@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: a5552549f7296e042a44ea2e35b0ea07
+timeCreated: 1533759362
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Dekko
+  fontNames:
+  - Dekko
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

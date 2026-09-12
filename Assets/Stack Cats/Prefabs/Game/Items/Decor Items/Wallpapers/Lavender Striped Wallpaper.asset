@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30cd58e6a63463d4a889fc97dae7e82a, type: 3}
+  m_Name: Lavender Striped Wallpaper
+  m_EditorClassIdentifier: 
+  Name: Lavender Striped Wallpaper
+  Icon: {fileID: 21300000, guid: 250e92a7de0ea374cbd9fc0e63da9c60, type: 3}
+  IsUnique: 1
+  _id: eeaf5d6f-120a-40c7-8108-0e4d9651e21c
+  WallpaperSprite: {fileID: 21300000, guid: 879e164c4f5dfa946b393ccadccf2269, type: 3}

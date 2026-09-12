@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95363db67a2ef0e4f93843df4b6fca6f, type: 3}
+  m_Name: Fish Statue 2
+  m_EditorClassIdentifier: 
+  JigsawSprites:
+  - {fileID: -3851926731618348224, guid: 977c8266b315e204f817761c42dd235f, type: 3}
+  - {fileID: -259732849796708034, guid: 977c8266b315e204f817761c42dd235f, type: 3}
+  _id: 15415dba-dfd9-4da3-9a99-0a7dad77d225

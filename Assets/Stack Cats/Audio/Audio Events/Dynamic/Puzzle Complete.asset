@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84435bcb93082734cb603e91c7d07aff, type: 3}
+  m_Name: Puzzle Complete
+  m_EditorClassIdentifier: 
+  AudioClipCandidates:
+  - AudioClip: {fileID: 8300000, guid: be56b1a80a8ce1d45b4e3fccd2948318, type: 3}
+    Probability: 1
+  - AudioClip: {fileID: 8300000, guid: 6c3c334a1e64cf146b33a91d65af25c1, type: 3}
+    Probability: 1
+  - AudioClip: {fileID: 8300000, guid: d5046a5a4737afb47a50e38f4cbd61f5, type: 3}
+    Probability: 1
+  Pitch: 1
+  Volume: 0.293
+  PitchVariance: 0
+  VolumeVariance: 0

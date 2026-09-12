@@ -1,0 +1,5 @@
+[*.{cs,csx}]
+max_line_length = 100
+
+[*.{config,csproj,props,slnx,targets,xaml,xml}]
+max_line_length = 100

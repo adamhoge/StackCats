@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2165aaac6c6117047835ba084c3cc33b, type: 3}
+  m_Name: Placeable Object Items
+  m_EditorClassIdentifier: 
+  List:
+  - {fileID: 11400000, guid: ad0ee18c06e586f4bb347b9d5de533e8, type: 2}
+  - {fileID: 11400000, guid: 978672b525583a04f8c609751cbd74c5, type: 2}
+  - {fileID: 11400000, guid: 055aa9dba966af64c9bf03bb9b415fce, type: 2}
+  - {fileID: 11400000, guid: 91862448c33551d408a92f1f1f44c459, type: 2}
+  - {fileID: 11400000, guid: 8da3c18d7b31c204bbbd8a2da8207932, type: 2}
+  - {fileID: 11400000, guid: ea54c8e7f2ddf1a4c8e672f7d3177195, type: 2}

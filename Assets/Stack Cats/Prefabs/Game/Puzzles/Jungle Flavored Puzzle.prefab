@@ -1,0 +1,170 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1684693184984520
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4544722668247200}
+  - component: {fileID: 114407293099354826}
+  m_Layer: 0
+  m_Name: Jungle Flavored Puzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4544722668247200
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684693184984520}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4121491632732732}
+  - {fileID: 3600199813050447221}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114407293099354826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684693184984520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25c003d4b854fa44b904d57e6eeee1a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BlockMovedSoundEffect: {fileID: 11400000, guid: 35ea792a6d51d504d81990de6bc1fbaf,
+    type: 2}
+  GetYarnSoundEffect: {fileID: 11400000, guid: f3ee06daf9f1b034d9f15dc32e47ff33, type: 2}
+  StackPrefab: {fileID: 114146765589553708, guid: 837087f41be1f6a48bd34902dc6fd3b0,
+    type: 3}
+  PuzzleBlockPrefab: {fileID: 114575933270427734, guid: d621ea3482dbc2e48a3833b1479bc9c5,
+    type: 3}
+  CatBlockPrefab: {fileID: 114053265728445722, guid: 06bf3963dd208594d8d4a479786d6bf9,
+    type: 3}
+  WildBlockPrefab: {fileID: 8008325539814887130, guid: a5694ca846b2fc745b662baa1c7b6cda,
+    type: 3}
+  SumBlockPrefab: {fileID: 114805964560928928, guid: 9b67d60d9c383774f8eede5855025285,
+    type: 3}
+  TerrainBlockPrefab: {fileID: 5568443133363427811, guid: 5e72cd0e95d63474aa1700167e675fb7,
+    type: 3}
+  RemovalBlockPrefab: {fileID: 8745651545632977859, guid: 82829c935e0c47c419363da1505a81f1,
+    type: 3}
+  PressureBlockPrefab: {fileID: 9129228619212235423, guid: 0e4b5dd42c66bf94d9e51482f5986ccd,
+    type: 3}
+  CatBoxRemovedObjectPooler: {fileID: 114877905024873142}
+  SpecialCatBoxRemovedObjectPooler: {fileID: 1540215522443815994}
+  RarityEffectPrefab: {fileID: 5625624525945306722, guid: bb5df11795194454481187adb24489ac,
+    type: 3}
+  IsInteractable: 1
+  IsEditMode: 0
+  IsSpecial: 0
+  _stacks: []
+  _maxStackHeight: 10
+  _stackSpacing: 0.02
+  JigsawBlockPrefab: {fileID: 114185772471296164, guid: ca5ad48bd056e8546854ae46c2f43d09,
+    type: 3}
+--- !u!1 &1959436631373864
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4121491632732732}
+  - component: {fileID: 114877905024873142}
+  m_Layer: 0
+  m_Name: Cat Box Particle Effects Object Pooler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4121491632732732
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959436631373864}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4544722668247200}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114877905024873142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959436631373864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16bcf27e97a62bd46b6baf613b4eb773, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: -1305326879193794749, guid: 8e4c1e1cbc7e44246a15485eb5c9f287, type: 3}
+  InitialSize: 5
+  IsExandable: 1
+--- !u!1 &836538805586319285
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3600199813050447221}
+  - component: {fileID: 1540215522443815994}
+  m_Layer: 0
+  m_Name: Special Cat Box Particle Effects Object Pooler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3600199813050447221
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 836538805586319285}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4544722668247200}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1540215522443815994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 836538805586319285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16bcf27e97a62bd46b6baf613b4eb773, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 926627832394003707, guid: 7dc78d9b0735cae42b3d35f7e71c2a58, type: 3}
+  InitialSize: 5
+  IsExandable: 1

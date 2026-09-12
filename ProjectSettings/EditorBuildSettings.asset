@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Stack Cats/Scenes/Title.unity
+    guid: 9940d11d9b72d164394a3d143a94e599
+  - enabled: 1
+    path: Assets/Stack Cats/Scenes/CutScene.unity
+    guid: a50ad726356328a4cb938a06315e7ac4
+  - enabled: 1
+    path: Assets/Stack Cats/Scenes/Tutorial.unity
+    guid: 33122031c5e47f1489ca7ffe3d34908e
+  - enabled: 1
+    path: Assets/Stack Cats/Scenes/Home.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Stack Cats/Scenes/Cats.unity
+    guid: 6778af59d867d0a428e151bb050f49a5
+  - enabled: 1
+    path: Assets/Stack Cats/Scenes/Shop.unity
+    guid: 300332bd48350e140ae1eb3cdc5c3455
+  - enabled: 1
+    path: Assets/Stack Cats/Scenes/OpenPresents.unity
+    guid: d533aff6da09a6a4bbc7f01cbbe717a9
+  - enabled: 1
+    path: Assets/Stack Cats/Scenes/Map.unity
+    guid: dbfccb572aa2d834899c5ff18770f0cc
+  - enabled: 1
+    path: Assets/Stack Cats/Scenes/StoryPuzzle.unity
+    guid: 2c052b4b3d5483140ae7bf5d08cd3630
+  - enabled: 1
+    path: Assets/Stack Cats/Scenes/ChallengeRun.unity
+    guid: 8c259d6a05f597148a93c35950bde36c
+  - enabled: 1
+    path: Assets/Stack Cats/Scenes/EndlessRun.unity
+    guid: dc8d460f1a4b66741a3ad9bd561ce9ed
+  - enabled: 1
+    path: Assets/Stack Cats/Scenes/Minigame.unity
+    guid: 40f6431444d2cb744b81cdbc181f4618
+  - enabled: 1
+    path: Assets/Stack Cats/Scenes/PuzzleMaker.unity
+    guid: d516ff111717c0a41a113313814438ec
+  - enabled: 1
+    path: Assets/Stack Cats/Scenes/ReplayCutScenes.unity
+    guid: 85ac75842f9f3854b8f96842ecfafe32
+  m_configObjects: {}

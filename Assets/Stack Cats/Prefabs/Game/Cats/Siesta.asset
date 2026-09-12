@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85c7e53790d884543b49fb3798f00674, type: 3}
+  m_Name: Siesta
+  m_EditorClassIdentifier: 
+  Name: Siesta
+  Number: 0
+  Personality: 5
+  Portrait: {fileID: 21300000, guid: 48367b5a9488cfc4c8a94776b7b7d753, type: 3}
+  AvatarSettings:
+    Body: 1
+    BodyMaterial: {fileID: 2100000, guid: 771ce0aff18d4e24bb77e1963dfd9bdf, type: 2}
+    EyesOpenMaterial: {fileID: 2100000, guid: 59da4ecfff3f3c84fbede0e02144b77e, type: 2}
+    EyesClosedMaterial: {fileID: 2100000, guid: 59da4ecfff3f3c84fbede0e02144b77e,
+      type: 2}
+    EyeColorPrimary: {r: 1, g: 1, b: 1, a: 0}
+  HeadAccessory:
+    Prefab: {fileID: 0}
+    Position: {x: 0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+  Meow: {fileID: 11400000, guid: 39c679547d6f95e48a553f7196cd4ccd, type: 2}
+  Rarity: 0
+  BondedAt: 10
+  Rewards:
+  - AtSightingCount: 10
+    Currency:
+      reorderableList:
+        canAdd: 1
+        canRemove: 1
+        draggable: 1
+        expandable: 1
+        multipleSelection: 1
+        isExpanded: 1
+        label:
+          m_Text: Keys
+          m_Image: {fileID: 0}
+          m_Tooltip: 
+        headerHeight: 18
+        footerHeight: 13
+        slideEasing: 0.15
+        verticalSpacing: 2
+        showDefaultBackground: 1
+        elementDisplayType: 0
+        elementNameProperty: 
+        elementNameOverride: 
+        elementIcon: {fileID: 0}
+      reqReferences: {fileID: 0}
+      isExpanded: 1
+      _keyValues: 01000000
+      _keys: 01000000
+      _values: 0a000000
+    Items:
+      reorderableList:
+        canAdd: 1
+        canRemove: 1
+        draggable: 1
+        expandable: 1
+        multipleSelection: 1
+        isExpanded: 0
+        label:
+          m_Text: Keys
+          m_Image: {fileID: 0}
+          m_Tooltip: 
+        headerHeight: 18
+        footerHeight: 13
+        slideEasing: 0.15
+        verticalSpacing: 2
+        showDefaultBackground: 1
+        elementDisplayType: 0
+        elementNameProperty: 
+        elementNameOverride: 
+        elementIcon: {fileID: 0}
+      reqReferences: {fileID: 0}
+      isExpanded: 0
+      _keyValues: []
+      _keys: []
+      _values: 
+  _id: 07897f0c-67e0-478c-81c3-d8530ab027ec

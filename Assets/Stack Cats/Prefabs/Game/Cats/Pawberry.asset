@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85c7e53790d884543b49fb3798f00674, type: 3}
+  m_Name: Pawberry
+  m_EditorClassIdentifier: 
+  Name: Pawberry
+  Number: 0
+  Personality: 2
+  Portrait: {fileID: 21300000, guid: af5d47a0574041b47b21b674f471e6b0, type: 3}
+  AvatarSettings:
+    Body: 0
+    BodyMaterial: {fileID: 2100000, guid: c549473b30a54a24d9eddc91b9451c60, type: 2}
+    EyesOpenMaterial: {fileID: 0}
+    EyesClosedMaterial: {fileID: 0}
+    EyeColorPrimary: {r: 0.40000004, g: 0.16862746, b: 0.16470589, a: 1}
+  HeadAccessory:
+    Prefab: {fileID: 8763873116198960119, guid: 0e245ec13c0548d4f9442decadcbc673,
+      type: 3}
+    Position: {x: 0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+  Meow: {fileID: 11400000, guid: 39c679547d6f95e48a553f7196cd4ccd, type: 2}
+  Rarity: 0
+  BondedAt: 10
+  Rewards: []
+  _id: 3c1704fd-0853-4c58-9f71-66e6f62a1141

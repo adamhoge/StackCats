@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10de9d625834f5b4888e94b0eb38077f, type: 3}
+  m_Name: Ancient Stone Dresser
+  m_EditorClassIdentifier: 
+  Name: Ancient Stone Dresser
+  Icon: {fileID: 21300000, guid: b91d6ea7d37821b4badff15e03145ac9, type: 3}
+  IsUnique: 1
+  _id: dc0c761e-84d9-4ecc-b1f0-dea921762214
+  DresserSprite: {fileID: 21300000, guid: c2df89546bf8968469ec6625fdf649a7, type: 3}
+  DrawerSprite: {fileID: 21300000, guid: 72db5875f7280534aaeadc83f9a1ddee, type: 3}

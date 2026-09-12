@@ -1,0 +1,219 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1471719339
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1471719340}
+  - component: {fileID: 1471719341}
+  m_Layer: 0
+  m_Name: Galaxy Block Effect Object Pooler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1471719340
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471719339}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 233598349695706267}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1471719341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471719339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16bcf27e97a62bd46b6baf613b4eb773, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 847318222, guid: 828fdb5ce8bfd41428cc92ac5530d2ef, type: 3}
+  InitialSize: 5
+  IsExandable: 1
+--- !u!1 &5606099942575840316
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9149719037468036559}
+  - component: {fileID: 1549002351436145665}
+  m_Layer: 0
+  m_Name: Special Cat Box Particle Effects Object Pooler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9149719037468036559
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5606099942575840316}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 233598349695706267}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1549002351436145665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5606099942575840316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16bcf27e97a62bd46b6baf613b4eb773, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 926627832394003707, guid: 7dc78d9b0735cae42b3d35f7e71c2a58, type: 3}
+  InitialSize: 5
+  IsExandable: 1
+--- !u!1 &5880323073555538490
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8809620814378234670}
+  - component: {fileID: 549938568522988170}
+  m_Layer: 0
+  m_Name: Cat Box Particle Effects Object Pooler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8809620814378234670
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5880323073555538490}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 233598349695706267}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &549938568522988170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5880323073555538490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16bcf27e97a62bd46b6baf613b4eb773, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: -1305326879193794749, guid: 8e4c1e1cbc7e44246a15485eb5c9f287, type: 3}
+  InitialSize: 5
+  IsExandable: 1
+--- !u!1 &7672370089603818480
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 233598349695706267}
+  - component: {fileID: 7672370089603818481}
+  m_Layer: 0
+  m_Name: Galaxy Flavored Puzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &233598349695706267
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7672370089603818480}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 8809620814378234670}
+  - {fileID: 9149719037468036559}
+  - {fileID: 1471719340}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7672370089603818481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7672370089603818480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d60c7e528af15d49aa25326c7304229, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BlockMovedSoundEffect: {fileID: 11400000, guid: 35ea792a6d51d504d81990de6bc1fbaf,
+    type: 2}
+  GetYarnSoundEffect: {fileID: 11400000, guid: f3ee06daf9f1b034d9f15dc32e47ff33, type: 2}
+  StackPrefab: {fileID: 114146765589553708, guid: 837087f41be1f6a48bd34902dc6fd3b0,
+    type: 3}
+  PuzzleBlockPrefab: {fileID: 114575933270427734, guid: d621ea3482dbc2e48a3833b1479bc9c5,
+    type: 3}
+  CatBlockPrefab: {fileID: 114053265728445722, guid: 06bf3963dd208594d8d4a479786d6bf9,
+    type: 3}
+  WildBlockPrefab: {fileID: 8008325539814887130, guid: a5694ca846b2fc745b662baa1c7b6cda,
+    type: 3}
+  SumBlockPrefab: {fileID: 114805964560928928, guid: 9b67d60d9c383774f8eede5855025285,
+    type: 3}
+  TerrainBlockPrefab: {fileID: 5568443133363427811, guid: 5e72cd0e95d63474aa1700167e675fb7,
+    type: 3}
+  RemovalBlockPrefab: {fileID: 8745651545632977859, guid: 82829c935e0c47c419363da1505a81f1,
+    type: 3}
+  PressureBlockPrefab: {fileID: 9129228619212235423, guid: 0e4b5dd42c66bf94d9e51482f5986ccd,
+    type: 3}
+  CatBoxRemovedObjectPooler: {fileID: 549938568522988170}
+  SpecialCatBoxRemovedObjectPooler: {fileID: 1549002351436145665}
+  RarityEffectPrefab: {fileID: 5625624525945306722, guid: bb5df11795194454481187adb24489ac,
+    type: 3}
+  IsInteractable: 1
+  IsEditMode: 0
+  IsSpecial: 0
+  _stacks: []
+  _maxStackHeight: 10
+  _stackSpacing: 0.02
+  RaiseStacksInterval: 5
+  GalaxyBlockPrefab: {fileID: 4702617122768635928, guid: 6bfa3b64c4d640b4c824d5e305a34bc5,
+    type: 3}
+  GalaxyBlockEffectObjectPooler: {fileID: 1471719341}

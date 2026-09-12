@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5baf6c6bd587ab4985c88c06bf8a1ef, type: 3}
+  m_Name: Luck Potion
+  m_EditorClassIdentifier: 
+  Name: Luck Potion
+  Icon: {fileID: 21300000, guid: ff2f7b02c5eb8b04fb1ac97d067a2955, type: 3}
+  IsUnique: 0
+  _id: 4aa4cb9c-0f18-4922-86d1-d178a961aeab

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0840859f1b364994c8d43f664efa9ec7, type: 3}
+  m_Name: Night Gem
+  m_EditorClassIdentifier: 
+  Name: Night Gem
+  Abbreviation: PG
+  PuzzleArea: {fileID: 11400000, guid: 2e23b412d70f6c04f82bd0bc26c00358, type: 2}
+  IconSprite: {fileID: 21300000, guid: 1ac827c16578c2249826f4be0365b95b, type: 3}
+  Color: {r: 0.8745099, g: 0.67058825, b: 0.7137255, a: 1}

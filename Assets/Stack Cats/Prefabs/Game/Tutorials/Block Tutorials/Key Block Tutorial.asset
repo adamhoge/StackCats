@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c65dc10034a4e6488e4010c34e77f5f, type: 3}
+  m_Name: Key Block Tutorial
+  m_EditorClassIdentifier: 
+  TypeName: RemovalBlock
+  BlockInformation: <b>Key Blocks</b>(<sprite index=6>) can be used to remove <b>Lock
+    Blocks</b> (<sprite index=7>).
+  DemoPuzzleJsonData: '{"_stacks":[{"_blocks":[{"_hasPuzzleBlock":false,"_hasCatBlock":true,"_hasWildBlock":false,"_hasSumBlock":false,"_hasTerrainBlock":false,"_hasRemovalBlock":false,"_hasPressureBlock":false,"_hasJigsawBlock":false,"_hasGalaxyBlock":false,"_puzzleBlock":{"_primaryNumber":0,"_secondaryNumber":0},"_catBlock":{"_catBlockId":"fe58158e-0ecc-43b0-b24a-4def78848e0a","_catId":"","_yarn":0},"_wildBlock":{},"_sumBlock":{"_sumValue":0},"_terrainBlock":{},"_removalBlock":{},"_pressureBlock":{"_numSupportableBlocks":0},"_jigsawBlock":{"_jigsawIndex":0,"_jigsawPuzzleObjectId":""},"_galaxyBlock":{"_primaryNumber":0,"_secondaryNumber":0}},{"_hasPuzzleBlock":false,"_hasCatBlock":false,"_hasWildBlock":false,"_hasSumBlock":false,"_hasTerrainBlock":true,"_hasRemovalBlock":false,"_hasPressureBlock":false,"_hasJigsawBlock":false,"_hasGalaxyBlock":false,"_puzzleBlock":{"_primaryNumber":0,"_secondaryNumber":0},"_catBlock":{"_catBlockId":"","_catId":"","_yarn":0},"_wildBlock":{},"_sumBlock":{"_sumValue":0},"_terrainBlock":{},"_removalBlock":{},"_pressureBlock":{"_numSupportableBlocks":0},"_jigsawBlock":{"_jigsawIndex":0,"_jigsawPuzzleObjectId":""},"_galaxyBlock":{"_primaryNumber":0,"_secondaryNumber":0}},{"_hasPuzzleBlock":true,"_hasCatBlock":false,"_hasWildBlock":false,"_hasSumBlock":false,"_hasTerrainBlock":false,"_hasRemovalBlock":false,"_hasPressureBlock":false,"_hasJigsawBlock":false,"_hasGalaxyBlock":false,"_puzzleBlock":{"_primaryNumber":2,"_secondaryNumber":0},"_catBlock":{"_catBlockId":"","_catId":"","_yarn":0},"_wildBlock":{},"_sumBlock":{"_sumValue":0},"_terrainBlock":{},"_removalBlock":{},"_pressureBlock":{"_numSupportableBlocks":0},"_jigsawBlock":{"_jigsawIndex":0,"_jigsawPuzzleObjectId":""},"_galaxyBlock":{"_primaryNumber":0,"_secondaryNumber":0}}]},{"_blocks":[{"_hasPuzzleBlock":true,"_hasCatBlock":false,"_hasWildBlock":false,"_hasSumBlock":false,"_hasTerrainBlock":false,"_hasRemovalBlock":false,"_hasPressureBlock":false,"_hasJigsawBlock":false,"_hasGalaxyBlock":false,"_puzzleBlock":{"_primaryNumber":3,"_secondaryNumber":1},"_catBlock":{"_catBlockId":"","_catId":"","_yarn":0},"_wildBlock":{},"_sumBlock":{"_sumValue":0},"_terrainBlock":{},"_removalBlock":{},"_pressureBlock":{"_numSupportableBlocks":0},"_jigsawBlock":{"_jigsawIndex":0,"_jigsawPuzzleObjectId":""},"_galaxyBlock":{"_primaryNumber":0,"_secondaryNumber":0}}]},{"_blocks":[{"_hasPuzzleBlock":false,"_hasCatBlock":true,"_hasWildBlock":false,"_hasSumBlock":false,"_hasTerrainBlock":false,"_hasRemovalBlock":false,"_hasPressureBlock":false,"_hasJigsawBlock":false,"_hasGalaxyBlock":false,"_puzzleBlock":{"_primaryNumber":0,"_secondaryNumber":0},"_catBlock":{"_catBlockId":"985b7232-9459-4d20-b6c3-eeaee70dcd60","_catId":"","_yarn":0},"_wildBlock":{},"_sumBlock":{"_sumValue":0},"_terrainBlock":{},"_removalBlock":{},"_pressureBlock":{"_numSupportableBlocks":0},"_jigsawBlock":{"_jigsawIndex":0,"_jigsawPuzzleObjectId":""},"_galaxyBlock":{"_primaryNumber":0,"_secondaryNumber":0}},{"_hasPuzzleBlock":true,"_hasCatBlock":false,"_hasWildBlock":false,"_hasSumBlock":false,"_hasTerrainBlock":false,"_hasRemovalBlock":false,"_hasPressureBlock":false,"_hasJigsawBlock":false,"_hasGalaxyBlock":false,"_puzzleBlock":{"_primaryNumber":2,"_secondaryNumber":0},"_catBlock":{"_catBlockId":"","_catId":"","_yarn":0},"_wildBlock":{},"_sumBlock":{"_sumValue":0},"_terrainBlock":{},"_removalBlock":{},"_pressureBlock":{"_numSupportableBlocks":0},"_jigsawBlock":{"_jigsawIndex":0,"_jigsawPuzzleObjectId":""},"_galaxyBlock":{"_primaryNumber":0,"_secondaryNumber":0}},{"_hasPuzzleBlock":false,"_hasCatBlock":false,"_hasWildBlock":false,"_hasSumBlock":false,"_hasTerrainBlock":false,"_hasRemovalBlock":true,"_hasPressureBlock":false,"_hasJigsawBlock":false,"_hasGalaxyBlock":false,"_puzzleBlock":{"_primaryNumber":0,"_secondaryNumber":0},"_catBlock":{"_catBlockId":"","_catId":"","_yarn":0},"_wildBlock":{},"_sumBlock":{"_sumValue":0},"_terrainBlock":{},"_removalBlock":{},"_pressureBlock":{"_numSupportableBlocks":0},"_jigsawBlock":{"_jigsawIndex":0,"_jigsawPuzzleObjectId":""},"_galaxyBlock":{"_primaryNumber":0,"_secondaryNumber":0}}]}],"_maxStackHeight":3,"_numMovesMade":0,"_isSpecial":false}'
+  DemoMoves:
+  - FromStackIndex: 0
+    FromBlockIndex: 2
+    ToStackIndex: 1
+    ToBlockIndex: 1
+  - FromStackIndex: 2
+    FromBlockIndex: 2
+    ToStackIndex: 0
+    ToBlockIndex: 2
+  - FromStackIndex: 2
+    FromBlockIndex: 1
+    ToStackIndex: 0
+    ToBlockIndex: 0

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c23ec5c6f623074088c25fb20bcb9b8, type: 3}
+  m_Name: Galaxy Flavored Diamond Trophy
+  m_EditorClassIdentifier: 
+  Name: Galaxy Flavored Diamond Trophy
+  Icon: {fileID: 0}
+  Rarity: 0
+  _id: e912e4df-72d6-43e7-ab92-8116738dc1fe
+  Material: 4
+  TrophyPrefab: {fileID: 0}

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95363db67a2ef0e4f93843df4b6fca6f, type: 3}
+  m_Name: Panther Statue
+  m_EditorClassIdentifier: 
+  JigsawSprites:
+  - {fileID: -2249931678318041621, guid: c8574af8f1dac0b4699efe4381641eab, type: 3}
+  - {fileID: 260153205526706690, guid: c8574af8f1dac0b4699efe4381641eab, type: 3}
+  - {fileID: -16558455006864239, guid: c8574af8f1dac0b4699efe4381641eab, type: 3}
+  _id: 5c46792d-18c4-48aa-80a2-8b26f7e69397

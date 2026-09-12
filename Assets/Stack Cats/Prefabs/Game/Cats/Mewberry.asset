@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85c7e53790d884543b49fb3798f00674, type: 3}
+  m_Name: Mewberry
+  m_EditorClassIdentifier: 
+  Name: Mewberry
+  Number: 10
+  Personality: 2
+  Portrait: {fileID: 21300000, guid: 582c696235acf0b458c2b1f3d850611b, type: 3}
+  AvatarSettings:
+    Body: 0
+    BodyMaterial: {fileID: 2100000, guid: 82af4429c7e24994595afdc07b98cd71, type: 2}
+    EyesOpenMaterial: {fileID: 0}
+    EyesClosedMaterial: {fileID: 0}
+    EyeColorPrimary: {r: 0.16862746, g: 0.24313727, b: 0.4039216, a: 1}
+  HeadAccessory:
+    Prefab: {fileID: 2922389836642293270, guid: 6c01103e002c830478e6509b3d87c33d,
+      type: 3}
+    Position: {x: 0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+  Meow: {fileID: 11400000, guid: 39c679547d6f95e48a553f7196cd4ccd, type: 2}
+  Rarity: 0
+  BondedAt: 10
+  Rewards: []
+  _id: 871d5690-3c65-48d0-8633-dce227bd88b3

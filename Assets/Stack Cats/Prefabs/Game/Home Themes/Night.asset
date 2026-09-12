@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ff15d5f10491648b85a842ab144dc6, type: 3}
+  m_Name: Night
+  m_EditorClassIdentifier: 
+  BackgroundMusic: {fileID: 0}
+  CameraBackgroundColor: {r: 0.31336504, g: 0.33878422, b: 0.50735295, a: 1}
+  BackgroundSprite: {fileID: 21300000, guid: c6de772a4f9e8094da7f38412f95567e, type: 3}
+  DrawerButtonSprite: {fileID: 21300000, guid: 5698535c99f874f478bf70bf6f56c1b7, type: 3}
+  PiggyBankColor: {r: 0.8235294, g: 0.84665316, b: 1, a: 1}
+  ButtonColors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.95631486, g: 0.96850616, b: 0.9852941, a: 1}
+    m_PressedColor: {r: 0.6708477, g: 0.79694545, b: 0.9705882, a: 0.5019608}
+    m_DisabledColor: {r: 0.80125433, g: 0.86630476, b: 0.9558824, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  ButtonTextColor: {r: 0.40830448, g: 0.6104282, b: 0.9411765, a: 1}

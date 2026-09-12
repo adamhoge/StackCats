@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 12f380fb5b1f0fa4d88916ad74ffe63a
+timeCreated: 1533759361
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Gidugu
+  fontNames:
+  - Gidugu
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

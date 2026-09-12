@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85c7e53790d884543b49fb3798f00674, type: 3}
+  m_Name: Mango
+  m_EditorClassIdentifier: 
+  Name: Mango
+  Number: 5
+  Personality: 1
+  Portrait: {fileID: 21300000, guid: 46d565ec1908e924b98b5c8dbf3607e1, type: 3}
+  AvatarSettings:
+    Body: 1
+    BodyMaterial: {fileID: 2100000, guid: e1de2d02b77f97e4294d083253719bec, type: 2}
+    EyesOpenMaterial: {fileID: 0}
+    EyesClosedMaterial: {fileID: 0}
+    EyeColorPrimary: {r: 0.38431376, g: 0.52156866, b: 0.427451, a: 1}
+  HeadAccessory:
+    Prefab: {fileID: 0}
+    Position: {x: 0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+  Meow: {fileID: 11400000, guid: 39c679547d6f95e48a553f7196cd4ccd, type: 2}
+  Rarity: 0
+  BondedAt: 5
+  Rewards:
+  - AtSightingCount: 5
+    Currency:
+      reorderableList:
+        canAdd: 1
+        canRemove: 1
+        draggable: 1
+        expandable: 1
+        multipleSelection: 1
+        isExpanded: 1
+        label:
+          m_Text: Keys
+          m_Image: {fileID: 0}
+          m_Tooltip: 
+        headerHeight: 18
+        footerHeight: 13
+        slideEasing: 0.15
+        verticalSpacing: 2
+        showDefaultBackground: 1
+        elementDisplayType: 0
+        elementNameProperty: 
+        elementNameOverride: 
+        elementIcon: {fileID: 0}
+      reqReferences: {fileID: 0}
+      isExpanded: 1
+      _keyValues: 01000000
+      _keys: 01000000
+      _values: 0a000000
+    Items:
+      reorderableList:
+        canAdd: 1
+        canRemove: 1
+        draggable: 1
+        expandable: 1
+        multipleSelection: 1
+        isExpanded: 0
+        label:
+          m_Text: Keys
+          m_Image: {fileID: 0}
+          m_Tooltip: 
+        headerHeight: 18
+        footerHeight: 13
+        slideEasing: 0.15
+        verticalSpacing: 2
+        showDefaultBackground: 1
+        elementDisplayType: 0
+        elementNameProperty: 
+        elementNameOverride: 
+        elementIcon: {fileID: 0}
+      reqReferences: {fileID: 11400000, guid: 3d6785e46e940b843aa5fbe4ca729d60, type: 2}
+      isExpanded: 0
+      _keyValues: []
+      _keys: []
+      _values: 
+  _id: c9099812-aaa9-453e-a19e-89e5be97ffc7

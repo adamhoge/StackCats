@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca0d031e7cb1241459554f241c1adae1, type: 3}
+  m_Name: Medals
+  m_EditorClassIdentifier: 
+  MedalSprites:
+  - {fileID: -2963475940132804913, guid: 6f456e8adcc1ca744b21d028d4fdac35, type: 3}
+  - {fileID: 3993988308447643433, guid: 6f456e8adcc1ca744b21d028d4fdac35, type: 3}
+  - {fileID: 8163216807629293228, guid: 6f456e8adcc1ca744b21d028d4fdac35, type: 3}
+  - {fileID: -3306841535413265940, guid: 6f456e8adcc1ca744b21d028d4fdac35, type: 3}
+  - {fileID: -1339615499646606572, guid: 6f456e8adcc1ca744b21d028d4fdac35, type: 3}
+  - {fileID: 6710133305587663631, guid: 6f456e8adcc1ca744b21d028d4fdac35, type: 3}
+  - {fileID: -8647457977524089024, guid: 6f456e8adcc1ca744b21d028d4fdac35, type: 3}
+  - {fileID: -7037270678933188671, guid: 6f456e8adcc1ca744b21d028d4fdac35, type: 3}
+  - {fileID: 8982476304869530055, guid: 6f456e8adcc1ca744b21d028d4fdac35, type: 3}
+  - {fileID: 8962402638936828073, guid: 6f456e8adcc1ca744b21d028d4fdac35, type: 3}
+  - {fileID: 3556705338768401712, guid: 6f456e8adcc1ca744b21d028d4fdac35, type: 3}
+  - {fileID: -4701792007228696207, guid: 6f456e8adcc1ca744b21d028d4fdac35, type: 3}
+  - {fileID: 7208895605544043216, guid: 6f456e8adcc1ca744b21d028d4fdac35, type: 3}
+  - {fileID: -1311100954646404053, guid: 6f456e8adcc1ca744b21d028d4fdac35, type: 3}
+  - {fileID: 4968946975532486625, guid: 6f456e8adcc1ca744b21d028d4fdac35, type: 3}
+  - {fileID: -7326993363555860543, guid: 6f456e8adcc1ca744b21d028d4fdac35, type: 3}
+  - {fileID: 6919204802980990922, guid: 6f456e8adcc1ca744b21d028d4fdac35, type: 3}
+  - {fileID: -5852713437975213294, guid: 6f456e8adcc1ca744b21d028d4fdac35, type: 3}
+  - {fileID: 3527483288557801790, guid: 6f456e8adcc1ca744b21d028d4fdac35, type: 3}
+  - {fileID: -7839132311073399520, guid: 6f456e8adcc1ca744b21d028d4fdac35, type: 3}
+  MedalOutlineSprites:
+  - {fileID: 5502217933429117371, guid: 9453950ef993cf9488d50bc6065b2dec, type: 3}
+  - {fileID: 7781498265641565716, guid: 9453950ef993cf9488d50bc6065b2dec, type: 3}
+  - {fileID: -7324571557060337623, guid: 9453950ef993cf9488d50bc6065b2dec, type: 3}
+  - {fileID: 4649066101815883931, guid: 9453950ef993cf9488d50bc6065b2dec, type: 3}
+  - {fileID: -4807101153511953733, guid: 9453950ef993cf9488d50bc6065b2dec, type: 3}
+  - {fileID: 5577357800614110638, guid: 9453950ef993cf9488d50bc6065b2dec, type: 3}
+  - {fileID: 1238288414349229510, guid: 9453950ef993cf9488d50bc6065b2dec, type: 3}
+  - {fileID: -3350349614063399843, guid: 9453950ef993cf9488d50bc6065b2dec, type: 3}
+  - {fileID: -6740749412869833739, guid: 9453950ef993cf9488d50bc6065b2dec, type: 3}
+  - {fileID: 4407180578571689956, guid: 9453950ef993cf9488d50bc6065b2dec, type: 3}
+  - {fileID: 3274319788924848396, guid: 9453950ef993cf9488d50bc6065b2dec, type: 3}
+  - {fileID: 3534243854276415907, guid: 9453950ef993cf9488d50bc6065b2dec, type: 3}
+  - {fileID: 1811099507395296488, guid: 9453950ef993cf9488d50bc6065b2dec, type: 3}
+  - {fileID: 7556475754202686363, guid: 9453950ef993cf9488d50bc6065b2dec, type: 3}
+  - {fileID: -3349119219282912566, guid: 9453950ef993cf9488d50bc6065b2dec, type: 3}
+  - {fileID: -6139705644064488406, guid: 9453950ef993cf9488d50bc6065b2dec, type: 3}
+  - {fileID: -2705589236544121101, guid: 9453950ef993cf9488d50bc6065b2dec, type: 3}
+  - {fileID: -6742977467086731511, guid: 9453950ef993cf9488d50bc6065b2dec, type: 3}
+  - {fileID: 8400615554567005768, guid: 9453950ef993cf9488d50bc6065b2dec, type: 3}
+  - {fileID: -7898332722037445258, guid: 9453950ef993cf9488d50bc6065b2dec, type: 3}

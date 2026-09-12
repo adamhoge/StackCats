@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 85c831eb4793a7f45841855a1c611be5
+timeCreated: 1535137644
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Cutive Mono
+  fontNames:
+  - Cutive Mono
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

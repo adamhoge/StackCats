@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0b3e7eea060b724cb39d7e5758ea257, type: 3}
+  m_Name: Jigsaw Puzzle Objects
+  m_EditorClassIdentifier: 
+  List:
+  - {fileID: 11400000, guid: 25a0cd766832ad3429595debd35fb616, type: 2}
+  - {fileID: 11400000, guid: 6e752ba4f0037ee438d337678a3c4f89, type: 2}
+  - {fileID: 11400000, guid: 48bbd1bd4661bdd4a95d46ad2da4e437, type: 2}
+  - {fileID: 11400000, guid: 985ec7b2c601d534fa34c8eef637a250, type: 2}
+  - {fileID: 11400000, guid: 440d0d85c871d544088311b3ec644da0, type: 2}
+  - {fileID: 11400000, guid: 731715e6ebf55cb4191c58f99e8215f5, type: 2}
+  - {fileID: 11400000, guid: 6ec83c2b5decddb4b9e5003ce9888ddf, type: 2}

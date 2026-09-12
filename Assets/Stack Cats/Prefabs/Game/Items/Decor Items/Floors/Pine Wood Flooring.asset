@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32318f5ad9ca2104eafd89a933f0525f, type: 3}
+  m_Name: Pine Wood Flooring
+  m_EditorClassIdentifier: 
+  Name: Pine Wood Flooring
+  Icon: {fileID: 21300000, guid: e495dad75e1cefd42a8b4c683e8de16e, type: 3}
+  ColorShift:
+    Hue: -180
+    Brightness: 0.08
+    Contrast: 1
+    Saturation: 0.88
+  IsUnique: 1
+  Rarity: 1
+  _id: 79e65f58-2b4d-4869-bb7c-5d9c7d2cb546
+  FloorSprite: {fileID: 21300000, guid: e495dad75e1cefd42a8b4c683e8de16e, type: 3}

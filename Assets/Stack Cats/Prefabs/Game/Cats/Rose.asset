@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85c7e53790d884543b49fb3798f00674, type: 3}
+  m_Name: Rose
+  m_EditorClassIdentifier: 
+  Name: Rose
+  Number: 2
+  Personality: 3
+  Portrait: {fileID: 21300000, guid: 778ad7dafbf82c0499e5a71b2af4ce51, type: 3}
+  AvatarSettings:
+    Body: 2
+    BodyMaterial: {fileID: 2100000, guid: 4a4d7516507e0e04b8d139db9363e4d4, type: 2}
+    EyesOpenMaterial: {fileID: 0}
+    EyesClosedMaterial: {fileID: 0}
+    EyeColorPrimary: {r: 0.13394447, g: 0.6344264, b: 0.6603774, a: 1}
+  HeadAccessory:
+    Prefab: {fileID: 0}
+    Position: {x: 0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+  Meow: {fileID: 11400000, guid: 39c679547d6f95e48a553f7196cd4ccd, type: 2}
+  Rarity: 0
+  BondedAt: 10
+  Rewards: []
+  _id: 83ba504d-ebfd-4f9f-bead-dc847f69c34f

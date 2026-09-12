@@ -1,0 +1,340 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a34f2b5c72f34184c84e885c3193d930, type: 3}
+  m_Name: Cattail Farm Puzzle Area
+  m_EditorClassIdentifier: 
+  AreaTitle: Cattail Farm
+  PuzzleTheme: {fileID: 11400000, guid: bc59bd8a05a65a848a48f25a74da8e26, type: 2}
+  PuzzleAreaIconSprite: {fileID: 21300000, guid: 3b90024582ff9884691d6b78413c4122,
+    type: 3}
+  PuzzleAreaGemSprite: {fileID: 21300000, guid: 0c8b6af2869ed6c468e4ecd713ff1dce,
+    type: 3}
+  PuzzlePrefab: {fileID: 114523078911042276, guid: 94cfaa34f9a92fa409ed072cc1b3a9b0,
+    type: 3}
+  PuzzleAreaMap: {fileID: 734420575525433637, guid: 19a488c9bdb0a984890f0ef048f9e287,
+    type: 3}
+  ProgressionPuzzleCats:
+  - {fileID: 11400000, guid: 83bc49d798f3a3a42a0d6fa60a29d742, type: 2}
+  - {fileID: 11400000, guid: 2e809a30b7a16e34189b013cc037252b, type: 2}
+  - {fileID: 11400000, guid: acf1cc5faea471141884844b6ffafe93, type: 2}
+  - {fileID: 11400000, guid: 70253d45e001fcd4a81cd6824ede3153, type: 2}
+  - {fileID: 11400000, guid: f9fe9db458f907040bc447a2d58fa984, type: 2}
+  - {fileID: 11400000, guid: c883f7313e5e7754b8c4b5e3e84dc0f0, type: 2}
+  - {fileID: 11400000, guid: 8b5f15bf71c58f14383dab781c6b2414, type: 2}
+  - {fileID: 11400000, guid: 2bf7ae3cd76df8e4d9d0425748f4ce4e, type: 2}
+  - {fileID: 11400000, guid: 48f250dbedba4fe4288fc250dd44124c, type: 2}
+  - {fileID: 11400000, guid: 2e37f7a185b964f41b4528af5361ce20, type: 2}
+  - {fileID: 11400000, guid: af7291477a0767a4aaaf1297a7a47998, type: 2}
+  GeneratedPuzzleCats:
+  - {fileID: 11400000, guid: 83bc49d798f3a3a42a0d6fa60a29d742, type: 2}
+  - {fileID: 11400000, guid: 2e809a30b7a16e34189b013cc037252b, type: 2}
+  - {fileID: 11400000, guid: 9ff6d0f165aa29242b534ce1f11d9f5d, type: 2}
+  - {fileID: 11400000, guid: f098b43c208b9fa4fa47e126b56346e0, type: 2}
+  - {fileID: 11400000, guid: 5a3e809a764f04245a1afa19014301cb, type: 2}
+  - {fileID: 11400000, guid: acf1cc5faea471141884844b6ffafe93, type: 2}
+  - {fileID: 11400000, guid: 70253d45e001fcd4a81cd6824ede3153, type: 2}
+  - {fileID: 11400000, guid: f9fe9db458f907040bc447a2d58fa984, type: 2}
+  - {fileID: 11400000, guid: c883f7313e5e7754b8c4b5e3e84dc0f0, type: 2}
+  - {fileID: 11400000, guid: 8b5f15bf71c58f14383dab781c6b2414, type: 2}
+  - {fileID: 11400000, guid: 2bf7ae3cd76df8e4d9d0425748f4ce4e, type: 2}
+  - {fileID: 11400000, guid: 48f250dbedba4fe4288fc250dd44124c, type: 2}
+  - {fileID: 11400000, guid: 2e37f7a185b964f41b4528af5361ce20, type: 2}
+  - {fileID: 11400000, guid: af7291477a0767a4aaaf1297a7a47998, type: 2}
+  - {fileID: 11400000, guid: 71f10124c73b3374ea0bdce0bf1bd549, type: 2}
+  - {fileID: 11400000, guid: bbc689f2fcb0f54429f8b7755eaca2b8, type: 2}
+  - {fileID: 11400000, guid: ccbc7cb270ebfe049b355c29575be3f6, type: 2}
+  ChallengeRunCost: 100
+  ChallengeRunRewards:
+  - AtDifficulty: 0
+    AtPuzzleIndex: 9
+    CurrencyReward:
+      reorderableList:
+        canAdd: 1
+        canRemove: 1
+        draggable: 1
+        expandable: 1
+        multipleSelection: 1
+        isExpanded: 1
+        label:
+          m_Text: Keys
+          m_Image: {fileID: 0}
+          m_Tooltip: 
+        headerHeight: 18
+        footerHeight: 13
+        slideEasing: 0.15
+        verticalSpacing: 2
+        showDefaultBackground: 1
+        elementDisplayType: 0
+        elementNameProperty: 
+        elementNameOverride: 
+        elementIcon: {fileID: 0}
+      reqReferences: {fileID: 0}
+      isExpanded: 1
+      _keyValues: 02000000
+      _keys: 02000000
+      _values: 01000000
+  - AtDifficulty: 1
+    AtPuzzleIndex: 4
+    CurrencyReward:
+      reorderableList:
+        canAdd: 1
+        canRemove: 1
+        draggable: 1
+        expandable: 1
+        multipleSelection: 1
+        isExpanded: 1
+        label:
+          m_Text: Keys
+          m_Image: {fileID: 0}
+          m_Tooltip: 
+        headerHeight: 18
+        footerHeight: 13
+        slideEasing: 0.15
+        verticalSpacing: 2
+        showDefaultBackground: 1
+        elementDisplayType: 0
+        elementNameProperty: 
+        elementNameOverride: 
+        elementIcon: {fileID: 0}
+      reqReferences: {fileID: 0}
+      isExpanded: 1
+      _keyValues: 02000000
+      _keys: 02000000
+      _values: 01000000
+  - AtDifficulty: 1
+    AtPuzzleIndex: 9
+    CurrencyReward:
+      reorderableList:
+        canAdd: 1
+        canRemove: 1
+        draggable: 1
+        expandable: 1
+        multipleSelection: 1
+        isExpanded: 1
+        label:
+          m_Text: Keys
+          m_Image: {fileID: 0}
+          m_Tooltip: 
+        headerHeight: 18
+        footerHeight: 13
+        slideEasing: 0.15
+        verticalSpacing: 2
+        showDefaultBackground: 1
+        elementDisplayType: 0
+        elementNameProperty: 
+        elementNameOverride: 
+        elementIcon: {fileID: 0}
+      reqReferences: {fileID: 0}
+      isExpanded: 1
+      _keyValues: 02000000
+      _keys: 02000000
+      _values: 01000000
+  - AtDifficulty: 2
+    AtPuzzleIndex: 4
+    CurrencyReward:
+      reorderableList:
+        canAdd: 1
+        canRemove: 1
+        draggable: 1
+        expandable: 1
+        multipleSelection: 1
+        isExpanded: 1
+        label:
+          m_Text: Keys
+          m_Image: {fileID: 0}
+          m_Tooltip: 
+        headerHeight: 18
+        footerHeight: 13
+        slideEasing: 0.15
+        verticalSpacing: 2
+        showDefaultBackground: 1
+        elementDisplayType: 0
+        elementNameProperty: 
+        elementNameOverride: 
+        elementIcon: {fileID: 0}
+      reqReferences: {fileID: 0}
+      isExpanded: 1
+      _keyValues: 02000000
+      _keys: 02000000
+      _values: 01000000
+  - AtDifficulty: 2
+    AtPuzzleIndex: 9
+    CurrencyReward:
+      reorderableList:
+        canAdd: 1
+        canRemove: 1
+        draggable: 1
+        expandable: 1
+        multipleSelection: 1
+        isExpanded: 1
+        label:
+          m_Text: Keys
+          m_Image: {fileID: 0}
+          m_Tooltip: 
+        headerHeight: 18
+        footerHeight: 13
+        slideEasing: 0.15
+        verticalSpacing: 2
+        showDefaultBackground: 1
+        elementDisplayType: 0
+        elementNameProperty: 
+        elementNameOverride: 
+        elementIcon: {fileID: 0}
+      reqReferences: {fileID: 0}
+      isExpanded: 1
+      _keyValues: 02000000
+      _keys: 02000000
+      _values: 02000000
+  - AtDifficulty: 3
+    AtPuzzleIndex: 4
+    CurrencyReward:
+      reorderableList:
+        canAdd: 1
+        canRemove: 1
+        draggable: 1
+        expandable: 1
+        multipleSelection: 1
+        isExpanded: 1
+        label:
+          m_Text: Keys
+          m_Image: {fileID: 0}
+          m_Tooltip: 
+        headerHeight: 18
+        footerHeight: 13
+        slideEasing: 0.15
+        verticalSpacing: 2
+        showDefaultBackground: 1
+        elementDisplayType: 0
+        elementNameProperty: 
+        elementNameOverride: 
+        elementIcon: {fileID: 0}
+      reqReferences: {fileID: 0}
+      isExpanded: 1
+      _keyValues: 02000000
+      _keys: 02000000
+      _values: 02000000
+  - AtDifficulty: 3
+    AtPuzzleIndex: 9
+    CurrencyReward:
+      reorderableList:
+        canAdd: 1
+        canRemove: 1
+        draggable: 1
+        expandable: 1
+        multipleSelection: 1
+        isExpanded: 1
+        label:
+          m_Text: Keys
+          m_Image: {fileID: 0}
+          m_Tooltip: 
+        headerHeight: 18
+        footerHeight: 13
+        slideEasing: 0.15
+        verticalSpacing: 2
+        showDefaultBackground: 1
+        elementDisplayType: 0
+        elementNameProperty: 
+        elementNameOverride: 
+        elementIcon: {fileID: 0}
+      reqReferences: {fileID: 0}
+      isExpanded: 1
+      _keyValues: 02000000
+      _keys: 02000000
+      _values: 02000000
+  - AtDifficulty: 4
+    AtPuzzleIndex: 4
+    CurrencyReward:
+      reorderableList:
+        canAdd: 1
+        canRemove: 1
+        draggable: 1
+        expandable: 1
+        multipleSelection: 1
+        isExpanded: 1
+        label:
+          m_Text: Keys
+          m_Image: {fileID: 0}
+          m_Tooltip: 
+        headerHeight: 18
+        footerHeight: 13
+        slideEasing: 0.15
+        verticalSpacing: 2
+        showDefaultBackground: 1
+        elementDisplayType: 0
+        elementNameProperty: 
+        elementNameOverride: 
+        elementIcon: {fileID: 0}
+      reqReferences: {fileID: 0}
+      isExpanded: 1
+      _keyValues: 02000000
+      _keys: 02000000
+      _values: 02000000
+  - AtDifficulty: 4
+    AtPuzzleIndex: 9
+    CurrencyReward:
+      reorderableList:
+        canAdd: 1
+        canRemove: 1
+        draggable: 1
+        expandable: 1
+        multipleSelection: 1
+        isExpanded: 1
+        label:
+          m_Text: Keys
+          m_Image: {fileID: 0}
+          m_Tooltip: 
+        headerHeight: 18
+        footerHeight: 13
+        slideEasing: 0.15
+        verticalSpacing: 2
+        showDefaultBackground: 1
+        elementDisplayType: 0
+        elementNameProperty: 
+        elementNameOverride: 
+        elementIcon: {fileID: 0}
+      reqReferences: {fileID: 0}
+      isExpanded: 1
+      _keyValues: 02000000
+      _keys: 02000000
+      _values: 03000000
+  ChallengeRunTrophies:
+    reorderableList:
+      canAdd: 1
+      canRemove: 1
+      draggable: 1
+      expandable: 1
+      multipleSelection: 1
+      isExpanded: 1
+      label:
+        m_Text: Keys
+        m_Image: {fileID: 0}
+        m_Tooltip: 
+      headerHeight: 18
+      footerHeight: 13
+      slideEasing: 0.15
+      verticalSpacing: 2
+      showDefaultBackground: 1
+      elementDisplayType: 0
+      elementNameProperty: 
+      elementNameOverride: 
+      elementIcon: {fileID: 0}
+    reqReferences: {fileID: 0}
+    isExpanded: 1
+    _keyValues: 0100000000000000020000000300000004000000
+    _keys: 0100000000000000020000000300000004000000
+    _values:
+    - {fileID: 11400000, guid: f544f36a85d77c047a832af08c1f5db4, type: 2}
+    - {fileID: 11400000, guid: 4e9a7b75c42ca3e42ae4cbf63f37ec2c, type: 2}
+    - {fileID: 11400000, guid: 99a9a627b065b99498583341f5c5769d, type: 2}
+    - {fileID: 11400000, guid: 939395e51b77a3949997aa2a6f8fde98, type: 2}
+    - {fileID: 11400000, guid: 00f3eccae5bb21f4a942ec5b13893d7b, type: 2}
+  _id: 4f09894f-c6a7-4664-a799-218617c83fe8

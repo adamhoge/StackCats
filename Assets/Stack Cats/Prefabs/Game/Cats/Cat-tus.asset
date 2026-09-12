@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85c7e53790d884543b49fb3798f00674, type: 3}
+  m_Name: Cat-tus
+  m_EditorClassIdentifier: 
+  Name: Cat-tus
+  Number: 0
+  Personality: 3
+  Portrait: {fileID: 21300000, guid: 3e8656235075f974990170b95d36bc11, type: 3}
+  AvatarSettings:
+    Body: 0
+    BodyMaterial: {fileID: 2100000, guid: e5c4df05d5b5ec440a606352d1eed9d1, type: 2}
+    EyesOpenMaterial: {fileID: 0}
+    EyesClosedMaterial: {fileID: 0}
+    EyeColorPrimary: {r: 0.078431375, g: 0.41176474, b: 0.20784315, a: 1}
+  HeadAccessory:
+    Prefab: {fileID: 2811384200652629905, guid: 49643f1e36f0859419494c4c7af5f2d1,
+      type: 3}
+    Position: {x: 0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+  Meow: {fileID: 11400000, guid: 39c679547d6f95e48a553f7196cd4ccd, type: 2}
+  Rarity: 2
+  BondedAt: 3
+  Rewards:
+  - AtSightingCount: 3
+    Currency:
+      reorderableList:
+        canAdd: 1
+        canRemove: 1
+        draggable: 1
+        expandable: 1
+        multipleSelection: 1
+        isExpanded: 1
+        label:
+          m_Text: Keys
+          m_Image: {fileID: 0}
+          m_Tooltip: 
+        headerHeight: 18
+        footerHeight: 13
+        slideEasing: 0.15
+        verticalSpacing: 2
+        showDefaultBackground: 1
+        elementDisplayType: 0
+        elementNameProperty: 
+        elementNameOverride: 
+        elementIcon: {fileID: 0}
+      reqReferences: {fileID: 0}
+      isExpanded: 1
+      _keyValues: 01000000
+      _keys: 01000000
+      _values: 0a000000
+    Items:
+      reorderableList:
+        canAdd: 1
+        canRemove: 1
+        draggable: 1
+        expandable: 1
+        multipleSelection: 1
+        isExpanded: 0
+        label:
+          m_Text: Keys
+          m_Image: {fileID: 0}
+          m_Tooltip: 
+        headerHeight: 18
+        footerHeight: 13
+        slideEasing: 0.15
+        verticalSpacing: 2
+        showDefaultBackground: 1
+        elementDisplayType: 0
+        elementNameProperty: 
+        elementNameOverride: 
+        elementIcon: {fileID: 0}
+      reqReferences: {fileID: 0}
+      isExpanded: 0
+      _keyValues: []
+      _keys: []
+      _values: 
+  _id: ec90daab-784c-4a14-98b3-bbc00eb4d110

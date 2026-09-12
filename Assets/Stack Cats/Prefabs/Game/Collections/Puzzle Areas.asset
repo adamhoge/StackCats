@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3417c6796031ca243a987d39ffd78f3d, type: 3}
+  m_Name: Puzzle Areas
+  m_EditorClassIdentifier: 
+  List:
+  - {fileID: 11400000, guid: e1bbe48d0bb37ac40821f234fcb7fbab, type: 2}
+  - {fileID: 11400000, guid: 8f566cdb8c9892b499d4757288eaab63, type: 2}
+  - {fileID: 11400000, guid: 0701961425c9bb344919a6d1f1982ceb, type: 2}
+  - {fileID: 11400000, guid: 2e23b412d70f6c04f82bd0bc26c00358, type: 2}

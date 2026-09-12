@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12755386232f2fa4aba10d7190c7426b, type: 3}
+  m_Name: Endless Lobby Puzzle Theme
+  m_EditorClassIdentifier: 
+  PuzzleScenaryPrefab: {fileID: 0}
+  HomeScenaryPrefab: {fileID: 0}
+  TopBoundarySprite: {fileID: 0}
+  TopBoundaryOffset: 0
+  BottomBoundarySprite: {fileID: 0}
+  BottomBoundaryOffset: 0
+  BackgroundColor: {r: 0.28097185, g: 0.47542435, b: 0.7735849, a: 1}
+  BackgroundGradient: {r: 0, g: 0, b: 0, a: 0}
+  AmbientColor: {r: 0.38781592, g: 0.7053939, b: 0.990566, a: 1}
+  UIColor: {r: 0.36418653, g: 0.5505873, b: 0.8301887, a: 1}
+  BackgroundMusic: {fileID: 0}

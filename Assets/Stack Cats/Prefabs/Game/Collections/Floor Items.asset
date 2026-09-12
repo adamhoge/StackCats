@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2cd7585b21363646a9e8463edcf3c2b, type: 3}
+  m_Name: Floor Items
+  m_EditorClassIdentifier: 
+  List:
+  - {fileID: 11400000, guid: ed3561516b1f6bb41b237fb11af131cc, type: 2}
+  - {fileID: 11400000, guid: 1f08d5a4d3fc78e4587ca16e48d20e2b, type: 2}
+  - {fileID: 11400000, guid: a556afded30635a40a348fe5fc15cd4f, type: 2}
+  - {fileID: 11400000, guid: 3d5a6b2a5edc18e47977bb1a3a9ecb53, type: 2}
+  - {fileID: 11400000, guid: 02b4507809bcb144fbf0bb4e8f98a48d, type: 2}
+  - {fileID: 11400000, guid: 6b1c8822a4d8ea04bbec70dff737292d, type: 2}
+  - {fileID: 11400000, guid: 9564e897ce12b704aaa49f741b701e05, type: 2}

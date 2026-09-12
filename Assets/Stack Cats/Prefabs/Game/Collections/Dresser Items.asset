@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eecddbddcb8171c48aa565c8ad6e53e3, type: 3}
+  m_Name: Dresser Items
+  m_EditorClassIdentifier: 
+  List:
+  - {fileID: 11400000, guid: 7788d0b9829a9414696d14c7f491533b, type: 2}
+  - {fileID: 11400000, guid: 921afab25a761a54d87713a0860ff68a, type: 2}
+  - {fileID: 11400000, guid: 1310410b629031448b0084ccdd1962ad, type: 2}
+  - {fileID: 11400000, guid: d4f7f601f8d4ea549b77f9a03b3cc4ed, type: 2}
+  - {fileID: 11400000, guid: 5ebca644213e15740aee4bbf5fee6256, type: 2}
+  - {fileID: 11400000, guid: 25c4fa250bae34a49b2ff8c80a0730e1, type: 2}
+  - {fileID: 11400000, guid: da9802bb18489334fb24c336c17ed2eb, type: 2}

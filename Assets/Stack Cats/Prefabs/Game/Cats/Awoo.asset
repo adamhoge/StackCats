@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85c7e53790d884543b49fb3798f00674, type: 3}
+  m_Name: Awoo
+  m_EditorClassIdentifier: 
+  Name: Awoo
+  Number: 0
+  Personality: 6
+  Portrait: {fileID: 21300000, guid: fdd99acb128200a4792077d2b2cb1877, type: 3}
+  AvatarSettings:
+    Body: 0
+    BodyMaterial: {fileID: 2100000, guid: 1a3d39392a667f14c84e90aa892e2d05, type: 2}
+    EyesOpenMaterial: {fileID: 0}
+    EyesClosedMaterial: {fileID: 0}
+    EyeColorPrimary: {r: 0.34509805, g: 0.34509805, b: 0.3529412, a: 1}
+  HeadAccessory:
+    Prefab: {fileID: 0}
+    Position: {x: 0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+  Meow: {fileID: 11400000, guid: 39c679547d6f95e48a553f7196cd4ccd, type: 2}
+  Rarity: 0
+  BondedAt: 10
+  Rewards: []
+  _id: 7a59674e-150e-4433-aed7-19b4a9618ab4

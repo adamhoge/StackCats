@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95363db67a2ef0e4f93843df4b6fca6f, type: 3}
+  m_Name: Teaser Statue
+  m_EditorClassIdentifier: 
+  JigsawSprites:
+  - {fileID: 5619799225478619874, guid: f990768456cb3504a89378c4d137fc9e, type: 3}
+  - {fileID: -4774926101862284526, guid: f990768456cb3504a89378c4d137fc9e, type: 3}
+  - {fileID: 301615824127333924, guid: f990768456cb3504a89378c4d137fc9e, type: 3}
+  - {fileID: 2889013703131517610, guid: f990768456cb3504a89378c4d137fc9e, type: 3}
+  - {fileID: -5957023981119150826, guid: f990768456cb3504a89378c4d137fc9e, type: 3}
+  _id: ad5dcc5c-e3b2-42a8-853a-be25eddb7856
