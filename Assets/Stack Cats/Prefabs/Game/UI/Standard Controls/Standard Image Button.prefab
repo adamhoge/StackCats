@@ -32,7 +32,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6376531413378915286}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -97,6 +96,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 549844347918166612, guid: ef1cc705eb40b244fa183ae4746e3f45,
@@ -244,6 +244,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Standard Image Button
       objectReference: {fileID: 0}
+    - target: {fileID: 7060659670924510321, guid: ef1cc705eb40b244fa183ae4746e3f45,
+        type: 3}
+      propertyPath: ContentImage
+      value: 
+      objectReference: {fileID: 1749090224}
     - target: {fileID: 7578710876984996594, guid: ef1cc705eb40b244fa183ae4746e3f45,
         type: 3}
       propertyPath: m_RootOrder
@@ -275,6 +280,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4625395057545896287}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2300276457930494173, guid: ef1cc705eb40b244fa183ae4746e3f45,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1749090223}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef1cc705eb40b244fa183ae4746e3f45, type: 3}
 --- !u!114 &4625395057545896287 stripped
 MonoBehaviour:

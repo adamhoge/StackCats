@@ -18,25 +18,35 @@ namespace Tofuwu.StackCats.UI
     {
         public Image MedalImage;
         public Image MedalOutlineImage;
+        public Sprite MedalPlaceholderSprite;
         public TextMeshProUGUI MedalText;
         public MedalSpriteCollection MedalSpriteCollection;
         public List<ColorAtIndex> MedalTextColors;
 
-        public bool HasOutline { get { return _hasOutline; } set { SetHasOutline(value); } }
+        public bool HasOutline
+        {
+            get { return _hasOutline; }
+            set { SetHasOutline(value); }
+        }
 
-        public int NumPuzzlesCompleted { get { return _numPuzzlesCompleted; } set { SetNumPuzzlesCompleted(value); } }
+        public int NumPuzzlesCompleted
+        {
+            get { return _numPuzzlesCompleted; }
+            set { SetNumPuzzlesCompleted(value); }
+        }
 
-        [SerializeField] 
+        [SerializeField]
         [HideInInspector]
         private bool _hasOutline = true;
 
         [SerializeField]
-        [HideInInspector] 
+        [HideInInspector]
         private int _numPuzzlesCompleted;
 
         private void SetHasOutline(bool value)
         {
-            if (value == _hasOutline) return;
+            if (value == _hasOutline)
+                return;
 
             _hasOutline = value;
 
@@ -53,13 +63,23 @@ namespace Tofuwu.StackCats.UI
 
         private void SetNumPuzzlesCompleted(int value)
         {
-            if (value == _numPuzzlesCompleted) return;
+            if (value == _numPuzzlesCompleted)
+                return;
 
             _numPuzzlesCompleted = value;
 
             MedalImage.sprite = GetMedalSprite(_numPuzzlesCompleted);
-            MedalText.text = _numPuzzlesCompleted.ToString();
-            MedalText.color = GetMedalTextColor(_numPuzzlesCompleted);
+
+            if (_numPuzzlesCompleted <= 0)
+            {
+                MedalText.gameObject.SetActive(false);
+            }
+            else
+            {
+                MedalText.gameObject.SetActive(true);
+                MedalText.text = _numPuzzlesCompleted.ToString();
+                MedalText.color = GetMedalTextColor(_numPuzzlesCompleted);
+            }
 
             if (_hasOutline)
             {
@@ -69,20 +89,24 @@ namespace Tofuwu.StackCats.UI
 
         private Sprite GetMedalSprite(int numPuzzlesCompleted)
         {
-            if (numPuzzlesCompleted <= 0) return null;
+            if (numPuzzlesCompleted <= 0)
+                return MedalPlaceholderSprite;
 
             var medalSprites = MedalSpriteCollection.MedalSprites;
-            if (numPuzzlesCompleted >= medalSprites.Count) return medalSprites[medalSprites.Count - 1];
+            if (numPuzzlesCompleted >= medalSprites.Count)
+                return medalSprites[medalSprites.Count - 1];
 
             return medalSprites[numPuzzlesCompleted - 1];
         }
 
         private Sprite GetMedalOutlineSprite(int numPuzzlesCompleted)
         {
-            if (numPuzzlesCompleted <= 0) return null;
+            if (numPuzzlesCompleted <= 0)
+                return MedalPlaceholderSprite;
 
             var medalOutlineSprites = MedalSpriteCollection.MedalOutlineSprites;
-            if (numPuzzlesCompleted >= medalOutlineSprites.Count) return medalOutlineSprites[medalOutlineSprites.Count - 1];
+            if (numPuzzlesCompleted >= medalOutlineSprites.Count)
+                return medalOutlineSprites[medalOutlineSprites.Count - 1];
 
             return medalOutlineSprites[numPuzzlesCompleted - 1];
         }
@@ -92,7 +116,10 @@ namespace Tofuwu.StackCats.UI
             for (int i = 0; i < MedalTextColors.Count; i++)
             {
                 int nextIndex = i + 1;
-                if (nextIndex >= MedalTextColors.Count || MedalTextColors[nextIndex].Index > numPuzzlesCompleted)
+                if (
+                    nextIndex >= MedalTextColors.Count
+                    || MedalTextColors[nextIndex].Index > numPuzzlesCompleted
+                )
                 {
                     return MedalTextColors[i].Color;
                 }

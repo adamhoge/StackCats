@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Tofuwu.StackCats.Models;
 using TMPro;
+using Tofuwu.StackCats.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,7 +12,7 @@ namespace Tofuwu.StackCats.UI
         {
             NotStarted,
             DisplayingScoreChange,
-            DisplayingCurrentScore
+            DisplayingCurrentScore,
         }
 
         public EndlessRunScene EndlessRunScene;
@@ -50,7 +50,9 @@ namespace Tofuwu.StackCats.UI
 
             bool isStarted = _currentEndlessRun.CurrentPuzzle.MovesMade > 0;
 
-            PlayPuzzleButton.GetComponentInChildren<TextMeshProUGUI>().text = isStarted ? "Resume Puzzle" : "Start Puzzle";
+            PlayPuzzleButton.GetComponentInChildren<TextMeshProUGUI>().text = isStarted
+                ? "Resume Puzzle"
+                : "Start Puzzle";
             if (EndlessRunScene.PuzzleArea)
             {
                 var puzzleTheme = EndlessRunScene.PuzzleArea.PuzzleTheme;
@@ -98,7 +100,10 @@ namespace Tofuwu.StackCats.UI
         {
             base.Update();
 
-            if (_currentState == State.DisplayingScoreChange && _stateEnterTime + DisplayScoreChangeDelayInSeconds < Time.time)
+            if (
+                _currentState == State.DisplayingScoreChange
+                && _stateEnterTime + DisplayScoreChangeDelayInSeconds < Time.time
+            )
             {
                 if (_nextScoreIncrementTime <= Time.time)
                 {
@@ -122,7 +127,8 @@ namespace Tofuwu.StackCats.UI
                 if (_shouldIncrementMedal)
                 {
                     Medal.NumPuzzlesCompleted += 1;
-                    if (Medal.NumPuzzlesCompleted == 1) Medal.gameObject.SetActive(true);
+                    if (Medal.NumPuzzlesCompleted == 1)
+                        Medal.gameObject.SetActive(true);
                     MedalFlashEffect.NumPuzzlesCompleted = Medal.NumPuzzlesCompleted;
                     MedalFlashEffect.Flash();
                     GameManager.Instance.Audio.PlaySoundEffect(MedalFlashAudioEvent);
@@ -134,34 +140,39 @@ namespace Tofuwu.StackCats.UI
 
         private void UpdatePuzzleCompletion()
         {
-            List<EndlessPuzzleCompletionModel> completedPuzzles = _currentEndlessRun.CompletedPuzzles;
+            List<EndlessPuzzleCompletionModel> completedPuzzles =
+                _currentEndlessRun.CompletedPuzzles;
             int numCompletedPuzzles = completedPuzzles.Count;
             if (numCompletedPuzzles == 0)
             {
-                Medal.gameObject.SetActive(false);
                 ScoreText.gameObject.SetActive(false);
             }
             else
             {
                 Medal.gameObject.SetActive(true);
                 Medal.NumPuzzlesCompleted = numCompletedPuzzles;
-                
+
                 int score = _currentEndlessRun.Score;
                 _currentScore = score;
-                _isHighScore = _puzzleManager.GetEndlessRunHighScore(EndlessRunScene.PuzzleArea) == score;
+                _isHighScore =
+                    _puzzleManager.GetEndlessRunHighScore(EndlessRunScene.PuzzleArea) == score;
                 ScoreText.gameObject.SetActive(true);
                 ScoreText.text = score == 0 ? "" : score.ToString();
             }
 
-            int bestNumCompletedPuzzles = _puzzleManager.GetEndlessRunMostPuzzlesCompleted(EndlessRunScene.PuzzleArea);
+            int bestNumCompletedPuzzles = _puzzleManager.GetEndlessRunMostPuzzlesCompleted(
+                EndlessRunScene.PuzzleArea
+            );
             if (bestNumCompletedPuzzles > 0)
             {
                 BestScoreRectTransform.gameObject.SetActive(true);
                 BestMedal.NumPuzzlesCompleted = bestNumCompletedPuzzles;
-                BestScoreText.text = _puzzleManager.GetEndlessRunHighScore(EndlessRunScene.PuzzleArea).ToString();
+                BestScoreText.text = _puzzleManager
+                    .GetEndlessRunHighScore(EndlessRunScene.PuzzleArea)
+                    .ToString();
             }
             else
-            {   
+            {
                 BestScoreRectTransform.gameObject.SetActive(false);
             }
         }
@@ -176,20 +187,27 @@ namespace Tofuwu.StackCats.UI
             Dismiss();
         }
 
-        private void OnEndlessPuzzleCompleted(PuzzleManager.EndlessPuzzleCompletionEvent completionInfo)
+        private void OnEndlessPuzzleCompleted(
+            PuzzleManager.EndlessPuzzleCompletionEvent completionInfo
+        )
         {
-            if (completionInfo.CompletionType != PuzzleCompletionType.PuzzleSolved) return;
+            if (completionInfo.CompletionType != PuzzleCompletionType.PuzzleSolved)
+                return;
 
             _displayedScore = _currentScore - completionInfo.PointsEarned;
             Medal.NumPuzzlesCompleted = completionInfo.TotalPuzzlesCompleted - 1;
-            if (Medal.NumPuzzlesCompleted == 0) Medal.gameObject.SetActive(false);
-            _shouldIncrementMedal = true; 
+            if (Medal.NumPuzzlesCompleted == 0)
+                Medal.gameObject.SetActive(false);
+            _shouldIncrementMedal = true;
             ScoreText.text = _displayedScore == 0 ? "" : _displayedScore.ToString();
 
             if (_isHighScore)
             {
-                _previousHighScore = _puzzleManager.GetEndlessRunCompletedHighScore(EndlessRunScene.PuzzleArea);
-                if (_displayedScore > _previousHighScore) _previousHighScore = _displayedScore;
+                _previousHighScore = _puzzleManager.GetEndlessRunCompletedHighScore(
+                    EndlessRunScene.PuzzleArea
+                );
+                if (_displayedScore > _previousHighScore)
+                    _previousHighScore = _displayedScore;
                 BestScoreText.text = _previousHighScore.ToString();
             }
 
@@ -198,15 +216,20 @@ namespace Tofuwu.StackCats.UI
 
         private void ChangeState(State state)
         {
-            if (state == _currentState) return;
+            if (state == _currentState)
+                return;
 
             if (_currentState == State.DisplayingScoreChange)
             {
-                LeanTween.scale(ScoreText.gameObject, Vector2.one * 1.25f, 1.0f).setEase(LeanTweenType.punch);
+                LeanTween
+                    .scale(ScoreText.gameObject, Vector2.one * 1.25f, 1.0f)
+                    .setEase(LeanTweenType.punch);
 
                 if (_isHighScore)
                 {
-                    LeanTween.scale(BestScoreText.gameObject, Vector2.one * 1.25f, 1.0f).setEase(LeanTweenType.punch);
+                    LeanTween
+                        .scale(BestScoreText.gameObject, Vector2.one * 1.25f, 1.0f)
+                        .setEase(LeanTweenType.punch);
                 }
             }
 

@@ -15,8 +15,8 @@ namespace Tofuwu.StackCats
 
         public Camera Camera;
         public Transform HomeScenaryTransform;
-        private const float CAMERA_SIZE_MAX = 4.45f;
-        private const float CAMERA_SIZE_PREFERRED = 3.56f;
+        private const float CAMERA_SIZE_MAX = 4.65f;
+        private const float CAMERA_SIZE_PREFERRED = 3.85f;
 
         private PuzzleManager _puzzleManager;
         private HomeVisitors _homeVisitors;
@@ -30,18 +30,21 @@ namespace Tofuwu.StackCats
             }
             else
             {
-                if (onSelectPlayMode != null) onSelectPlayMode();
+                if (onSelectPlayMode != null)
+                    onSelectPlayMode();
             }
         }
 
         public void SelectChallengeArea()
         {
-            if (onSelectChallengeArea != null) onSelectChallengeArea();
+            if (onSelectChallengeArea != null)
+                onSelectChallengeArea();
         }
 
         public void SelectEndlessArea()
         {
-            if (onSelectEndlessArea != null) onSelectEndlessArea();
+            if (onSelectEndlessArea != null)
+                onSelectEndlessArea();
         }
 
         public void PlayStoryMode()
@@ -127,9 +130,17 @@ namespace Tofuwu.StackCats
 
         private void UpdateCameraAspect(float aspect)
         {
-            float clampedAspect = Mathf.Clamp(aspect, Constants.MinAspect, Constants.PreferredAspect);
-            float clampedAspectNormal = (clampedAspect - Constants.MinAspect) / (Constants.PreferredAspect - Constants.MinAspect);
-            Camera.orthographicSize = CAMERA_SIZE_PREFERRED + (CAMERA_SIZE_MAX - CAMERA_SIZE_PREFERRED) * (1 - clampedAspectNormal);
+            float clampedAspect = Mathf.Clamp(
+                aspect,
+                Constants.MinAspect,
+                Constants.PreferredAspect
+            );
+            float clampedAspectNormal =
+                (clampedAspect - Constants.MinAspect)
+                / (Constants.PreferredAspect - Constants.MinAspect);
+            Camera.orthographicSize =
+                CAMERA_SIZE_PREFERRED
+                + (CAMERA_SIZE_MAX - CAMERA_SIZE_PREFERRED) * (1 - clampedAspectNormal);
         }
     }
 }

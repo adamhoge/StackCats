@@ -34,15 +34,18 @@ namespace Tofuwu.StackCats.UI
             base.OnTransitioningIn();
 
             int highScore = _puzzleManager.GetEndlessRunHighScore(EndlessRunScene.PuzzleArea);
-            if(highScore == 0)
+            if (highScore == 0)
             {
                 HighScoreRectTransform.gameObject.SetActive(false);
+                // TODO: Enable some kind of placeholer for highscore, maybe info about starting a new run
             }
             else
             {
                 HighScoreRectTransform.gameObject.SetActive(true);
                 HighScoreText.text = highScore.ToString();
-                Medal.NumPuzzlesCompleted = _puzzleManager.GetEndlessRunMostPuzzlesCompleted(EndlessRunScene.PuzzleArea);
+                Medal.NumPuzzlesCompleted = _puzzleManager.GetEndlessRunMostPuzzlesCompleted(
+                    EndlessRunScene.PuzzleArea
+                );
             }
         }
 
