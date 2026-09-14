@@ -9,5 +9,6 @@ namespace Tofuwu.StackCats
         TerrainBlock,
         RemovalBlock,
         PressureBlock,
+        RestrictedBlock,
     }
 }

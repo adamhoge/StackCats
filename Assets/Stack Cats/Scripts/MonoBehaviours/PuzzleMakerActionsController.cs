@@ -148,6 +148,9 @@ namespace Tofuwu.StackCats
                     case BlockType.PressureBlock:
                         PuzzleMakerActions.AddPressureBlock(stack);
                         break;
+                    case BlockType.RestrictedBlock:
+                        PuzzleMakerActions.AddRestrictedBlock(stack);
+                        break;
                 }
             }
             else

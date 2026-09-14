@@ -24,12 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1419301104594254}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4475543281908986}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114202646062502358
 MonoBehaviour:
@@ -70,14 +71,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1851146286647062}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4220847734074578}
   - {fileID: 6035430647173347905}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114523078911042276
 MonoBehaviour:
@@ -109,6 +111,8 @@ MonoBehaviour:
   RemovalBlockPrefab: {fileID: 8745651545632977859, guid: 82829c935e0c47c419363da1505a81f1,
     type: 3}
   PressureBlockPrefab: {fileID: 9129228619212235423, guid: 0e4b5dd42c66bf94d9e51482f5986ccd,
+    type: 3}
+  RestrictedBlockPrefab: {fileID: 8831135185448180688, guid: 1fd483aed7b960f409df9e8262fcad7f,
     type: 3}
   CatBoxRemovedObjectPooler: {fileID: 114202646062502358}
   SpecialCatBoxRemovedObjectPooler: {fileID: 8704069877352669475}
@@ -144,12 +148,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1884109506329388898}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4475543281908986}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8704069877352669475
 MonoBehaviour:

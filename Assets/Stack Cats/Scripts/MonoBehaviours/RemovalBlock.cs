@@ -9,14 +9,27 @@ namespace Tofuwu.StackCats
         /// </summary>
         public RemovalBlockDestructionEffect DestructionEffect;
 
+        public override bool IsPlaceableOn(Block otherBlock)
+        {
+            if (!otherBlock)
+                return true;
+
+            if (otherBlock.GetComponent<RestrictedBlock>())
+                return false;
+
+            return true;
+        }
+
         public override void OnMove()
         {
             // Check stack for top block and remove it if one exists
             Block blockBelow = Block.GetBlockBelow();
-            if (!blockBelow) return;
+            if (!blockBelow)
+                return;
 
             TerrainBlock terrainBlockBelow = blockBelow.GetComponent<TerrainBlock>();
-            if (!terrainBlockBelow) return;
+            if (!terrainBlockBelow)
+                return;
 
             Block.ParentStack.RemoveBlocks(blockBelow, Block, true);
         }

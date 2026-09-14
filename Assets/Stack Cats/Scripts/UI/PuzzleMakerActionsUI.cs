@@ -45,6 +45,7 @@ namespace Tofuwu.StackCats.UI
         public Button SetTerrainBlockButton;
         public Button SetRemovalBlockButton;
         public Button SetPressureBlockButton;
+        public Button SetRestrictedBlockButton;
         public InputField ResizePuzzleStacksInputField;
         public InputField ResizePuzzleMaxBlocksInputField;
         public Button ResizePuzzleButton;
@@ -65,6 +66,7 @@ namespace Tofuwu.StackCats.UI
             SetTerrainBlockButton.onClick.AddListener(OnSetTerrainBlockButtonClicked);
             SetRemovalBlockButton.onClick.AddListener(OnSetRemovalBlockButtonClicked);
             SetPressureBlockButton.onClick.AddListener(OnSetPressureBlockButtonClicked);
+            SetRestrictedBlockButton.onClick.AddListener(OnSetRestrictedBlockButtonClicked);
             ResizePuzzleButton.onClick.AddListener(OnResizePuzzleButtonClicked);
         }
 
@@ -77,6 +79,7 @@ namespace Tofuwu.StackCats.UI
             SetWildBlockButton.onClick.RemoveListener(OnSetWildBlockButtonClicked);
             SetSumBlockButton.onClick.RemoveListener(OnSetSumBlockButtonClicked);
             SetTerrainBlockButton.onClick.RemoveListener(OnSetTerrainBlockButtonClicked);
+            SetRestrictedBlockButton.onClick.RemoveListener(OnSetRestrictedBlockButtonClicked);
             SetRemovalBlockButton.onClick.RemoveListener(OnSetRemovalBlockButtonClicked);
             SetPressureBlockButton.onClick.RemoveListener(OnSetPressureBlockButtonClicked);
             ResizePuzzleButton.onClick.RemoveListener(OnResizePuzzleButtonClicked);
@@ -119,21 +122,13 @@ namespace Tofuwu.StackCats.UI
                 }
             }
 
-            for (int i = 0; i < BlockType.GetValues(typeof(BlockType)).Length; i++)
+            for (int i = 0; i < Enum.GetValues(typeof(BlockType)).Length; i++)
             {
                 if (Input.GetKeyDown(BlockTypeKeyboardShortcuts[i]) && !GetIsActionInputFocused())
                 {
                     PuzzleMakerActionsController.ChangeBlockType((BlockType)i);
                 }
             }
-        }
-
-        private void SelectPuzzleMakerAction(int actionIndex)
-        {
-            if (actionIndex < 0 || actionIndex >= PuzzleMakerActionsOptions.Count)
-                return;
-
-            SelectPuzzleMakerAction(PuzzleMakerActionsOptions[actionIndex]);
         }
 
         private void SelectPuzzleMakerAction(PuzzleMakerActionOptionUI action)
@@ -214,6 +209,11 @@ namespace Tofuwu.StackCats.UI
             PuzzleMakerActionsController.ChangeBlockType(BlockType.PressureBlock);
         }
 
+        private void OnSetRestrictedBlockButtonClicked()
+        {
+            PuzzleMakerActionsController.ChangeBlockType(BlockType.RestrictedBlock);
+        }
+
         private void OnResizePuzzleButtonClicked()
         {
             int numStacks;
@@ -243,6 +243,8 @@ namespace Tofuwu.StackCats.UI
                 blockType == BlockType.PressureBlock ? BlockSelectionColor : Color.white;
             SetWildBlockButton.image.color =
                 blockType == BlockType.WildBlock ? BlockSelectionColor : Color.white;
+            SetRestrictedBlockButton.image.color =
+                blockType == BlockType.RestrictedBlock ? BlockSelectionColor : Color.white;
         }
     }
 }

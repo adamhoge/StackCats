@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Tofuwu.StackCats.Models;
 using UnityEngine;
-using System.Linq;
 
 namespace Tofuwu.StackCats
 {
@@ -13,7 +13,11 @@ namespace Tofuwu.StackCats
         /// <param name="puzzleModel">The puzzle model used to build the puzzle.</param>
         /// <param name="puzzlePrefab">The prefab used to generate the puzzle.</param>
         /// <returns></returns>
-        public static DesertFlavoredPuzzle BuildFromModel(DesertFlavoredPuzzleModel puzzleModel, DesertFlavoredPuzzle puzzlePrefab, CatManager catManager)
+        public static DesertFlavoredPuzzle BuildFromModel(
+            DesertFlavoredPuzzleModel puzzleModel,
+            DesertFlavoredPuzzle puzzlePrefab,
+            CatManager catManager
+        )
         {
             DesertFlavoredPuzzle puzzle = Object.Instantiate(puzzlePrefab);
             puzzle.name = "Desert Flavored Puzzle";
@@ -33,11 +37,20 @@ namespace Tofuwu.StackCats
                     }
                     else if (blockModel.HasPuzzleBlock)
                     {
-                        puzzle.AddNewPuzzleBlock(stack, blockModel.PuzzleBlock.PrimaryNumber, blockModel.PuzzleBlock.SecondaryNumber);
+                        puzzle.AddNewPuzzleBlock(
+                            stack,
+                            blockModel.PuzzleBlock.PrimaryNumber,
+                            blockModel.PuzzleBlock.SecondaryNumber
+                        );
                     }
                     else if (blockModel.HasCatBlock)
                     {
-                        puzzle.AddNewCatBlock(stack, catManager.CatCollection.GetById(blockModel.CatBlock.CatId), blockModel.CatBlock.Yarn, blockModel.CatBlock.CatBlockId);
+                        puzzle.AddNewCatBlock(
+                            stack,
+                            catManager.CatCollection.GetById(blockModel.CatBlock.CatId),
+                            blockModel.CatBlock.Yarn,
+                            blockModel.CatBlock.CatBlockId
+                        );
                     }
                     else if (blockModel.HasSumBlock)
                     {
@@ -54,6 +67,10 @@ namespace Tofuwu.StackCats
                     else if (blockModel.HasPressureBlock)
                     {
                         puzzle.AddNewPressureBlock(stack, blockModel.PressureBlock.BreakingPoint);
+                    }
+                    else if (blockModel.HasRestrictedBlock)
+                    {
+                        puzzle.AddNewRestrictedBlock(stack);
                     }
                 }
             }
@@ -95,7 +112,7 @@ namespace Tofuwu.StackCats
                             blockModel.PuzzleBlock = new PuzzleBlockComponentModel
                             {
                                 PrimaryNumber = puzzleBlock.PrimaryNumber,
-                                SecondaryNumber = puzzleBlock.SecondaryNumber
+                                SecondaryNumber = puzzleBlock.SecondaryNumber,
                             };
                         }
                     }
@@ -105,14 +122,22 @@ namespace Tofuwu.StackCats
                     {
                         string catId = catBlock.Cat ? catBlock.Cat.GetId() : "";
                         blockModel.HasCatBlock = true;
-                        blockModel.CatBlock = new CatBlockComponentModel { CatId = catId, Yarn = catBlock.Yarn, CatBlockId = catBlock.CatBlockId };
+                        blockModel.CatBlock = new CatBlockComponentModel
+                        {
+                            CatId = catId,
+                            Yarn = catBlock.Yarn,
+                            CatBlockId = catBlock.CatBlockId,
+                        };
                     }
 
                     SumBlock sumBlock = block.GetComponent<SumBlock>();
                     if (sumBlock)
                     {
                         blockModel.HasSumBlock = true;
-                        blockModel.SumBlock = new SumBlockComponentModel { SumValue = sumBlock.SumValue };
+                        blockModel.SumBlock = new SumBlockComponentModel
+                        {
+                            SumValue = sumBlock.SumValue,
+                        };
                     }
 
                     TerrainBlock terrainBlock = block.GetComponent<TerrainBlock>();
@@ -133,7 +158,10 @@ namespace Tofuwu.StackCats
                     if (pressureBlock)
                     {
                         blockModel.HasPressureBlock = true;
-                        blockModel.PressureBlock = new PressureBlockComponentModel { BreakingPoint = pressureBlock.BreakingPoint };
+                        blockModel.PressureBlock = new PressureBlockComponentModel
+                        {
+                            BreakingPoint = pressureBlock.BreakingPoint,
+                        };
                     }
 
                     stackModel.Blocks.Add(blockModel);

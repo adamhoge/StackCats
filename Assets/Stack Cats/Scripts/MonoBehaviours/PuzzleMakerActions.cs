@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Linq;
+﻿using System.Linq;
+using UnityEngine;
 
 namespace Tofuwu.StackCats
 {
@@ -76,9 +76,15 @@ namespace Tofuwu.StackCats
             Puzzle.AddNewPressureBlock(stack);
         }
 
+        public void AddRestrictedBlock(Stack stack)
+        {
+            Puzzle.AddNewRestrictedBlock(stack);
+        }
+
         public void RemoveBlockAt(Stack stack, int blockIndex)
         {
-            if (stack == null || blockIndex >= stack.Blocks.Count) return;
+            if (stack == null || blockIndex >= stack.Blocks.Count)
+                return;
 
             Block block = stack.Blocks[blockIndex];
             stack.RemoveBlock(block, true);
@@ -87,7 +93,8 @@ namespace Tofuwu.StackCats
         // Remove blocks at and above the provided index.
         public void RemoveBlocksAt(Stack stack, int blockIndex)
         {
-            if (stack == null || blockIndex >= stack.Blocks.Count) return;
+            if (stack == null || blockIndex >= stack.Blocks.Count)
+                return;
 
             while (stack.Blocks.Count > blockIndex)
             {
@@ -103,7 +110,8 @@ namespace Tofuwu.StackCats
             while (sumIndex >= 0)
             {
                 PuzzleBlock puzzleBlock = stack.Blocks[sumIndex].GetComponent<PuzzleBlock>();
-                if (!puzzleBlock) break;
+                if (!puzzleBlock)
+                    break;
 
                 puzzleBlock.PrimaryNumber += amount;
                 --sumIndex;
@@ -113,20 +121,24 @@ namespace Tofuwu.StackCats
         public void SumBlock(Stack stack, Block block, int amount)
         {
             PuzzleBlock puzzleBlock = block.GetComponent<PuzzleBlock>();
-            if (puzzleBlock) puzzleBlock.PrimaryNumber += amount;
+            if (puzzleBlock)
+                puzzleBlock.PrimaryNumber += amount;
 
             SumBlock sumBlock = block.GetComponent<SumBlock>();
-            if (sumBlock) sumBlock.SumValue += amount;
+            if (sumBlock)
+                sumBlock.SumValue += amount;
 
             PressureBlock pressureBlock = block.GetComponent<PressureBlock>();
-            if (pressureBlock) pressureBlock.BreakingPoint += amount;
+            if (pressureBlock)
+                pressureBlock.BreakingPoint += amount;
         }
 
         public void ShiftBlock(Stack stack, Block block, int amount)
         {
             int blockIndex = stack.Blocks.IndexOf(block);
 
-            if (blockIndex + amount < 0 || blockIndex + amount > stack.Blocks.Count - 1) return;
+            if (blockIndex + amount < 0 || blockIndex + amount > stack.Blocks.Count - 1)
+                return;
 
             stack.RemoveBlock(block);
             stack.InsertBlock(block, blockIndex + amount);

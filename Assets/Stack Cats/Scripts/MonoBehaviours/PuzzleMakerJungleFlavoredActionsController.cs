@@ -47,6 +47,9 @@ namespace Tofuwu.StackCats
                     case BlockType.PressureBlock:
                         _puzzleMakerJungleFlavoredActions.AddPressureBlock(stack);
                         break;
+                    case BlockType.RestrictedBlock:
+                        _puzzleMakerJungleFlavoredActions.AddRestrictedBlock(stack);
+                        break;
                 }
             }
             else

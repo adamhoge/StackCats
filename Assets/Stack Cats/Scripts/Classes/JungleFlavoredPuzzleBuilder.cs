@@ -11,9 +11,15 @@ namespace Tofuwu.StackCats
         /// <param name="puzzleModel">The puzzle model used to build the puzzle.</param>
         /// <param name="puzzleArea">The area information used to generate the puzzle.</param>
         /// <returns></returns>
-        public static JungleFlavoredPuzzle BuildFromModel(PuzzleModel puzzleModel, JungleFlavoredPuzzleArea puzzleArea, CatManager catManager)
+        public static JungleFlavoredPuzzle BuildFromModel(
+            PuzzleModel puzzleModel,
+            JungleFlavoredPuzzleArea puzzleArea,
+            CatManager catManager
+        )
         {
-            JungleFlavoredPuzzle puzzle = Object.Instantiate((JungleFlavoredPuzzle)puzzleArea.PuzzlePrefab);
+            JungleFlavoredPuzzle puzzle = Object.Instantiate(
+                (JungleFlavoredPuzzle)puzzleArea.PuzzlePrefab
+            );
             puzzle.name = "Jungle Flavored Puzzle";
             puzzle.MaxStackHeight = puzzleModel.MaxStackHeight;
             puzzle.NumMovesMade = puzzleModel.NumMovesMade;
@@ -31,11 +37,20 @@ namespace Tofuwu.StackCats
                     }
                     else if (blockModel.HasPuzzleBlock)
                     {
-                        puzzle.AddNewPuzzleBlock(stack, blockModel.PuzzleBlock.PrimaryNumber, blockModel.PuzzleBlock.SecondaryNumber);
+                        puzzle.AddNewPuzzleBlock(
+                            stack,
+                            blockModel.PuzzleBlock.PrimaryNumber,
+                            blockModel.PuzzleBlock.SecondaryNumber
+                        );
                     }
                     else if (blockModel.HasCatBlock)
                     {
-                        puzzle.AddNewCatBlock(stack, catManager.CatCollection.GetById(blockModel.CatBlock.CatId), blockModel.CatBlock.Yarn, blockModel.CatBlock.CatBlockId);
+                        puzzle.AddNewCatBlock(
+                            stack,
+                            catManager.CatCollection.GetById(blockModel.CatBlock.CatId),
+                            blockModel.CatBlock.Yarn,
+                            blockModel.CatBlock.CatBlockId
+                        );
                     }
                     else if (blockModel.HasSumBlock)
                     {
@@ -55,8 +70,19 @@ namespace Tofuwu.StackCats
                     }
                     else if (blockModel.HasJigsawBlock)
                     {
-                        JigsawPuzzleObject jigsawPuzzleObject = puzzleArea.JigsawPuzzleObjects.GetById(blockModel.JigsawBlock.JigsawPuzzleObjectId);
-                        puzzle.AddNewJigsawBlock(stack, jigsawPuzzleObject, blockModel.JigsawBlock.JigsawIndex);
+                        JigsawPuzzleObject jigsawPuzzleObject =
+                            puzzleArea.JigsawPuzzleObjects.GetById(
+                                blockModel.JigsawBlock.JigsawPuzzleObjectId
+                            );
+                        puzzle.AddNewJigsawBlock(
+                            stack,
+                            jigsawPuzzleObject,
+                            blockModel.JigsawBlock.JigsawIndex
+                        );
+                    }
+                    else if (blockModel.HasRestrictedBlock)
+                    {
+                        puzzle.AddNewRestrictedBlock(stack);
                     }
                 }
             }
@@ -96,7 +122,7 @@ namespace Tofuwu.StackCats
                             blockModel.PuzzleBlock = new PuzzleBlockComponentModel
                             {
                                 PrimaryNumber = puzzleBlock.PrimaryNumber,
-                                SecondaryNumber = puzzleBlock.SecondaryNumber
+                                SecondaryNumber = puzzleBlock.SecondaryNumber,
                             };
                         }
                     }
@@ -106,14 +132,22 @@ namespace Tofuwu.StackCats
                     {
                         string catId = catBlock.Cat ? catBlock.Cat.GetId() : "";
                         blockModel.HasCatBlock = true;
-                        blockModel.CatBlock = new CatBlockComponentModel { CatId = catId, Yarn = catBlock.Yarn, CatBlockId = catBlock.CatBlockId };
+                        blockModel.CatBlock = new CatBlockComponentModel
+                        {
+                            CatId = catId,
+                            Yarn = catBlock.Yarn,
+                            CatBlockId = catBlock.CatBlockId,
+                        };
                     }
 
                     SumBlock sumBlock = block.GetComponent<SumBlock>();
                     if (sumBlock)
                     {
                         blockModel.HasSumBlock = true;
-                        blockModel.SumBlock = new SumBlockComponentModel { SumValue = sumBlock.SumValue };
+                        blockModel.SumBlock = new SumBlockComponentModel
+                        {
+                            SumValue = sumBlock.SumValue,
+                        };
                     }
 
                     TerrainBlock terrainBlock = block.GetComponent<TerrainBlock>();
@@ -134,14 +168,21 @@ namespace Tofuwu.StackCats
                     if (pressureBlock)
                     {
                         blockModel.HasPressureBlock = true;
-                        blockModel.PressureBlock = new PressureBlockComponentModel { BreakingPoint = pressureBlock.BreakingPoint };
+                        blockModel.PressureBlock = new PressureBlockComponentModel
+                        {
+                            BreakingPoint = pressureBlock.BreakingPoint,
+                        };
                     }
 
                     JigsawBlock jigsawBlock = block.GetComponent<JigsawBlock>();
                     if (jigsawBlock)
                     {
                         blockModel.HasJigsawBlock = true;
-                        blockModel.JigsawBlock = new JigsawBlockComponentModel { JigsawPuzzleObjectId = jigsawBlock.JigsawPuzzleObject.GetId(), JigsawIndex = jigsawBlock.JigsawIndex };
+                        blockModel.JigsawBlock = new JigsawBlockComponentModel
+                        {
+                            JigsawPuzzleObjectId = jigsawBlock.JigsawPuzzleObject.GetId(),
+                            JigsawIndex = jigsawBlock.JigsawIndex,
+                        };
                     }
 
                     stackModel.Blocks.Add(blockModel);

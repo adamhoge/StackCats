@@ -19,7 +19,11 @@ namespace Tofuwu.StackCats
         public float MaxAddEffectDuration = 1.0f;
         public SumBlockDestructionEffect DestructionEffect;
 
-        public int SumValue { get { return _sumValue; } set { SetSumValue(value); } }
+        public int SumValue
+        {
+            get { return _sumValue; }
+            set { SetSumValue(value); }
+        }
 
         [SerializeField]
         [HideInInspector]
@@ -27,7 +31,8 @@ namespace Tofuwu.StackCats
 
         public override bool IsPlaceableOn(Block block)
         {
-            if (!block) return true;
+            if (!block)
+                return true;
 
             WildBlock wildBlock = block.GetComponent<WildBlock>();
             if (wildBlock)
@@ -35,8 +40,12 @@ namespace Tofuwu.StackCats
                 return false;
             }
 
+            if (block.GetComponent<RestrictedBlock>())
+                return false;
+
             PuzzleBlock puzzleBlock = block.GetComponent<PuzzleBlock>();
-            if (!puzzleBlock) return true;
+            if (!puzzleBlock)
+                return true;
 
             int totalSumValue = SumValue;
             Block blockAbove = Block.GetBlockAbove();
@@ -49,11 +58,14 @@ namespace Tofuwu.StackCats
             }
 
             int minSummedValue = puzzleBlock.PrimaryNumber + totalSumValue;
-            if (minSummedValue < 1) return false;
+            if (minSummedValue < 1)
+                return false;
 
             PuzzleBlock maxPuzzleBlock = puzzleBlock;
             Block blockBelow = maxPuzzleBlock.Block.GetBlockBelow();
-            PuzzleBlock puzzleBlockBelow = blockBelow ? blockBelow.GetComponent<PuzzleBlock>() : null;
+            PuzzleBlock puzzleBlockBelow = blockBelow
+                ? blockBelow.GetComponent<PuzzleBlock>()
+                : null;
             while (puzzleBlockBelow)
             {
                 maxPuzzleBlock = puzzleBlockBelow;
@@ -76,7 +88,8 @@ namespace Tofuwu.StackCats
             }
 
             PuzzleBlock puzzleBlock = block.GetComponent<PuzzleBlock>();
-            if (!puzzleBlock) return ruleExceptions;
+            if (!puzzleBlock)
+                return ruleExceptions;
 
             int totalSumValue = SumValue;
             Block blockAbove = Block.GetBlockAbove();
@@ -89,18 +102,24 @@ namespace Tofuwu.StackCats
             }
 
             int minSummedValue = puzzleBlock.PrimaryNumber + totalSumValue;
-            if (minSummedValue < 1) ruleExceptions.Add("Puzzle Block values must be between 1 and 9");
+            if (minSummedValue < 1)
+                ruleExceptions.Add("Puzzle Block values must be between 1 and 9");
 
             PuzzleBlock maxPuzzleBlock = puzzleBlock;
             Block blockBelow = maxPuzzleBlock.Block.GetBlockBelow();
-            PuzzleBlock puzzleBlockBelow = blockBelow ? blockBelow.GetComponent<PuzzleBlock>() : null;
+            PuzzleBlock puzzleBlockBelow = blockBelow
+                ? blockBelow.GetComponent<PuzzleBlock>()
+                : null;
             while (puzzleBlockBelow)
             {
                 maxPuzzleBlock = puzzleBlockBelow;
                 blockBelow = blockBelow.GetBlockBelow();
                 puzzleBlockBelow = blockBelow ? blockBelow.GetComponent<PuzzleBlock>() : null;
             }
-            if (maxPuzzleBlock.PrimaryNumber + totalSumValue > 9) { ruleExceptions.Add("Puzzle Block values must be between 1 and 9"); }
+            if (maxPuzzleBlock.PrimaryNumber + totalSumValue > 9)
+            {
+                ruleExceptions.Add("Puzzle Block values must be between 1 and 9");
+            }
 
             return ruleExceptions;
         }
@@ -108,21 +127,25 @@ namespace Tofuwu.StackCats
         public override void OnMove()
         {
             Stack parentStack = _block.ParentStack;
-            if (!parentStack) return;
+            if (!parentStack)
+                return;
 
             Block blockBelow = _block.GetBlockBelow();
             float addEffectDuration = MaxAddEffectDuration / parentStack.MaxBlocks;
 
             int sumValue = _sumValue;
 
-            PuzzleBlock puzzleBlockBelow = blockBelow ? blockBelow.GetComponent<PuzzleBlock>() : null;
+            PuzzleBlock puzzleBlockBelow = blockBelow
+                ? blockBelow.GetComponent<PuzzleBlock>()
+                : null;
             if (puzzleBlockBelow && puzzleBlockBelow.enabled)
             {
                 // Combine all sum blocks above.
                 foreach (Block block in _block.GetBlocksAbove())
                 {
                     SumBlock sumBlock = block.GetComponent<SumBlock>();
-                    if (sumBlock) sumValue += sumBlock.SumValue;
+                    if (sumBlock)
+                        sumValue += sumBlock.SumValue;
                     parentStack.RemoveBlock(block, true);
                 }
 
@@ -133,9 +156,14 @@ namespace Tofuwu.StackCats
                     PuzzleBlock puzzleBlock = parentStack.Blocks[i].GetComponent<PuzzleBlock>();
                     if (puzzleBlock)
                     {
-                        SumPuzzleBlock(puzzleBlock, sumValue, BaseEffectDuration + (startIndex - i) * addEffectDuration);
+                        SumPuzzleBlock(
+                            puzzleBlock,
+                            sumValue,
+                            BaseEffectDuration + (startIndex - i) * addEffectDuration
+                        );
                     }
-                    else break;
+                    else
+                        break;
                 }
 
                 // Play a sound effect.
@@ -159,7 +187,10 @@ namespace Tofuwu.StackCats
         {
             base.OnDestroyed();
 
-            SumBlockDestructionEffect destructionEffect = Instantiate(DestructionEffect, transform.parent);
+            SumBlockDestructionEffect destructionEffect = Instantiate(
+                DestructionEffect,
+                transform.parent
+            );
             destructionEffect.SumBlock.SumValue = SumValue;
             destructionEffect.transform.position = transform.position;
         }
@@ -167,21 +198,28 @@ namespace Tofuwu.StackCats
         protected void Update()
         {
             float positionY = (Time.time * 0.25f) % 1.0f;
-            if (_sumValue < 0) positionY = 1.0f - positionY;
+            if (_sumValue < 0)
+                positionY = 1.0f - positionY;
             SumBackground.transform.localPosition = Vector2.up * positionY;
         }
 
         private void SumPuzzleBlock(PuzzleBlock puzzleBlock, int sumValue, float effectDuration)
         {
-            if (!puzzleBlock) return;
+            if (!puzzleBlock)
+                return;
 
             puzzleBlock.PrimaryNumber += sumValue;
-            puzzleBlock.Block.FlashBlock(sumValue >= 0 ? PositiveColor : NegativeColor, effectDuration, LeanTweenType.easeInSine);
+            puzzleBlock.Block.FlashBlock(
+                sumValue >= 0 ? PositiveColor : NegativeColor,
+                effectDuration,
+                LeanTweenType.easeInSine
+            );
         }
 
         private void SetSumValue(int sumValue)
         {
-            if (sumValue == _sumValue) return;
+            if (sumValue == _sumValue)
+                return;
 
             _sumValue = sumValue;
 

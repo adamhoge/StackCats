@@ -7,8 +7,18 @@ using UnityEngine;
 namespace Tofuwu.StackCats
 {
     public delegate void BlockMoved(Puzzle puzzle, Stack source, Block block, Stack destination);
-    public delegate void AfterBlockMoved(Puzzle puzzle, Stack source, Block block, Stack destination);
-    public delegate void BlockMoveResolved(Puzzle puzzle, Stack source, Block block, Stack destination);
+    public delegate void AfterBlockMoved(
+        Puzzle puzzle,
+        Stack source,
+        Block block,
+        Stack destination
+    );
+    public delegate void BlockMoveResolved(
+        Puzzle puzzle,
+        Stack source,
+        Block block,
+        Stack destination
+    );
     public delegate void CatSightingEvent(Cat cat, Puzzle puzzle, int stackIndex, int puzzleIndex);
     public delegate void NewCatRevealedEvent(Cat cat);
     public delegate void CurrencyFound(CatBlock source, Currency currency, int amount);
@@ -20,7 +30,7 @@ namespace Tofuwu.StackCats
     public enum PuzzleCompletionType
     {
         PuzzleFailed,
-        PuzzleSolved
+        PuzzleSolved,
     }
 
     public abstract class Puzzle : MonoBehaviour, IIdentifiable
@@ -123,6 +133,12 @@ namespace Tofuwu.StackCats
         public PressureBlock PressureBlockPrefab;
 
         /// <summary>
+        /// Prefab used for the creation of new restricted blocks.
+        /// </summary>
+        [Tooltip("Prefab used for the creation of new restricted blocks.")]
+        public RestrictedBlock RestrictedBlockPrefab;
+
+        /// <summary>
         /// The object pooler used to create cat block removal effects.
         /// </summary>
         [Tooltip("The object pooler used to create cat block removal effects.")]
@@ -158,49 +174,77 @@ namespace Tofuwu.StackCats
         /// <summary>
         /// Indicates whether or not the puzzle has been completed.
         /// </summary>
-        public bool IsCompleted { get { return _isComplete; } }
+        public bool IsCompleted
+        {
+            get { return _isComplete; }
+        }
 
         /// <summary>
         /// The max stack height for stacks used in the puzzle.
         /// </summary>
-        public int MaxStackHeight { get { return _maxStackHeight; } set { SetMaxStackHeight(value); } }
+        public int MaxStackHeight
+        {
+            get { return _maxStackHeight; }
+            set { SetMaxStackHeight(value); }
+        }
 
         /// <summary>
         /// The max movable stack height (adjustable height).
         /// </summary>
-        public virtual int MaxMovableStackHeight { get { return _maxStackHeight; } }
+        public virtual int MaxMovableStackHeight
+        {
+            get { return _maxStackHeight; }
+        }
 
         /// <summary>
         /// All stacks associated with the puzzle.
         /// </summary>
-        public ReadOnlyCollection<Stack> Stacks { get { return _stacks.AsReadOnly(); } }
+        public ReadOnlyCollection<Stack> Stacks
+        {
+            get { return _stacks.AsReadOnly(); }
+        }
 
         /// <summary>
         /// The space between each stack.
         /// </summary>
-        public float StackSpacing { get { return _stackSpacing; } set { SetStackSpacing(value); } }
+        public float StackSpacing
+        {
+            get { return _stackSpacing; }
+            set { SetStackSpacing(value); }
+        }
 
         /// <summary>
         /// The cumulative time elapsed while the puzzle has been interactable.
         /// </summary>
-        public float TimeElapsed { get { return _timeElapsed; } }
+        public float TimeElapsed
+        {
+            get { return _timeElapsed; }
+        }
 
         /// <summary>
         /// The max blocks that can fit in the current puzzle (based on stack heights).
         /// </summary>
-        public int MaxBlocks { get { return Stacks.Sum(s => s.MaxBlocks); } }
+        public int MaxBlocks
+        {
+            get { return Stacks.Sum(s => s.MaxBlocks); }
+        }
 
         /// <summary>
         /// The total number of moves made on the current puzzle.
         /// </summary>
-        public int NumMovesMade { get { return _numMovesMade; } set { _numMovesMade = value; } }
+        public int NumMovesMade
+        {
+            get { return _numMovesMade; }
+            set { _numMovesMade = value; }
+        }
 
         protected CatManager _cats;
         protected GameManager _gameManager;
         protected float _timeElapsed;
         protected int _numMovesMade;
         protected bool _isComplete;
-        protected Dictionary<Stack, List<FallingBlock>> _fallingBlocks = new Dictionary<Stack, List<FallingBlock>>();
+        protected Dictionary<Stack, List<FallingBlock>> _fallingBlocks =
+            new Dictionary<Stack, List<FallingBlock>>();
 
         [SerializeField]
         [HideInInspector]
@@ -220,7 +264,10 @@ namespace Tofuwu.StackCats
 
         public string GetId()
         {
-            if (_guid == Guid.Empty) { _guid = Guid.NewGuid(); }
+            if (_guid == Guid.Empty)
+            {
+                _guid = Guid.NewGuid();
+            }
 
             return _guid.ToString();
         }
@@ -233,7 +280,8 @@ namespace Tofuwu.StackCats
         public virtual bool AddStack(Stack stack)
         {
             // If the stack is null or already exists, don't add it.
-            if (!stack || _stacks.Contains(stack)) return false;
+            if (!stack || _stacks.Contains(stack))
+                return false;
 
             // Add the stack.
             _stacks.Add(stack);
@@ -257,7 +305,8 @@ namespace Tofuwu.StackCats
         public virtual bool RemoveStack(Stack stack)
         {
             // If the stack doesn't exist in the puzzle, don't attempt to remove it.
-            if (!_stacks.Contains(stack)) return false;
+            if (!_stacks.Contains(stack))
+                return false;
 
             // Remove the stack.
             _stacks.Remove(stack);
@@ -281,7 +330,8 @@ namespace Tofuwu.StackCats
         {
             _isComplete = true;
             OnPuzzleCompleted();
-            if (onPuzzleCompleted != null) onPuzzleCompleted(this, puzzleCompletionType);
+            if (onPuzzleCompleted != null)
+                onPuzzleCompleted(this, puzzleCompletionType);
         }
 
         /// <summary>
@@ -291,7 +341,8 @@ namespace Tofuwu.StackCats
         public virtual Stack AddNewStack()
         {
             // If the stack prefab isn't defined, don't add a new stack.
-            if (!StackPrefab) return null;
+            if (!StackPrefab)
+                return null;
 
             // Create the new stack.
             Stack newStack = Instantiate(StackPrefab);
@@ -317,9 +368,11 @@ namespace Tofuwu.StackCats
         /// <returns></returns>
         public Vector3 GetStackLocalPosition(Stack stack)
         {
-            if (!_stacks.Contains(stack)) return Vector3.zero;
+            if (!_stacks.Contains(stack))
+                return Vector3.zero;
 
-            float xPosition = (-(float)(_stacks.Count - 1) / 2 + _stacks.IndexOf(stack)) * (1 + _stackSpacing);
+            float xPosition =
+                (-(float)(_stacks.Count - 1) / 2 + _stacks.IndexOf(stack)) * (1 + _stackSpacing);
             return new Vector3(xPosition, 0.0f, 0.0f);
         }
 
@@ -333,14 +386,16 @@ namespace Tofuwu.StackCats
         public bool AddNewPuzzleBlock(Stack stack, int primaryNumber = 1, int secondaryNumber = 0)
         {
             // If the stack isn't a part of the puzzle or the puzzle block prefab isn't defined, don't add anything.
-            if (!_stacks.Contains(stack) || !PuzzleBlockPrefab) return false;
+            if (!_stacks.Contains(stack) || !PuzzleBlockPrefab)
+                return false;
 
             // Create the new puzzle block.
             PuzzleBlock newPuzzleBlock = CreatePuzzleBlock(primaryNumber, secondaryNumber);
 
             // Add it to the stack, or destroy it if unable to add it.
             bool wasAdded = stack.AddBlock(newPuzzleBlock.GetComponent<Block>());
-            if (!wasAdded) DestroyImmediate(newPuzzleBlock.gameObject);
+            if (!wasAdded)
+                DestroyImmediate(newPuzzleBlock.gameObject);
             return wasAdded;
         }
 
@@ -361,7 +416,8 @@ namespace Tofuwu.StackCats
 
             // Add it to the stack, or destroy it if unable to add it.
             bool wasAdded = stack.AddBlock(puzzleBlock.GetComponent<Block>());
-            if (!wasAdded) DestroyImmediate(puzzleBlock.gameObject);
+            if (!wasAdded)
+                DestroyImmediate(puzzleBlock.gameObject);
             return wasAdded;
         }
 
@@ -372,7 +428,8 @@ namespace Tofuwu.StackCats
 
         public bool InsertBlock(Stack stack, int atIndex, Block block)
         {
-            if (!block) return false;
+            if (!block)
+                return false;
 
             if (!_stacks.Contains(stack))
             {
@@ -382,7 +439,8 @@ namespace Tofuwu.StackCats
 
             // Add it to the stack, or destroy it if unable to add it.
             bool wasAdded = stack.InsertBlock(block, atIndex);
-            if (!wasAdded) DestroyImmediate(block.gameObject);
+            if (!wasAdded)
+                DestroyImmediate(block.gameObject);
             return wasAdded;
         }
 
@@ -390,17 +448,24 @@ namespace Tofuwu.StackCats
         /// Add a new cat block to the stack.
         /// </summary>
         /// <returns>A flag indicating whether or not the cat block was successfully added.</returns>
-        public bool AddNewCatBlock(Stack stack, Cat cat = null, int yarn = 0, string catBlockId = "")
+        public bool AddNewCatBlock(
+            Stack stack,
+            Cat cat = null,
+            int yarn = 0,
+            string catBlockId = ""
+        )
         {
             // If the stack isn't a part of the puzzle or the cat block prefab isn't defined, don't add anything.
-            if (!_stacks.Contains(stack) || !CatBlockPrefab) return false;
+            if (!_stacks.Contains(stack) || !CatBlockPrefab)
+                return false;
 
             // Create a new cat block.
             CatBlock newCatBlock = CreateCatBlock(cat, yarn, catBlockId);
 
             // Add it to the stack, or destroy it if unable to add it.
             bool wasAdded = stack.AddBlock(newCatBlock.GetComponent<Block>());
-            if (!wasAdded) DestroyImmediate(newCatBlock.gameObject);
+            if (!wasAdded)
+                DestroyImmediate(newCatBlock.gameObject);
             newCatBlock.onCatBlockRemoved += OnCatBlockRemoved;
 
             return wasAdded;
@@ -414,14 +479,16 @@ namespace Tofuwu.StackCats
         public bool AddNewWildBlock(Stack stack)
         {
             // If the stack isn't a part of the puzzle or the terrain block prefab isn't defined, don't add anything.
-            if (!_stacks.Contains(stack) || !WildBlockPrefab) return false;
+            if (!_stacks.Contains(stack) || !WildBlockPrefab)
+                return false;
 
             // Create a new terrain block.
             WildBlock newWildBlock = CreateWildBlock();
 
             // Add it to the stack, or destroy it if unable to add it.
             bool wasAdded = stack.AddBlock(newWildBlock.GetComponent<Block>());
-            if (!wasAdded) DestroyImmediate(newWildBlock.gameObject);
+            if (!wasAdded)
+                DestroyImmediate(newWildBlock.gameObject);
             return wasAdded;
         }
 
@@ -434,7 +501,8 @@ namespace Tofuwu.StackCats
         public bool AddNewSumBlock(Stack stack, int sumValue)
         {
             // If the stack isn't a part of the puzzle or the sum block prefab isn't defined, don't add anything.
-            if (!_stacks.Contains(stack) || !SumBlockPrefab) return false;
+            if (!_stacks.Contains(stack) || !SumBlockPrefab)
+                return false;
 
             // Create a new sum block.
             SumBlock newSumBlock = Instantiate(SumBlockPrefab);
@@ -443,7 +511,8 @@ namespace Tofuwu.StackCats
 
             // Add it to the stack, or destroy it if unable to add it.
             bool wasAdded = stack.AddBlock(newSumBlock.GetComponent<Block>());
-            if (!wasAdded) DestroyImmediate(newSumBlock.gameObject);
+            if (!wasAdded)
+                DestroyImmediate(newSumBlock.gameObject);
             return wasAdded;
         }
 
@@ -455,14 +524,16 @@ namespace Tofuwu.StackCats
         public bool AddNewTerrainBlock(Stack stack)
         {
             // If the stack isn't a part of the puzzle or the terrain block prefab isn't defined, don't add anything.
-            if (!_stacks.Contains(stack) || !TerrainBlockPrefab) return false;
+            if (!_stacks.Contains(stack) || !TerrainBlockPrefab)
+                return false;
 
             // Create a new terrain block.
             TerrainBlock newTerrainBlock = CreateTerrainBlock();
 
             // Add it to the stack, or destroy it if unable to add it.
             bool wasAdded = stack.AddBlock(newTerrainBlock.GetComponent<Block>());
-            if (!wasAdded) DestroyImmediate(newTerrainBlock.gameObject);
+            if (!wasAdded)
+                DestroyImmediate(newTerrainBlock.gameObject);
             return wasAdded;
         }
 
@@ -474,14 +545,16 @@ namespace Tofuwu.StackCats
         public bool AddNewRemovalBlock(Stack stack)
         {
             // If the stack isn't a part of the puzzle or the removal block prefab isn't defined, don't add anything.
-            if (!_stacks.Contains(stack) || !RemovalBlockPrefab) return false;
+            if (!_stacks.Contains(stack) || !RemovalBlockPrefab)
+                return false;
 
             // Create a new removal block.
             RemovalBlock newRemovalBlock = CreateRemovalBlock();
 
             // Add it to the stack, or destroy it if unable to add it.
             bool wasAdded = stack.AddBlock(newRemovalBlock.GetComponent<Block>());
-            if (!wasAdded) DestroyImmediate(newRemovalBlock.gameObject);
+            if (!wasAdded)
+                DestroyImmediate(newRemovalBlock.gameObject);
             return wasAdded;
         }
 
@@ -493,14 +566,37 @@ namespace Tofuwu.StackCats
         public bool AddNewPressureBlock(Stack stack, int breakingPoint = 3)
         {
             // If the stack isn't a part of the puzzle or the removal block prefab isn't defined, don't add anything.
-            if (!_stacks.Contains(stack) || !PressureBlockPrefab) return false;
+            if (!_stacks.Contains(stack) || !PressureBlockPrefab)
+                return false;
 
             // Create a new pressure block.
             PressureBlock newPressureBlock = CreatePressureBlock(breakingPoint);
 
             // Add it to the stack, or destroy it if unable to add it.
             bool wasAdded = stack.AddBlock(newPressureBlock.GetComponent<Block>());
-            if (!wasAdded) DestroyImmediate(newPressureBlock.gameObject);
+            if (!wasAdded)
+                DestroyImmediate(newPressureBlock.gameObject);
+            return wasAdded;
+        }
+
+        /// <summary>
+        /// Add a new restricted block to the stack.
+        /// </summary>
+        /// <param name="stack"></param>
+        /// <returns></returns>
+        public bool AddNewRestrictedBlock(Stack stack)
+        {
+            // If the stack isn't a part of the puzzle or the restricted block prefab isn't defined, don't add anything.
+            if (!_stacks.Contains(stack) || !RestrictedBlockPrefab)
+                return false;
+
+            // Create a new restricted block.
+            RestrictedBlock newRestrictedBlock = CreateRestrictedBlock();
+
+            // Add it to the stack, or destroy it if unable to add it.
+            bool wasAdded = stack.AddBlock(newRestrictedBlock.GetComponent<Block>());
+            if (!wasAdded)
+                DestroyImmediate(newRestrictedBlock.gameObject);
             return wasAdded;
         }
 
@@ -513,11 +609,14 @@ namespace Tofuwu.StackCats
         /// <returns>A flag indicating whether or not the block can be moved.</returns>
         public virtual bool CanMoveBlock(Stack source, Block block, Stack destination)
         {
-            if (!source || !block || !destination || destination == source) return false;
-         
-            if (IsEditMode) return true;
+            if (!source || !block || !destination || destination == source)
+                return false;
 
-            if (!CanFit(source, block, destination)) return false;
+            if (IsEditMode)
+                return true;
+
+            if (!CanFit(source, block, destination))
+                return false;
 
             return !(!IsMovable(source, block) || !IsPlaceable(block, destination.TopBlock));
         }
@@ -542,9 +641,16 @@ namespace Tofuwu.StackCats
         /// <param name="block">The block that should be moved.</param>
         /// <param name="destination">The stack to which the block should be moved.</param>
         /// <returns>A flag indicating whether or not the block was moved.</returns>
-        public bool MoveBlock(Stack source, Block block, Stack destination, bool dataOnly = false, bool ignoreRules = false)
+        public bool MoveBlock(
+            Stack source,
+            Block block,
+            Stack destination,
+            bool dataOnly = false,
+            bool ignoreRules = false
+        )
         {
-            if (!ignoreRules && !CanMoveBlock(source, block, destination)) return false;
+            if (!ignoreRules && !CanMoveBlock(source, block, destination))
+                return false;
 
             int blockIndex = source.Blocks.IndexOf(block);
 
@@ -575,11 +681,22 @@ namespace Tofuwu.StackCats
                     int animateIndex = blockCount - blocksAffected;
                     if (i >= animateIndex)
                     {
-                        float impactNormal = blockCount == 1 ? 0.25f : (i + 1 - animateIndex) / (float)blocksAffected;
+                        float impactNormal =
+                            blockCount == 1
+                                ? 0.25f
+                                : (i + 1 - animateIndex) / (float)blocksAffected;
 
                         LeanTween.cancel(b.gameObject);
-                        LeanTween.scale(b.gameObject, Vector3.one * 1.025f, 0.25f).setEase(LeanTweenType.punch);
-                        LeanTween.moveLocal(b.gameObject, b.transform.localPosition + Vector3.down * 0.05f * impactNormal, 0.75f).setEase(LeanTweenType.punch);
+                        LeanTween
+                            .scale(b.gameObject, Vector3.one * 1.025f, 0.25f)
+                            .setEase(LeanTweenType.punch);
+                        LeanTween
+                            .moveLocal(
+                                b.gameObject,
+                                b.transform.localPosition + Vector3.down * 0.05f * impactNormal,
+                                0.75f
+                            )
+                            .setEase(LeanTweenType.punch);
                     }
                 }
             }
@@ -591,7 +708,9 @@ namespace Tofuwu.StackCats
                 movedBlocks.AddRange(block.GetBlocksAbove());
                 foreach (Block movedBlock in movedBlocks)
                 {
-                    foreach (BlockComponent blockComponent in movedBlock.GetComponents<BlockComponent>())
+                    foreach (
+                        BlockComponent blockComponent in movedBlock.GetComponents<BlockComponent>()
+                    )
                     {
                         blockComponent.OnMove();
                     }
@@ -602,7 +721,8 @@ namespace Tofuwu.StackCats
                 OnStackChanged(source);
                 OnStackChanged(destination);
 
-                if (IsComplete()) CompletePuzzle(PuzzleCompletionType.PuzzleSolved);
+                if (IsComplete())
+                    CompletePuzzle(PuzzleCompletionType.PuzzleSolved);
 
                 OnAfterBlockMoved(source, block, destination);
             }
@@ -619,11 +739,13 @@ namespace Tofuwu.StackCats
         /// <returns>The first movable block, or null if no movable blocks exist in the stack.</returns>
         public Block GetFirstMovableBlock(Stack stack)
         {
-            if (!Stacks.Contains(stack)) return null;
+            if (!Stacks.Contains(stack))
+                return null;
 
             foreach (Block block in stack.Blocks)
             {
-                if (IsMovable(stack, block)) return block;
+                if (IsMovable(stack, block))
+                    return block;
             }
 
             return null;
@@ -646,10 +768,12 @@ namespace Tofuwu.StackCats
         /// <param name="amount"></param>
         public void AddCurrencyFound(CatBlock source, Currency currency, int amount)
         {
-            if (amount == 0) return;
+            if (amount == 0)
+                return;
 
             _gameManager.Currency.ChangeCurrency(currency, amount);
-            if (onCurrencyFound != null) onCurrencyFound(source, currency, amount);
+            if (onCurrencyFound != null)
+                onCurrencyFound(source, currency, amount);
             if (GetYarnSoundEffect)
             {
                 _gameManager.Audio.PlaySoundEffect(GetYarnSoundEffect);
@@ -665,7 +789,8 @@ namespace Tofuwu.StackCats
         /// <param name="blockIndex"></param>
         public void AddCatSighting(Cat cat, Puzzle puzzle, int stackIndex, int blockIndex)
         {
-            if (onCatSighting != null) onCatSighting(cat, puzzle, stackIndex, blockIndex);
+            if (onCatSighting != null)
+                onCatSighting(cat, puzzle, stackIndex, blockIndex);
         }
 
         public abstract bool IsMovable(Stack source, Block block);
@@ -676,7 +801,8 @@ namespace Tofuwu.StackCats
 
         public PuzzleBlock CreatePuzzleBlock(int primaryNumber = 1, int secondaryNumber = 0)
         {
-            if (!PuzzleBlockPrefab) return null;
+            if (!PuzzleBlockPrefab)
+                return null;
 
             // Create the new puzzle block.
             PuzzleBlock newPuzzleBlock = Instantiate(PuzzleBlockPrefab);
@@ -689,12 +815,15 @@ namespace Tofuwu.StackCats
 
         public CatBlock CreateCatBlock(Cat cat = null, int yarn = 0, string catBlockId = "")
         {
-            if (!CatBlockPrefab) return null;
+            if (!CatBlockPrefab)
+                return null;
 
             // Create the new cat block.
             CatBlock newCatBlock = Instantiate(CatBlockPrefab);
             newCatBlock.name = "Cat Block";
-            newCatBlock.CatBlockId = string.IsNullOrEmpty(catBlockId) ? Guid.NewGuid().ToString() : catBlockId;
+            newCatBlock.CatBlockId = string.IsNullOrEmpty(catBlockId)
+                ? Guid.NewGuid().ToString()
+                : catBlockId;
             newCatBlock.Cat = cat;
             newCatBlock.Yarn = yarn;
             newCatBlock.IsSpecial = IsSpecial;
@@ -704,7 +833,8 @@ namespace Tofuwu.StackCats
 
         public WildBlock CreateWildBlock()
         {
-            if (!WildBlockPrefab) return null;
+            if (!WildBlockPrefab)
+                return null;
 
             // Create the new sum block.
             WildBlock newWildBlock = Instantiate(WildBlockPrefab);
@@ -715,7 +845,8 @@ namespace Tofuwu.StackCats
 
         public SumBlock CreateSumBlock(int sumValue)
         {
-            if (!SumBlockPrefab) return null;
+            if (!SumBlockPrefab)
+                return null;
 
             // Create the new sum block.
             SumBlock newSumBlock = Instantiate(SumBlockPrefab);
@@ -727,7 +858,8 @@ namespace Tofuwu.StackCats
 
         public TerrainBlock CreateTerrainBlock()
         {
-            if (!TerrainBlockPrefab) return null;
+            if (!TerrainBlockPrefab)
+                return null;
 
             // Create the new terrain block.
             TerrainBlock newTerrainBlock = Instantiate(TerrainBlockPrefab);
@@ -738,7 +870,8 @@ namespace Tofuwu.StackCats
 
         public RemovalBlock CreateRemovalBlock()
         {
-            if (!RemovalBlockPrefab) return null;
+            if (!RemovalBlockPrefab)
+                return null;
 
             // Create the new terrain block.
             RemovalBlock newRemovalBlock = Instantiate(RemovalBlockPrefab);
@@ -749,7 +882,8 @@ namespace Tofuwu.StackCats
 
         public PressureBlock CreatePressureBlock(int breakingPoint = 3)
         {
-            if (!PressureBlockPrefab) return null;
+            if (!PressureBlockPrefab)
+                return null;
 
             // Create the new terrain block.
             PressureBlock newPressureBlock = Instantiate(PressureBlockPrefab);
@@ -759,19 +893,34 @@ namespace Tofuwu.StackCats
             return newPressureBlock;
         }
 
+        public RestrictedBlock CreateRestrictedBlock()
+        {
+            if (!RestrictedBlockPrefab)
+                return null;
+
+            // Create the new restricted block.
+            RestrictedBlock newRestrictedBlock = Instantiate(RestrictedBlockPrefab);
+            newRestrictedBlock.name = "Restricted Block";
+
+            return newRestrictedBlock;
+        }
+
         protected virtual void OnBlockMoved(Stack source, Block block, Stack destination)
         {
-            if (onBlockMoved != null) onBlockMoved(this, source, block, destination);
+            if (onBlockMoved != null)
+                onBlockMoved(this, source, block, destination);
         }
 
         protected virtual void OnAfterBlockMoved(Stack source, Block block, Stack destination)
         {
-            if (onAfterBlockMoved != null) onAfterBlockMoved(this, source, block, destination);
+            if (onAfterBlockMoved != null)
+                onAfterBlockMoved(this, source, block, destination);
         }
 
         protected void OnBlockMoveResolved(Stack source, Block block, Stack destination)
         {
-            if (onBlockMoveResolved != null) onBlockMoveResolved(this, source, block, destination);
+            if (onBlockMoveResolved != null)
+                onBlockMoveResolved(this, source, block, destination);
         }
 
         protected virtual bool IsComplete()
@@ -785,7 +934,12 @@ namespace Tofuwu.StackCats
             Cat cat = catBlock.Cat;
             if (cat)
             {
-                AddCatSighting(cat, this, Stacks.IndexOf(stack), stack.Blocks.IndexOf(catBlock.Block));
+                AddCatSighting(
+                    cat,
+                    this,
+                    Stacks.IndexOf(stack),
+                    stack.Blocks.IndexOf(catBlock.Block)
+                );
                 RarityEffect rarityEffect = Instantiate(RarityEffectPrefab, transform);
                 rarityEffect.Cat = cat;
                 rarityEffect.transform.position = catBlock.transform.position;
@@ -796,10 +950,13 @@ namespace Tofuwu.StackCats
                 AddCurrencyFound(catBlock, Currency.SilverPaw, catBlock.Yarn);
             }
 
-            ObjectPooler catRemovedObjectPooler = IsSpecial ? SpecialCatBoxRemovedObjectPooler : CatBoxRemovedObjectPooler;
+            ObjectPooler catRemovedObjectPooler = IsSpecial
+                ? SpecialCatBoxRemovedObjectPooler
+                : CatBoxRemovedObjectPooler;
             PoolObject destructionParticles = catRemovedObjectPooler.BorrowInstance();
             destructionParticles.transform.SetParent(transform);
-            destructionParticles.transform.position = catBlock.transform.position + Vector3.up * 0.5f;
+            destructionParticles.transform.position =
+                catBlock.transform.position + Vector3.up * 0.5f;
         }
 
         protected virtual void OnPuzzleCompleted() { }
@@ -818,23 +975,38 @@ namespace Tofuwu.StackCats
                 foreach (Block block in stack.Blocks)
                 {
                     CatBlock catBlock = block.GetComponent<CatBlock>();
-                    if (catBlock) catBlock.onCatBlockRemoved += OnCatBlockRemoved;
+                    if (catBlock)
+                        catBlock.onCatBlockRemoved += OnCatBlockRemoved;
                 }
             }
         }
 
         protected void Update()
         {
-            if (IsInteractable) _timeElapsed += Time.deltaTime;
+            if (IsInteractable)
+                _timeElapsed += Time.deltaTime;
         }
 
-        protected void AnimateFallingBlock(Stack stack, Block block, int fromIndex, int toIndex, float delay)
+        protected void AnimateFallingBlock(
+            Stack stack,
+            Block block,
+            int fromIndex,
+            int toIndex,
+            float delay
+        )
         {
             List<FallingBlock> fallingBlocks = _fallingBlocks[stack];
             FallingBlock fallingBlock = fallingBlocks.FirstOrDefault(fb => fb.Block == block);
             if (fallingBlock == null)
             {
-                fallingBlock = new FallingBlock { Stack = stack, Block = block, FromIndex = fromIndex, ToIndex = toIndex, Delay = delay };
+                fallingBlock = new FallingBlock
+                {
+                    Stack = stack,
+                    Block = block,
+                    FromIndex = fromIndex,
+                    ToIndex = toIndex,
+                    Delay = delay,
+                };
                 fallingBlocks.Add(fallingBlock);
             }
             else
@@ -844,23 +1016,41 @@ namespace Tofuwu.StackCats
 
             // TODO: block is null when two pairs of galaxy blocks trigger in one stack.
             LeanTween.cancel(block.gameObject);
-            block.transform.position = stack.transform.position + stack.GetBlockLocalPosition(fromIndex);
-            LeanTween.moveLocal(block.gameObject, block.transform.localPosition + Vector3.up * 0.15f, 0.1f).setEase(LeanTweenType.easeOutSine);
-            LeanTween.moveLocal(block.gameObject, stack.GetBlockLocalPosition(toIndex), 0.35f).setEase(LeanTweenType.easeInCubic).setDelay(0.1f + delay).setOnComplete(CompleteFallingBlockAnimation, fallingBlock);
+            block.transform.position =
+                stack.transform.position + stack.GetBlockLocalPosition(fromIndex);
+            LeanTween
+                .moveLocal(
+                    block.gameObject,
+                    block.transform.localPosition + Vector3.up * 0.15f,
+                    0.1f
+                )
+                .setEase(LeanTweenType.easeOutSine);
+            LeanTween
+                .moveLocal(block.gameObject, stack.GetBlockLocalPosition(toIndex), 0.35f)
+                .setEase(LeanTweenType.easeInCubic)
+                .setDelay(0.1f + delay)
+                .setOnComplete(CompleteFallingBlockAnimation, fallingBlock);
         }
 
         private void CompleteFallingBlockAnimation(object fallingBlockObject)
         {
             FallingBlock fallingBlock = (FallingBlock)fallingBlockObject;
             Block block = fallingBlock.Block;
-            LeanTween.moveLocal(block.gameObject, block.transform.localPosition + Vector3.down * 0.025f, 0.75f).setEase(LeanTweenType.punch);
+            LeanTween
+                .moveLocal(
+                    block.gameObject,
+                    block.transform.localPosition + Vector3.down * 0.025f,
+                    0.75f
+                )
+                .setEase(LeanTweenType.punch);
 
             _fallingBlocks[fallingBlock.Stack].Remove(fallingBlock);
         }
 
         private void SetMaxStackHeight(int value)
         {
-            if (_maxStackHeight == value) return;
+            if (_maxStackHeight == value)
+                return;
 
             _maxStackHeight = value;
             foreach (Stack stack in _stacks)
@@ -871,7 +1061,8 @@ namespace Tofuwu.StackCats
 
         private void SetStackSpacing(float value)
         {
-            if (value == _stackSpacing) return;
+            if (value == _stackSpacing)
+                return;
 
             _stackSpacing = value;
             UpdateStackPositions();
@@ -895,10 +1086,13 @@ namespace Tofuwu.StackCats
             {
                 Block blockToTrigger = blocksToTrigger[blocksToTrigger.Count - 1];
 
-                foreach (BlockComponent blockComponent in blockToTrigger.GetComponents<BlockComponent>())
+                foreach (
+                    BlockComponent blockComponent in blockToTrigger.GetComponents<BlockComponent>()
+                )
                 {
                     blockComponent.OnStackChanged();
-                    if (!blockToTrigger) break;
+                    if (!blockToTrigger)
+                        break;
                 }
 
                 blocksToTrigger.Remove(blockToTrigger);
@@ -917,7 +1111,8 @@ namespace Tofuwu.StackCats
                 for (int i = fromIndex; i < sender.Blocks.Count; i++)
                 {
                     Block curBlockAbove = sender.Blocks[i];
-                    FallingBlock existingFallingBlock = _fallingBlocks[sender].FirstOrDefault(fb => fb.Block == curBlockAbove);
+                    FallingBlock existingFallingBlock = _fallingBlocks[sender]
+                        .FirstOrDefault(fb => fb.Block == curBlockAbove);
                     int fallFromIndex;
                     if (existingFallingBlock != null)
                     {

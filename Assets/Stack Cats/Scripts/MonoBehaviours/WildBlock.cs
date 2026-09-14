@@ -23,13 +23,19 @@ namespace Tofuwu.StackCats
 
         public override bool IsPlaceableOn(Block otherBlock)
         {
-            if (!otherBlock) return true;
+            if (!otherBlock)
+                return true;
 
             SumBlock sumBlock = otherBlock.GetComponent<SumBlock>();
-            if (sumBlock) return false;
+            if (sumBlock)
+                return false;
+
+            if (otherBlock.GetComponent<RestrictedBlock>())
+                return false;
 
             PuzzleBlock puzzleBlock = otherBlock.GetComponent<PuzzleBlock>();
-            if (!puzzleBlock || !puzzleBlock.enabled) return true;
+            if (!puzzleBlock || !puzzleBlock.enabled)
+                return true;
 
             int numWildBlocks = 1;
             Block currentBlockAbove = Block.GetBlockAbove();
@@ -67,7 +73,10 @@ namespace Tofuwu.StackCats
                 currentBlockAbove = currentBlockAbove.GetBlockAbove();
             }
 
-            if (puzzleBlock.PrimaryNumber - numWildBlocks < 1) { ruleExceptions.Add("Wild Block values must be between 1 and 9"); }
+            if (puzzleBlock.PrimaryNumber - numWildBlocks < 1)
+            {
+                ruleExceptions.Add("Wild Block values must be between 1 and 9");
+            }
 
             return ruleExceptions;
         }
@@ -88,10 +97,12 @@ namespace Tofuwu.StackCats
 
         private void TryTriggerAgainstBlock(Block block, int direction)
         {
-            if (!block) return;
+            if (!block)
+                return;
 
             PuzzleBlock puzzleBlock = block.GetComponent<PuzzleBlock>();
-            if (!puzzleBlock || !puzzleBlock.enabled) return;
+            if (!puzzleBlock || !puzzleBlock.enabled)
+                return;
 
             Block.FlashBlock(Color.white, 0.5f);
             int primaryNumber = puzzleBlock.PrimaryNumber + direction;
