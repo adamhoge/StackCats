@@ -94,10 +94,10 @@ namespace Tofuwu.StackCats
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
 
-            if (Input.GetKey(KeyCode.BackQuote))
+            if (Input.GetKey(KeyCode.P))
             {
                 ++_keypresses;
-                if (_keypresses == 100)
+                if (_keypresses == 5)
                     UnlockAllAreasAndPuzzles();
             }
 

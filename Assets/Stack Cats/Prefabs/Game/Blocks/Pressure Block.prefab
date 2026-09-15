@@ -34,7 +34,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2228666146815081389
 SpriteRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -91,6 +91,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!1 &1122766589204439501
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,7 +217,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1803914611707287525
 SpriteRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -273,6 +274,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!1 &1661714137755512047
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,7 +285,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3359716871898900739}
   - component: {fileID: 784696383588945626}
-  - component: {fileID: 5653541885681940386}
   - component: {fileID: 4522693336064946236}
   m_Layer: 0
   m_Name: Blocks Above Text
@@ -308,7 +309,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.2, y: 0.66}
+  m_AnchoredPosition: {x: -0.2, y: 0.6}
   m_SizeDelta: {x: 0.33, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &784696383588945626
@@ -360,14 +361,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!222 &5653541885681940386
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1661714137755512047}
-  m_CullTransparentMesh: 0
 --- !u!114 &4522693336064946236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,10 +408,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 3.65
-  m_fontSizeBase: 5.76
+  m_fontSize: 3.85
+  m_fontSizeBase: 3.85
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 1
   m_fontSizeMax: 5
   m_fontStyle: 0
@@ -473,7 +466,6 @@ GameObject:
   m_Component:
   - component: {fileID: 96925154138874159}
   - component: {fileID: 1575381844719291645}
-  - component: {fileID: 3169009340506775157}
   - component: {fileID: 930177756913656569}
   m_Layer: 0
   m_Name: Solidus Text
@@ -550,14 +542,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!222 &3169009340506775157
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3742835921913121848}
-  m_CullTransparentMesh: 0
 --- !u!114 &930177756913656569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -663,7 +647,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1732090119574917824}
   - component: {fileID: 1691096017285633762}
-  - component: {fileID: 7537523589080034934}
   - component: {fileID: 7329498467352842775}
   m_Layer: 0
   m_Name: Breaking Point Text
@@ -688,7 +671,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.2, y: 0.33}
+  m_AnchoredPosition: {x: 0.2, y: 0.4}
   m_SizeDelta: {x: 0.33, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &1691096017285633762
@@ -740,14 +723,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!222 &7537523589080034934
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5715830562541969965}
-  m_CullTransparentMesh: 0
 --- !u!114 &7329498467352842775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -795,10 +770,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 3.65
-  m_fontSizeBase: 5.76
+  m_fontSize: 3.85
+  m_fontSizeBase: 3.85
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 1
   m_fontSizeMax: 5
   m_fontStyle: 0
@@ -877,7 +852,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9183685046789076738
 SpriteRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -934,6 +909,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!1 &9045327002375431160
 GameObject:
   m_ObjectHideFlags: 0
