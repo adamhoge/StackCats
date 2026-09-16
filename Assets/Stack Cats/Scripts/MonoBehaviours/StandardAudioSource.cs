@@ -7,7 +7,7 @@ namespace Tofuwu.StackCats
         None,
         Short,
         Medium,
-        Long
+        Long,
     }
 
     public enum AudioEchoDuration
@@ -15,7 +15,7 @@ namespace Tofuwu.StackCats
         None,
         Short,
         Medium,
-        Long
+        Long,
     }
 
     [RequireComponent(typeof(AudioSource))]
@@ -26,37 +26,59 @@ namespace Tofuwu.StackCats
         /// <summary>
         /// The amount of reverb applied to audio clips.
         /// </summary>
-        public AudioReverbDuration AudioReverbDuration { set { SetAudioReverbDuration(value); } }
+        public AudioReverbDuration AudioReverbDuration
+        {
+            set { SetAudioReverbDuration(value); }
+        }
 
         /// <summary>
         /// The amount of echo applied to audio clips.
         /// </summary>
-        public AudioEchoDuration AudioEchoDuration { set { SetAudioEchoDuration(value); } }
+        public AudioEchoDuration AudioEchoDuration
+        {
+            set { SetAudioEchoDuration(value); }
+        }
 
         /// <summary>
         /// The audio source associated with the standard audio source.
         /// </summary>
-        public AudioSource AudioSource { get { return _audioSource; } }
+        public AudioSource AudioSource
+        {
+            get { return _audioSource; }
+        }
 
         /// <summary>
         /// The volume of the audio source.
         /// </summary>
-        public float Volume { get { return _audioSource.volume; } set { _audioSource.volume = value; } }
+        public float Volume
+        {
+            get { return _audioSource.volume; }
+            set { _audioSource.volume = value; }
+        }
 
         /// <summary>
         /// Flag indicating whether or not the audio source is currently playing.
         /// </summary>
-        public bool IsPlaying { get { return _audioSource.isPlaying; } }
+        public bool IsPlaying
+        {
+            get { return _audioSource.isPlaying; }
+        }
 
         /// <summary>
         /// The length of the audio clip in seconds.
         /// </summary>
-        public float ClipLength { get { return _audioSource.clip.length; } }
+        public float ClipLength
+        {
+            get { return _audioSource.clip.length; }
+        }
 
         /// <summary>
         /// Playback position in seconds.
         /// </summary>
-        public float Time { get { return _audioSource.time; } }
+        public float Time
+        {
+            get { return _audioSource.time; }
+        }
 
         private AudioSource _audioSource;
         private AudioReverbFilter _audioReverbFilter;
@@ -71,9 +93,15 @@ namespace Tofuwu.StackCats
             _audioEchoFilter = GetComponent<AudioEchoFilter>();
         }
 
+        public void Stop()
+        {
+            _audioSource.Stop();
+        }
+
         private void SetAudioReverbDuration(AudioReverbDuration duration)
         {
-            if (_audioReverbDuration == duration) return;
+            if (_audioReverbDuration == duration)
+                return;
 
             _audioReverbDuration = duration;
             if (_audioEchoDuration == AudioEchoDuration.None)
@@ -97,7 +125,8 @@ namespace Tofuwu.StackCats
 
         private void SetAudioEchoDuration(AudioEchoDuration duration)
         {
-            if (_audioEchoDuration == duration) return;
+            if (_audioEchoDuration == duration)
+                return;
 
             _audioEchoDuration = duration;
             if (_audioEchoDuration == AudioEchoDuration.None)

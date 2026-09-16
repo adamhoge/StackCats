@@ -31,43 +31,73 @@ namespace Tofuwu.StackCats
         /// <summary>
         /// The audio source used to play background music.
         /// </summary>
-        public AudioLooper BackgroundMusic { get { return _backgroundMusic; } }
+        public AudioLooper BackgroundMusic
+        {
+            get { return _backgroundMusic; }
+        }
 
         /// <summary>
         /// A flag for whether or not overall sound is enabled.
         /// </summary>
-        public bool IsMasterEnabled { get { return _preferenceData.IsMasterEnabled; } set { SetMasterEnabled(value); } }
+        public bool IsMasterEnabled
+        {
+            get { return _preferenceData.IsMasterEnabled; }
+            set { SetMasterEnabled(value); }
+        }
 
         /// <summary>
         /// A flag for whether or not background music is enabled.
         /// </summary>
-        public bool IsBackgroundMusicEnabled { get { return _preferenceData.IsBackgroundMusicEnabled; } set { SetBackgroundMusicEnabled(value); } }
+        public bool IsBackgroundMusicEnabled
+        {
+            get { return _preferenceData.IsBackgroundMusicEnabled; }
+            set { SetBackgroundMusicEnabled(value); }
+        }
 
         /// <summary>
         /// A flag for whether or not sound effects are enabled.
         /// </summary>
-        public bool IsSoundEffectsEnabled { get { return _preferenceData.IsSoundEffectsEnabled; } set { SetSoundEffectsEnabled(value); } }
+        public bool IsSoundEffectsEnabled
+        {
+            get { return _preferenceData.IsSoundEffectsEnabled; }
+            set { SetSoundEffectsEnabled(value); }
+        }
 
         /// <summary>
         /// The current overall sound volume.
         /// </summary>
-        public float MasterVolume { get { return _preferenceData.MasterVolume; } set { SetMasterVolume(value); } }
+        public float MasterVolume
+        {
+            get { return _preferenceData.MasterVolume; }
+            set { SetMasterVolume(value); }
+        }
 
         /// <summary>
         /// The current background music volume.
         /// </summary>
-        public float BackgroundMusicVolume { get { return _preferenceData.BackgroundMusicVolume; } set { SetBackgroundMusicVolume(value); } }
+        public float BackgroundMusicVolume
+        {
+            get { return _preferenceData.BackgroundMusicVolume; }
+            set { SetBackgroundMusicVolume(value); }
+        }
 
         /// <summary>
         /// The current sound effects volume.
         /// </summary>
-        public float SoundEffectsVolume { get { return _preferenceData.SoundEffectsVolume; } set { SetSoundEffectsVolume(value); } }
+        public float SoundEffectsVolume
+        {
+            get { return _preferenceData.SoundEffectsVolume; }
+            set { SetSoundEffectsVolume(value); }
+        }
 
         private IPreferencesData _preferenceData;
         private AudioLooper _backgroundMusic;
-        private Dictionary<AudioLoop, float> _backgroundMusicTimes = new Dictionary<AudioLoop, float>();
-        private Dictionary<Guid, float> _backgroundMusicVolumeModifiers = new Dictionary<Guid, float>();
-        private readonly List<StandardAudioSource> _audioSourceChannels = new List<StandardAudioSource>();
+        private Dictionary<AudioLoop, float> _backgroundMusicTimes =
+            new Dictionary<AudioLoop, float>();
+        private Dictionary<Guid, float> _backgroundMusicVolumeModifiers =
+            new Dictionary<Guid, float>();
+        private readonly List<StandardAudioSource> _audioSourceChannels =
+            new List<StandardAudioSource>();
 
         protected void Awake()
         {
@@ -78,7 +108,9 @@ namespace Tofuwu.StackCats
             _preferenceData = GameManager.Instance.Data.PreferencesData;
 
             // Create the background music channel.
-            AudioLooper backgroundMusicChannel = new GameObject("Background Music").AddComponent<AudioLooper>();
+            AudioLooper backgroundMusicChannel = new GameObject(
+                "Background Music"
+            ).AddComponent<AudioLooper>();
             backgroundMusicChannel.transform.SetParent(channels.transform);
             _backgroundMusic = backgroundMusicChannel;
             UpdateBackgroundMusicVolume();
@@ -86,7 +118,10 @@ namespace Tofuwu.StackCats
             // Create the sound effect channels.
             for (int i = 0; i < MaxSimultaneousSoundEffects; i++)
             {
-                StandardAudioSource audioSourceChannel = Instantiate(StandardAudioSourcePrefab, channels.transform);
+                StandardAudioSource audioSourceChannel = Instantiate(
+                    StandardAudioSourcePrefab,
+                    channels.transform
+                );
                 audioSourceChannel.name = "Sound Effects Channel " + i;
                 _audioSourceChannels.Add(audioSourceChannel);
             }
@@ -160,7 +195,8 @@ namespace Tofuwu.StackCats
         /// <param name="volumeModifier">The new value of the modifier.</param>
         public void SetBackgroundMusicVolumeModifier(Guid guid, float volumeModifier)
         {
-            if (!_backgroundMusicVolumeModifiers.ContainsKey(guid)) return;
+            if (!_backgroundMusicVolumeModifiers.ContainsKey(guid))
+                return;
 
             _backgroundMusicVolumeModifiers[guid] = volumeModifier;
 
@@ -172,16 +208,21 @@ namespace Tofuwu.StackCats
         /// </summary>
         /// <param name="audioEvent">The source audio event to play.</param>
         /// <param name="panning">The stereo panning of the sound effect.</param>
-        public void PlaySoundEffect(AudioEvent audioEvent, float panning = 0.0f)
+        public StandardAudioSource PlaySoundEffect(AudioEvent audioEvent, float panning = 0.0f)
         {
-            if (!audioEvent) return;
+            if (!audioEvent)
+                return null;
 
             if (IsSoundEffectsEnabled && IsMasterEnabled)
             {
                 StandardAudioSource channel = GetOpenSoundEffectsChannel();
                 channel.Volume = SoundEffectsVolume * MasterVolume;
                 audioEvent.Play(channel.AudioSource, panning);
+
+                return channel;
             }
+
+            return null;
         }
 
         private void SetMasterEnabled(bool isEnabled)
@@ -227,8 +268,13 @@ namespace Tofuwu.StackCats
 
         private void UpdateBackgroundMusicVolume()
         {
-            bool isEnabled = _preferenceData.IsMasterEnabled && _preferenceData.IsBackgroundMusicEnabled;
-            _backgroundMusic.Volume = isEnabled ? _preferenceData.BackgroundMusicVolume * BaseBackgroundMusicVolumeModifier * _preferenceData.MasterVolume : 0.0f;
+            bool isEnabled =
+                _preferenceData.IsMasterEnabled && _preferenceData.IsBackgroundMusicEnabled;
+            _backgroundMusic.Volume = isEnabled
+                ? _preferenceData.BackgroundMusicVolume
+                    * BaseBackgroundMusicVolumeModifier
+                    * _preferenceData.MasterVolume
+                : 0.0f;
 
             if (_backgroundMusic.Volume != 0.0f)
             {
@@ -241,13 +287,19 @@ namespace Tofuwu.StackCats
 
         private StandardAudioSource GetOpenSoundEffectsChannel()
         {
-            StandardAudioSource openChannel = _audioSourceChannels.FirstOrDefault(channel => !channel.IsPlaying);
+            StandardAudioSource openChannel = _audioSourceChannels.FirstOrDefault(channel =>
+                !channel.IsPlaying
+            );
 
             if (!openChannel)
             {
                 foreach (StandardAudioSource channel in _audioSourceChannels)
                 {
-                    if (!openChannel || openChannel.ClipLength - openChannel.Time > channel.ClipLength - channel.Time)
+                    if (
+                        !openChannel
+                        || openChannel.ClipLength - openChannel.Time
+                            > channel.ClipLength - channel.Time
+                    )
                     {
                         openChannel = channel;
                     }

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84435bcb93082734cb603e91c7d07aff, type: 3}
-  m_Name: Puzzle Area Unlocked
-  m_EditorClassIdentifier: 
+  m_Name: Steady Gain
+  m_EditorClassIdentifier: Assembly-CSharp::Tofuwu.StackCats.DynamicAudioEvent
   AudioClipCandidates:
-  - AudioClip: {fileID: 8300000, guid: acac100bbebd6464db7099f43f4bf99f, type: 3}
+  - AudioClip: {fileID: 8300000, guid: ce1c0bdfb98b0df438696aaa459495f6, type: 3}
     Probability: 1
   Pitch: 1
-  Volume: 0.859
+  Volume: 1
   PitchVariance: 0
   VolumeVariance: 0

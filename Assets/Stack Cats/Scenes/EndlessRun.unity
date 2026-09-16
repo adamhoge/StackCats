@@ -179,6 +179,8 @@ MonoBehaviour:
   CatSightingPrefab: {fileID: 4800676060933968669, guid: 8bce525de4764b74595f2f64d6e45d53,
     type: 3}
   CatSightingsContainer: {fileID: 455526251}
+  BondingProgressAudioEvent: {fileID: 11400000, guid: 73c16bebb77034e4bbe2c8b5e71afc5e,
+    type: 2}
 --- !u!1 &13653954
 GameObject:
   m_ObjectHideFlags: 0

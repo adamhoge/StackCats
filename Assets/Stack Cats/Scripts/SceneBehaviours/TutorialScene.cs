@@ -24,7 +24,7 @@ namespace Tofuwu.StackCats
         BuildingStairs,
         BuildingStairsWithHelper,
         HeadingHome,
-        Completed
+        Completed,
     }
 
     public delegate void BoxThumped(Vector3 boxPosition, int direction);
@@ -117,7 +117,17 @@ namespace Tofuwu.StackCats
 
             _ambienceVolumeGuid = _gameManager.Audio.AddBackgroundMusicVolumeModifier(1.0f);
             _gameManager.Audio.PlayBackgroundMusic(TutorialAmbience);
-            LeanTween.value(0.0f, 1.0f, 1.0f).setOnUpdate((float value) => { _gameManager.Audio.SetBackgroundMusicVolumeModifier(_ambienceVolumeGuid, value); });
+            LeanTween
+                .value(0.0f, 1.0f, 1.0f)
+                .setOnUpdate(
+                    (float value) =>
+                    {
+                        _gameManager.Audio.SetBackgroundMusicVolumeModifier(
+                            _ambienceVolumeGuid,
+                            value
+                        );
+                    }
+                );
 
             ChangeState(TutorialSceneState.HearingNoise);
         }
@@ -129,55 +139,69 @@ namespace Tofuwu.StackCats
             switch (_state)
             {
                 case TutorialSceneState.HearingNoise:
-                    if (_stateTimeElapsed > 6.0f) ChangeState(TutorialSceneState.FreeingCat);
+                    if (_stateTimeElapsed > 6.0f)
+                        ChangeState(TutorialSceneState.FreeingCat);
                     UpdateCatBlockRustling();
                     break;
                 case TutorialSceneState.FreeingCat:
-                    if (_stateTimeElapsed > 5.0f) ChangeState(TutorialSceneState.FreeingCatWithHelper);
+                    if (_stateTimeElapsed > 5.0f)
+                        ChangeState(TutorialSceneState.FreeingCatWithHelper);
                     UpdateCatBlockRustling();
                     break;
                 case TutorialSceneState.FreeingCatWithHelper:
                     UpdateCatBlockRustling();
                     break;
                 case TutorialSceneState.MeetingCat:
-                    if (_stateTimeElapsed > 3.0f) ChangeState(TutorialSceneState.Zoom1);
+                    if (_stateTimeElapsed > 3.0f)
+                        ChangeState(TutorialSceneState.Zoom1);
                     // PlayAnimation
                     break;
                 case TutorialSceneState.Zoom1:
-                    if (_stateTimeElapsed > 1.0f) ChangeState(TutorialSceneState.Zoom2);
+                    if (_stateTimeElapsed > 1.0f)
+                        ChangeState(TutorialSceneState.Zoom2);
                     break;
                 case TutorialSceneState.Zoom2:
-                    if (_stateTimeElapsed > 1.0f) ChangeState(TutorialSceneState.Zoom3);
+                    if (_stateTimeElapsed > 1.0f)
+                        ChangeState(TutorialSceneState.Zoom3);
                     break;
                 case TutorialSceneState.Zoom3:
-                    if (_stateTimeElapsed > 2.0f) ChangeState(TutorialSceneState.BondingWithCat);
+                    if (_stateTimeElapsed > 2.0f)
+                        ChangeState(TutorialSceneState.BondingWithCat);
                     break;
                 case TutorialSceneState.BondingWithCat:
-                    if(!_areHeartsEmitted && _stateTimeElapsed > 6.0f)
+                    if (!_areHeartsEmitted && _stateTimeElapsed > 6.0f)
                     {
                         _catAvatar.Animator.HeartsParticleSystem.Play();
                         _areHeartsEmitted = true;
                     }
-                    if (_stateTimeElapsed > 9.0f) ChangeState(TutorialSceneState.ChatIntroductions);
+                    if (_stateTimeElapsed > 9.0f)
+                        ChangeState(TutorialSceneState.ChatIntroductions);
                     break;
                 case TutorialSceneState.NoticingHouse:
-                    if (_stateTimeElapsed > 2.0f) ChangeState(TutorialSceneState.ChatAboutHouse);
+                    if (_stateTimeElapsed > 2.0f)
+                        ChangeState(TutorialSceneState.ChatAboutHouse);
                     break;
                 case TutorialSceneState.MovingToBlockStackingPuzzle:
-                    if (_stateTimeElapsed > 2.0f) ChangeState(TutorialSceneState.ChatAboutStairs);
+                    if (_stateTimeElapsed > 2.0f)
+                        ChangeState(TutorialSceneState.ChatAboutStairs);
                     break;
                 case TutorialSceneState.BuildingStairs:
-                    if (_stateTimeElapsed > 5.0f) ChangeState(TutorialSceneState.BuildingStairsWithHelper);
+                    if (_stateTimeElapsed > 5.0f)
+                        ChangeState(TutorialSceneState.BuildingStairsWithHelper);
                     break;
                 case TutorialSceneState.HeadingHome:
-                    if (_stateTimeElapsed > 3.0f) ChangeState(TutorialSceneState.Completed);
+                    if (_stateTimeElapsed > 3.0f)
+                        ChangeState(TutorialSceneState.Completed);
                     break;
             }
         }
 
         public void SkipTutorial()
         {
-            _gameManager.ConfirmAction("Are you sure you want to skip the tutorial?", ConfirmSkipTutorial);
+            _gameManager.ConfirmAction(
+                "Are you sure you want to skip the tutorial?",
+                ConfirmSkipTutorial
+            );
         }
 
         private void ConfirmSkipTutorial()
@@ -189,13 +213,14 @@ namespace Tofuwu.StackCats
             }
 
             _gameManager.Data.TutorialData.TutorialState = TutorialSceneState.Completed;
-            
+
             _gameManager.GoHome();
         }
 
         private void ChangeState(TutorialSceneState state)
         {
-            if (_state == state) return;
+            if (_state == state)
+                return;
 
             _state = state;
             _stateTimeElapsed = 0.0f;
@@ -209,7 +234,10 @@ namespace Tofuwu.StackCats
                     SetPuzzleInteractable(false);
                     Camera.transform.position = new Vector3(0.0f, 8.0f, -8.0f);
                     Camera.orthographicSize = 5.0f;
-                    LeanTween.moveLocalY(Camera.gameObject, 1.0f, 2.0f).setEase(LeanTweenType.easeInOutSine).setDelay(4.0f);
+                    LeanTween
+                        .moveLocalY(Camera.gameObject, 1.0f, 2.0f)
+                        .setEase(LeanTweenType.easeInOutSine)
+                        .setDelay(4.0f);
                     break;
                 case TutorialSceneState.FreeingCat:
                     SetPuzzleInteractable(true);
@@ -224,8 +252,13 @@ namespace Tofuwu.StackCats
                     _gameManager.Audio.PlayBackgroundMusic(null);
                     _catAvatar = Instantiate(TutorialCatAvatarPrefab, transform);
                     _catAvatar.transform.localScale = Vector3.one * 0.5f;
-                    LeanTween.scale(_catAvatar.gameObject, Vector3.one, 1.0f).setEase(LeanTweenType.easeOutQuint);
-                    RarityEffect rarityEffect = Instantiate(FreeCatPuzzle.RarityEffectPrefab, transform);
+                    LeanTween
+                        .scale(_catAvatar.gameObject, Vector3.one, 1.0f)
+                        .setEase(LeanTweenType.easeOutQuint);
+                    RarityEffect rarityEffect = Instantiate(
+                        FreeCatPuzzle.RarityEffectPrefab,
+                        transform
+                    );
                     rarityEffect.Cat = ChatCat;
                     rarityEffect.transform.position = FreeCatPuzzle.transform.position;
                     _catAvatar.Initialize();
@@ -258,18 +291,35 @@ namespace Tofuwu.StackCats
                     break;
                 case TutorialSceneState.ChatIntroductions:
                     // TODO?: _catAvatar.TutorialAnimator.PlayChatIntroductions();
-                    LeanTween.value(Camera.gameObject, Camera.orthographicSize, 2.0f, 2.0f).setEase(LeanTweenType.easeInOutSine).setOnUpdate(
-                        (float newOrthoSize) => { Camera.orthographicSize = newOrthoSize; });
+                    LeanTween
+                        .value(Camera.gameObject, Camera.orthographicSize, 2.0f, 2.0f)
+                        .setEase(LeanTweenType.easeInOutSine)
+                        .setOnUpdate(
+                            (float newOrthoSize) =>
+                            {
+                                Camera.orthographicSize = newOrthoSize;
+                            }
+                        );
                     _gameManager.Audio.PlayBackgroundMusic(TutorialBackgroundMusic);
                     _gameManager.ChatCat.Say("You must be my new human!", ChatCatEmote.Surprised);
-                    _gameManager.ChatCat.Say("Wow that's a lot of responsibility...", ChatCatEmote.Thinking);
+                    _gameManager.ChatCat.Say(
+                        "Wow that's a lot of responsibility...",
+                        ChatCatEmote.Thinking
+                    );
                     _gameManager.ChatCat.Say("...", ChatCatEmote.Thinking, 0.5f);
                     _gameManager.ChatCat.Say("But I think I can handle it!", ChatCatEmote.Heart);
                     break;
                 case TutorialSceneState.NoticingHouse:
                     _catAvatar.TutorialAnimator.PlayNoticingHouse();
-                    LeanTween.value(Camera.gameObject, Camera.orthographicSize, 3.0f, 2.0f).setEase(LeanTweenType.easeInOutSine).setOnUpdate(
-                        (float newOrthoSize) => { Camera.orthographicSize = newOrthoSize; });
+                    LeanTween
+                        .value(Camera.gameObject, Camera.orthographicSize, 3.0f, 2.0f)
+                        .setEase(LeanTweenType.easeInOutSine)
+                        .setOnUpdate(
+                            (float newOrthoSize) =>
+                            {
+                                Camera.orthographicSize = newOrthoSize;
+                            }
+                        );
                     break;
                 case TutorialSceneState.ChatAboutHouse:
                     _gameManager.ChatCat.Say("Oh!", ChatCatEmote.Surprised);
@@ -279,14 +329,29 @@ namespace Tofuwu.StackCats
                     // TODO?: _catAvatar.TutorialAnimator.PlayMovingToBlockStackingPuzzle();
                     StairsPuzzle.gameObject.SetActive(true);
                     Camera.transform.position = new Vector3(0.0f, 0.8f, -8.0f);
-                    LeanTween.moveLocal(Camera.gameObject, new Vector3(10.0f, 1.5f, -8.0f), 2.0f).setEase(LeanTweenType.easeInOutSine);
-                    LeanTween.value(Camera.gameObject, Camera.orthographicSize, 6.5f, 2.0f).setEase(LeanTweenType.easeInOutSine).setOnUpdate(
-                        (float newOrthoSize) => { Camera.orthographicSize = newOrthoSize; });
+                    LeanTween
+                        .moveLocal(Camera.gameObject, new Vector3(10.0f, 1.5f, -8.0f), 2.0f)
+                        .setEase(LeanTweenType.easeInOutSine);
+                    LeanTween
+                        .value(Camera.gameObject, Camera.orthographicSize, 6.5f, 2.0f)
+                        .setEase(LeanTweenType.easeInOutSine)
+                        .setOnUpdate(
+                            (float newOrthoSize) =>
+                            {
+                                Camera.orthographicSize = newOrthoSize;
+                            }
+                        );
                     break;
                 case TutorialSceneState.ChatAboutStairs:
-                    _gameManager.ChatCat.Say("I didn't know you came with one of those!", ChatCatEmote.Surprised);
+                    _gameManager.ChatCat.Say(
+                        "I didn't know you came with one of those!",
+                        ChatCatEmote.Surprised
+                    );
                     _gameManager.ChatCat.Say("Help me inside, would you?");
-                    _gameManager.ChatCat.Say("Maybe you could make a staircase for me with those blocks!", ChatCatEmote.Thinking);
+                    _gameManager.ChatCat.Say(
+                        "Maybe you could make a staircase for me with those blocks!",
+                        ChatCatEmote.Thinking
+                    );
                     break;
                 case TutorialSceneState.UnloadingPreviousPuzzle:
                     _puzzleLoader.onPuzzleUnloaded += OnFirstPuzzleUnloaded;
@@ -306,7 +371,8 @@ namespace Tofuwu.StackCats
                     break;
             }
 
-            if (onEnterState != null) onEnterState(_state);
+            if (onEnterState != null)
+                onEnterState(_state);
         }
 
         private void UpdateCatBlockRustling()
@@ -317,28 +383,46 @@ namespace Tofuwu.StackCats
                 for (i = 0; i < UnityEngine.Random.Range(1, 4); i++)
                 {
                     int direction = UnityEngine.Random.value >= 0.5f ? -1 : 1;
-                    LeanTween.moveLocalX(_chatCatBlock.gameObject, 0.05f * direction, 0.3f)
+                    LeanTween
+                        .moveLocalX(_chatCatBlock.gameObject, 0.05f * direction, 0.3f)
                         .setEase(LeanTweenType.punch)
                         .setDelay(i * 0.3f)
-                        .setOnStart(delegate ()
-                        {
-                            _gameManager.Audio.PlaySoundEffect(ThumpSoundEffect);
-                            if (onBoxThumped != null) onBoxThumped(_chatCatBlock.transform.position, direction);
-                        });
+                        .setOnStart(
+                            delegate()
+                            {
+                                _gameManager.Audio.PlaySoundEffect(ThumpSoundEffect);
+                                if (onBoxThumped != null)
+                                    onBoxThumped(_chatCatBlock.transform.position, direction);
+                            }
+                        );
                 }
                 _nextRustleTime = Time.time + i * 0.3f + UnityEngine.Random.Range(0.5f, 2.0f);
             }
         }
 
-        private void OnFreeCatPuzzleBlockMoved(Puzzle puzzle, Stack source, Block block, Stack destination)
+        private void OnFreeCatPuzzleBlockMoved(
+            Puzzle puzzle,
+            Stack source,
+            Block block,
+            Stack destination
+        )
         {
             FreeCatPuzzle.onBlockMoved -= OnFreeCatPuzzleBlockMoved;
             ChangeState(TutorialSceneState.MeetingCat);
         }
 
-        private void OnStairsPuzzleBlockMoved(Puzzle puzzle, Stack source, Block block, Stack destination)
+        private void OnStairsPuzzleBlockMoved(
+            Puzzle puzzle,
+            Stack source,
+            Block block,
+            Stack destination
+        )
         {
-            if (puzzle.Stacks[0].Blocks.Count == 1 && puzzle.Stacks[1].Blocks.Count == 2 && puzzle.Stacks[2].Blocks.Count == 3)
+            if (
+                puzzle.Stacks[0].Blocks.Count == 1
+                && puzzle.Stacks[1].Blocks.Count == 2
+                && puzzle.Stacks[2].Blocks.Count == 3
+            )
             {
                 puzzle.CompletePuzzle(PuzzleCompletionType.PuzzleSolved);
                 PuzzleFlasher.FlashPuzzle(puzzle);
@@ -350,7 +434,8 @@ namespace Tofuwu.StackCats
 
         private void OnTutorialPuzzleLoaded(Puzzle puzzle)
         {
-            PointerPuzzleController controller = puzzle.gameObject.AddComponent<PointerPuzzleController>();
+            PointerPuzzleController controller =
+                puzzle.gameObject.AddComponent<PointerPuzzleController>();
             controller.Camera = Camera;
             controller.enabled = _isPuzzleInteractable;
         }
