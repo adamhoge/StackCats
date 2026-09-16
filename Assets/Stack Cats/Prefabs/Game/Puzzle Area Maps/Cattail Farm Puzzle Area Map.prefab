@@ -154,7 +154,7 @@ MonoBehaviour:
     NormalPuzzle: {fileID: 11400000, guid: 7745be167cb3748498ddeead3227d776, type: 2}
     HardPuzzle: {fileID: 0}
   - Coordinates: {x: 0.17161812, y: -0.20912749}
-    NormalPuzzle: {fileID: 11400000, guid: ec2ebdba68ad4e04eb124fbc1d071aa2, type: 2}
+    NormalPuzzle: {fileID: 11400000, guid: 51e72011c058a5f46808ebeea4167151, type: 2}
     HardPuzzle: {fileID: 0}
   - Coordinates: {x: 0.13994311, y: -0.11249194}
     NormalPuzzle: {fileID: 11400000, guid: bb92167a857af574bab6b371951fcb38, type: 2}
