@@ -6365,6 +6365,11 @@ PrefabInstance:
       propertyPath: m_textInfo.characterCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8327073580914645311, guid: 960fdc43f438d9f4eb4bcd7838b4e6ca,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 8327073581969482664, guid: 960fdc43f438d9f4eb4bcd7838b4e6ca,
         type: 3}
       propertyPath: m_Name
@@ -10758,7 +10763,7 @@ MonoBehaviour:
   - {fileID: 6883617617028698100, guid: 6f0f80c37dc42924c8e92de917aeda08, type: 3}
   - {fileID: 449015494158807686, guid: 6f0f80c37dc42924c8e92de917aeda08, type: 3}
   - {fileID: 3432932373809711598, guid: 6f0f80c37dc42924c8e92de917aeda08, type: 3}
-  - {fileID: 3432932373809711598, guid: 6f0f80c37dc42924c8e92de917aeda08, type: 3}
+  - {fileID: 5435844400067700528, guid: 6f0f80c37dc42924c8e92de917aeda08, type: 3}
   MinRewardBagHeight: 250
   MaxRewardBagHeight: 400
 --- !u!114 &2017257478
