@@ -7006,6 +7006,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: b0fba90f511874643a59503e502def1a,
         type: 2}
+    - target: {fileID: 4800676060933968669, guid: 8bce525de4764b74595f2f64d6e45d53,
+        type: 3}
+      propertyPath: PresentReceivedAudioEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: cb15a1a0fb709ff4bac9d553092fedd5,
+        type: 2}
     - target: {fileID: 4800676060933968671, guid: 8bce525de4764b74595f2f64d6e45d53,
         type: 3}
       propertyPath: m_Name
@@ -8008,7 +8014,7 @@ MeshRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -995457147
   m_SortingLayer: -2
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1723666099

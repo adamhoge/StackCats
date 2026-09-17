@@ -29,6 +29,7 @@ namespace Tofuwu.StackCats.UI
         public RectTransform BondingGuageRectTransform;
         public RectTransform PresentIconsRectTransform;
         public RectTransform PresentReceivedRectTransform;
+        public DynamicAudioEvent PresentReceivedAudioEvent;
         public FillTransform BondingGuageMaskFillTransform;
         public CanvasGroup BondingEventFaderCanvasGroup;
         public TextMeshProUGUI CatNameText;
@@ -252,6 +253,10 @@ namespace Tofuwu.StackCats.UI
                                     0.5f
                                 )
                                 .setEase(LeanTweenType.punch);
+                        }
+                        if (PresentReceivedAudioEvent)
+                        {
+                            GameManager.Instance.Audio.PlaySoundEffect(PresentReceivedAudioEvent);
                         }
                     }
                     if (_sightingsCount != Cat.BondedAt)

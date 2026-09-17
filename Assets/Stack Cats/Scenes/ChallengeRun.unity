@@ -10758,7 +10758,7 @@ MonoBehaviour:
   - {fileID: 6883617617028698100, guid: 6f0f80c37dc42924c8e92de917aeda08, type: 3}
   - {fileID: 449015494158807686, guid: 6f0f80c37dc42924c8e92de917aeda08, type: 3}
   - {fileID: 3432932373809711598, guid: 6f0f80c37dc42924c8e92de917aeda08, type: 3}
-  - {fileID: 5435844400067700528, guid: 6f0f80c37dc42924c8e92de917aeda08, type: 3}
+  - {fileID: 3432932373809711598, guid: 6f0f80c37dc42924c8e92de917aeda08, type: 3}
   MinRewardBagHeight: 250
   MaxRewardBagHeight: 400
 --- !u!114 &2017257478

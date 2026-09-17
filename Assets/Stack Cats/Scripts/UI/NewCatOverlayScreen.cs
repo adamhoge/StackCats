@@ -20,7 +20,8 @@ namespace Tofuwu.StackCats.UI
         {
             base.Update();
 
-            if (Input.GetMouseButtonDown(0)) Dismiss();
+            if (Input.GetMouseButtonDown(0))
+                Dismiss();
         }
 
         public override void OnTransitioningIn()
@@ -30,17 +31,20 @@ namespace Tofuwu.StackCats.UI
             if (Cat && OverlayCanvas)
             {
                 OverlayCanvas.alpha = 0.0f;
-                LeanTween.alphaCanvas(OverlayCanvas, 1.0f, TransitionInDuration).setEase(TransitionInTween);
+                LeanTween
+                    .alphaCanvas(OverlayCanvas, 1.0f, TransitionInDuration)
+                    .setEase(TransitionInTween);
 
                 var isBonded = GameManager.Instance.Cats.IsBonded(Cat);
 
                 if (CatPortait)
                 {
                     CatPortait.sprite = Cat.Portrait;
-                    CatPortait.color = isBonded ? Color.white : NotBondedColor;
+                    CatPortait.color = NotBondedColor;
                     NotBondedGameObject.SetActive(!isBonded);
                 }
-                if (CatNameText) CatNameText.text = isBonded ? Cat.Name : "Name: ???";
+                if (CatNameText)
+                    CatNameText.text = isBonded ? Cat.Name : "Name: ???";
             }
         }
 
@@ -50,7 +54,9 @@ namespace Tofuwu.StackCats.UI
 
             if (OverlayCanvas)
             {
-                LeanTween.alphaCanvas(OverlayCanvas, 0.0f, TransitionOutDuration).setEase(TransitionOutTween);
+                LeanTween
+                    .alphaCanvas(OverlayCanvas, 0.0f, TransitionOutDuration)
+                    .setEase(TransitionOutTween);
             }
         }
     }

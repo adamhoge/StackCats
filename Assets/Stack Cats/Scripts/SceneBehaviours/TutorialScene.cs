@@ -210,6 +210,7 @@ namespace Tofuwu.StackCats
             {
                 CatReward reward = _gameManager.Cats.AddCatSighting(ChatCat);
                 _gameManager.Stuff.AddPresent(ChatCat, reward.Currency, reward.Items);
+                _gameManager.Home.InviteCat(ChatCat);
             }
 
             _gameManager.Data.TutorialData.TutorialState = TutorialSceneState.Completed;
@@ -286,6 +287,7 @@ namespace Tofuwu.StackCats
                     {
                         CatReward reward = _gameManager.Cats.AddCatSighting(ChatCat);
                         _gameManager.Stuff.AddPresent(ChatCat, reward.Currency, reward.Items);
+                        _gameManager.Home.InviteCat(ChatCat);
                     }
                     SetPuzzleInteractable(false);
                     break;
