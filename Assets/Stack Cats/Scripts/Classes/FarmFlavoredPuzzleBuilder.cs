@@ -136,14 +136,14 @@ namespace Tofuwu.StackCats
                         };
                     }
 
-                    TerrainBlock terrainBlock = block.GetComponent<TerrainBlock>();
+                    LockBlock terrainBlock = block.GetComponent<LockBlock>();
                     if (terrainBlock)
                     {
                         blockModel.HasTerrainBlock = true;
                         blockModel.TerrainBlock = new TerrainBlockComponentModel();
                     }
 
-                    RemovalBlock removalBlock = block.GetComponent<RemovalBlock>();
+                    KeyBlock removalBlock = block.GetComponent<KeyBlock>();
                     if (removalBlock)
                     {
                         blockModel.HasRemovalBlock = true;

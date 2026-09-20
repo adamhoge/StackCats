@@ -118,13 +118,13 @@ namespace Tofuwu.StackCats
         /// Prefab used for the creation of new terrain blocks.
         /// </summary>
         [Tooltip("Prefab used for the creation of new terrain blocks.")]
-        public TerrainBlock TerrainBlockPrefab;
+        public LockBlock TerrainBlockPrefab;
 
         /// <summary>
         /// Prefab used for the creation of new removal blocks.
         /// </summary>
         [Tooltip("Prefab used for the creation of new removal blocks.")]
-        public RemovalBlock RemovalBlockPrefab;
+        public KeyBlock RemovalBlockPrefab;
 
         /// <summary>
         /// Prefab used for the creation of new pressure blocks.
@@ -528,7 +528,7 @@ namespace Tofuwu.StackCats
                 return false;
 
             // Create a new terrain block.
-            TerrainBlock newTerrainBlock = CreateTerrainBlock();
+            LockBlock newTerrainBlock = CreateTerrainBlock();
 
             // Add it to the stack, or destroy it if unable to add it.
             bool wasAdded = stack.AddBlock(newTerrainBlock.GetComponent<Block>());
@@ -549,7 +549,7 @@ namespace Tofuwu.StackCats
                 return false;
 
             // Create a new removal block.
-            RemovalBlock newRemovalBlock = CreateRemovalBlock();
+            KeyBlock newRemovalBlock = CreateRemovalBlock();
 
             // Add it to the stack, or destroy it if unable to add it.
             bool wasAdded = stack.AddBlock(newRemovalBlock.GetComponent<Block>());
@@ -856,25 +856,25 @@ namespace Tofuwu.StackCats
             return newSumBlock;
         }
 
-        public TerrainBlock CreateTerrainBlock()
+        public LockBlock CreateTerrainBlock()
         {
             if (!TerrainBlockPrefab)
                 return null;
 
             // Create the new terrain block.
-            TerrainBlock newTerrainBlock = Instantiate(TerrainBlockPrefab);
+            LockBlock newTerrainBlock = Instantiate(TerrainBlockPrefab);
             newTerrainBlock.name = "Terrain Block";
 
             return newTerrainBlock;
         }
 
-        public RemovalBlock CreateRemovalBlock()
+        public KeyBlock CreateRemovalBlock()
         {
             if (!RemovalBlockPrefab)
                 return null;
 
             // Create the new terrain block.
-            RemovalBlock newRemovalBlock = Instantiate(RemovalBlockPrefab);
+            KeyBlock newRemovalBlock = Instantiate(RemovalBlockPrefab);
             newRemovalBlock.name = "Removal Block";
 
             return newRemovalBlock;

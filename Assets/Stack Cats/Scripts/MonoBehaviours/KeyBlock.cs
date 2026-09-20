@@ -2,12 +2,12 @@
 
 namespace Tofuwu.StackCats
 {
-    public class RemovalBlock : BlockComponent
+    public class KeyBlock : BlockComponent
     {
         /// <summary>
         /// The visual effect shown when the removal block is destroyed.
         /// </summary>
-        public RemovalBlockDestructionEffect DestructionEffect;
+        public KeyBlockDestructionEffect DestructionEffect;
 
         public override bool IsPlaceableOn(Block otherBlock)
         {
@@ -27,7 +27,7 @@ namespace Tofuwu.StackCats
             if (!blockBelow)
                 return;
 
-            TerrainBlock terrainBlockBelow = blockBelow.GetComponent<TerrainBlock>();
+            LockBlock terrainBlockBelow = blockBelow.GetComponent<LockBlock>();
             if (!terrainBlockBelow)
                 return;
 
@@ -38,7 +38,7 @@ namespace Tofuwu.StackCats
         {
             base.OnDestroyed();
 
-            RemovalBlockDestructionEffect destructionEffect = Instantiate(DestructionEffect);
+            KeyBlockDestructionEffect destructionEffect = Instantiate(DestructionEffect);
             destructionEffect.transform.position = transform.position;
         }
     }
