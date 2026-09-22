@@ -34,7 +34,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &734420574831219731
 SpriteRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -91,6 +91,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!1 &734420575525433639
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,22 +164,22 @@ MonoBehaviour:
     NormalPuzzle: {fileID: 11400000, guid: c73676eb82ee2d348904e9cf64d52e8c, type: 2}
     HardPuzzle: {fileID: 0}
   - Coordinates: {x: 0.136208, y: 0.07721488}
-    NormalPuzzle: {fileID: 11400000, guid: 63e68cabc3998ab47a2b46358db01421, type: 2}
+    NormalPuzzle: {fileID: 11400000, guid: 91c4c7d66a6b54e41a29b8ebf824ed37, type: 2}
     HardPuzzle: {fileID: 0}
   - Coordinates: {x: 0.1731124, y: 0.1675295}
-    NormalPuzzle: {fileID: 11400000, guid: 34e09feaf07b7094abdeb0217020a4e5, type: 2}
+    NormalPuzzle: {fileID: 11400000, guid: 63e68cabc3998ab47a2b46358db01421, type: 2}
     HardPuzzle: {fileID: 0}
   - Coordinates: {x: 0.18519436, y: 0.26463202}
-    NormalPuzzle: {fileID: 11400000, guid: fd7da4a0475460241ab8fb7fde908a54, type: 2}
+    NormalPuzzle: {fileID: 11400000, guid: 27b65ff97d14a054c9f97e824f399875, type: 2}
     HardPuzzle: {fileID: 0}
   - Coordinates: {x: 0.11224769, y: 0.33170173}
-    NormalPuzzle: {fileID: 11400000, guid: aef9c6c27b48d164a96c5542004d3092, type: 2}
+    NormalPuzzle: {fileID: 11400000, guid: 34e09feaf07b7094abdeb0217020a4e5, type: 2}
     HardPuzzle: {fileID: 0}
   - Coordinates: {x: 0.018447949, y: 0.35141596}
-    NormalPuzzle: {fileID: 0}
+    NormalPuzzle: {fileID: 11400000, guid: fd7da4a0475460241ab8fb7fde908a54, type: 2}
     HardPuzzle: {fileID: 0}
   - Coordinates: {x: -0.0764419, y: 0.33634058}
-    NormalPuzzle: {fileID: 0}
+    NormalPuzzle: {fileID: 11400000, guid: aef9c6c27b48d164a96c5542004d3092, type: 2}
     HardPuzzle: {fileID: 0}
   - Coordinates: {x: -0.1794437, y: 0.24483952}
     NormalPuzzle: {fileID: 0}
@@ -363,7 +364,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4722678622642392851
 SpriteRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -420,6 +421,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!1001 &1111759197652736769
 PrefabInstance:
   m_ObjectHideFlags: 0
