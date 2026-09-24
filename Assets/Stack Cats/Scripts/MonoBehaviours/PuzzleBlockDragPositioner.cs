@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class PuzzleBlockDragPositioner : MonoBehaviour
     {
@@ -43,7 +43,11 @@ namespace Tofuwu.StackCats
                 Block block = blocks[i];
                 Action<object> updateBlockPositions = UpdateBlockPositions;
                 LeanTween
-                    .moveLocal(block.gameObject, _selection.Stack.GetBlockLocalPosition(block), 0.1f)
+                    .moveLocal(
+                        block.gameObject,
+                        _selection.Stack.GetBlockLocalPosition(block),
+                        0.1f
+                    )
                     .setEase(LeanTweenType.easeInOutQuint)
                     .setOnComplete(UpdateBlockPositions, block);
             }
@@ -54,14 +58,25 @@ namespace Tofuwu.StackCats
 
         protected void Update()
         {
-            if (_selection == null) return;
+            if (_selection == null)
+                return;
 
             for (int i = 0; i < _selectedBlocks.Count; i++)
             {
                 Block selectedBlock = _selectedBlocks[i];
-                Vector3 blockPointerPosition = (DragPosition + Vector3.up * transform.lossyScale.y * (_selection.Stack.BlockHeight * i - _selection.Stack.BlockHeight / 2) + Vector3.back * 8.0f);
+                Vector3 blockPointerPosition = (
+                    DragPosition
+                    + Vector3.up
+                        * transform.lossyScale.y
+                        * (_selection.Stack.BlockHeight * i - _selection.Stack.BlockHeight / 2)
+                    + Vector3.back * 8.0f
+                );
 
-                selectedBlock.transform.position = Vector3.Lerp(selectedBlock.transform.position, blockPointerPosition, 0.5f);
+                selectedBlock.transform.position = Vector3.Lerp(
+                    selectedBlock.transform.position,
+                    blockPointerPosition,
+                    0.5f
+                );
             }
         }
 

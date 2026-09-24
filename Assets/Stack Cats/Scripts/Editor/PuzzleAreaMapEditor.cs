@@ -1,6 +1,6 @@
-﻿using Tofuwu.StackCats;
-using UnityEngine;
+﻿using RockhopperGames.StackCats;
 using UnityEditor;
+using UnityEngine;
 
 [CustomEditor(typeof(PuzzleAreaMap))]
 public class PuzzleAreaMapEditor : Editor
@@ -18,13 +18,19 @@ public class PuzzleAreaMapEditor : Editor
 
             if (i > 0)
             {
-                ProgressionPuzzleRouteItem lastRouteItem = puzzleAreaMap.ProgressionPuzzleRoute[i - 1];
+                ProgressionPuzzleRouteItem lastRouteItem = puzzleAreaMap.ProgressionPuzzleRoute[
+                    i - 1
+                ];
 
                 Vector2 startTangent;
-                if(i > 1)
+                if (i > 1)
                 {
-                    Vector2 tangentRouteCoordinates = puzzleAreaMap.ProgressionPuzzleRoute[i - 2].Coordinates;
-                    startTangent = lastRouteItem.Coordinates - (tangentRouteCoordinates - lastRouteItem.Coordinates) / 5;
+                    Vector2 tangentRouteCoordinates = puzzleAreaMap
+                        .ProgressionPuzzleRoute[i - 2]
+                        .Coordinates;
+                    startTangent =
+                        lastRouteItem.Coordinates
+                        - (tangentRouteCoordinates - lastRouteItem.Coordinates) / 5;
                 }
                 else
                 {
@@ -32,10 +38,14 @@ public class PuzzleAreaMapEditor : Editor
                 }
 
                 Vector2 endTangent;
-                if(i + 1 < puzzleAreaMap.ProgressionPuzzleRoute.Count)
+                if (i + 1 < puzzleAreaMap.ProgressionPuzzleRoute.Count)
                 {
-                    Vector2 tangentRouteCoordinates = puzzleAreaMap.ProgressionPuzzleRoute[i + 1].Coordinates;
-                    endTangent = routeItem.Coordinates - (tangentRouteCoordinates - routeItem.Coordinates) / 5;
+                    Vector2 tangentRouteCoordinates = puzzleAreaMap
+                        .ProgressionPuzzleRoute[i + 1]
+                        .Coordinates;
+                    endTangent =
+                        routeItem.Coordinates
+                        - (tangentRouteCoordinates - routeItem.Coordinates) / 5;
                 }
                 else
                 {
@@ -49,13 +59,17 @@ public class PuzzleAreaMapEditor : Editor
                     endTangent,
                     Color.white,
                     null,
-                    8.0f);
+                    8.0f
+                );
             }
 
             Handles.DrawSolidDisc(routeItem.Coordinates, Vector3.forward, 0.045f);
 
             EditorGUI.BeginChangeCheck();
-            Vector2 newRouteCoordinatesPosition = Handles.PositionHandle(routeItem.Coordinates, Quaternion.identity);
+            Vector2 newRouteCoordinatesPosition = Handles.PositionHandle(
+                routeItem.Coordinates,
+                Quaternion.identity
+            );
             if (EditorGUI.EndChangeCheck())
             {
                 Undo.RecordObject(puzzleAreaMap, "Change route coordinates");

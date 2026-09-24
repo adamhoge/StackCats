@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     /// <summary>
     /// Provides finer separation of animation from state.
@@ -11,7 +11,7 @@ namespace Tofuwu.StackCats
         {
             Standing,
             Sitting,
-            Sleeping
+            Sleeping,
         }
 
         /// <summary>
@@ -37,9 +37,18 @@ namespace Tofuwu.StackCats
         public int Surprise1TriggerHash = Animator.StringToHash("Surprise");
         public int StateIntHash = Animator.StringToHash("State");
 
-        public bool IsStanding { get { return _state == State.Standing; } }
-        public bool IsSitting { get { return _state == State.Sitting; } }
-        public bool IsSleeping { get { return _state == State.Sleeping; } }
+        public bool IsStanding
+        {
+            get { return _state == State.Standing; }
+        }
+        public bool IsSitting
+        {
+            get { return _state == State.Sitting; }
+        }
+        public bool IsSleeping
+        {
+            get { return _state == State.Sleeping; }
+        }
 
         private State _state;
 
@@ -100,7 +109,8 @@ namespace Tofuwu.StackCats
 
         private void ChangeState(State state)
         {
-            if (_state == state) return;
+            if (_state == state)
+                return;
 
             _state = state;
             CatAnimator.SetInteger(StateIntHash, (int)_state);

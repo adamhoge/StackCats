@@ -1,4 +1,4 @@
-using Tofuwu.StackCats.UI;
+using RockhopperGames.StackCats.UI;
 using UnityEditor;
 
 [CustomEditor(typeof(MedalUI))]

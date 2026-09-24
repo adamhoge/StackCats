@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public delegate void CatBlockRemoved(CatBlock catBlock);
 
@@ -15,11 +15,23 @@ namespace Tofuwu.StackCats
         public Sprite OpenedCatPawSprite;
         public CatBlockDestructionEffect DestructionEffect;
 
-        public Cat Cat { get { return _cat; } set { SetCat(value); } }
+        public Cat Cat
+        {
+            get { return _cat; }
+            set { SetCat(value); }
+        }
 
-        public bool IsSpecial { get { return _isSpecial; } set { SetIsSpecial(value); } }
+        public bool IsSpecial
+        {
+            get { return _isSpecial; }
+            set { SetIsSpecial(value); }
+        }
 
-        public bool IsOpened { get { return _isOpened; } set { SetIsOpened(value); } }
+        public bool IsOpened
+        {
+            get { return _isOpened; }
+            set { SetIsOpened(value); }
+        }
 
         public int Yarn;
 
@@ -41,7 +53,8 @@ namespace Tofuwu.StackCats
 
             if (Block.GetBlocksAbove().Count == 0)
             {
-                if (onCatBlockRemoved != null) onCatBlockRemoved(this);
+                if (onCatBlockRemoved != null)
+                    onCatBlockRemoved(this);
                 Block.ParentStack.RemoveBlock(Block, true);
             }
         }
@@ -50,11 +63,39 @@ namespace Tofuwu.StackCats
         {
             base.OnDestroyed();
 
-            CatBlockDestructionEffect destructionEffect = Instantiate(DestructionEffect, transform.parent);
+            CatBlockDestructionEffect destructionEffect = Instantiate(
+                DestructionEffect,
+                transform.parent
+            );
             destructionEffect.transform.position = transform.position;
-            Color blockColor = _isSpecial ? HSBColor.ToColor(new HSBColor(((Time.time - (transform.position.x + transform.position.y / 2) / 4) * 0.5f) % 1, 0.65f, 1)) : _originalColor;
-            Color catColor = _isSpecial ? HSBColor.ToColor(new HSBColor(((Time.time + 0.25f - (transform.position.x + transform.position.y / 2) / 4) * 0.5f) % 1, 0.15f, 1)) : _originalCatPawColor;
-            destructionEffect.CatPawSpriteRenderer.sprite = _isOpened ? OpenedCatPawSprite : UnopenedCatPawSprite;
+            Color blockColor = _isSpecial
+                ? HSBColor.ToColor(
+                    new HSBColor(
+                        ((Time.time - (transform.position.x + transform.position.y / 2) / 4) * 0.5f)
+                            % 1,
+                        0.65f,
+                        1
+                    )
+                )
+                : _originalColor;
+            Color catColor = _isSpecial
+                ? HSBColor.ToColor(
+                    new HSBColor(
+                        (
+                            (
+                                Time.time
+                                + 0.25f
+                                - (transform.position.x + transform.position.y / 2) / 4
+                            ) * 0.5f
+                        ) % 1,
+                        0.15f,
+                        1
+                    )
+                )
+                : _originalCatPawColor;
+            destructionEffect.CatPawSpriteRenderer.sprite = _isOpened
+                ? OpenedCatPawSprite
+                : UnopenedCatPawSprite;
             destructionEffect.BlockSpriteRenderer.color = blockColor;
             destructionEffect.CatPawSpriteRenderer.color = catColor;
         }
@@ -71,8 +112,33 @@ namespace Tofuwu.StackCats
         {
             if (_isSpecial)
             {
-                Color blockColor = _isSpecial ? HSBColor.ToColor(new HSBColor(((Time.time - (transform.position.x + transform.position.y / 2) / 4) * 0.35f) % 1, 0.65f, 1)) : _originalColor;
-                Color catColor = _isSpecial ? HSBColor.ToColor(new HSBColor(((Time.time + 0.25f - (transform.position.x + transform.position.y / 2) / 4) * 0.35f) % 1, 0.15f, 1)) : _originalCatPawColor;
+                Color blockColor = _isSpecial
+                    ? HSBColor.ToColor(
+                        new HSBColor(
+                            (
+                                (Time.time - (transform.position.x + transform.position.y / 2) / 4)
+                                * 0.35f
+                            ) % 1,
+                            0.65f,
+                            1
+                        )
+                    )
+                    : _originalColor;
+                Color catColor = _isSpecial
+                    ? HSBColor.ToColor(
+                        new HSBColor(
+                            (
+                                (
+                                    Time.time
+                                    + 0.25f
+                                    - (transform.position.x + transform.position.y / 2) / 4
+                                ) * 0.35f
+                            ) % 1,
+                            0.15f,
+                            1
+                        )
+                    )
+                    : _originalCatPawColor;
                 BlockSpriteRenderer.color = blockColor;
                 CatPawSpriteRenderer.color = catColor;
             }
@@ -88,14 +154,16 @@ namespace Tofuwu.StackCats
 
         private void SetIsSpecial(bool value)
         {
-            if (value == _isSpecial) return;
+            if (value == _isSpecial)
+                return;
 
             _isSpecial = value;
         }
 
         private void SetIsOpened(bool value)
         {
-            if (value == _isOpened) return;
+            if (value == _isOpened)
+                return;
 
             _isOpened = value;
 

@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class BlockTutorialOverlayScreen : TutorialOverlayScreen
     {

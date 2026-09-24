@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class ChallengeModePuzzleAreaUnlockedBanner : BannerUI
     {
@@ -22,7 +22,8 @@ namespace Tofuwu.StackCats.UI
         {
             BannerBackgroundImage.color = PuzzleArea.PuzzleTheme.UIColor;
             BannerMessageText.text = PuzzleArea.AreaTitle + " Challenge Mode Unlocked!";
-            if(BannerStartSound) _gameManager.Audio.PlaySoundEffect(BannerStartSound);
+            if (BannerStartSound)
+                _gameManager.Audio.PlaySoundEffect(BannerStartSound);
         }
     }
 }

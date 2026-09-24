@@ -1,4 +1,4 @@
-﻿using Tofuwu.StackCats;
+﻿using RockhopperGames.StackCats;
 using UnityEditor;
 
 [CustomEditor(typeof(TrophyItem))]
@@ -7,7 +7,7 @@ public class TrophyItemEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-        TrophyItem trophyItem = (TrophyItem) target;
+        TrophyItem trophyItem = (TrophyItem)target;
 
         base.OnInspectorGUI();
         EditorGUILayout.Space();

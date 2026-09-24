@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public enum GameScene
     {
@@ -18,7 +18,7 @@ namespace Tofuwu.StackCats
         EndlessRun = 10,
         Minigame = 11,
         PuzzleMaker = 12,
-        ReplayCutScenes = 13
+        ReplayCutScenes = 13,
     }
 
     // TODO: Create GameSceneData scriptable object
@@ -29,9 +29,15 @@ namespace Tofuwu.StackCats
     {
         public SceneTransitioner SceneTransitioner;
 
-        public GameScene CurrentGameScene { get { return _currentGameScene; } }
+        public GameScene CurrentGameScene
+        {
+            get { return _currentGameScene; }
+        }
 
-        public GameScene PreviousGameScene { get { return _previousGameScene; } }
+        public GameScene PreviousGameScene
+        {
+            get { return _previousGameScene; }
+        }
 
         private CutSceneManager _cutSceneManager;
         private GameScene _currentGameScene;
@@ -45,7 +51,7 @@ namespace Tofuwu.StackCats
         {
             if (scene != GameScene.CutScene && _cutSceneManager.PendingCutScene)
             {
-                if(_cutSceneManager.ReturnScene == GameScene.None)
+                if (_cutSceneManager.ReturnScene == GameScene.None)
                 {
                     _cutSceneManager.ReturnScene = scene;
                     _cutSceneManager.ReturnSceneTransitionSettings = transitionSettings;

@@ -1,4 +1,4 @@
-﻿namespace Tofuwu.StackCats.Models
+﻿namespace RockhopperGames.StackCats.Models
 {
     [System.Serializable]
     public class GalaxyBlockComponentModel : PuzzleBlockComponentModel { }

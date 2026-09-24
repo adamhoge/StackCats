@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class PuzzleMakerSceneUI : MonoBehaviour
     {
@@ -50,7 +49,9 @@ namespace Tofuwu.StackCats.UI
             List<Dropdown.OptionData> options = new List<Dropdown.OptionData>();
             foreach (PuzzleMakerAreaEditor areaEditor in PuzzleMakerScene.AreaEditors)
             {
-                Dropdown.OptionData optionData = new Dropdown.OptionData(areaEditor.PuzzleArea.AreaTitle);
+                Dropdown.OptionData optionData = new Dropdown.OptionData(
+                    areaEditor.PuzzleArea.AreaTitle
+                );
                 options.Add(optionData);
             }
             AreaEditorSelectDropdown.AddOptions(options);
@@ -82,25 +83,40 @@ namespace Tofuwu.StackCats.UI
             }
         }
 
-        private void OnActionEditorStarted(PuzzleMakerActions actionsEditor, PuzzleMakerActionsController actionsController)
+        private void OnActionEditorStarted(
+            PuzzleMakerActions actionsEditor,
+            PuzzleMakerActionsController actionsController
+        )
         {
             if (actionsEditor.GetType() == typeof(PuzzleMakerNightFlavoredActions))
             {
-                _currentPuzzleMakerActionsUI = Instantiate(PuzzleMakerNightFlavoredActionsPrefab, PuzzleMakerActionsRectTransform);
+                _currentPuzzleMakerActionsUI = Instantiate(
+                    PuzzleMakerNightFlavoredActionsPrefab,
+                    PuzzleMakerActionsRectTransform
+                );
             }
             else if (actionsEditor.GetType() == typeof(PuzzleMakerDesertFlavoredActions))
             {
-                _currentPuzzleMakerActionsUI = Instantiate(PuzzleMakerDesertFlavoredActionsPrefab, PuzzleMakerActionsRectTransform);
+                _currentPuzzleMakerActionsUI = Instantiate(
+                    PuzzleMakerDesertFlavoredActionsPrefab,
+                    PuzzleMakerActionsRectTransform
+                );
             }
             else if (actionsEditor.GetType() == typeof(PuzzleMakerJungleFlavoredActions))
             {
-                _currentPuzzleMakerActionsUI = Instantiate(PuzzleMakerJungleFlavoredActionsPrefab, PuzzleMakerActionsRectTransform);
+                _currentPuzzleMakerActionsUI = Instantiate(
+                    PuzzleMakerJungleFlavoredActionsPrefab,
+                    PuzzleMakerActionsRectTransform
+                );
             }
             else if (actionsEditor.GetType() == typeof(PuzzleMakerFarmFlavoredActions))
             {
-                _currentPuzzleMakerActionsUI = Instantiate(PuzzleMakerFarmFlavoredActionsPrefab, PuzzleMakerActionsRectTransform);
+                _currentPuzzleMakerActionsUI = Instantiate(
+                    PuzzleMakerFarmFlavoredActionsPrefab,
+                    PuzzleMakerActionsRectTransform
+                );
             }
-            if(_currentPuzzleMakerActionsUI != null)
+            if (_currentPuzzleMakerActionsUI != null)
             {
                 _currentPuzzleMakerActionsUI.PuzzleMakerActions = actionsEditor;
                 _currentPuzzleMakerActionsUI.PuzzleMakerActionsController = actionsController;

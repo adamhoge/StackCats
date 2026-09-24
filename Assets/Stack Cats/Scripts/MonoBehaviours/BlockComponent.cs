@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     /// <summary>
     /// Base MonoBehaviour for all block components.
@@ -14,13 +14,25 @@ namespace Tofuwu.StackCats
         /// <summary>
         /// The block with which the component is associated.
         /// </summary>
-        public Block Block { get { return _block; } }
+        public Block Block
+        {
+            get { return _block; }
+        }
 
-        public virtual bool IsMovable { get { return true; } }
+        public virtual bool IsMovable
+        {
+            get { return true; }
+        }
 
-        public virtual bool IsPlaceableOn(Block block) { return true; }
+        public virtual bool IsPlaceableOn(Block block)
+        {
+            return true;
+        }
 
-        public virtual List<string> GetIsPlaceableOnRuleExceptions(Block block) { return new List<string>(); }
+        public virtual List<string> GetIsPlaceableOnRuleExceptions(Block block)
+        {
+            return new List<string>();
+        }
 
         public virtual void OnMove() { }
 

@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class GalaxyFlavoredPuzzleUI : MonoBehaviour
     {
@@ -23,12 +23,14 @@ namespace Tofuwu.StackCats.UI
             PuzzleLoader.onPuzzleUnloaded += OnPuzzleUnloaded;
             PuzzleLoader.onPuzzleRestarted += OnPuzzleRestarted;
 
-            if (RaiseStacksTimerRectTransform) RaiseStacksTimerRectTransform.gameObject.SetActive(false);
+            if (RaiseStacksTimerRectTransform)
+                RaiseStacksTimerRectTransform.gameObject.SetActive(false);
         }
 
         private void UpdateRaiseStacksTimer()
         {
-            if (RaiseStacksTimerText) RaiseStacksTimerText.text = _puzzle.RaiseStacksMovesRemaining.ToString();// + "/" + Puzzle.CurtainDropMoveCount;
+            if (RaiseStacksTimerText)
+                RaiseStacksTimerText.text = _puzzle.RaiseStacksMovesRemaining.ToString(); // + "/" + Puzzle.CurtainDropMoveCount;
         }
 
         private void OnPuzzleBeginLoad(Puzzle puzzle, bool wasRestarted, bool isUndo)
@@ -46,7 +48,10 @@ namespace Tofuwu.StackCats.UI
                 if (RaiseStacksTimerRectTransform)
                 {
                     RaiseStacksTimerRectTransform.gameObject.SetActive(true);
-                    Vector3 originalPosition = RaiseStacksTimerRectTransform.gameObject.transform.position;
+                    Vector3 originalPosition = RaiseStacksTimerRectTransform
+                        .gameObject
+                        .transform
+                        .position;
                 }
             }
         }
@@ -64,7 +69,8 @@ namespace Tofuwu.StackCats.UI
                 RaiseStacksButton.onClick.RemoveListener(OnRaiseStacksButtonClicked);
                 _puzzle = null;
 
-                if (RaiseStacksTimerRectTransform) RaiseStacksTimerRectTransform.gameObject.SetActive(false);
+                if (RaiseStacksTimerRectTransform)
+                    RaiseStacksTimerRectTransform.gameObject.SetActive(false);
             }
         }
 
@@ -74,16 +80,20 @@ namespace Tofuwu.StackCats.UI
 
             if (puzzle.GetType() == typeof(GalaxyFlavoredPuzzle))
             {
-                if (_puzzle) _puzzle.onRaiseStacksMovesChanged -= OnRaiseStacksMovesChanged;
+                if (_puzzle)
+                    _puzzle.onRaiseStacksMovesChanged -= OnRaiseStacksMovesChanged;
 
                 _puzzle = (GalaxyFlavoredPuzzle)puzzle;
                 _puzzle.onRaiseStacksMovesChanged += OnRaiseStacksMovesChanged;
 
-                if (CurtainTimerText) RaiseStacksTimerText.text = _puzzle.RaiseStacksInterval.ToString();// + "/" + Puzzle.CurtainDropMoveCount;
+                if (CurtainTimerText)
+                    RaiseStacksTimerText.text = _puzzle.RaiseStacksInterval.ToString(); // + "/" + Puzzle.CurtainDropMoveCount;
 
                 if (RaiseStacksTimerRectTransform)
                 {
-                    LeanTween.scale(RaiseStacksTimerRectTransform.gameObject, Vector3.one * 1.2f, 0.25f).setEase(LeanTweenType.punch);
+                    LeanTween
+                        .scale(RaiseStacksTimerRectTransform.gameObject, Vector3.one * 1.2f, 0.25f)
+                        .setEase(LeanTweenType.punch);
                 }
             }
         }

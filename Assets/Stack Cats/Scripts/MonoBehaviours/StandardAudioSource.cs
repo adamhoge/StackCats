@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public enum AudioReverbDuration
     {

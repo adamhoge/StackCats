@@ -1,9 +1,9 @@
-﻿using TMPro;
-using Tofuwu.StackCats.UI;
+﻿using RockhopperGames.StackCats.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class PuzzleAreaEndlessCompletionUI : MonoBehaviour
     {
@@ -47,7 +47,12 @@ namespace Tofuwu.StackCats
         {
             if (IsLocked)
             {
-                BannerImage.color = new Color(BannerImage.color.r, BannerImage.color.g, BannerImage.color.b, 0.25f);
+                BannerImage.color = new Color(
+                    BannerImage.color.r,
+                    BannerImage.color.g,
+                    BannerImage.color.b,
+                    0.25f
+                );
                 MedalPlaceholderImage.gameObject.SetActive(false);
                 Medal.gameObject.SetActive(false);
                 LockedImage.gameObject.SetActive(true);

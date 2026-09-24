@@ -1,4 +1,4 @@
-﻿namespace Tofuwu.StackCats
+﻿namespace RockhopperGames.StackCats
 {
     using UnityEngine;
 
@@ -160,7 +160,8 @@
 
         public static HSBColor Lerp(HSBColor a, HSBColor b, float t)
         {
-            float h, s;
+            float h,
+                s;
 
             //check special case black (color.b==0): interpolate neither hue nor saturation!
             //check special case grey (color.s==0): don't interpolate hue!
@@ -221,7 +222,10 @@
             color = new HSBColor(new Color(0.4f, 1f, 0.84f, 1f));
             Debug.Log("0.4, 1f, 0.84: " + color);
 
-            Debug.Log("164,82,84   .... 0.643137f, 0.321568f, 0.329411f  :" + ToColor(new HSBColor(new Color(0.643137f, 0.321568f, 0.329411f))));
+            Debug.Log(
+                "164,82,84   .... 0.643137f, 0.321568f, 0.329411f  :"
+                    + ToColor(new HSBColor(new Color(0.643137f, 0.321568f, 0.329411f)))
+            );
         }
     }
 }

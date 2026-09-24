@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public delegate void TransitioningIn();
     public delegate void TransitioningOut();
@@ -25,18 +25,21 @@ namespace Tofuwu.StackCats.UI
 
         public void Dismiss()
         {
-            if (DisplayedBy) DisplayedBy.DismissCurrentScreen();
+            if (DisplayedBy)
+                DisplayedBy.DismissCurrentScreen();
         }
 
         public virtual void OnTransitioningIn()
         {
-            if (onTransitioningIn != null) onTransitioningIn();
+            if (onTransitioningIn != null)
+                onTransitioningIn();
         }
 
         public virtual void OnTransitioningOut()
         {
             _isActive = false;
-            if (onTransitioningOut != null) onTransitioningOut();
+            if (onTransitioningOut != null)
+                onTransitioningOut();
         }
 
         public virtual void OnActive()
@@ -45,8 +48,10 @@ namespace Tofuwu.StackCats.UI
             _activeTimeElapsed = 0.0f;
         }
 
-        public virtual void OnHidden() {
-            if (onHidden != null) onHidden();
+        public virtual void OnHidden()
+        {
+            if (onHidden != null)
+                onHidden();
         }
 
         protected virtual void Update()

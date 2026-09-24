@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
-    [CreateAssetMenu(fileName = "Item Collection", menuName= "Stack Cats/Items/Item Collection")]
+    [CreateAssetMenu(fileName = "Item Collection", menuName = "Stack Cats/Items/Item Collection")]
     public class ItemCollection : IDCollection<Item> { }
 }

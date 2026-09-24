@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public abstract class PointerGestureActionUI
     {
@@ -48,7 +48,8 @@ namespace Tofuwu.StackCats.UI
     [RequireComponent(typeof(PointerGestureUI))]
     public class PointerGestureSequenceUI : MonoBehaviour
     {
-        public List<PointerGestureActionUI> ActionSequenceItems = new List<PointerGestureActionUI>();
+        public List<PointerGestureActionUI> ActionSequenceItems =
+            new List<PointerGestureActionUI>();
         public bool Loop;
 
         private PointerGestureUI _pointerGesture;
@@ -68,7 +69,10 @@ namespace Tofuwu.StackCats.UI
 
         protected void Update()
         {
-            if (_currentAction != null && Time.time >= _currentActionExecutionTime + _currentAction.Duration)
+            if (
+                _currentAction != null
+                && Time.time >= _currentActionExecutionTime + _currentAction.Duration
+            )
             {
                 GoToNextAction();
             }
@@ -78,14 +82,16 @@ namespace Tofuwu.StackCats.UI
         {
             if (_currentAction == null)
             {
-                if (ActionSequenceItems.Count == 0) return;
+                if (ActionSequenceItems.Count == 0)
+                    return;
 
                 _currentAction = ActionSequenceItems[0];
             }
             else
             {
                 int nextActionIndex = ActionSequenceItems.IndexOf(_currentAction) + 1;
-                if (Loop) nextActionIndex = nextActionIndex % ActionSequenceItems.Count;
+                if (Loop)
+                    nextActionIndex = nextActionIndex % ActionSequenceItems.Count;
 
                 if (nextActionIndex >= 0 && nextActionIndex < ActionSequenceItems.Count)
                 {

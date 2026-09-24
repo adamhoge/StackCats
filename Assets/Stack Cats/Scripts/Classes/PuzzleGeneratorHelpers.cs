@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Tofuwu.StackCats.Procedural
+namespace RockhopperGames.StackCats.Procedural
 {
     /// <summary>
     /// Provides helper methods for generating puzzles.
@@ -11,7 +11,10 @@ namespace Tofuwu.StackCats.Procedural
         public static Stack SelectStackWithLeastishMovableBlocks(Puzzle puzzle, List<Stack> stacks)
         {
             int lowestMovableBlocks = stacks.Min(s => puzzle.GetNumMovableBlocksInStack(s));
-            return stacks.Where(s => puzzle.GetNumMovableBlocksInStack(s) <= lowestMovableBlocks + 1).ToList().SelectRandom();
+            return stacks
+                .Where(s => puzzle.GetNumMovableBlocksInStack(s) <= lowestMovableBlocks + 1)
+                .ToList()
+                .SelectRandom();
         }
     }
 }

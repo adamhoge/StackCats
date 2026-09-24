@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public delegate void CurtainDropMoveCountChanged(int moveCount);
 
@@ -10,7 +10,10 @@ namespace Tofuwu.StackCats
 
         public bool IsAutoLiftCurtainEnabled = true;
 
-        public NightFlavoredPuzzle NightFlavoredPuzzle { get { return _nightFlavoredPuzzle; } }
+        public NightFlavoredPuzzle NightFlavoredPuzzle
+        {
+            get { return _nightFlavoredPuzzle; }
+        }
 
         private NightFlavoredPuzzle _nightFlavoredPuzzle;
         private int _curtainDropMoveCount;
@@ -19,8 +22,10 @@ namespace Tofuwu.StackCats
         public void SetCurtainDropMoveCount(int moveCount)
         {
             _curtainDropMoveCount = moveCount;
-            _nightFlavoredPuzzle.CurtainTurnsRemaining = _nightFlavoredPuzzle.CurtainDropInterval - moveCount;
-            if (onCurtainDropMoveCountChanged != null) onCurtainDropMoveCountChanged(moveCount);
+            _nightFlavoredPuzzle.CurtainTurnsRemaining =
+                _nightFlavoredPuzzle.CurtainDropInterval - moveCount;
+            if (onCurtainDropMoveCountChanged != null)
+                onCurtainDropMoveCountChanged(moveCount);
         }
 
         // Set Curtain Drop Interval
@@ -47,7 +52,12 @@ namespace Tofuwu.StackCats
             _nightFlavoredPuzzle.onBlockMoveResolved += OnBlockMoveResolved;
         }
 
-        private void OnBlockMoveResolved(Puzzle puzzle, Stack source, Block block, Stack destination)
+        private void OnBlockMoveResolved(
+            Puzzle puzzle,
+            Stack source,
+            Block block,
+            Stack destination
+        )
         {
             if (IsAutoLiftCurtainEnabled)
             {

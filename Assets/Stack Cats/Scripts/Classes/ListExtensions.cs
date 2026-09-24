@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public static class ListExtensions
     {
-        public static T SelectRandom<T>(this List<T> list) where T : class
+        public static T SelectRandom<T>(this List<T> list)
+            where T : class
         {
             return list != null && list.Count > 0 ? list[Random.Range(0, list.Count)] : null;
         }

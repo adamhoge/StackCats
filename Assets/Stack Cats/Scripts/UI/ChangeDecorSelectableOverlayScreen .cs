@@ -2,9 +2,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
-    public abstract class ChangeDecorSelectableOverlayScreen<T> : OverlayScreen where T : Item
+    public abstract class ChangeDecorSelectableOverlayScreen<T> : OverlayScreen
+        where T : Item
     {
         public HomeDecor HomeDecor;
         public ItemButton ItemButtonPrefab;
@@ -42,7 +43,8 @@ namespace Tofuwu.StackCats.UI
 
         public void GoToPage(int pageIndex)
         {
-            if (pageIndex < 0 || pageIndex > _pageCount) return;
+            if (pageIndex < 0 || pageIndex > _pageCount)
+                return;
 
             foreach (ItemButton itemButton in _pageItemButtons)
             {
@@ -57,7 +59,12 @@ namespace Tofuwu.StackCats.UI
             {
                 ItemButton newItemButton = Instantiate(ItemButtonPrefab, ItemButtonsRectTransform);
                 newItemButton.Item = _items[i];
-                newItemButton.Button.onClick.AddListener(delegate { OnSelect((T)newItemButton.Item); });
+                newItemButton.Button.onClick.AddListener(
+                    delegate
+                    {
+                        OnSelect((T)newItemButton.Item);
+                    }
+                );
                 _pageItemButtons.Add(newItemButton);
             }
 

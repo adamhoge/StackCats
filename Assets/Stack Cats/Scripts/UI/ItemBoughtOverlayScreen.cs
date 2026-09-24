@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class ItemBoughtOverlayScreen : OverlayScreen
     {
@@ -25,9 +25,15 @@ namespace Tofuwu.StackCats.UI
             ShopListingLabel.text = ShopListing.Item.Name;
 
             Type itemType = ShopListing.Item.GetType();
-            bool isAutoUsable = itemType == typeof(WallpaperItem) || itemType == typeof(FloorItem) || itemType == typeof(WindowItem) || itemType == typeof(DresserItem);
+            bool isAutoUsable =
+                itemType == typeof(WallpaperItem)
+                || itemType == typeof(FloorItem)
+                || itemType == typeof(WindowItem)
+                || itemType == typeof(DresserItem);
             UseNowButton.gameObject.SetActive(isAutoUsable);
-            ConfirmButtonRectTransform.anchorMin = isAutoUsable ? _useNowConfirmAnchorMin : Vector2.zero;
+            ConfirmButtonRectTransform.anchorMin = isAutoUsable
+                ? _useNowConfirmAnchorMin
+                : Vector2.zero;
         }
 
         public void UseNow()

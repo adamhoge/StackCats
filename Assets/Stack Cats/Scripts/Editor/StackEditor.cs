@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
+using RockhopperGames.StackCats;
 using UnityEditor;
-using Tofuwu.StackCats;
+using UnityEngine;
 
 [CustomEditor(typeof(Stack), true)]
 [CanEditMultipleObjects]
@@ -12,7 +12,7 @@ public class StackEditor : Editor
 
     protected void Awake()
     {
-        Stack stack = (Stack) target;
+        Stack stack = (Stack)target;
 
         _blockHeight = stack.BlockHeight;
         _maxBlocks = stack.MaxBlocks;

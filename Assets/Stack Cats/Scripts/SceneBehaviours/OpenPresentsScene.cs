@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public delegate void RemovedOpenPresent();
 
@@ -14,9 +14,15 @@ namespace Tofuwu.StackCats
 
         public Present PresentPrefab;
 
-        public bool IsOpeningPresent { get { return _currentPresent && _currentPresent.State == PresentState.Opening; } }
+        public bool IsOpeningPresent
+        {
+            get { return _currentPresent && _currentPresent.State == PresentState.Opening; }
+        }
 
-        public float LastPresentOpenedTime { get { return _lastPresentOpenedTime; } }
+        public float LastPresentOpenedTime
+        {
+            get { return _lastPresentOpenedTime; }
+        }
 
         private StuffManager _stuff;
         private CurrencyManager _currency;
@@ -33,7 +39,9 @@ namespace Tofuwu.StackCats
                 grabbedPresent.PresentInfo = presents[0];
                 grabbedPresent.onPresentOpened += OnPresentOpened;
                 grabbedPresent.transform.Translate(Vector3.up * 0.5f);
-                LeanTween.moveLocal(grabbedPresent.gameObject, Vector3.zero, 0.5f).setEase(LeanTweenType.easeOutBounce);
+                LeanTween
+                    .moveLocal(grabbedPresent.gameObject, Vector3.zero, 0.5f)
+                    .setEase(LeanTweenType.easeOutBounce);
                 LeanTween.alpha(grabbedPresent.gameObject, 0.0f, 0.0f);
                 LeanTween.alpha(grabbedPresent.gameObject, 1.0f, 0.25f);
                 _currentPresent = grabbedPresent;
@@ -45,9 +53,12 @@ namespace Tofuwu.StackCats
             if (!IsOpeningPresent && Time.time > _lastPresentOpenedTime + 0.25f)
             {
                 _currentPresent.onPresentOpened -= OnPresentOpened;
-                LeanTween.scale(_currentPresent.gameObject, Vector3.zero, 0.1f).setDestroyOnComplete(true);
+                LeanTween
+                    .scale(_currentPresent.gameObject, Vector3.zero, 0.1f)
+                    .setDestroyOnComplete(true);
                 _currentPresent = null;
-                if (onOpenPresentRemoved != null) onOpenPresentRemoved();
+                if (onOpenPresentRemoved != null)
+                    onOpenPresentRemoved();
             }
         }
 
@@ -103,7 +114,8 @@ namespace Tofuwu.StackCats
             }
             _stuff.RemovePresent(present.PresentInfo.PresentId);
             _lastPresentOpenedTime = Time.time;
-            if (onPresentOpened != null) onPresentOpened(present);
+            if (onPresentOpened != null)
+                onPresentOpened(present);
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Tofuwu.StackCats.Data
+namespace RockhopperGames.StackCats.Data
 {
     [Serializable]
     public class LocalStuffData : LocalData<LocalStuffData>, IStuffData
@@ -10,14 +10,19 @@ namespace Tofuwu.StackCats.Data
         private readonly Dictionary<string, IPresentData> _unopenedPresents;
         private readonly Dictionary<string, int> _items;
 
-        public LocalStuffData(string dataPath) : base(dataPath)
+        public LocalStuffData(string dataPath)
+            : base(dataPath)
         {
             _unopenedPresents = new Dictionary<string, IPresentData>();
             _items = new Dictionary<string, int>();
             Save();
         }
 
-        public string AddPresent(string fromCatID, CurrencyAmountDictionary currency, Dictionary<string, int> items)
+        public string AddPresent(
+            string fromCatID,
+            CurrencyAmountDictionary currency,
+            Dictionary<string, int> items
+        )
         {
             string presentID = Guid.NewGuid().ToString();
             IPresentData presentData = new LocalPresentData(fromCatID, currency, items);
@@ -30,7 +35,8 @@ namespace Tofuwu.StackCats.Data
 
         public void RemovePresent(string presentID)
         {
-            if (_unopenedPresents.Remove(presentID)) Save();
+            if (_unopenedPresents.Remove(presentID))
+                Save();
         }
 
         public Dictionary<string, IPresentData> GetPresents()
@@ -57,7 +63,8 @@ namespace Tofuwu.StackCats.Data
             if (_items.ContainsKey(itemID))
             {
                 _items[itemID] -= amount;
-                if (_items[itemID] <= 0) _items.Remove(itemID);
+                if (_items[itemID] <= 0)
+                    _items.Remove(itemID);
             }
 
             Save();
@@ -70,7 +77,8 @@ namespace Tofuwu.StackCats.Data
                 return true;
             }
 
-            return includePresents && _unopenedPresents.Values.Any(p => p.Items.ContainsKey(itemID));
+            return includePresents
+                && _unopenedPresents.Values.Any(p => p.Items.ContainsKey(itemID));
         }
 
         public int GetItemCount(string itemID)

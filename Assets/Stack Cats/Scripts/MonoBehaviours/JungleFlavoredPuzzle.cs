@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public delegate void JigsawBlockMoved(JigsawBlock jigsawBlock);
 
@@ -12,14 +12,25 @@ namespace Tofuwu.StackCats
 
         public JigsawBlock JigsawBlockPrefab;
 
-        public int NumJigsawPuzzles { get { return GetNumJigsawPuzzles(); } }
+        public int NumJigsawPuzzles
+        {
+            get { return GetNumJigsawPuzzles(); }
+        }
 
-        public int NumCompletedJigsawPuzzles { get { return GetNumCompletedJigsawPuzzles(); } }
+        public int NumCompletedJigsawPuzzles
+        {
+            get { return GetNumCompletedJigsawPuzzles(); }
+        }
 
-        public bool AddNewJigsawBlock(Stack stack, JigsawPuzzleObject jigsawPuzzleObject, int jigsawIndex)
+        public bool AddNewJigsawBlock(
+            Stack stack,
+            JigsawPuzzleObject jigsawPuzzleObject,
+            int jigsawIndex
+        )
         {
             // If the stack isn't a part of the puzzle or the cat block prefab isn't defined, don't add anything.
-            if (!_stacks.Contains(stack) || !JigsawBlockPrefab) return false;
+            if (!_stacks.Contains(stack) || !JigsawBlockPrefab)
+                return false;
 
             // Create a new jigsaw block.
             JigsawBlock newJigsawBlock = Instantiate(JigsawBlockPrefab);
@@ -29,7 +40,8 @@ namespace Tofuwu.StackCats
 
             // Add it to the stack, or destroy it if unable to add it.
             bool wasAdded = stack.AddBlock(newJigsawBlock.GetComponent<Block>());
-            if (!wasAdded) DestroyImmediate(newJigsawBlock.gameObject);
+            if (!wasAdded)
+                DestroyImmediate(newJigsawBlock.gameObject);
             return wasAdded;
         }
 
@@ -38,12 +50,19 @@ namespace Tofuwu.StackCats
             base.OnBlockMoved(source, block, destination);
 
             JigsawBlock jigsawBlock = block.GetComponent<JigsawBlock>();
-            if (jigsawBlock && onJigsawBlockMoved != null) onJigsawBlockMoved(jigsawBlock);
+            if (jigsawBlock && onJigsawBlockMoved != null)
+                onJigsawBlockMoved(jigsawBlock);
         }
 
         protected override bool IsComplete()
         {
-            List<JigsawBlock> jigsawBlocks = Stacks.SelectMany(stack => stack.Blocks, (stack, block) => block.GetComponent<JigsawBlock>()).Where(jigsawBlock => jigsawBlock).ToList();
+            List<JigsawBlock> jigsawBlocks = Stacks
+                .SelectMany(
+                    stack => stack.Blocks,
+                    (stack, block) => block.GetComponent<JigsawBlock>()
+                )
+                .Where(jigsawBlock => jigsawBlock)
+                .ToList();
 
             while (jigsawBlocks.Count > 0)
             {
@@ -62,7 +81,8 @@ namespace Tofuwu.StackCats
 
         protected override void OnPuzzleCompleted()
         {
-            if (IsEditMode) return;
+            if (IsEditMode)
+                return;
 
             //foreach (CatBlock catBlock in GetAllBlocksOfComponent<CatBlock>())
             //{
@@ -83,7 +103,13 @@ namespace Tofuwu.StackCats
         {
             int numJigsawPuzzles = 0;
 
-            List<JigsawBlock> jigsawBlocks = Stacks.SelectMany(stack => stack.Blocks, (stack, block) => block.GetComponent<JigsawBlock>()).Where(jigsawBlock => jigsawBlock).ToList();
+            List<JigsawBlock> jigsawBlocks = Stacks
+                .SelectMany(
+                    stack => stack.Blocks,
+                    (stack, block) => block.GetComponent<JigsawBlock>()
+                )
+                .Where(jigsawBlock => jigsawBlock)
+                .ToList();
 
             while (jigsawBlocks.Count > 0)
             {
@@ -94,7 +120,11 @@ namespace Tofuwu.StackCats
                 JigsawPuzzleObject currentJigsawPuzzleObject = jigsawBlocks[0].JigsawPuzzleObject;
                 for (int i = 0; i < currentJigsawPuzzleObject.JigsawSprites.Count; i++)
                 {
-                    jigsawBlocks.Remove(jigsawBlocks.First(j => j.JigsawPuzzleObject == currentJigsawPuzzleObject && j.JigsawIndex == i));
+                    jigsawBlocks.Remove(
+                        jigsawBlocks.First(j =>
+                            j.JigsawPuzzleObject == currentJigsawPuzzleObject && j.JigsawIndex == i
+                        )
+                    );
                 }
             }
 
@@ -105,7 +135,13 @@ namespace Tofuwu.StackCats
         {
             int numCompletedJigsawPuzzles = 0;
 
-            List<JigsawBlock> jigsawBlocks = Stacks.SelectMany(stack => stack.Blocks, (stack, block) => block.GetComponent<JigsawBlock>()).Where(jigsawBlock => jigsawBlock).ToList();
+            List<JigsawBlock> jigsawBlocks = Stacks
+                .SelectMany(
+                    stack => stack.Blocks,
+                    (stack, block) => block.GetComponent<JigsawBlock>()
+                )
+                .Where(jigsawBlock => jigsawBlock)
+                .ToList();
 
             while (jigsawBlocks.Count > 0)
             {

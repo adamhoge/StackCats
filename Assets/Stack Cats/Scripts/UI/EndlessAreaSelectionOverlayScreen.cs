@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class EndlessAreaSelectionOverlayScreen : OverlayScreen
     {
@@ -19,10 +19,18 @@ namespace Tofuwu.StackCats.UI
         {
             foreach (PuzzleArea puzzleArea in _puzzleManager.PuzzleAreaCollection.List)
             {
-                EndlessAreaInfoUI endlessAreaInfoInstance = Instantiate(EndlessAreaInfoPrefab, EndlessAreasRectTransform);
+                EndlessAreaInfoUI endlessAreaInfoInstance = Instantiate(
+                    EndlessAreaInfoPrefab,
+                    EndlessAreasRectTransform
+                );
                 endlessAreaInfoInstance.PuzzleArea = puzzleArea;
                 endlessAreaInfoInstance.IsLocked = _puzzleManager.IsEndlessModeLocked(puzzleArea);
-                endlessAreaInfoInstance.Button.onClick.AddListener(delegate () { HomeScene.PlayEndlessMode(endlessAreaInfoInstance.PuzzleArea); });
+                endlessAreaInfoInstance.Button.onClick.AddListener(
+                    delegate()
+                    {
+                        HomeScene.PlayEndlessMode(endlessAreaInfoInstance.PuzzleArea);
+                    }
+                );
             }
         }
     }

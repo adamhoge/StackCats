@@ -1,9 +1,9 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using Tofuwu.StackCats.Data;
+using RockhopperGames.StackCats.Data;
+using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     /// <summary>
     /// Manages the player's home, including cat visitors, invited cats, decor, etc.
@@ -18,12 +18,18 @@ namespace Tofuwu.StackCats
         /// <summary>
         /// List of cats invited into the player's home.
         /// </summary>
-        public List<Cat> InvitedCats { get { return _invitedCats; } }
+        public List<Cat> InvitedCats
+        {
+            get { return _invitedCats; }
+        }
 
         /// <summary>
         /// Flag indicating whether or not more cats can be invited into the player's home.
         /// </summary>
-        public bool CanInviteCats { get { return _invitedCats.Count < MaxInvitedCats; } }
+        public bool CanInviteCats
+        {
+            get { return _invitedCats.Count < MaxInvitedCats; }
+        }
 
         private IHomeData _homeData;
         private StuffManager _stuffManager;

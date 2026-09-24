@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     // Manages all prompt functionality
-    public class PromptManager : MonoBehaviour
-    {
-    }
+    public class PromptManager : MonoBehaviour { }
 }

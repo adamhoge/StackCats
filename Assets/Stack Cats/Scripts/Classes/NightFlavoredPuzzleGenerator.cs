@@ -2,43 +2,62 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Tofuwu.StackCats.Procedural
+namespace RockhopperGames.StackCats.Procedural
 {
     public class NightFlavoredPuzzleGenerator : PuzzleGenerator<PuzzleArea, NightFlavoredPuzzle>
     {
-        public NightFlavoredPuzzleGenerator(PuzzleArea puzzleArea) : base(puzzleArea) { }
+        public NightFlavoredPuzzleGenerator(PuzzleArea puzzleArea)
+            : base(puzzleArea) { }
 
-        public override GeneratedPuzzleInfo<PuzzleArea, NightFlavoredPuzzle> Generate(int difficulty)
+        public override GeneratedPuzzleInfo<PuzzleArea, NightFlavoredPuzzle> Generate(
+            int difficulty
+        )
         {
-            GeneratedPuzzleInfo<PuzzleArea, NightFlavoredPuzzle> generatedPuzzleInfo = base.Generate(difficulty);
+            GeneratedPuzzleInfo<PuzzleArea, NightFlavoredPuzzle> generatedPuzzleInfo =
+                base.Generate(difficulty);
 
             generatedPuzzleInfo.Puzzle.Curtain.Raise(false);
 
             return generatedPuzzleInfo;
         }
 
-        public override Stack GetPreferredDestinationStack(NightFlavoredPuzzle puzzle, List<Stack> usableStacks)
+        public override Stack GetPreferredDestinationStack(
+            NightFlavoredPuzzle puzzle,
+            List<Stack> usableStacks
+        )
         {
             int minMovableBlocks = usableStacks.Min(s => puzzle.GetNumMovableBlocksInStack(s));
-            return usableStacks.First(s => puzzle.GetNumMovableBlocksInStack(s) == minMovableBlocks);
+            return usableStacks.First(s =>
+                puzzle.GetNumMovableBlocksInStack(s) == minMovableBlocks
+            );
         }
 
-        public override Stack GetPreferredSourceStack(NightFlavoredPuzzle puzzle, List<Stack> usableStacks)
+        public override Stack GetPreferredSourceStack(
+            NightFlavoredPuzzle puzzle,
+            List<Stack> usableStacks
+        )
         {
             throw new System.NotImplementedException();
         }
 
         protected override MoveStrategyResult PerformMoveStrategy(
             IMoveStrategy<PuzzleArea, NightFlavoredPuzzle> moveStrategy,
-            GeneratedPuzzleInfo<PuzzleArea, NightFlavoredPuzzle> generatedPuzzleInfo)
+            GeneratedPuzzleInfo<PuzzleArea, NightFlavoredPuzzle> generatedPuzzleInfo
+        )
         {
             NightFlavoredPuzzle puzzle = generatedPuzzleInfo.Puzzle;
-            if (puzzle.Curtain.Height == 0 && puzzle.CurtainTurnsRemaining == puzzle.CurtainDropInterval)
+            if (
+                puzzle.Curtain.Height == 0
+                && puzzle.CurtainTurnsRemaining == puzzle.CurtainDropInterval
+            )
             {
                 return new MoveStrategyResult() { shouldRemoveStrategy = true, succeeded = false };
             }
 
-            MoveStrategyResult moveStrategyResult = moveStrategy.PerformMoveStrategy(this, generatedPuzzleInfo);
+            MoveStrategyResult moveStrategyResult = moveStrategy.PerformMoveStrategy(
+                this,
+                generatedPuzzleInfo
+            );
 
             if (moveStrategyResult.succeeded)
             {
@@ -51,13 +70,17 @@ namespace Tofuwu.StackCats.Procedural
                     }
                 }
 
-                puzzle.CurtainTurnsRemaining = puzzle.CurtainDropInterval - generatedPuzzleInfo.NumMovesMade % puzzle.CurtainDropInterval;
+                puzzle.CurtainTurnsRemaining =
+                    puzzle.CurtainDropInterval
+                    - generatedPuzzleInfo.NumMovesMade % puzzle.CurtainDropInterval;
             }
 
             return moveStrategyResult;
         }
 
-        protected override void CreateFinishedPuzzle(GeneratedPuzzleInfo<PuzzleArea, NightFlavoredPuzzle> generatedPuzzleInfo)
+        protected override void CreateFinishedPuzzle(
+            GeneratedPuzzleInfo<PuzzleArea, NightFlavoredPuzzle> generatedPuzzleInfo
+        )
         {
             NightFlavoredPuzzle puzzle = generatedPuzzleInfo.Puzzle;
 
@@ -83,11 +106,13 @@ namespace Tofuwu.StackCats.Procedural
             int lowStackMinSize = generatedPuzzleInfo.ObjectiveDifficulty >= 30 ? 1 : 0;
             int lowStackSize = Random.Range(lowStackMinSize, 3);
             int avgStackSize = Mathf.CeilToInt(generatedPuzzleInfo.ObjectiveDifficulty / 30.0f + 1);
-            if (avgStackSize > generatedPuzzleInfo.MaxBlocks / 2) avgStackSize = generatedPuzzleInfo.MaxBlocks / 2;
+            if (avgStackSize > generatedPuzzleInfo.MaxBlocks / 2)
+                avgStackSize = generatedPuzzleInfo.MaxBlocks / 2;
 
             foreach (Stack stack in puzzle.Stacks)
             {
-                int stackSize = stack == lowStack ? lowStackSize : avgStackSize + Random.Range(-1, 2);
+                int stackSize =
+                    stack == lowStack ? lowStackSize : avgStackSize + Random.Range(-1, 2);
 
                 for (int i = 0; i < stackSize; i++)
                 {
@@ -99,21 +124,36 @@ namespace Tofuwu.StackCats.Procedural
             puzzle.Curtain.Drop(puzzle.MaxStackHeight - avgStackSize - 1, false);
         }
 
-        protected override Dictionary<IMoveStrategy<PuzzleArea, NightFlavoredPuzzle>, float> GetMoveStrategies(int difficulty)
+        protected override Dictionary<
+            IMoveStrategy<PuzzleArea, NightFlavoredPuzzle>,
+            float
+        > GetMoveStrategies(int difficulty)
         {
-            Dictionary<IMoveStrategy<PuzzleArea, NightFlavoredPuzzle>, float> moveStrategies = new Dictionary<IMoveStrategy<PuzzleArea, NightFlavoredPuzzle>, float>();
+            Dictionary<IMoveStrategy<PuzzleArea, NightFlavoredPuzzle>, float> moveStrategies =
+                new Dictionary<IMoveStrategy<PuzzleArea, NightFlavoredPuzzle>, float>();
 
-            MoveBlocksStrategy<PuzzleArea, NightFlavoredPuzzle> moveBlocksStrategy = new MoveBlocksStrategy<PuzzleArea, NightFlavoredPuzzle>();
+            MoveBlocksStrategy<PuzzleArea, NightFlavoredPuzzle> moveBlocksStrategy =
+                new MoveBlocksStrategy<PuzzleArea, NightFlavoredPuzzle>();
             moveStrategies.Add(moveBlocksStrategy, 0.0f);
 
             int maxSumBlocks = Mathf.CeilToInt((difficulty - 25.0f) / (MAX_DIFFICULTY - 25.0f) * 4);
-            AddSumBlockStrategy<PuzzleArea, NightFlavoredPuzzle> addSumBlockStrategy = new AddSumBlockStrategy<PuzzleArea, NightFlavoredPuzzle>(maxSumBlocks);
-            AddRequiredSumBlockStrategy<PuzzleArea, NightFlavoredPuzzle> addRequiredSumBlockStrategy = new AddRequiredSumBlockStrategy<PuzzleArea, NightFlavoredPuzzle>(maxSumBlocks);
+            AddSumBlockStrategy<PuzzleArea, NightFlavoredPuzzle> addSumBlockStrategy =
+                new AddSumBlockStrategy<PuzzleArea, NightFlavoredPuzzle>(maxSumBlocks);
+            AddRequiredSumBlockStrategy<
+                PuzzleArea,
+                NightFlavoredPuzzle
+            > addRequiredSumBlockStrategy = new AddRequiredSumBlockStrategy<
+                PuzzleArea,
+                NightFlavoredPuzzle
+            >(maxSumBlocks);
             moveStrategies.Add(addSumBlockStrategy, 0.0f);
             moveStrategies.Add(addRequiredSumBlockStrategy, 0.0f);
 
-            int maxWildBlocks = Mathf.CeilToInt((difficulty - 50.0f) / (MAX_DIFFICULTY - 50.0f) * 4);
-            AddWildBlockStrategy<PuzzleArea, NightFlavoredPuzzle> addWildBlockStategy = new AddWildBlockStrategy<PuzzleArea, NightFlavoredPuzzle>(maxWildBlocks);
+            int maxWildBlocks = Mathf.CeilToInt(
+                (difficulty - 50.0f) / (MAX_DIFFICULTY - 50.0f) * 4
+            );
+            AddWildBlockStrategy<PuzzleArea, NightFlavoredPuzzle> addWildBlockStategy =
+                new AddWildBlockStrategy<PuzzleArea, NightFlavoredPuzzle>(maxWildBlocks);
             moveStrategies.Add(addWildBlockStategy, 0.0f);
 
             float strategyPercentageRemaining = 1.0f;
@@ -130,7 +170,7 @@ namespace Tofuwu.StackCats.Procedural
             {
                 float usedPercent = MathHelpers.TakePercent(ref strategyPercentageRemaining, 0.25f);
                 moveStrategies[moveBlocksStrategy] += usedPercent / 4;
-               // moveStrategies[addRequiredSumBlockStrategy] += usedPercent / 2; // There is an issue with this that creates stray cat blocks on top of stacks
+                // moveStrategies[addRequiredSumBlockStrategy] += usedPercent / 2; // There is an issue with this that creates stray cat blocks on top of stacks
                 moveStrategies[addSumBlockStrategy] += usedPercent / 2;
                 moveStrategies[addWildBlockStategy] += usedPercent / 4;
             }

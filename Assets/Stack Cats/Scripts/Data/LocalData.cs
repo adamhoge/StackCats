@@ -2,10 +2,11 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace Tofuwu.StackCats.Data
+namespace RockhopperGames.StackCats.Data
 {
     [Serializable]
-    public abstract class LocalData<T> where T : class
+    public abstract class LocalData<T>
+        where T : class
     {
         private readonly string _dataPath;
 

@@ -2,11 +2,20 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
-    public delegate void BeginDragPlaceableObjectItem(PointerEventData eventData, PlaceableObjectItem PlaceableObjectItem);
-    public delegate void DragPlaceableObjectItem(PointerEventData eventData, PlaceableObjectItem PlaceableObjectItem);
-    public delegate void EndDragPlaceableObjectItem(PointerEventData eventData, PlaceableObjectItem PlaceableObjectItem);
+    public delegate void BeginDragPlaceableObjectItem(
+        PointerEventData eventData,
+        PlaceableObjectItem PlaceableObjectItem
+    );
+    public delegate void DragPlaceableObjectItem(
+        PointerEventData eventData,
+        PlaceableObjectItem PlaceableObjectItem
+    );
+    public delegate void EndDragPlaceableObjectItem(
+        PointerEventData eventData,
+        PlaceableObjectItem PlaceableObjectItem
+    );
     public delegate void ClickPlaceableObjectItem(PlaceableObjectItem PlaceableObjectItem);
 
     [RequireComponent(typeof(RectTransform))]
@@ -20,8 +29,12 @@ namespace Tofuwu.StackCats.UI
         public ClickPlaceableObjectItem onClickPlaceableObjectItem;
 
         public Image ButtonImage;
-        
-        public PlaceableObjectItem PlaceableObjectItem { get { return _PlaceableObjectItem; } set { SetPlaceableObjectItem(value); } }
+
+        public PlaceableObjectItem PlaceableObjectItem
+        {
+            get { return _PlaceableObjectItem; }
+            set { SetPlaceableObjectItem(value); }
+        }
 
         private PlaceableObjectItem _PlaceableObjectItem;
         private RectTransform _rectTransform;
@@ -57,7 +70,8 @@ namespace Tofuwu.StackCats.UI
 
         private void SetPlaceableObjectItem(PlaceableObjectItem PlaceableObjectItem)
         {
-            if (_PlaceableObjectItem == PlaceableObjectItem) return;
+            if (_PlaceableObjectItem == PlaceableObjectItem)
+                return;
 
             _PlaceableObjectItem = PlaceableObjectItem;
             ButtonImage.sprite = PlaceableObjectItem.Icon;
@@ -66,22 +80,26 @@ namespace Tofuwu.StackCats.UI
 
         private void OnBeginDrag(PointerEventData eventData)
         {
-            if (onBeginDragPlaceableObjectItem != null) onBeginDragPlaceableObjectItem(eventData, PlaceableObjectItem);
+            if (onBeginDragPlaceableObjectItem != null)
+                onBeginDragPlaceableObjectItem(eventData, PlaceableObjectItem);
         }
 
         private void OnDrag(PointerEventData eventData)
         {
-            if (onDragPlaceableObjectItem != null) onDragPlaceableObjectItem(eventData, PlaceableObjectItem);
+            if (onDragPlaceableObjectItem != null)
+                onDragPlaceableObjectItem(eventData, PlaceableObjectItem);
         }
 
         private void OnEndDrag(PointerEventData eventData)
         {
-            if (onEndDragPlaceableObjectItem != null) onEndDragPlaceableObjectItem(eventData, PlaceableObjectItem);
+            if (onEndDragPlaceableObjectItem != null)
+                onEndDragPlaceableObjectItem(eventData, PlaceableObjectItem);
         }
 
         private void OnClick()
         {
-            if (onClickPlaceableObjectItem != null) onClickPlaceableObjectItem(PlaceableObjectItem);
+            if (onClickPlaceableObjectItem != null)
+                onClickPlaceableObjectItem(PlaceableObjectItem);
         }
     }
 }

@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class PuzzleAreaUnlockedBanner : BannerUI
     {
@@ -23,7 +23,8 @@ namespace Tofuwu.StackCats.UI
         {
             BannerBackgroundImage.color = PuzzleArea.PuzzleTheme.UIColor;
             BannerMessageText.text = PuzzleArea.AreaTitle + " Puzzles Unlocked!";
-            if(BannerStartSound) _gameManager.Audio.PlaySoundEffect(BannerStartSound);
+            if (BannerStartSound)
+                _gameManager.Audio.PlaySoundEffect(BannerStartSound);
         }
     }
 }

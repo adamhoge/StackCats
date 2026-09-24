@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats.Models
+namespace RockhopperGames.StackCats.Models
 {
     [System.Serializable]
     public class BlockModel

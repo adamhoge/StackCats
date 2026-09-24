@@ -1,19 +1,34 @@
 ﻿using System;
 
-namespace Tofuwu.StackCats.Data
+namespace RockhopperGames.StackCats.Data
 {
     [Serializable]
     public class LocalChallengePuzzleCompletionData : IChallengePuzzleCompletionData
     {
-        public PuzzleCompletionType CompletionType { get { return _puzzleCompletionType; } }
+        public PuzzleCompletionType CompletionType
+        {
+            get { return _puzzleCompletionType; }
+        }
 
-        public int DifficultyRating { get { return _difficultyRating; } }
+        public int DifficultyRating
+        {
+            get { return _difficultyRating; }
+        }
 
-        public int MinMoves { get { return _minMoves; } }
+        public int MinMoves
+        {
+            get { return _minMoves; }
+        }
 
-        public int MaxMoves { get { return _maxMoves; } }
+        public int MaxMoves
+        {
+            get { return _maxMoves; }
+        }
 
-        public int MovesMade { get { return _movesMade; } }
+        public int MovesMade
+        {
+            get { return _movesMade; }
+        }
 
         private readonly PuzzleCompletionType _puzzleCompletionType;
         private readonly int _difficultyRating;
@@ -21,7 +36,13 @@ namespace Tofuwu.StackCats.Data
         private readonly int _maxMoves;
         private readonly int _movesMade;
 
-        public LocalChallengePuzzleCompletionData(PuzzleCompletionType completionType, int difficultyRating, int minMoves, int maxMoves, int movesMade)
+        public LocalChallengePuzzleCompletionData(
+            PuzzleCompletionType completionType,
+            int difficultyRating,
+            int minMoves,
+            int maxMoves,
+            int movesMade
+        )
         {
             _puzzleCompletionType = completionType;
             _difficultyRating = difficultyRating;

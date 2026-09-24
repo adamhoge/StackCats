@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     // TODO: It may be cleaner to rework as an "axis" controller, supporting holding both axes
     [RequireComponent(typeof(Puzzle))]
@@ -10,9 +10,17 @@ namespace Tofuwu.StackCats
     {
         private class DirectionHold
         {
-            public Direction Direction { get { return _direction; } }
+            public Direction Direction
+            {
+                get { return _direction; }
+            }
 
-            public DirectionHold(Direction direction, float heldAt, float directionHoldDelay, float directionHoldInterval)
+            public DirectionHold(
+                Direction direction,
+                float heldAt,
+                float directionHoldDelay,
+                float directionHoldInterval
+            )
             {
                 _direction = direction;
                 _heldAt = heldAt;
@@ -24,7 +32,10 @@ namespace Tofuwu.StackCats
             {
                 float time = Time.time;
 
-                if (_heldAt + _directionHoldDelay < time && _lastIntervalAt + _directionHoldInterval < time)
+                if (
+                    _heldAt + _directionHoldDelay < time
+                    && _lastIntervalAt + _directionHoldInterval < time
+                )
                 {
                     _lastIntervalAt = time;
                     return true;
@@ -64,34 +75,57 @@ namespace Tofuwu.StackCats
 
         protected void Update()
         {
-            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) HoldDirection(Direction.Up);
-            else if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.UpArrow)) ReleaseDirection(Direction.Up);
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+                HoldDirection(Direction.Up);
+            else if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.UpArrow))
+                ReleaseDirection(Direction.Up);
 
-            if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) HoldDirection(Direction.Right);
-            else if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.RightArrow)) ReleaseDirection(Direction.Right);
+            if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+                HoldDirection(Direction.Right);
+            else if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.RightArrow))
+                ReleaseDirection(Direction.Right);
 
-            if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) HoldDirection(Direction.Down);
-            else if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.DownArrow)) ReleaseDirection(Direction.Down);
+            if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+                HoldDirection(Direction.Down);
+            else if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.DownArrow))
+                ReleaseDirection(Direction.Down);
 
-            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) HoldDirection(Direction.Left);
-            else if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.LeftArrow)) ReleaseDirection(Direction.Left);
+            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+                HoldDirection(Direction.Left);
+            else if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.LeftArrow))
+                ReleaseDirection(Direction.Left);
 
-            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.RightControl) || Input.GetKeyDown(KeyCode.LeftControl)) _puzzleController.Select();
+            if (
+                Input.GetKeyDown(KeyCode.Return)
+                || Input.GetKeyDown(KeyCode.RightControl)
+                || Input.GetKeyDown(KeyCode.LeftControl)
+            )
+                _puzzleController.Select();
 
-            if (Input.GetKeyDown(KeyCode.Escape)) _puzzleController.Cancel();
+            if (Input.GetKeyDown(KeyCode.Escape))
+                _puzzleController.Cancel();
 
             if (_directionHold != null && _directionHold.GetInterval())
             {
-                if (_directionHold.Direction == Direction.Up) FocusNextBlock();
-                if (_directionHold.Direction == Direction.Right) FocusNextStack();
-                if (_directionHold.Direction == Direction.Down) FocusPreviousBlock();
-                if (_directionHold.Direction == Direction.Left) FocusPreviousStack();
+                if (_directionHold.Direction == Direction.Up)
+                    FocusNextBlock();
+                if (_directionHold.Direction == Direction.Right)
+                    FocusNextStack();
+                if (_directionHold.Direction == Direction.Down)
+                    FocusPreviousBlock();
+                if (_directionHold.Direction == Direction.Left)
+                    FocusPreviousStack();
             }
         }
 
         protected void HoldDirection(Direction direction)
         {
-            _directionHold = new DirectionHold(direction, Time.time, DirectionHoldDelay, DirectionHoldInterval);
+            _directionHold = new DirectionHold(
+                direction,
+                Time.time,
+                DirectionHoldDelay,
+                DirectionHoldInterval
+            );
 
             switch (direction)
             {
@@ -122,7 +156,8 @@ namespace Tofuwu.StackCats
 
         private void FocusPreviousStack()
         {
-            if (_puzzleController.Selection != null || _currentStackIndex <= 0) return;
+            if (_puzzleController.Selection != null || _currentStackIndex <= 0)
+                return;
 
             Stack stack = null;
             for (int i = _currentStackIndex - 1; i >= 0; i--)
@@ -135,23 +170,33 @@ namespace Tofuwu.StackCats
                 }
             }
 
-            if (!stack) return;
+            if (!stack)
+                return;
 
-            _currentBlockIndex = _currentBlockIndex < stack.Blocks.Count ? _currentBlockIndex : stack.Blocks.Count - 1;
+            _currentBlockIndex =
+                _currentBlockIndex < stack.Blocks.Count
+                    ? _currentBlockIndex
+                    : stack.Blocks.Count - 1;
             if (IgnoreImmovableBlocks)
             {
                 int lowestIndex = GetLowestMovableBlockIndex(stack);
-                if (_currentBlockIndex < lowestIndex) _currentBlockIndex = lowestIndex;
+                if (_currentBlockIndex < lowestIndex)
+                    _currentBlockIndex = lowestIndex;
             }
             Block block = stack.Blocks[_currentBlockIndex];
 
             _puzzleController.FocusAt(stack, block);
-            if (MarkerFocusSound) GameManager.Instance.Audio.PlaySoundEffect(MarkerFocusSound);
+            if (MarkerFocusSound)
+                GameManager.Instance.Audio.PlaySoundEffect(MarkerFocusSound);
         }
 
         private void FocusNextStack()
         {
-            if (_puzzleController.Selection != null || _currentStackIndex == _puzzle.Stacks.Count - 1) return;
+            if (
+                _puzzleController.Selection != null
+                || _currentStackIndex == _puzzle.Stacks.Count - 1
+            )
+                return;
 
             Stack stack = null;
             for (int i = _currentStackIndex + 1; i < _puzzle.Stacks.Count; i++)
@@ -164,23 +209,30 @@ namespace Tofuwu.StackCats
                 }
             }
 
-            if (!stack) return;
+            if (!stack)
+                return;
 
-            _currentBlockIndex = _currentBlockIndex < stack.Blocks.Count ? _currentBlockIndex : stack.Blocks.Count - 1;
+            _currentBlockIndex =
+                _currentBlockIndex < stack.Blocks.Count
+                    ? _currentBlockIndex
+                    : stack.Blocks.Count - 1;
             if (IgnoreImmovableBlocks)
             {
                 int lowestIndex = GetLowestMovableBlockIndex(stack);
-                if (_currentBlockIndex < lowestIndex) _currentBlockIndex = lowestIndex;
+                if (_currentBlockIndex < lowestIndex)
+                    _currentBlockIndex = lowestIndex;
             }
             Block block = stack.Blocks[_currentBlockIndex];
 
             _puzzleController.FocusAt(stack, block);
-            if (MarkerFocusSound) GameManager.Instance.Audio.PlaySoundEffect(MarkerFocusSound);
+            if (MarkerFocusSound)
+                GameManager.Instance.Audio.PlaySoundEffect(MarkerFocusSound);
         }
 
         private void FocusPreviousBlock()
         {
-            if (_puzzleController.Selection != null) return;
+            if (_puzzleController.Selection != null)
+                return;
 
             if (_currentBlockIndex > 0)
             {
@@ -193,13 +245,15 @@ namespace Tofuwu.StackCats
                     return;
                 }
                 _puzzleController.FocusAt(stack, block);
-                if (MarkerFocusSound) GameManager.Instance.Audio.PlaySoundEffect(MarkerFocusSound);
+                if (MarkerFocusSound)
+                    GameManager.Instance.Audio.PlaySoundEffect(MarkerFocusSound);
             }
         }
 
         private void FocusNextBlock()
         {
-            if (_puzzleController.Selection != null) return;
+            if (_puzzleController.Selection != null)
+                return;
 
             if (_currentBlockIndex < _puzzle.Stacks[_currentStackIndex].Blocks.Count - 1)
             {
@@ -212,7 +266,8 @@ namespace Tofuwu.StackCats
                     return;
                 }
                 _puzzleController.FocusAt(stack, block);
-                if (MarkerFocusSound) GameManager.Instance.Audio.PlaySoundEffect(MarkerFocusSound);
+                if (MarkerFocusSound)
+                    GameManager.Instance.Audio.PlaySoundEffect(MarkerFocusSound);
             }
         }
 

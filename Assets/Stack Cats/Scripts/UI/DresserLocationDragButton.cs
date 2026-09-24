@@ -2,11 +2,17 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
-    public delegate void BeginDragDresserLocation(PointerEventData eventData, int dresserPlacementIndex);
+    public delegate void BeginDragDresserLocation(
+        PointerEventData eventData,
+        int dresserPlacementIndex
+    );
     public delegate void DragDresserLocation(PointerEventData eventData, int dresserPlacementIndex);
-    public delegate void EndDragDresserLocation(PointerEventData eventData, int dresserPlacementIndex);
+    public delegate void EndDragDresserLocation(
+        PointerEventData eventData,
+        int dresserPlacementIndex
+    );
     public delegate void ClickDresserLocation(int dresserPlacementIndex);
 
     [RequireComponent(typeof(RectTransform))]
@@ -57,22 +63,26 @@ namespace Tofuwu.StackCats.UI
 
         private void OnBeginDrag(PointerEventData eventData)
         {
-            if (onBeginDragDresserLocation != null) onBeginDragDresserLocation(eventData, DresserLocationIndex);
+            if (onBeginDragDresserLocation != null)
+                onBeginDragDresserLocation(eventData, DresserLocationIndex);
         }
 
         private void OnDrag(PointerEventData eventData)
         {
-            if (onDragDresserLocation != null) onDragDresserLocation(eventData, DresserLocationIndex);
+            if (onDragDresserLocation != null)
+                onDragDresserLocation(eventData, DresserLocationIndex);
         }
 
         private void OnEndDrag(PointerEventData eventData)
         {
-            if (onEndDragDresserLocation != null) onEndDragDresserLocation(eventData, DresserLocationIndex);
+            if (onEndDragDresserLocation != null)
+                onEndDragDresserLocation(eventData, DresserLocationIndex);
         }
 
         private void OnClick()
         {
-            if (onClickDresserLocation != null) onClickDresserLocation(DresserLocationIndex);
+            if (onClickDresserLocation != null)
+                onClickDresserLocation(DresserLocationIndex);
         }
     }
 }

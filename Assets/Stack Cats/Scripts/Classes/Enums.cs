@@ -1,4 +1,4 @@
-﻿namespace Tofuwu.StackCats
+﻿namespace RockhopperGames.StackCats
 {
     public enum Currency
     {
@@ -8,7 +8,7 @@
         JungleGem,
         CityGem,
         DesertGem,
-        GalaxyGem
+        GalaxyGem,
     }
 
     public enum Direction
@@ -16,14 +16,14 @@
         Up,
         Right,
         Down,
-        Left
+        Left,
     }
 
     public enum Rarity
     {
         Common,
         Uncommon,
-        Rare
+        Rare,
     }
 
     public enum TimeOfDay
@@ -31,7 +31,7 @@
         Night,
         Morning,
         Day,
-        Evening
+        Evening,
     }
 
     public enum PuzzleAreaType
@@ -40,7 +40,7 @@
         Jungle,
         Desert,
         Night,
-        Galaxy
+        Galaxy,
     }
 
     public enum PuzzleMode
@@ -48,7 +48,7 @@
         Story,
         Challenge,
         Endless,
-        Daily
+        Daily,
     }
 
     public enum ChallengeRunDifficulty
@@ -57,6 +57,6 @@
         Easy,
         Medium,
         Hard,
-        VeryHard
+        VeryHard,
     }
 }

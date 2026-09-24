@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     [Serializable]
     public class DemoMove
@@ -32,7 +32,7 @@ namespace Tofuwu.StackCats
             Moving,
             EndingMove,
             Complete,
-            Restarting
+            Restarting,
         }
 
         public event ShowingPuzzle onShowingPuzzle;
@@ -50,6 +50,7 @@ namespace Tofuwu.StackCats
         public float MoveDuration = 0.5f;
         public float EndMoveDuration = 0.5f;
         public float CompletePuzzleDuration = 1.0f;
+
         [TextArea]
         public string PuzzleJsonData;
         public List<DemoMove> DemoMoves = new List<DemoMove>();
@@ -122,7 +123,8 @@ namespace Tofuwu.StackCats
             PuzzleLoader.LoadPuzzle(PuzzleJsonData, PuzzleArea, false, false, false);
             _demoMovesRemaining = new Queue<DemoMove>(DemoMoves);
 
-            if (onShowingPuzzle != null) onShowingPuzzle();
+            if (onShowingPuzzle != null)
+                onShowingPuzzle();
             ChangeDemoState(DemoState.ShowingPuzzle);
         }
 
@@ -136,14 +138,16 @@ namespace Tofuwu.StackCats
 
             DemoMove currentDemoMove = _demoMovesRemaining.Peek();
             HoverBlocks(currentDemoMove);
-            if (onHoveringBlocks != null) onHoveringBlocks(_dragPositioner.DragPosition);
+            if (onHoveringBlocks != null)
+                onHoveringBlocks(_dragPositioner.DragPosition);
             ChangeDemoState(DemoState.ReadyingMove);
         }
 
         private void BeginMove()
         {
             SelectBlocks(_demoMovesRemaining.Peek());
-            if (onSelectedBlocks != null) onSelectedBlocks();
+            if (onSelectedBlocks != null)
+                onSelectedBlocks();
             ChangeDemoState(DemoState.BeginningMove);
         }
 
@@ -151,16 +155,23 @@ namespace Tofuwu.StackCats
         {
             DemoMove demoMove = _demoMovesRemaining.Peek();
             Stack toStack = PuzzleLoader.Puzzle.Stacks[demoMove.ToStackIndex];
-            Vector3 finalDragPosition = toStack.GetBlockLocalPosition(demoMove.ToBlockIndex) + Vector3.up * 0.5f;
+            Vector3 finalDragPosition =
+                toStack.GetBlockLocalPosition(demoMove.ToBlockIndex) + Vector3.up * 0.5f;
             finalDragPosition.Scale(toStack.transform.lossyScale);
             finalDragPosition = finalDragPosition + toStack.transform.position + Vector3.up * 0.1f;
             LeanTween
                 .value(0.0f, 1.0f, MoveDuration)
                 .setEase(LeanTweenType.easeInSine)
-                .setOnUpdate((float stateDelta) =>
-                {
-                    UpdateDragPosition(stateDelta, _dragPositioner.DragPosition, finalDragPosition);
-                });
+                .setOnUpdate(
+                    (float stateDelta) =>
+                    {
+                        UpdateDragPosition(
+                            stateDelta,
+                            _dragPositioner.DragPosition,
+                            finalDragPosition
+                        );
+                    }
+                );
             ChangeDemoState(DemoState.Moving);
         }
 
@@ -169,7 +180,8 @@ namespace Tofuwu.StackCats
             DemoMove demoMove = _demoMovesRemaining.Peek();
 
             _dragPositioner.ReleaseBlocks();
-            if (onReleasedBlocks != null) onReleasedBlocks();
+            if (onReleasedBlocks != null)
+                onReleasedBlocks();
 
             Stack fromStack = PuzzleLoader.Puzzle.Stacks[demoMove.FromStackIndex];
             Block fromBlock = fromStack.Blocks[demoMove.FromBlockIndex];
@@ -182,7 +194,8 @@ namespace Tofuwu.StackCats
 
         private void CompleteDemo()
         {
-            if (onDemoComplete != null) onDemoComplete();
+            if (onDemoComplete != null)
+                onDemoComplete();
             ChangeDemoState(DemoState.Complete);
         }
 
@@ -208,7 +221,8 @@ namespace Tofuwu.StackCats
         private void UpdateDragPosition(float stateDelta, Vector3 fromPosition, Vector3 toPosition)
         {
             _dragPositioner.DragPosition = fromPosition + (toPosition - fromPosition) * stateDelta;
-            if (onDraggingBlocks != null) onDraggingBlocks(_dragPositioner.DragPosition);
+            if (onDraggingBlocks != null)
+                onDraggingBlocks(_dragPositioner.DragPosition);
         }
 
         private void ChangeDemoState(DemoState demoState)

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     [CreateAssetMenu(fileName = "Story Puzzle", menuName = "Stack Cats/Story Puzzle")]
     public class StoryPuzzle : ScriptableObject, IIdentifiable
@@ -19,7 +19,10 @@ namespace Tofuwu.StackCats
 
         public string GetId()
         {
-            if (string.IsNullOrEmpty(_id)) { _id = Guid.NewGuid().ToString(); }
+            if (string.IsNullOrEmpty(_id))
+            {
+                _id = Guid.NewGuid().ToString();
+            }
 
             return _id;
         }

@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class CatInfoOverlayScreen : OverlayScreen
     {
@@ -19,7 +19,11 @@ namespace Tofuwu.StackCats.UI
         public float RotationSensitivity = 0.5f;
         public bool Rotate;
 
-        public Cat Cat { get { return _cat; } set { SetCat(value); } }
+        public Cat Cat
+        {
+            get { return _cat; }
+            set { SetCat(value); }
+        }
 
         private HomeManager _homeManager;
         private Cat _cat;
@@ -72,8 +76,11 @@ namespace Tofuwu.StackCats.UI
 
             if (_pointerDownAt != null)
             {
-                float catRotation = (Input.mousePosition.x - _pointerDownAt.Value.x) * RotationSensitivity;
-                CatAvatar.transform.localRotation = Quaternion.Euler(_lastRotation + CatAvatar.transform.up * -catRotation);
+                float catRotation =
+                    (Input.mousePosition.x - _pointerDownAt.Value.x) * RotationSensitivity;
+                CatAvatar.transform.localRotation = Quaternion.Euler(
+                    _lastRotation + CatAvatar.transform.up * -catRotation
+                );
             }
 
             if (Rotate)
@@ -81,22 +88,25 @@ namespace Tofuwu.StackCats.UI
                 CatAvatar.transform.Rotate(Vector3.up, 45.0f * Time.deltaTime);
             }
 
-            if (Input.GetButtonDown("Cancel")) Dismiss();
+            if (Input.GetButtonDown("Cancel"))
+                Dismiss();
         }
 
         private void SetCat(Cat value)
         {
-            if (_cat == value) return;
+            if (_cat == value)
+                return;
 
             _cat = value;
             _isBonded = GameManager.Instance.Cats.IsBonded(_cat);
-            bool canInviteCat = _homeManager.CanInviteCats || _homeManager.InvitedCats.Contains(_cat);
+            bool canInviteCat =
+                _homeManager.CanInviteCats || _homeManager.InvitedCats.Contains(_cat);
             NameText.text = _isBonded ? _cat.Name : "???";
             PersonalityText.text = "Personality: " + _cat.Personality.ToCatPersonalityString();
 
             PortraitImage.sprite = _cat.Portrait;
             PortraitImage.color = _isBonded ? Color.white : NotBondedColor;
-            
+
             InviteHomeRectTransform.gameObject.SetActive(_isBonded);
             InviteHomeToggle.onValueChanged.RemoveListener(OnToggleInviteCat);
             InviteHomeToggle.isOn = _homeManager.InvitedCats.Contains(_cat);

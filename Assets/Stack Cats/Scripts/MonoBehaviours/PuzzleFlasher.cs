@@ -1,4 +1,4 @@
-﻿using Tofuwu.StackCats;
+﻿using RockhopperGames.StackCats;
 using UnityEngine;
 
 public class PuzzleFlasher : MonoBehaviour
@@ -22,14 +22,16 @@ public class PuzzleFlasher : MonoBehaviour
 
     protected void Update()
     {
-        if(!_isComplete && Time.time >= _nextFlashAt)
+        if (!_isComplete && Time.time >= _nextFlashAt)
         {
             _isComplete = true;
-            foreach(Stack stack in _puzzle.Stacks)
+            foreach (Stack stack in _puzzle.Stacks)
             {
-                if(_nextFlashIndex < stack.Blocks.Count)
+                if (_nextFlashIndex < stack.Blocks.Count)
                 {
-                    stack.Blocks[_nextFlashIndex].FlashBlock(FlashColor, FlashDuration, LeanTweenType.easeInSine);
+                    stack
+                        .Blocks[_nextFlashIndex]
+                        .FlashBlock(FlashColor, FlashDuration, LeanTweenType.easeInSine);
                     _isComplete = false;
                 }
             }

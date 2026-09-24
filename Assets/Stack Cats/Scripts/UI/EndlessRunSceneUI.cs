@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using RockhopperGames.StackCats.Models;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using System;
-using Tofuwu.StackCats.Models;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class EndlessRunSceneUI : MonoBehaviour
     {
@@ -100,19 +100,25 @@ namespace Tofuwu.StackCats.UI
 
             LeanTween.cancel(NumUndoesRemainingText.gameObject);
             NumUndoesRemainingText.transform.localScale = Vector2.one;
-            LeanTween.scale(NumUndoesRemainingText.gameObject, Vector2.one * 1.25f, 0.5f).setEase(LeanTweenType.punch);
+            LeanTween
+                .scale(NumUndoesRemainingText.gameObject, Vector2.one * 1.25f, 0.5f)
+                .setEase(LeanTweenType.punch);
 
-            if (numUndosRemaining == 0) UndoButton.interactable = false;
+            if (numUndosRemaining == 0)
+                UndoButton.interactable = false;
         }
 
         private void UpdateMovesRemaining(int movesRemaining)
         {
             MovesRemainingText.text = movesRemaining.ToString();
-            MovesRemainingText.color = movesRemaining > 3 ? Color.white : MovesRemainingCriticalColor;
+            MovesRemainingText.color =
+                movesRemaining > 3 ? Color.white : MovesRemainingCriticalColor;
 
             LeanTween.cancel(MovesRemainingText.gameObject);
             MovesRemainingText.transform.localScale = Vector2.one;
-            LeanTween.scale(MovesRemainingText.gameObject, Vector2.one * 1.25f, 0.5f).setEase(LeanTweenType.punch);
+            LeanTween
+                .scale(MovesRemainingText.gameObject, Vector2.one * 1.25f, 0.5f)
+                .setEase(LeanTweenType.punch);
         }
 
         private void OnEndlessRunSceneStateChanged(EndlessRunSceneState state)
@@ -126,13 +132,19 @@ namespace Tofuwu.StackCats.UI
                     EndlessOverlayScreenManager.EnqueueScreen(EndlessStartOverlayScreen);
                     break;
                 case EndlessRunSceneState.PlayingPuzzle:
-                    LeanTween.alphaCanvas(EndlessRunHeaderCanvasGroup, 0.0f, 0.5f).setEase(LeanTweenType.easeOutSine);
+                    LeanTween
+                        .alphaCanvas(EndlessRunHeaderCanvasGroup, 0.0f, 0.5f)
+                        .setEase(LeanTweenType.easeOutSine);
                     break;
                 case EndlessRunSceneState.ViewingProgress:
-                    LeanTween.alphaCanvas(EndlessRunHeaderCanvasGroup, 1.0f, 0.5f).setEase(LeanTweenType.easeOutSine);
+                    LeanTween
+                        .alphaCanvas(EndlessRunHeaderCanvasGroup, 1.0f, 0.5f)
+                        .setEase(LeanTweenType.easeOutSine);
                     UpdatePuzzleAreaUI();
                     EndlessOverlayScreenManager.EnqueueScreen(EndlessProgressOverlayScreen);
-                    UpdateNumUndosRemaining(EndlessRunScene.CurrentEndlessRun.CurrentPuzzle.UndosRemaining);
+                    UpdateNumUndosRemaining(
+                        EndlessRunScene.CurrentEndlessRun.CurrentPuzzle.UndosRemaining
+                    );
                     break;
                 case EndlessRunSceneState.RunCompleted:
                     UpdatePuzzleAreaUI();
@@ -148,23 +160,29 @@ namespace Tofuwu.StackCats.UI
             PuzzleArea puzzleArea = EndlessRunScene.PuzzleArea;
             Color uiColor = puzzleArea.PuzzleTheme.UIColor;
             FooterBackgroundImage.color = uiColor;
-            foreach (Button button in UIButtons) button.image.color = uiColor;
-            foreach (Image image in UIImages) image.color = uiColor;
+            foreach (Button button in UIButtons)
+                button.image.color = uiColor;
+            foreach (Image image in UIImages)
+                image.color = uiColor;
         }
 
         private void OnPuzzleBeginLoad(Puzzle puzzle, bool wasRestarted, bool isUndo)
         {
             BackButton.interactable = false;
             PuzzleCameraAdjuster.FitCameraAndUIToPuzzleAspect(puzzle);
-            if (!isUndo && puzzle.IsSpecial) MainOverlayScreenManager.EnqueueScreen(LuckyPuzzleOverlayScreen);
-            UpdateMovesRemaining(EndlessRunScene.CurrentEndlessRun.CurrentPuzzle.MaxMoves - puzzle.NumMovesMade);
+            if (!isUndo && puzzle.IsSpecial)
+                MainOverlayScreenManager.EnqueueScreen(LuckyPuzzleOverlayScreen);
+            UpdateMovesRemaining(
+                EndlessRunScene.CurrentEndlessRun.CurrentPuzzle.MaxMoves - puzzle.NumMovesMade
+            );
             UpdateNumUndosRemaining(EndlessRunScene.CurrentEndlessRun.CurrentPuzzle.UndosRemaining);
         }
 
         private void OnPuzzleLoaded(Puzzle puzzle)
         {
             BackButton.interactable = true;
-            UndoButton.interactable = EndlessRunScene.CurrentEndlessRun.CurrentPuzzle.UndosRemaining > 0;
+            UndoButton.interactable =
+                EndlessRunScene.CurrentEndlessRun.CurrentPuzzle.UndosRemaining > 0;
             puzzle.onCurrencyFound += OnCurrencyFound;
         }
 
@@ -197,7 +215,10 @@ namespace Tofuwu.StackCats.UI
             UndoButton.interactable = false;
         }
 
-        private void OnEndlessPuzzleSceneCompleted(Puzzle puzzle, PuzzleCompletionType puzzleCompletionType)
+        private void OnEndlessPuzzleSceneCompleted(
+            Puzzle puzzle,
+            PuzzleCompletionType puzzleCompletionType
+        )
         {
             MovesRemainingRectTransform.gameObject.SetActive(false);
 
@@ -208,7 +229,10 @@ namespace Tofuwu.StackCats.UI
 
                 foreach (Cat cat in newCatsSeen)
                 {
-                    NewCatOverlayScreen newCatOverlayScreen = Instantiate(NewCatOverlayScreenPrefab, MainOverlayScreenManager.transform);
+                    NewCatOverlayScreen newCatOverlayScreen = Instantiate(
+                        NewCatOverlayScreenPrefab,
+                        MainOverlayScreenManager.transform
+                    );
                     newCatOverlayScreen.Cat = cat;
                     MainOverlayScreenManager.EnqueueScreen(newCatOverlayScreen);
                 }
@@ -252,7 +276,8 @@ namespace Tofuwu.StackCats.UI
 
         private void OnCurrencyFound(CatBlock source, Currency currency, int amount)
         {
-            CurrencyFadeInfo currencyFadeInfo = (CurrencyFadeInfo)CurrencyFadeInfoObjectPooler.BorrowInstance();
+            CurrencyFadeInfo currencyFadeInfo = (CurrencyFadeInfo)
+                CurrencyFadeInfoObjectPooler.BorrowInstance();
             currencyFadeInfo.Currency = currency;
             currencyFadeInfo.Amount = amount;
             currencyFadeInfo.transform.position = source.transform.position + Vector3.up * 0.5f;

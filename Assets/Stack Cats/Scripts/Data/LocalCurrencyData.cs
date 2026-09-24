@@ -1,13 +1,14 @@
 ﻿using System;
 
-namespace Tofuwu.StackCats.Data
+namespace RockhopperGames.StackCats.Data
 {
     [Serializable]
     public class LocalCurrencyData : LocalData<LocalCurrencyData>, ICurrencyData
     {
         private readonly int[] _currencyHeld;
 
-        public LocalCurrencyData(string dataPath) : base(dataPath)
+        public LocalCurrencyData(string dataPath)
+            : base(dataPath)
         {
             _currencyHeld = new int[7];
             Save();
@@ -24,7 +25,8 @@ namespace Tofuwu.StackCats.Data
 
             if (-amount > currencyHeld)
             {
-                if (!allowRemainder) return false;
+                if (!allowRemainder)
+                    return false;
 
                 amount = -currencyHeld;
             }

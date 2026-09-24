@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     [RequireComponent(typeof(PuzzleBlock))]
     public class WildBlock : BlockComponent

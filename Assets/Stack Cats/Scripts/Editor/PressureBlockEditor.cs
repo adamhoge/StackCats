@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using RockhopperGames.StackCats;
 using UnityEditor;
-using Tofuwu.StackCats;
+using UnityEngine;
 
 [CustomEditor(typeof(PressureBlock))]
 public class PressureBlockEditor : Editor
@@ -11,6 +11,9 @@ public class PressureBlockEditor : Editor
 
         PressureBlock pressureBlock = (PressureBlock)target;
 
-        pressureBlock.BreakingPoint = EditorGUILayout.IntField("Breaking Point:", pressureBlock.BreakingPoint);
+        pressureBlock.BreakingPoint = EditorGUILayout.IntField(
+            "Breaking Point:",
+            pressureBlock.BreakingPoint
+        );
     }
 }

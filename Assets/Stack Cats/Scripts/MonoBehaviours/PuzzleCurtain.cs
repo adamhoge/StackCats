@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     /// <summary>
     /// Used in a puzzle to overlap the area with which the player has to work.
@@ -36,12 +36,20 @@ namespace Tofuwu.StackCats
         /// <summary>
         /// The current block height of the curtain.
         /// </summary>
-        public int Height { get { return _height; } set { SetHeight(value, false); } }
+        public int Height
+        {
+            get { return _height; }
+            set { SetHeight(value, false); }
+        }
 
         /// <summary>
         /// Set whether or not the curtain is shaking
         /// </summary>
-        public bool IsShaking { get { return _isShaking; } set { SetIsShaking(value); } }
+        public bool IsShaking
+        {
+            get { return _isShaking; }
+            set { SetIsShaking(value); }
+        }
 
         private int _height;
         private bool _isShaking;
@@ -100,7 +108,8 @@ namespace Tofuwu.StackCats
         {
             List<Block> blocks = new List<Block>();
 
-            if (!Puzzle) return blocks;
+            if (!Puzzle)
+                return blocks;
 
             foreach (Stack stack in Puzzle.Stacks)
             {
@@ -127,12 +136,18 @@ namespace Tofuwu.StackCats
 
             float curtainScaleY = _height + _paddingTop;
             CurtainSprite.size = new Vector2(CurtainSprite.size.x, curtainScaleY);
-            if (_curtainDropTweenId.HasValue) LeanTween.cancel(_curtainDropTweenId.Value);
+            if (_curtainDropTweenId.HasValue)
+                LeanTween.cancel(_curtainDropTweenId.Value);
 
             if (isAnimated)
             {
                 CurtainSprite.transform.Translate(Vector2.up * moveAmount);
-                _curtainDropTweenId = LeanTween.moveLocalY(CurtainSprite.gameObject, MaxHeight + _paddingTop, CurtainDropDuration)
+                _curtainDropTweenId = LeanTween
+                    .moveLocalY(
+                        CurtainSprite.gameObject,
+                        MaxHeight + _paddingTop,
+                        CurtainDropDuration
+                    )
                     .setEase(LeanTweenType.easeOutBack)
                     .id;
             }
@@ -151,13 +166,15 @@ namespace Tofuwu.StackCats
 
         private void SetIsShaking(bool value)
         {
-            if (value == _isShaking) return;
+            if (value == _isShaking)
+                return;
 
             _isShaking = value;
 
             if (_isShaking)
             {
-                _curtainShakeTweenId = LeanTween.moveLocalX(CurtainSprite.gameObject, CurtainShakeAmount, CurtainShakeDuration)
+                _curtainShakeTweenId = LeanTween
+                    .moveLocalX(CurtainSprite.gameObject, CurtainShakeAmount, CurtainShakeDuration)
                     .setLoopPingPong()
                     .id;
             }
@@ -165,7 +182,11 @@ namespace Tofuwu.StackCats
             {
                 LeanTween.cancel(_curtainShakeTweenId.Value);
                 var curtainSpritePosition = CurtainSprite.transform.position;
-                CurtainSprite.transform.position = new Vector3(0.0f, curtainSpritePosition.y, curtainSpritePosition.z);
+                CurtainSprite.transform.position = new Vector3(
+                    0.0f,
+                    curtainSpritePosition.y,
+                    curtainSpritePosition.z
+                );
             }
         }
     }

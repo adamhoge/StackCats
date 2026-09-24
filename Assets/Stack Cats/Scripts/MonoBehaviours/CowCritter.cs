@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class CowCritter : MonoBehaviour
     {
@@ -9,7 +9,7 @@ namespace Tofuwu.StackCats
             None,
             Standing,
             Moving,
-            Grazing
+            Grazing,
         }
 
         public GameObject RootGameObject;
@@ -26,7 +26,7 @@ namespace Tofuwu.StackCats
         public float GrazeFrequency = 0.25f;
         public float GrazeDuration = 2.0f;
         public float MoveDistance = 0.2f;
-        public int MaxMoves;                
+        public int MaxMoves;
 
         private State _state;
         private float _stateTimeElapsed;
@@ -63,7 +63,7 @@ namespace Tofuwu.StackCats
                     break;
             }
 
-            if(_stateTimeElapsed >= _animationDuration)
+            if (_stateTimeElapsed >= _animationDuration)
             {
                 DoSomethingElse();
             }
@@ -71,7 +71,8 @@ namespace Tofuwu.StackCats
 
         private void ChangeState(State state)
         {
-            if (_state == state) return;
+            if (_state == state)
+                return;
 
             _state = state;
             _stateTimeElapsed = 0.0f;
@@ -124,8 +125,10 @@ namespace Tofuwu.StackCats
             float leftMovementArea = _rootPosition + MovementArea / 2;
 
             bool moveRight = Random.value >= 0.5f;
-            if (moveRight && rightMovementArea < MoveDistance) moveRight = false;
-            if (!moveRight && leftMovementArea < MoveDistance) moveRight = true;
+            if (moveRight && rightMovementArea < MoveDistance)
+                moveRight = false;
+            if (!moveRight && leftMovementArea < MoveDistance)
+                moveRight = true;
 
             int maxMoves;
             if (moveRight)
@@ -139,25 +142,60 @@ namespace Tofuwu.StackCats
                 RootGameObject.transform.localRotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
             }
 
-            if (maxMoves > MaxMoves) maxMoves = MaxMoves;
+            if (maxMoves > MaxMoves)
+                maxMoves = MaxMoves;
             int numMoves = Random.Range(1, maxMoves + 1);
             for (int i = 0; i < numMoves; i++)
             {
-                float moveRootPosition = _rootPosition + (i + 1) * MoveDistance * (moveRight ? 1 : -1);
+                float moveRootPosition =
+                    _rootPosition + (i + 1) * MoveDistance * (moveRight ? 1 : -1);
                 float baseDelay = i * 0.5f;
-                LeanTween.moveLocalX(RootGameObject, moveRootPosition, 0.5f).setEase(LeanTweenType.easeOutSine).setDelay(baseDelay);
-                LeanTween.moveLocalY(RootGameObject, 0.15f, 0.25f).setEase(LeanTweenType.easeOutSine).setDelay(baseDelay);
-                LeanTween.moveLocalY(RootGameObject, 0.0f, 0.25f).setEase(LeanTweenType.easeInSine).setDelay(baseDelay + 0.25f);
+                LeanTween
+                    .moveLocalX(RootGameObject, moveRootPosition, 0.5f)
+                    .setEase(LeanTweenType.easeOutSine)
+                    .setDelay(baseDelay);
+                LeanTween
+                    .moveLocalY(RootGameObject, 0.15f, 0.25f)
+                    .setEase(LeanTweenType.easeOutSine)
+                    .setDelay(baseDelay);
+                LeanTween
+                    .moveLocalY(RootGameObject, 0.0f, 0.25f)
+                    .setEase(LeanTweenType.easeInSine)
+                    .setDelay(baseDelay + 0.25f);
 
                 float zRotation = i % 2 == 0 ? 25.0f : -25.0f;
-                LeanTween.rotateZ(LegFrontRight, zRotation, 0.25f).setEase(LeanTweenType.easeOutSine).setDelay(baseDelay);
-                LeanTween.rotateZ(LegBackRight, -zRotation, 0.25f).setEase(LeanTweenType.easeOutSine).setDelay(baseDelay);
-                LeanTween.rotateZ(LegFrontLeft, -zRotation, 0.25f).setEase(LeanTweenType.easeOutSine).setDelay(baseDelay);
-                LeanTween.rotateZ(LegBackLeft, zRotation, 0.25f).setEase(LeanTweenType.easeOutSine).setDelay(baseDelay);
-                LeanTween.rotateZ(LegFrontRight, 0.0f, 0.25f).setEase(LeanTweenType.easeInSine).setDelay(baseDelay + 0.25f);
-                LeanTween.rotateZ(LegBackRight, 0.0f, 0.25f).setEase(LeanTweenType.easeInSine).setDelay(baseDelay + 0.25f);
-                LeanTween.rotateZ(LegFrontLeft, 0.0f, 0.25f).setEase(LeanTweenType.easeInSine).setDelay(baseDelay + 0.25f);
-                LeanTween.rotateZ(LegBackLeft, 0.0f, 0.25f).setEase(LeanTweenType.easeInSine).setDelay(baseDelay + 0.25f);
+                LeanTween
+                    .rotateZ(LegFrontRight, zRotation, 0.25f)
+                    .setEase(LeanTweenType.easeOutSine)
+                    .setDelay(baseDelay);
+                LeanTween
+                    .rotateZ(LegBackRight, -zRotation, 0.25f)
+                    .setEase(LeanTweenType.easeOutSine)
+                    .setDelay(baseDelay);
+                LeanTween
+                    .rotateZ(LegFrontLeft, -zRotation, 0.25f)
+                    .setEase(LeanTweenType.easeOutSine)
+                    .setDelay(baseDelay);
+                LeanTween
+                    .rotateZ(LegBackLeft, zRotation, 0.25f)
+                    .setEase(LeanTweenType.easeOutSine)
+                    .setDelay(baseDelay);
+                LeanTween
+                    .rotateZ(LegFrontRight, 0.0f, 0.25f)
+                    .setEase(LeanTweenType.easeInSine)
+                    .setDelay(baseDelay + 0.25f);
+                LeanTween
+                    .rotateZ(LegBackRight, 0.0f, 0.25f)
+                    .setEase(LeanTweenType.easeInSine)
+                    .setDelay(baseDelay + 0.25f);
+                LeanTween
+                    .rotateZ(LegFrontLeft, 0.0f, 0.25f)
+                    .setEase(LeanTweenType.easeInSine)
+                    .setDelay(baseDelay + 0.25f);
+                LeanTween
+                    .rotateZ(LegBackLeft, 0.0f, 0.25f)
+                    .setEase(LeanTweenType.easeInSine)
+                    .setDelay(baseDelay + 0.25f);
             }
 
             _rootPosition += numMoves * MoveDistance * (moveRight ? 1 : -1);
@@ -170,11 +208,24 @@ namespace Tofuwu.StackCats
             float beginGrazingDuration = GrazeDuration / 4.0f;
             float grazingDuration = GrazeDuration / 2.0f;
             float endGrazingDuration = GrazeDuration / 4.0f;
-            LeanTween.moveLocalX(HeadGameObject, HeadGrazingLocalPosition.x, beginGrazingDuration).setEase(LeanTweenType.easeOutSine);
-            LeanTween.moveLocalY(HeadGameObject, HeadGrazingLocalPosition.y, beginGrazingDuration).setEase(LeanTweenType.easeInSine);
-            LeanTween.moveLocalY(HeadGameObject, HeadGrazingLocalPosition.y + 0.05f, grazingDuration / 8).setLoopPingPong(4).setDelay(beginGrazingDuration);
-            LeanTween.moveLocalX(HeadGameObject, HeadDefaultLocalPosition.x, endGrazingDuration).setEase(LeanTweenType.easeInSine).setDelay(beginGrazingDuration + grazingDuration);
-            LeanTween.moveLocalY(HeadGameObject, HeadDefaultLocalPosition.y, endGrazingDuration).setEase(LeanTweenType.easeOutSine).setDelay(beginGrazingDuration + grazingDuration);
+            LeanTween
+                .moveLocalX(HeadGameObject, HeadGrazingLocalPosition.x, beginGrazingDuration)
+                .setEase(LeanTweenType.easeOutSine);
+            LeanTween
+                .moveLocalY(HeadGameObject, HeadGrazingLocalPosition.y, beginGrazingDuration)
+                .setEase(LeanTweenType.easeInSine);
+            LeanTween
+                .moveLocalY(HeadGameObject, HeadGrazingLocalPosition.y + 0.05f, grazingDuration / 8)
+                .setLoopPingPong(4)
+                .setDelay(beginGrazingDuration);
+            LeanTween
+                .moveLocalX(HeadGameObject, HeadDefaultLocalPosition.x, endGrazingDuration)
+                .setEase(LeanTweenType.easeInSine)
+                .setDelay(beginGrazingDuration + grazingDuration);
+            LeanTween
+                .moveLocalY(HeadGameObject, HeadDefaultLocalPosition.y, endGrazingDuration)
+                .setEase(LeanTweenType.easeOutSine)
+                .setDelay(beginGrazingDuration + grazingDuration);
             return GrazeDuration;
         }
     }

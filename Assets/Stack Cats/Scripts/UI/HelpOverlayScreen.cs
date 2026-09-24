@@ -1,6 +1,4 @@
-﻿namespace Tofuwu.StackCats.UI
+﻿namespace RockhopperGames.StackCats.UI
 {
-    public class HelpOverlayScreen : OverlayScreen
-    {
-    }
+    public class HelpOverlayScreen : OverlayScreen { }
 }

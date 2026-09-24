@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public delegate void BlockMoved(Puzzle puzzle, Stack source, Block block, Stack destination);
     public delegate void AfterBlockMoved(

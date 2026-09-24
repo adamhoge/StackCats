@@ -1058,15 +1058,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3619434508632442574, guid: 82153da76a18d5644844e3346ee95ece, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3619434508632442574, guid: 82153da76a18d5644844e3346ee95ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3619434508632442574, guid: 82153da76a18d5644844e3346ee95ece, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 874090835}
     - target: {fileID: 3619434508632442574, guid: 82153da76a18d5644844e3346ee95ece, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
+      value: EnqueueScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 3619434508632442574, guid: 82153da76a18d5644844e3346ee95ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: RockhopperGames.StackCats.UI.OverlayScreenManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3619434508632442574, guid: 82153da76a18d5644844e3346ee95ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: RockhopperGames.StackCats.UI.OverlayScreen, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4625395057545896287, guid: 82153da76a18d5644844e3346ee95ece, type: 3}
       propertyPath: m_Type
@@ -2212,7 +2224,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3619434508632442574, guid: 82153da76a18d5644844e3346ee95ece, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Tofuwu.StackCats.UI.OverlayScreenManager, Assembly-CSharp
+      value: RockhopperGames.StackCats.UI.OverlayScreenManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3619434508632442574, guid: 82153da76a18d5644844e3346ee95ece, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
@@ -2220,7 +2232,7 @@ PrefabInstance:
       objectReference: {fileID: 1454045470}
     - target: {fileID: 3619434508632442574, guid: 82153da76a18d5644844e3346ee95ece, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: Tofuwu.StackCats.UI.OverlayScreen, Assembly-CSharp
+      value: RockhopperGames.StackCats.UI.OverlayScreen, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4625395057545896287, guid: 82153da76a18d5644844e3346ee95ece, type: 3}
       propertyPath: m_Type
@@ -15347,7 +15359,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 51.05
+  m_fontSize: 47.6
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

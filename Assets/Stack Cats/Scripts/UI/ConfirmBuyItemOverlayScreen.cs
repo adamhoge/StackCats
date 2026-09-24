@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class ConfirmBuyItemOverlayScreen : OverlayScreen
     {
@@ -35,7 +35,7 @@ namespace Tofuwu.StackCats.UI
 
         private void ClearCurrencyAmounts()
         {
-            foreach(CurrencyAmountUI currencyAmount in _currencyAmounts)
+            foreach (CurrencyAmountUI currencyAmount in _currencyAmounts)
             {
                 Destroy(currencyAmount.gameObject);
             }
@@ -46,7 +46,10 @@ namespace Tofuwu.StackCats.UI
         {
             foreach (KeyValuePair<Currency, int> currencyAmount in ShopListing.Price)
             {
-                CurrencyAmountUI currencyAmountUI = Instantiate(CurrencyAmountPrefab, ShopListingPriceRectTransform);
+                CurrencyAmountUI currencyAmountUI = Instantiate(
+                    CurrencyAmountPrefab,
+                    ShopListingPriceRectTransform
+                );
                 currencyAmountUI.CurrencyType = currencyAmount.Key;
                 currencyAmountUI.Amount = currencyAmount.Value;
                 _currencyAmounts.Add(currencyAmountUI);

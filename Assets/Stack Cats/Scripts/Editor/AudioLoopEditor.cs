@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using RockhopperGames.StackCats;
 using UnityEditor;
-using Tofuwu.StackCats;
+using UnityEngine;
 
 [CustomEditor(typeof(AudioLoop))]
 public class AudioLoopEditor : Editor

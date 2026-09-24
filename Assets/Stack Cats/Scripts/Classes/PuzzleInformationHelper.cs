@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public static class PuzzleInformationHelper
     {
-        public static List<Stack> GetStacksByMovableCountRange(this Puzzle puzzle, int minCount = 1, int maxCount = 10)
+        public static List<Stack> GetStacksByMovableCountRange(
+            this Puzzle puzzle,
+            int minCount = 1,
+            int maxCount = 10
+        )
         {
             List<Stack> potentialStacks = new List<Stack>(puzzle.Stacks);
 
@@ -29,14 +33,18 @@ namespace Tofuwu.StackCats
             Block currentBlock = stack.TopBlock;
             while (currentBlock)
             {
-                if (!puzzle.IsMovable(stack, currentBlock)) return numMovableBlocks;
+                if (!puzzle.IsMovable(stack, currentBlock))
+                    return numMovableBlocks;
 
-                if (currentBlock.GetComponent<SumBlock>()) return numMovableBlocks;
+                if (currentBlock.GetComponent<SumBlock>())
+                    return numMovableBlocks;
 
                 Block blockBelow = currentBlock.GetBlockBelow();
-                if (!blockBelow) return numMovableBlocks + 1;
+                if (!blockBelow)
+                    return numMovableBlocks + 1;
 
-                if (blockBelow.GetComponent<CatBlock>()) return numMovableBlocks;
+                if (blockBelow.GetComponent<CatBlock>())
+                    return numMovableBlocks;
 
                 ++numMovableBlocks;
                 currentBlock = blockBelow;
@@ -49,14 +57,15 @@ namespace Tofuwu.StackCats
         {
             List<Type> blockTypes = new List<Type>();
 
-            foreach(Stack stack in puzzle.Stacks)
+            foreach (Stack stack in puzzle.Stacks)
             {
-                foreach(Block block in stack.Blocks)
+                foreach (Block block in stack.Blocks)
                 {
-                    foreach(BlockComponent blockComponent in block.GetComponents<BlockComponent>())
+                    foreach (BlockComponent blockComponent in block.GetComponents<BlockComponent>())
                     {
                         Type blockType = blockComponent.GetType();
-                        if (!blockTypes.Contains(blockType)){
+                        if (!blockTypes.Contains(blockType))
+                        {
                             blockTypes.Add(blockType);
                         }
                     }
@@ -65,12 +74,15 @@ namespace Tofuwu.StackCats
 
             return blockTypes;
         }
-        public static int GetBlockComponentCount<T>(this Puzzle puzzle) where T : BlockComponent
+
+        public static int GetBlockComponentCount<T>(this Puzzle puzzle)
+            where T : BlockComponent
         {
             return puzzle.Stacks.Sum(s => s.Blocks.Count(b => b.GetComponent<T>()));
         }
 
-        public static List<T> GetAllBlocksOfComponent<T>(this Puzzle puzzle) where T : BlockComponent
+        public static List<T> GetAllBlocksOfComponent<T>(this Puzzle puzzle)
+            where T : BlockComponent
         {
             List<T> blockComponents = new List<T>();
 
@@ -79,31 +91,37 @@ namespace Tofuwu.StackCats
                 foreach (Block block in stack.Blocks)
                 {
                     T blockComponent = block.GetComponent<T>();
-                    if (blockComponent) blockComponents.Add(blockComponent);
+                    if (blockComponent)
+                        blockComponents.Add(blockComponent);
                 }
             }
 
             return blockComponents;
         }
 
-        public static bool HasBlockComponent<T>(this Stack stack) where T : BlockComponent
+        public static bool HasBlockComponent<T>(this Stack stack)
+            where T : BlockComponent
         {
             return stack.Blocks.FirstOrDefault(b => b.GetComponent<T>());
         }
 
         public static bool IsImmovableInTopNumBlocks(this Stack stack, int numBlocks)
         {
-            if (stack.IsEmpty) return true;
+            if (stack.IsEmpty)
+                return true;
 
             Block currentBlock = stack.TopBlock;
-            if(currentBlock.GetComponents<BlockComponent>().Any(b => !b.IsMovable))
+            if (currentBlock.GetComponents<BlockComponent>().Any(b => !b.IsMovable))
             {
                 return true;
             }
             for (int i = 0; i < numBlocks - 1; i++)
             {
                 currentBlock = currentBlock.GetBlockBelow();
-                if (!currentBlock || currentBlock.GetComponents<BlockComponent>().Any(b => !b.IsMovable))
+                if (
+                    !currentBlock
+                    || currentBlock.GetComponents<BlockComponent>().Any(b => !b.IsMovable)
+                )
                 {
                     return true;
                 }

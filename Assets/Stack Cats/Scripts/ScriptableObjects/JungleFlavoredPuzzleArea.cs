@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
-    [CreateAssetMenu(fileName = "Jungle Flavored Puzzle Area", menuName = "Stack Cats/Jungle Flavored Puzzle Area")]
+    [CreateAssetMenu(
+        fileName = "Jungle Flavored Puzzle Area",
+        menuName = "Stack Cats/Jungle Flavored Puzzle Area"
+    )]
     public class JungleFlavoredPuzzleArea : PuzzleArea
     {
         public JigsawPuzzleObjectsCollection JigsawPuzzleObjects;

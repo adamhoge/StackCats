@@ -1,4 +1,4 @@
-using Tofuwu.StackCats.UI;
+using RockhopperGames.StackCats.UI;
 using UnityEditor;
 using UnityEngine;
 
@@ -11,10 +11,17 @@ public class MedalFlashEffectEditor : Editor
 
         MedalFlashEffectUI medalFlashEffect = (MedalFlashEffectUI)target;
 
-        medalFlashEffect.NumPuzzlesCompleted = EditorGUILayout.IntField("Num Puzzles Completed:", medalFlashEffect.NumPuzzlesCompleted);
-        if (medalFlashEffect.NumPuzzlesCompleted < 1) medalFlashEffect.NumPuzzlesCompleted = 1;
+        medalFlashEffect.NumPuzzlesCompleted = EditorGUILayout.IntField(
+            "Num Puzzles Completed:",
+            medalFlashEffect.NumPuzzlesCompleted
+        );
+        if (medalFlashEffect.NumPuzzlesCompleted < 1)
+            medalFlashEffect.NumPuzzlesCompleted = 1;
 
-        medalFlashEffect.HasOutline = EditorGUILayout.Toggle("Has Outline:", medalFlashEffect.HasOutline);
+        medalFlashEffect.HasOutline = EditorGUILayout.Toggle(
+            "Has Outline:",
+            medalFlashEffect.HasOutline
+        );
 
         if (GUILayout.Button("Flash"))
         {

@@ -1,7 +1,7 @@
-﻿using Tofuwu.StackCats.Models;
+﻿using RockhopperGames.StackCats.Models;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public enum EndlessRunSceneState
     {
@@ -9,7 +9,7 @@ namespace Tofuwu.StackCats
         NotStarted,
         PlayingPuzzle,
         ViewingProgress,
-        RunCompleted
+        RunCompleted,
     }
 
     public delegate void StateChanged(EndlessRunSceneState state);
@@ -32,7 +32,10 @@ namespace Tofuwu.StackCats
         /// <summary>
         /// The current endless run (if any).
         /// </summary>
-        public EndlessRunModel CurrentEndlessRun { get { return _currentEndlessRun; } }
+        public EndlessRunModel CurrentEndlessRun
+        {
+            get { return _currentEndlessRun; }
+        }
 
         private Puzzle _puzzle;
         private PuzzleUndoer _puzzleUndoer;
@@ -46,9 +49,19 @@ namespace Tofuwu.StackCats
                 if (_puzzleUndoer.UndoMove())
                 {
                     int undosRemaining = _currentEndlessRun.CurrentPuzzle.UndosRemaining - 1;
-                    _puzzleManager.UpdateCurrentEndlessPuzzle(_puzzleArea, PuzzleBuilder.GetPuzzleJsonData(_puzzle), _puzzle.NumMovesMade, CatsSeen, NewCatsSeen, undosRemaining);
+                    _puzzleManager.UpdateCurrentEndlessPuzzle(
+                        _puzzleArea,
+                        PuzzleBuilder.GetPuzzleJsonData(_puzzle),
+                        _puzzle.NumMovesMade,
+                        CatsSeen,
+                        NewCatsSeen,
+                        undosRemaining
+                    );
                     _currentEndlessRun = _puzzleManager.GetCurrentEndlessRun(_puzzleArea);
-                    if (onUndoUsed != null) { onUndoUsed(undosRemaining); }
+                    if (onUndoUsed != null)
+                    {
+                        onUndoUsed(undosRemaining);
+                    }
                 }
             }
         }
@@ -77,7 +90,8 @@ namespace Tofuwu.StackCats
 
         public void StopPlayingCurrentPuzzle()
         {
-            if (_state != EndlessRunSceneState.PlayingPuzzle) return;
+            if (_state != EndlessRunSceneState.PlayingPuzzle)
+                return;
 
             if (_currentEndlessRun.CurrentPuzzle == null)
             {
@@ -103,7 +117,10 @@ namespace Tofuwu.StackCats
         {
             if (_state == EndlessRunSceneState.ViewingProgress)
             {
-                _gameManager.ConfirmAction("Are you sure you want to end the current endless run?", ConfirmEndEndlessRun);
+                _gameManager.ConfirmAction(
+                    "Are you sure you want to end the current endless run?",
+                    ConfirmEndEndlessRun
+                );
             }
             else if (_state == EndlessRunSceneState.RunCompleted)
             {
@@ -189,7 +206,10 @@ namespace Tofuwu.StackCats
             TopBoundarySprite.transform.localPosition = Vector2.up * 6.25f;
         }
 
-        protected override void OnPuzzleCompleted(Puzzle puzzle, PuzzleCompletionType completionType)
+        protected override void OnPuzzleCompleted(
+            Puzzle puzzle,
+            PuzzleCompletionType completionType
+        )
         {
             base.OnPuzzleCompleted(puzzle, completionType);
 
@@ -198,14 +218,16 @@ namespace Tofuwu.StackCats
 
         private void ChangeState(EndlessRunSceneState state)
         {
-            if (_state == state) return;
+            if (_state == state)
+                return;
 
             switch (_state)
             {
                 case EndlessRunSceneState.PlayingPuzzle:
                     _puzzleLoader.UnloadPuzzle();
                     HidePuzzleBackdrop();
-                    if (onEndlessPuzzleUnloaded != null) onEndlessPuzzleUnloaded();
+                    if (onEndlessPuzzleUnloaded != null)
+                        onEndlessPuzzleUnloaded();
                     break;
                 default:
                     break;
@@ -218,12 +240,19 @@ namespace Tofuwu.StackCats
                 case EndlessRunSceneState.NotStarted:
                     break;
                 case EndlessRunSceneState.PlayingPuzzle:
-                    _puzzleLoader.LoadPuzzle(_currentEndlessRun.CurrentPuzzle.PuzzleCurrentStateJsonData, _puzzleArea);
+                    _puzzleLoader.LoadPuzzle(
+                        _currentEndlessRun.CurrentPuzzle.PuzzleCurrentStateJsonData,
+                        _puzzleArea
+                    );
                     _puzzleLoader.Puzzle.NumMovesMade = _currentEndlessRun.CurrentPuzzle.MovesMade;
                     ShowPuzzleBackdrop(_puzzleLoader.Puzzle);
                     CatsSeen = _currentEndlessRun.CurrentPuzzle.CatsSeen;
                     NewCatsSeen = _currentEndlessRun.CurrentPuzzle.NewCatsSeen;
-                    if (onEndlessPuzzleLoaded != null) onEndlessPuzzleLoaded(_puzzleLoader.Puzzle, _currentEndlessRun.CurrentPuzzle);
+                    if (onEndlessPuzzleLoaded != null)
+                        onEndlessPuzzleLoaded(
+                            _puzzleLoader.Puzzle,
+                            _currentEndlessRun.CurrentPuzzle
+                        );
                     break;
                 case EndlessRunSceneState.ViewingProgress:
                     GetCurrentEndlessRun();
@@ -234,12 +263,17 @@ namespace Tofuwu.StackCats
                     break;
             }
 
-            if (onStateChanged != null) onStateChanged(_state);
+            if (onStateChanged != null)
+                onStateChanged(_state);
         }
 
         private void CompletePuzzle(Puzzle puzzle, PuzzleCompletionType completionType)
         {
-            _puzzleManager.CompleteCurrentEndlessPuzzle(_puzzleArea, completionType, puzzle.NumMovesMade);
+            _puzzleManager.CompleteCurrentEndlessPuzzle(
+                _puzzleArea,
+                completionType,
+                puzzle.NumMovesMade
+            );
             GetCurrentEndlessRun();
 
             if (completionType == PuzzleCompletionType.PuzzleSolved)
@@ -259,13 +293,21 @@ namespace Tofuwu.StackCats
                 controller.enabled = false;
             }
 
-            if (onEndlessPuzzleCompleted != null) onEndlessPuzzleCompleted(puzzle, completionType);
+            if (onEndlessPuzzleCompleted != null)
+                onEndlessPuzzleCompleted(puzzle, completionType);
         }
 
         private void UpdateEndlessPuzzleData(Puzzle puzzle)
         {
             int undosRemaining = _currentEndlessRun.CurrentPuzzle.UndosRemaining;
-            _puzzleManager.UpdateCurrentEndlessPuzzle(_puzzleArea, PuzzleBuilder.GetPuzzleJsonData(puzzle), puzzle.NumMovesMade, CatsSeen, NewCatsSeen, undosRemaining);
+            _puzzleManager.UpdateCurrentEndlessPuzzle(
+                _puzzleArea,
+                PuzzleBuilder.GetPuzzleJsonData(puzzle),
+                puzzle.NumMovesMade,
+                CatsSeen,
+                NewCatsSeen,
+                undosRemaining
+            );
             EndlessPuzzleModel endlessPuzzle = _currentEndlessRun.CurrentPuzzle;
 
             int maxMoves = endlessPuzzle.MaxMoves;
@@ -276,7 +318,8 @@ namespace Tofuwu.StackCats
                     puzzle.CompletePuzzle(PuzzleCompletionType.PuzzleFailed);
                 }
 
-                if (onMovesRemainingChanged != null) onMovesRemainingChanged(endlessPuzzle.MaxMoves - puzzle.NumMovesMade);
+                if (onMovesRemainingChanged != null)
+                    onMovesRemainingChanged(endlessPuzzle.MaxMoves - puzzle.NumMovesMade);
             }
         }
 
@@ -299,7 +342,12 @@ namespace Tofuwu.StackCats
             _puzzle = puzzle;
         }
 
-        private void OnBlockMoveResolved(Puzzle puzzle, Stack source, Block block, Stack destination)
+        private void OnBlockMoveResolved(
+            Puzzle puzzle,
+            Stack source,
+            Block block,
+            Stack destination
+        )
         {
             if (!puzzle.IsCompleted)
             {

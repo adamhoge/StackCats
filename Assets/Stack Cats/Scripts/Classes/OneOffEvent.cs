@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine.Events;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     /// <summary>
     /// Stores events that should only be handled once.
@@ -28,7 +28,7 @@ namespace Tofuwu.StackCats
 
         public void ConsumeAll(UnityAction<T> action)
         {
-            while(_events.Count > 0)
+            while (_events.Count > 0)
             {
                 ConsumeFirst(action);
             }
@@ -36,7 +36,7 @@ namespace Tofuwu.StackCats
 
         public void ConsumeValue(T eventValue, UnityAction<T> action)
         {
-            for(int i = _events.Count - 1; i >= 0; i--)
+            for (int i = _events.Count - 1; i >= 0; i--)
             {
                 if (_events[i].Equals(eventValue))
                 {

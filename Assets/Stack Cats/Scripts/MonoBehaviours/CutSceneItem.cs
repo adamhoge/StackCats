@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using Tofuwu.StackCats.UI;
+using RockhopperGames.StackCats.UI;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public delegate void CutSceneItemEnded();
 
     public enum LeanTweenMotion
     {
         Scale,
-        MoveY
+        MoveY,
     }
 
     [Serializable]
@@ -46,30 +46,43 @@ namespace Tofuwu.StackCats
 
         public void EndCutSceneItem()
         {
-            if (onCutSceneItemEnded != null) onCutSceneItemEnded();
+            if (onCutSceneItemEnded != null)
+                onCutSceneItemEnded();
         }
 
         protected void OnEnable()
         {
             _timeElapsed = 0.0f;
 
-            foreach(CutSceneItemSpriteTween spriteTween in SpriteTweens)
+            foreach (CutSceneItemSpriteTween spriteTween in SpriteTweens)
             {
-                foreach(TweenInfo tweenInfo in spriteTween.Tweens)
+                foreach (TweenInfo tweenInfo in spriteTween.Tweens)
                 {
                     switch (tweenInfo.Motion)
                     {
                         case LeanTweenMotion.Scale:
-                            LTDescr scale = LeanTween.scale(spriteTween.SpriteRenderer.gameObject, Vector3.one * tweenInfo.Value, tweenInfo.Duration)
+                            LTDescr scale = LeanTween
+                                .scale(
+                                    spriteTween.SpriteRenderer.gameObject,
+                                    Vector3.one * tweenInfo.Value,
+                                    tweenInfo.Duration
+                                )
                                 .setEase(tweenInfo.Type)
                                 .setDelay(tweenInfo.Delay);
-                            if (tweenInfo.LoopPingPong) scale.setLoopPingPong();
+                            if (tweenInfo.LoopPingPong)
+                                scale.setLoopPingPong();
                             break;
                         case LeanTweenMotion.MoveY:
-                            LTDescr moveY = LeanTween.moveLocalY(spriteTween.SpriteRenderer.gameObject, tweenInfo.Value, tweenInfo.Duration)
+                            LTDescr moveY = LeanTween
+                                .moveLocalY(
+                                    spriteTween.SpriteRenderer.gameObject,
+                                    tweenInfo.Value,
+                                    tweenInfo.Duration
+                                )
                                 .setEase(tweenInfo.Type)
                                 .setDelay(tweenInfo.Delay);
-                            if (tweenInfo.LoopPingPong) moveY.setLoopPingPong();
+                            if (tweenInfo.LoopPingPong)
+                                moveY.setLoopPingPong();
                             break;
                     }
                 }

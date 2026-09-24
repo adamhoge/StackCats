@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
+using RockhopperGames.StackCats.Models;
 using TMPro;
-using Tofuwu.StackCats.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class EndlessProgressOverlayScreen : OverlayScreen
     {

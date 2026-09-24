@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     [System.Serializable]
     public class PointerAction

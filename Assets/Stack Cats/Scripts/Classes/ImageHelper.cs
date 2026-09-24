@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public static class ImageHelper
     {
@@ -14,7 +14,8 @@ namespace Tofuwu.StackCats
 
         public static void SetMaterialForItem(this Image image, ItemColorShift colorShift)
         {
-            if (colorShift == null) return;
+            if (colorShift == null)
+                return;
 
             image.CloneMaterial();
             image.material.SetFloat("_Hue", colorShift.Hue);

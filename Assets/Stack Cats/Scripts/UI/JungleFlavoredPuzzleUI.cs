@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using TMPro;
+﻿using TMPro;
+using UnityEngine;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class JungleFlavoredPuzzleUI : MonoBehaviour
     {
@@ -17,7 +17,8 @@ namespace Tofuwu.StackCats.UI
             PuzzleLoader.onPuzzleUnloaded += OnPuzzleUnloaded;
             PuzzleLoader.onPuzzleRestarted += OnPuzzleRestarted;
 
-            if (JigsawRectTransform) JigsawRectTransform.gameObject.SetActive(false);
+            if (JigsawRectTransform)
+                JigsawRectTransform.gameObject.SetActive(false);
         }
 
         private void OnPuzzleBeginLoad(Puzzle puzzle, bool wasRestarted, bool isUndo)
@@ -46,7 +47,8 @@ namespace Tofuwu.StackCats.UI
                 _puzzle.onJigsawBlockMoved -= OnJigsawBlockMoved;
                 _puzzle = null;
 
-                if (JigsawRectTransform) JigsawRectTransform.gameObject.SetActive(false);
+                if (JigsawRectTransform)
+                    JigsawRectTransform.gameObject.SetActive(false);
             }
         }
 
@@ -61,7 +63,9 @@ namespace Tofuwu.StackCats.UI
 
                 if (JigsawRectTransform)
                 {
-                    LeanTween.scale(JigsawRectTransform.gameObject, Vector3.one * 1.2f, 0.25f).setEase(LeanTweenType.punch);
+                    LeanTween
+                        .scale(JigsawRectTransform.gameObject, Vector3.one * 1.2f, 0.25f)
+                        .setEase(LeanTweenType.punch);
                 }
             }
         }

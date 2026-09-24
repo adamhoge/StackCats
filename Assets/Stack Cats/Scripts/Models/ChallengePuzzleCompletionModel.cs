@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tofuwu.StackCats.Models
+namespace RockhopperGames.StackCats.Models
 {
     [Serializable]
     public class ChallengePuzzleCompletionModel

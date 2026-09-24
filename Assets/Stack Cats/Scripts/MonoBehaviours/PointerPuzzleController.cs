@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     [RequireComponent(typeof(Puzzle))]
     [RequireComponent(typeof(PuzzleController))]
@@ -41,12 +41,14 @@ namespace Tofuwu.StackCats
                 Cancel();
                 UpdateFocus(_currentStackIndex, _currentBlockIndex);
             }
-            else if (Input.GetMouseButtonDown(1)) Cancel();
+            else if (Input.GetMouseButtonDown(1))
+                Cancel();
         }
 
         private void UpdateMousePosition(Vector3 mousePosition)
         {
-            if (mousePosition == _currentMousePosition) return;
+            if (mousePosition == _currentMousePosition)
+                return;
 
             _currentMousePosition = Input.mousePosition;
             Vector3 pointerPosition = Camera.ScreenToWorldPoint(Input.mousePosition);
@@ -55,11 +57,17 @@ namespace Tofuwu.StackCats
 
         private void UpdatePointerPosition(Vector3 pointerPosition)
         {
-            if (pointerPosition == _currentPointerPosition) return;
+            if (pointerPosition == _currentPointerPosition)
+                return;
 
             _currentPointerPosition = pointerPosition;
             _dragPositioner.DragPosition = pointerPosition;
-            int stackIndex = (int)Mathf.Floor((_currentPointerPosition.x - _puzzle.transform.position.x) / (1.0f + _puzzle.StackSpacing) + (float)_puzzle.Stacks.Count / 2);
+            int stackIndex = (int)
+                Mathf.Floor(
+                    (_currentPointerPosition.x - _puzzle.transform.position.x)
+                        / (1.0f + _puzzle.StackSpacing)
+                        + (float)_puzzle.Stacks.Count / 2
+                );
             int blockIndex;
             if (stackIndex < 0 || stackIndex >= _puzzle.Stacks.Count)
             {
@@ -67,30 +75,45 @@ namespace Tofuwu.StackCats
             }
             else
             {
-                blockIndex = (int)Mathf.Floor((_currentPointerPosition.y - _puzzle.transform.position.y) / _puzzle.Stacks[stackIndex].BlockHeight);
+                blockIndex = (int)
+                    Mathf.Floor(
+                        (_currentPointerPosition.y - _puzzle.transform.position.y)
+                            / _puzzle.Stacks[stackIndex].BlockHeight
+                    );
             }
 
             UpdateFocus(stackIndex, blockIndex);
         }
 
-
         private void UpdateFocus(int stackIndex, int blockIndex)
         {
-            if (_puzzle.MaxBlocks == 0 || _currentStackIndex == stackIndex && _currentBlockIndex == blockIndex) return;
+            if (
+                _puzzle.MaxBlocks == 0
+                || _currentStackIndex == stackIndex && _currentBlockIndex == blockIndex
+            )
+                return;
 
             _currentStackIndex = stackIndex;
             _currentBlockIndex = blockIndex;
 
-            if (_currentStackIndex < 0) _currentStackIndex = 0;
-            if (_currentStackIndex >= _puzzle.Stacks.Count) _currentStackIndex = _puzzle.Stacks.Count - 1;
+            if (_currentStackIndex < 0)
+                _currentStackIndex = 0;
+            if (_currentStackIndex >= _puzzle.Stacks.Count)
+                _currentStackIndex = _puzzle.Stacks.Count - 1;
 
-            if (_currentBlockIndex < 0 || _currentBlockIndex >= _puzzle.Stacks[_currentStackIndex].Blocks.Count)
+            if (
+                _currentBlockIndex < 0
+                || _currentBlockIndex >= _puzzle.Stacks[_currentStackIndex].Blocks.Count
+            )
             {
                 FocusAt(_puzzle.Stacks[_currentStackIndex], null);
             }
             else
             {
-                FocusAt(_puzzle.Stacks[_currentStackIndex], _puzzle.Stacks[_currentStackIndex].Blocks[_currentBlockIndex]);
+                FocusAt(
+                    _puzzle.Stacks[_currentStackIndex],
+                    _puzzle.Stacks[_currentStackIndex].Blocks[_currentBlockIndex]
+                );
             }
         }
 
@@ -111,13 +134,19 @@ namespace Tofuwu.StackCats
             {
                 FocusAt(null, null);
             }
-            else if (_currentBlockIndex < 0 || _currentBlockIndex >= _puzzle.Stacks[_currentStackIndex].Blocks.Count)
+            else if (
+                _currentBlockIndex < 0
+                || _currentBlockIndex >= _puzzle.Stacks[_currentStackIndex].Blocks.Count
+            )
             {
                 FocusAt(_puzzle.Stacks[_currentStackIndex], null);
             }
             else
             {
-                FocusAt(_puzzle.Stacks[_currentStackIndex], _puzzle.Stacks[_currentStackIndex].Blocks[_currentBlockIndex]);
+                FocusAt(
+                    _puzzle.Stacks[_currentStackIndex],
+                    _puzzle.Stacks[_currentStackIndex].Blocks[_currentBlockIndex]
+                );
             }
         }
     }

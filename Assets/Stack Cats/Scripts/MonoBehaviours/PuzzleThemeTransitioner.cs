@@ -1,7 +1,7 @@
 ﻿using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class PuzzleThemeTransitioner : MonoBehaviour
     {
@@ -9,7 +9,7 @@ namespace Tofuwu.StackCats
         {
             None,
             FadingOut,
-            FadingIn
+            FadingIn,
         }
 
         public Camera Camera;
@@ -24,7 +24,8 @@ namespace Tofuwu.StackCats
 
         public void LoadPuzzleTheme(PuzzleTheme puzzleTheme)
         {
-            if (puzzleTheme == _currentPuzzleTheme) return;
+            if (puzzleTheme == _currentPuzzleTheme)
+                return;
 
             _currentPuzzleTheme = puzzleTheme;
 
@@ -63,7 +64,8 @@ namespace Tofuwu.StackCats
 
         private void ChangeState(State state)
         {
-            if (_state == state) return;
+            if (_state == state)
+                return;
 
             _state = state;
             _stateTimeElapsed = 0.0f;
@@ -74,7 +76,9 @@ namespace Tofuwu.StackCats
                     break;
                 case State.FadingOut:
                     LeanTween.cancel(ScenaryFaderSpriteRenderer.gameObject);
-                    LeanTween.alpha(ScenaryFaderSpriteRenderer.gameObject, 1.0f, TransitionDuration).setEase(LeanTweenType.easeOutSine);
+                    LeanTween
+                        .alpha(ScenaryFaderSpriteRenderer.gameObject, 1.0f, TransitionDuration)
+                        .setEase(LeanTweenType.easeOutSine);
                     break;
                 case State.FadingIn:
                     if (_currentScenary)
@@ -114,7 +118,9 @@ namespace Tofuwu.StackCats
                     faderColor.a = 1.0f;
                     ScenaryFaderSpriteRenderer.color = faderColor;
                     LeanTween.cancel(ScenaryFaderSpriteRenderer.gameObject);
-                    LeanTween.alpha(ScenaryFaderSpriteRenderer.gameObject, 0.0f, TransitionDuration).setEase(LeanTweenType.easeOutSine);
+                    LeanTween
+                        .alpha(ScenaryFaderSpriteRenderer.gameObject, 0.0f, TransitionDuration)
+                        .setEase(LeanTweenType.easeOutSine);
                     break;
             }
         }

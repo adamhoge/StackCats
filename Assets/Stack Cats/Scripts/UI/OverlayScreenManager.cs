@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public enum OverlayScreenManagerState
     {
@@ -20,7 +20,10 @@ namespace Tofuwu.StackCats.UI
         public UnityEvent OnVisible;
         public UnityEvent OnHidden;
 
-        public bool IsDisplayingScreen { get { return _currentScreen != null; } }
+        public bool IsDisplayingScreen
+        {
+            get { return _currentScreen != null; }
+        }
 
         private OverlayScreenManagerState _state;
         private float _stateTimeElapsed;
@@ -53,7 +56,8 @@ namespace Tofuwu.StackCats.UI
             if (screen && !_screenQueue.Contains(screen))
             {
                 _screenQueue.Enqueue(screen);
-                if (_state == OverlayScreenManagerState.Idle) LoadNextScreen();
+                if (_state == OverlayScreenManagerState.Idle)
+                    LoadNextScreen();
             }
         }
 
@@ -72,7 +76,10 @@ namespace Tofuwu.StackCats.UI
                     _state = OverlayScreenManagerState.ScreenTransitioningOut;
                     _stateTimeElapsed = 0.0f;
 
-                    if (Overlay && hideOverlay) LeanTween.alphaCanvas(Overlay, 0.0f, _currentScreen.TransitionOutDuration).setEase(_currentScreen.TransitionOutTween);
+                    if (Overlay && hideOverlay)
+                        LeanTween
+                            .alphaCanvas(Overlay, 0.0f, _currentScreen.TransitionOutDuration)
+                            .setEase(_currentScreen.TransitionOutTween);
                 }
                 else if (_state == OverlayScreenManagerState.ScreenTransitioningIn)
                 {
@@ -159,14 +166,20 @@ namespace Tofuwu.StackCats.UI
             {
                 if (!hasOverlay)
                 {
-                    LeanTween.alphaCanvas(Overlay, 1.0f, _currentScreen.TransitionInDuration).setEase(_currentScreen.TransitionInTween);
+                    LeanTween
+                        .alphaCanvas(Overlay, 1.0f, _currentScreen.TransitionInDuration)
+                        .setEase(_currentScreen.TransitionInTween);
                     Overlay.GetComponent<Image>().color = _currentScreen.OverlayColor;
                     Overlay.blocksRaycasts = true;
                     Overlay.interactable = true;
                 }
                 else
                 {
-                    LeanTween.color(Overlay.GetComponent<RectTransform>(), _currentScreen.OverlayColor, _currentScreen.TransitionInDuration);
+                    LeanTween.color(
+                        Overlay.GetComponent<RectTransform>(),
+                        _currentScreen.OverlayColor,
+                        _currentScreen.TransitionInDuration
+                    );
                 }
             }
 

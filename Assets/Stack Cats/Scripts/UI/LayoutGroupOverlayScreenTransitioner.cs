@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     [RequireComponent(typeof(LayoutGroup))]
     public class LayoutGroupOverlayScreenTransitioner : MonoBehaviour
@@ -29,12 +29,8 @@ namespace Tofuwu.StackCats.UI
             OverlayScreen.onTransitioningOut -= OnTransitioningOut;
         }
 
-        private void OnTransitioningIn()
-        {
-        }
+        private void OnTransitioningIn() { }
 
-        private void OnTransitioningOut()
-        {
-        }
+        private void OnTransitioningOut() { }
     }
 }

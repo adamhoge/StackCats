@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class PuzzleTutorialOverlayScreen : TutorialOverlayScreen
     {
@@ -16,6 +16,7 @@ namespace Tofuwu.StackCats.UI
         private PointerGestureUI _pointerGestureUI;
         private PuzzleDemo _puzzleDemoInstance;
         private PuzzleDemoUI _puzzleDemoUIInstance;
+
         public void Initialize(PuzzleTutorial puzzleTutorial, PointerGestureUI pointerGestureUI)
         {
             base.Initialize(puzzleTutorial);

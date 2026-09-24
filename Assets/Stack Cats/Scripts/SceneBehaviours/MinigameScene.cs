@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class MinigameScene : SceneBehaviour
     {
@@ -14,7 +14,7 @@ namespace Tofuwu.StackCats
             base.Start();
 
             MinigameInformation currentMinigame = _gameManager.Minigames.CurrentMinigame;
-            if(!currentMinigame)
+            if (!currentMinigame)
             {
                 Debug.LogError("Minigame is not defined in MinigameScene.");
                 _gameManager.GoHome();

@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
 using System.Collections.Generic;
-using System;
+using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     [RequireComponent(typeof(PuzzleScene))]
     [RequireComponent(typeof(PuzzleLoader))]
@@ -22,10 +22,17 @@ namespace Tofuwu.StackCats
         /// </summary>
         public bool UndoMove()
         {
-            if (_puzzleHistoryData.Count < 2) return false;
+            if (_puzzleHistoryData.Count < 2)
+                return false;
 
             _puzzleHistoryData.Pop();
-            _puzzleLoader.LoadPuzzle(_puzzleHistoryData.Peek(), PuzzleScene.PuzzleArea, false, true, false);
+            _puzzleLoader.LoadPuzzle(
+                _puzzleHistoryData.Peek(),
+                PuzzleScene.PuzzleArea,
+                false,
+                true,
+                false
+            );
             return true;
         }
 
@@ -58,7 +65,9 @@ namespace Tofuwu.StackCats
 
             if (isUndo)
             {
-                LeanTween.scale(puzzle.gameObject, Vector2.one * 0.99f, 0.4f).setEase(LeanTweenType.punch);
+                LeanTween
+                    .scale(puzzle.gameObject, Vector2.one * 0.99f, 0.4f)
+                    .setEase(LeanTweenType.punch);
                 _audioManager.PlaySoundEffect(UndoSoundEffect);
             }
             else
@@ -85,7 +94,12 @@ namespace Tofuwu.StackCats
             puzzle.onBlockMoveResolved -= OnBlockMoveResolved;
         }
 
-        private void OnBlockMoveResolved(Puzzle puzzle, Stack source, Block block, Stack destination)
+        private void OnBlockMoveResolved(
+            Puzzle puzzle,
+            Stack source,
+            Block block,
+            Stack destination
+        )
         {
             if (!puzzle.IsEditMode)
             {

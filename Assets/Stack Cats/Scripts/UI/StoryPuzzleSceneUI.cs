@@ -1,9 +1,9 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     [RequireComponent(typeof(PuzzleCameraAdjuster))]
     public class StoryPuzzleSceneUI : MonoBehaviour
@@ -35,7 +35,8 @@ namespace Tofuwu.StackCats.UI
         {
             PuzzleTheme puzzleTheme = StoryPuzzleScene.PuzzleArea.PuzzleTheme;
             FooterBackgroundImage.color = puzzleTheme.UIColor;
-            foreach (Image image in UIImages) image.color = puzzleTheme.UIColor;
+            foreach (Image image in UIImages)
+                image.color = puzzleTheme.UIColor;
         }
 
         protected void OnEnable()
@@ -98,7 +99,8 @@ namespace Tofuwu.StackCats.UI
 
         private void OnCurrencyFound(CatBlock source, Currency currency, int amount)
         {
-            CurrencyFadeInfo currencyFadeInfo = (CurrencyFadeInfo)CurrencyFadeInfoObjectPooler.BorrowInstance();
+            CurrencyFadeInfo currencyFadeInfo = (CurrencyFadeInfo)
+                CurrencyFadeInfoObjectPooler.BorrowInstance();
             currencyFadeInfo.Currency = currency;
             currencyFadeInfo.Amount = amount;
             currencyFadeInfo.transform.position = source.transform.position + Vector3.up * 0.5f;
@@ -112,7 +114,11 @@ namespace Tofuwu.StackCats.UI
             UndoButton.interactable = false;
         }
 
-        private void OnStoryPuzzleSceneCompleted(StoryPuzzle storyPuzzle, PuzzleCompletionType completionType, int numMovesMade)
+        private void OnStoryPuzzleSceneCompleted(
+            StoryPuzzle storyPuzzle,
+            PuzzleCompletionType completionType,
+            int numMovesMade
+        )
         {
             if (completionType == PuzzleCompletionType.PuzzleSolved)
             {
@@ -120,12 +126,15 @@ namespace Tofuwu.StackCats.UI
                 List<Cat> newCatsSeen = StoryPuzzleScene.NewCatsSeen;
                 foreach (Cat cat in newCatsSeen)
                 {
-                    NewCatOverlayScreen newCatOverlayScreen = Instantiate(NewCatOverlayScreenPrefab, OverlayScreenManager.transform);
+                    NewCatOverlayScreen newCatOverlayScreen = Instantiate(
+                        NewCatOverlayScreenPrefab,
+                        OverlayScreenManager.transform
+                    );
                     newCatOverlayScreen.Cat = cat;
                     OverlayScreenManager.EnqueueScreen(newCatOverlayScreen);
                 }
 
-                if(newCatsSeen.Count > 0)
+                if (newCatsSeen.Count > 0)
                 {
                     NewCatsInCollectionOverlayScreen.NewCats = newCatsSeen;
                     OverlayScreenManager.EnqueueScreen(NewCatsInCollectionOverlayScreen);

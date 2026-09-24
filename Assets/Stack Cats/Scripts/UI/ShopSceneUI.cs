@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class ShopSceneUI : MonoBehaviour
     {
@@ -47,33 +47,50 @@ namespace Tofuwu.StackCats.UI
             _allShopListings = ShopScene.ShopCollection.ShopListings;
 
             _puzzleAreaFilterOptions = new List<PuzzleAreaFilterOption>();
-            _puzzleAreaFilterOptions.Add(new PuzzleAreaFilterOption { PuzzleArea = null, Label = "All" });
+            _puzzleAreaFilterOptions.Add(
+                new PuzzleAreaFilterOption { PuzzleArea = null, Label = "All" }
+            );
             foreach (PuzzleArea puzzleArea in _puzzleManager.PuzzleAreaCollection.List)
             {
                 if (!_puzzleManager.IsAreaLocked(puzzleArea))
                 {
-                    _puzzleAreaFilterOptions.Add(new PuzzleAreaFilterOption { PuzzleArea = puzzleArea, Label = puzzleArea.AreaTitle });
+                    _puzzleAreaFilterOptions.Add(
+                        new PuzzleAreaFilterOption
+                        {
+                            PuzzleArea = puzzleArea,
+                            Label = puzzleArea.AreaTitle,
+                        }
+                    );
                 }
             }
             PuzzleAreaFilterDropdown.ClearOptions();
             foreach (PuzzleAreaFilterOption puzzleAreaFilterOption in _puzzleAreaFilterOptions)
             {
-                PuzzleAreaFilterDropdown.options.Add(new Dropdown.OptionData { text = puzzleAreaFilterOption.Label });
+                PuzzleAreaFilterDropdown.options.Add(
+                    new Dropdown.OptionData { text = puzzleAreaFilterOption.Label }
+                );
             }
 
-            _itemTypeFilterOptions = new List<ItemTypeFilterOption> {
-                new ItemTypeFilterOption{ ItemType = null, Label = "All" },
-                new ItemTypeFilterOption{ ItemType = typeof(WallpaperItem), Label = "Wallpapers" },
-                new ItemTypeFilterOption{ ItemType = typeof(FloorItem), Label = "Floors" },
-                new ItemTypeFilterOption{ ItemType = typeof(WindowItem), Label = "Windows" },
-                new ItemTypeFilterOption{ ItemType = typeof(DresserItem), Label = "Dressers" },
-                new ItemTypeFilterOption{ ItemType = typeof(PlaceableObjectItem), Label = "Objects" },
-                new ItemTypeFilterOption{ ItemType = typeof(Item), Label = "Other" }
+            _itemTypeFilterOptions = new List<ItemTypeFilterOption>
+            {
+                new ItemTypeFilterOption { ItemType = null, Label = "All" },
+                new ItemTypeFilterOption { ItemType = typeof(WallpaperItem), Label = "Wallpapers" },
+                new ItemTypeFilterOption { ItemType = typeof(FloorItem), Label = "Floors" },
+                new ItemTypeFilterOption { ItemType = typeof(WindowItem), Label = "Windows" },
+                new ItemTypeFilterOption { ItemType = typeof(DresserItem), Label = "Dressers" },
+                new ItemTypeFilterOption
+                {
+                    ItemType = typeof(PlaceableObjectItem),
+                    Label = "Objects",
+                },
+                new ItemTypeFilterOption { ItemType = typeof(Item), Label = "Other" },
             };
             ItemTypeFilterDropdown.ClearOptions();
             foreach (ItemTypeFilterOption itemTypeFilterOption in _itemTypeFilterOptions)
             {
-                ItemTypeFilterDropdown.options.Add(new Dropdown.OptionData { text = itemTypeFilterOption.Label });
+                ItemTypeFilterDropdown.options.Add(
+                    new Dropdown.OptionData { text = itemTypeFilterOption.Label }
+                );
             }
         }
 
@@ -111,8 +128,13 @@ namespace Tofuwu.StackCats.UI
         private List<ShopListing> GetListingsForFilters()
         {
             IEnumerable<ShopListing> shopListings = _allShopListings
-                .Where(sl => sl.RequiredPuzzleArea == null || !_puzzleManager.IsAreaLocked(sl.RequiredPuzzleArea))
-                .Where(sl => !sl.Item.IsUnique || !_stuffManager.HasItem(sl.Item) /* || sl.Item.GetType() == typeof(ConsumableItem)*/);
+                .Where(sl =>
+                    sl.RequiredPuzzleArea == null
+                    || !_puzzleManager.IsAreaLocked(sl.RequiredPuzzleArea)
+                )
+                .Where(sl =>
+                    !sl.Item.IsUnique || !_stuffManager.HasItem(sl.Item) /* || sl.Item.GetType() == typeof(ConsumableItem)*/
+                );
 
             if (_itemTypeFilter != null)
             {
@@ -143,9 +165,17 @@ namespace Tofuwu.StackCats.UI
             List<ShopListing> shopListings = GetListingsForFilters();
             foreach (ShopListing shopListing in shopListings)
             {
-                ShopListingButtonUI shopListingButton = Instantiate(ShopListingButtonPrefab, ShopItemsRectTransform);
+                ShopListingButtonUI shopListingButton = Instantiate(
+                    ShopListingButtonPrefab,
+                    ShopItemsRectTransform
+                );
                 shopListingButton.ShopListing = shopListing;
-                shopListingButton.Button.onClick.AddListener(delegate { ConfirmBuyItem(shopListing); });
+                shopListingButton.Button.onClick.AddListener(
+                    delegate
+                    {
+                        ConfirmBuyItem(shopListing);
+                    }
+                );
                 _shopListingButtons.Add(shopListingButton);
             }
         }

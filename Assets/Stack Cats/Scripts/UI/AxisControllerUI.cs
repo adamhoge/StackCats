@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class AxisControllerUI : MonoBehaviour
     {
@@ -11,7 +11,11 @@ namespace Tofuwu.StackCats.UI
         public Color MovableBlockMarkerColor = Color.white;
         public Color ImmovableBlockMarkerColor = Color.red;
 
-        public PuzzleController PuzzleController { get { return _puzzleController; } set { SetPuzzleController(value); } }
+        public PuzzleController PuzzleController
+        {
+            get { return _puzzleController; }
+            set { SetPuzzleController(value); }
+        }
 
         [SerializeField]
         [HideInInspector]
@@ -35,7 +39,8 @@ namespace Tofuwu.StackCats.UI
             if (_marker != null && MarkerFlashSpeed != 0)
             {
                 _markerAlpha = (_markerAlpha + Time.deltaTime) % (MarkerFlashSpeed * 2);
-                float alpha = Mathf.Abs(-MarkerFlashSpeed + _markerAlpha) / MarkerFlashSpeed * 0.25f + 0.75f;
+                float alpha =
+                    Mathf.Abs(-MarkerFlashSpeed + _markerAlpha) / MarkerFlashSpeed * 0.25f + 0.75f;
                 _marker.color = new Color(_marker.color.r, _marker.color.g, _marker.color.b, alpha);
             }
         }
@@ -66,7 +71,8 @@ namespace Tofuwu.StackCats.UI
         {
             if (marker == null)
             {
-                if (_marker) Destroy(_marker.gameObject);
+                if (_marker)
+                    Destroy(_marker.gameObject);
                 return;
             }
 
@@ -90,7 +96,8 @@ namespace Tofuwu.StackCats.UI
 
         private void OnCheck(PuzzleMarker source, PuzzleMarker marker, int numBlocks, bool isValid)
         {
-            if (_placementPreview) Destroy(_placementPreview.gameObject);
+            if (_placementPreview)
+                Destroy(_placementPreview.gameObject);
 
             //else if (_puzzleController.Puzzle.IsPlaceable(_puzzleController.Selection.Block, marker.Stack.TopBlock))
             //{
@@ -105,11 +112,11 @@ namespace Tofuwu.StackCats.UI
             //    }
             //}
 
-            if (isValid /* || marker.Stack == _puzzleController.Selection.Stack*/)
+            if (
+                isValid /* || marker.Stack == _puzzleController.Selection.Stack*/
+            )
             {
-                foreach (Block block in _puzzleController.SelectedBlocks)
-                {
-                }
+                foreach (Block block in _puzzleController.SelectedBlocks) { }
             }
         }
     }

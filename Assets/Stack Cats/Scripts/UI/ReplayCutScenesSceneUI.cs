@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class ReplayCutScenesSceneUI : MonoBehaviour
     {
@@ -14,9 +14,17 @@ namespace Tofuwu.StackCats.UI
         {
             foreach (CutScene cutScene in ReplayCutScenesScene.UnlockedCutScenes)
             {
-                CutSceneInfoUI cutSceneInfo = Instantiate(CutSceneInfoPrefab, CutScenesRectTransform);
+                CutSceneInfoUI cutSceneInfo = Instantiate(
+                    CutSceneInfoPrefab,
+                    CutScenesRectTransform
+                );
                 cutSceneInfo.CutSceneTitleText.text = cutScene.name;
-                cutSceneInfo.Button.onClick.AddListener(delegate () { OnPlayCutScene(cutScene); });
+                cutSceneInfo.Button.onClick.AddListener(
+                    delegate()
+                    {
+                        OnPlayCutScene(cutScene);
+                    }
+                );
             }
         }
 

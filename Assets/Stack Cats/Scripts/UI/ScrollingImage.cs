@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     [RequireComponent(typeof(Mask))]
     [RequireComponent(typeof(RectTransform))]
@@ -35,7 +35,8 @@ namespace Tofuwu.StackCats.UI
         {
             bool resizeImage = false;
 
-            if (!Preview || !TargetImage || !TargetImage.sprite || (ScrollX == 0 && ScrollY == 0)) return;
+            if (!Preview || !TargetImage || !TargetImage.sprite || (ScrollX == 0 && ScrollY == 0))
+                return;
 
             if (TargetImage.sprite != _targetSprite)
             {
@@ -43,11 +44,13 @@ namespace Tofuwu.StackCats.UI
                 resizeImage = true;
             }
 
-            if (!_rectTransform) _rectTransform = GetComponent<RectTransform>();
+            if (!_rectTransform)
+                _rectTransform = GetComponent<RectTransform>();
 
             Vector2 rectSize = _rectTransform.rect.size;
 
-            if (rectSize == Vector2.zero) return;
+            if (rectSize == Vector2.zero)
+                return;
 
             if (_rectSize != rectSize)
             {
@@ -55,13 +58,17 @@ namespace Tofuwu.StackCats.UI
                 resizeImage = true;
             }
 
-            if (resizeImage) ResizeImage();
+            if (resizeImage)
+                ResizeImage();
 
-            float offsetX, offsetY;
+            float offsetX,
+                offsetY;
             if (ScrollX != 0)
             {
                 int sign = ScrollX > 0 ? 1 : -1;
-                offsetX = _targetSpriteSize.x / 2 * -sign + Mathf.Abs(ScrollX * Time.time) % _targetSpriteSize.x * sign;
+                offsetX =
+                    _targetSpriteSize.x / 2 * -sign
+                    + Mathf.Abs(ScrollX * Time.time) % _targetSpriteSize.x * sign;
             }
             else
             {
@@ -71,7 +78,9 @@ namespace Tofuwu.StackCats.UI
             if (ScrollY != 0)
             {
                 int sign = ScrollY > 0 ? 1 : -1;
-                offsetY = _targetSpriteSize.y / 2 * -sign + Mathf.Abs(ScrollY * Time.time) % _targetSpriteSize.y * sign;
+                offsetY =
+                    _targetSpriteSize.y / 2 * -sign
+                    + Mathf.Abs(ScrollY * Time.time) % _targetSpriteSize.y * sign;
             }
             else
             {
@@ -91,7 +100,10 @@ namespace Tofuwu.StackCats.UI
             _targetSprite = TargetImage.sprite;
             _targetSpriteSize = _targetSprite.rect.size;
             CanvasScaler canvasScaler = GetComponentInParent<CanvasScaler>();
-            if (canvasScaler) _targetSpriteSize *= (canvasScaler.referencePixelsPerUnit / _targetSprite.pixelsPerUnit);
+            if (canvasScaler)
+                _targetSpriteSize *= (
+                    canvasScaler.referencePixelsPerUnit / _targetSprite.pixelsPerUnit
+                );
             TargetImage.type = Image.Type.Tiled;
             //Debug.Log("");
             //Debug.Log("Sprite Changed");

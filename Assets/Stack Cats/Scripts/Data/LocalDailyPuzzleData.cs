@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using Tofuwu.StackCats.Models;
+using RockhopperGames.StackCats.Models;
 
-namespace Tofuwu.StackCats.Data
+namespace RockhopperGames.StackCats.Data
 {
     [Serializable]
     public class LocalDailyPuzzleData : IDailyPuzzleData
     {
-        public DateTime ForDate { get { throw new NotImplementedException(); } }
+        public DateTime ForDate
+        {
+            get { throw new NotImplementedException(); }
+        }
 
         private DailyPuzzlesModel _model;
         private List<int> _completedPuzzleIndices = new List<int>();

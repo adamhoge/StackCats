@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     [RequireComponent(typeof(Button))]
     public class ShopListingButtonUI : MonoBehaviour
@@ -15,7 +15,10 @@ namespace Tofuwu.StackCats.UI
         /// <summary>
         /// The button associated with the shop item.
         /// </summary>
-        public Button Button { get { return _button; } }
+        public Button Button
+        {
+            get { return _button; }
+        }
 
         private CurrencyManager _currencyManager;
         private Button _button;
@@ -32,10 +35,13 @@ namespace Tofuwu.StackCats.UI
 
             ItemIconImage.sprite = ShopListing.Item.Icon;
             ItemIconImage.SetMaterialForItem(ShopListing.Item.ColorShift);
-            
-            foreach(KeyValuePair<Currency, int> currencyAmount in ShopListing.Price)
+
+            foreach (KeyValuePair<Currency, int> currencyAmount in ShopListing.Price)
             {
-                CurrencyAmountUI currencyAmountUI = Instantiate(CurrencyAmountPrefab, CostRectTransform);
+                CurrencyAmountUI currencyAmountUI = Instantiate(
+                    CurrencyAmountPrefab,
+                    CostRectTransform
+                );
                 currencyAmountUI.CurrencyType = currencyAmount.Key;
                 currencyAmountUI.Amount = currencyAmount.Value;
             }

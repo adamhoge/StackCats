@@ -1,10 +1,10 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class HomeVisitorsUI : MonoBehaviour
     {
@@ -26,9 +26,14 @@ namespace Tofuwu.StackCats.UI
 
         protected void Awake()
         {
-            foreach(Button interactWithVisitorButton in InteractWithVisitorButtons)
+            foreach (Button interactWithVisitorButton in InteractWithVisitorButtons)
             {
-                interactWithVisitorButton.onClick.AddListener(() => { HomeVisitors.InteractWithVisitor(InteractWithVisitorButtons.IndexOf(interactWithVisitorButton)); });
+                interactWithVisitorButton.onClick.AddListener(() =>
+                {
+                    HomeVisitors.InteractWithVisitor(
+                        InteractWithVisitorButtons.IndexOf(interactWithVisitorButton)
+                    );
+                });
             }
         }
 

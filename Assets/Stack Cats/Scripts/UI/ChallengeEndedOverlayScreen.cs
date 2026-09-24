@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using RockhopperGames.StackCats.Models;
 using UnityEngine;
 using UnityEngine.UI;
-using Tofuwu.StackCats.Models;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class ChallengeEndedOverlayScreen : OverlayScreen
     {
@@ -46,8 +46,14 @@ namespace Tofuwu.StackCats.UI
             }
 
             ChallengeRunModel completedChallengeRun = ChallengeRunScene.CurrentChallengeRun;
-            List<ChallengePuzzleCompletionModel> completedPuzzles = ChallengeRunScene.CurrentChallengeRun.CompletedPuzzles;
-            List<ChallengePuzzleReward> rewards = ChallengeRunScene.PuzzleArea.ChallengeRunRewards.Where(r => r.AtDifficulty == completedChallengeRun.Difficulty).ToList();
+            List<ChallengePuzzleCompletionModel> completedPuzzles = ChallengeRunScene
+                .CurrentChallengeRun
+                .CompletedPuzzles;
+            List<ChallengePuzzleReward> rewards = ChallengeRunScene
+                .PuzzleArea.ChallengeRunRewards.Where(r =>
+                    r.AtDifficulty == completedChallengeRun.Difficulty
+                )
+                .ToList();
             int numCompletedPuzzles = completedPuzzles.Count;
             int goldPaws = 0;
             int farmGems = 0;
@@ -58,49 +64,78 @@ namespace Tofuwu.StackCats.UI
 
             for (int i = 0; i < numCompletedPuzzles; i++)
             {
-                ChallengePuzzleReward rewardAtIndex = rewards.FirstOrDefault(r => r.AtPuzzleIndex == i);
-                CurrencyAmountDictionary currencyRewards = rewardAtIndex != null ? rewardAtIndex.CurrencyReward : _puzzleManager.DefaultCurrencyReward;
-                if (currencyRewards.ContainsKey(Currency.GoldPaw)) goldPaws += currencyRewards[Currency.GoldPaw];
-                if (currencyRewards.ContainsKey(Currency.FarmGem)) farmGems += currencyRewards[Currency.FarmGem];
-                if (currencyRewards.ContainsKey(Currency.JungleGem)) jungleGems += currencyRewards[Currency.JungleGem];
-                if (currencyRewards.ContainsKey(Currency.CityGem)) cityGems += currencyRewards[Currency.CityGem];
-                if (currencyRewards.ContainsKey(Currency.DesertGem)) desertGems += currencyRewards[Currency.DesertGem];
-                if (currencyRewards.ContainsKey(Currency.GalaxyGem)) galaxyGems += currencyRewards[Currency.GalaxyGem];
+                ChallengePuzzleReward rewardAtIndex = rewards.FirstOrDefault(r =>
+                    r.AtPuzzleIndex == i
+                );
+                CurrencyAmountDictionary currencyRewards =
+                    rewardAtIndex != null
+                        ? rewardAtIndex.CurrencyReward
+                        : _puzzleManager.DefaultCurrencyReward;
+                if (currencyRewards.ContainsKey(Currency.GoldPaw))
+                    goldPaws += currencyRewards[Currency.GoldPaw];
+                if (currencyRewards.ContainsKey(Currency.FarmGem))
+                    farmGems += currencyRewards[Currency.FarmGem];
+                if (currencyRewards.ContainsKey(Currency.JungleGem))
+                    jungleGems += currencyRewards[Currency.JungleGem];
+                if (currencyRewards.ContainsKey(Currency.CityGem))
+                    cityGems += currencyRewards[Currency.CityGem];
+                if (currencyRewards.ContainsKey(Currency.DesertGem))
+                    desertGems += currencyRewards[Currency.DesertGem];
+                if (currencyRewards.ContainsKey(Currency.GalaxyGem))
+                    galaxyGems += currencyRewards[Currency.GalaxyGem];
             }
 
             if (goldPaws > 0)
             {
-                CurrencyAmountUI rewardAmount = Instantiate(CurrencyAmountPrefab, EarnedRewardsRectTransform);
+                CurrencyAmountUI rewardAmount = Instantiate(
+                    CurrencyAmountPrefab,
+                    EarnedRewardsRectTransform
+                );
                 rewardAmount.CurrencyType = Currency.GoldPaw;
                 rewardAmount.Amount = goldPaws;
             }
             if (farmGems > 0)
             {
-                CurrencyAmountUI rewardAmount = Instantiate(CurrencyAmountPrefab, EarnedRewardsRectTransform);
+                CurrencyAmountUI rewardAmount = Instantiate(
+                    CurrencyAmountPrefab,
+                    EarnedRewardsRectTransform
+                );
                 rewardAmount.CurrencyType = Currency.FarmGem;
                 rewardAmount.Amount = farmGems;
             }
             if (jungleGems > 0)
             {
-                CurrencyAmountUI rewardAmount = Instantiate(CurrencyAmountPrefab, EarnedRewardsRectTransform);
+                CurrencyAmountUI rewardAmount = Instantiate(
+                    CurrencyAmountPrefab,
+                    EarnedRewardsRectTransform
+                );
                 rewardAmount.CurrencyType = Currency.JungleGem;
                 rewardAmount.Amount = jungleGems;
             }
             if (cityGems > 0)
             {
-                CurrencyAmountUI rewardAmount = Instantiate(CurrencyAmountPrefab, EarnedRewardsRectTransform);
+                CurrencyAmountUI rewardAmount = Instantiate(
+                    CurrencyAmountPrefab,
+                    EarnedRewardsRectTransform
+                );
                 rewardAmount.CurrencyType = Currency.CityGem;
                 rewardAmount.Amount = cityGems;
             }
             if (desertGems > 0)
             {
-                CurrencyAmountUI rewardAmount = Instantiate(CurrencyAmountPrefab, EarnedRewardsRectTransform);
+                CurrencyAmountUI rewardAmount = Instantiate(
+                    CurrencyAmountPrefab,
+                    EarnedRewardsRectTransform
+                );
                 rewardAmount.CurrencyType = Currency.DesertGem;
                 rewardAmount.Amount = desertGems;
             }
             if (galaxyGems > 0)
             {
-                CurrencyAmountUI rewardAmount = Instantiate(CurrencyAmountPrefab, EarnedRewardsRectTransform);
+                CurrencyAmountUI rewardAmount = Instantiate(
+                    CurrencyAmountPrefab,
+                    EarnedRewardsRectTransform
+                );
                 rewardAmount.CurrencyType = Currency.GalaxyGem;
                 rewardAmount.Amount = galaxyGems;
             }

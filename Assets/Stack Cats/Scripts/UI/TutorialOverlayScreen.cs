@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public abstract class TutorialOverlayScreen : OverlayScreen
     {
@@ -20,7 +20,7 @@ namespace Tofuwu.StackCats.UI
         {
             base.OnTransitioningIn();
 
-            if(!_isInitialized)
+            if (!_isInitialized)
             {
                 Debug.LogError("Data was not intialized. Exiting overlay.");
                 Dismiss();
@@ -46,7 +46,8 @@ namespace Tofuwu.StackCats.UI
 
             if (_isActive)
             {
-                if (Input.GetMouseButtonDown(0)) Dismiss();
+                if (Input.GetMouseButtonDown(0))
+                    Dismiss();
             }
         }
 

@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Tofuwu.StackCats.Data
+namespace RockhopperGames.StackCats.Data
 {
     [Serializable]
     public class LocalCatCollectionData : LocalData<LocalCatCollectionData>, ICatCollectionData
     {
         private readonly string _dataPath;
-        private readonly Dictionary<string, ICatData> _catsSeen = new Dictionary<string, ICatData>();
+        private readonly Dictionary<string, ICatData> _catsSeen =
+            new Dictionary<string, ICatData>();
 
-        public LocalCatCollectionData(string dataPath) : base(dataPath) { }
+        public LocalCatCollectionData(string dataPath)
+            : base(dataPath) { }
 
         /// <summary>
         /// Check if a cat was seen.

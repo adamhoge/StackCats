@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class PlaceObjectsOverlayScreen : OverlayScreen
     {
@@ -26,12 +26,16 @@ namespace Tofuwu.StackCats.UI
 
         private PageableList<PlaceableObjectItem> _items;
         private StuffManager _stuffManager;
-        private List<PlaceableObjectItemDragButton> _placeableObjectItemDragButtons = new List<PlaceableObjectItemDragButton>();
-        private List<DresserLocationDragButton> _dresserLocationDragButtons = new List<DresserLocationDragButton>();
+        private List<PlaceableObjectItemDragButton> _placeableObjectItemDragButtons =
+            new List<PlaceableObjectItemDragButton>();
+        private List<DresserLocationDragButton> _dresserLocationDragButtons =
+            new List<DresserLocationDragButton>();
         private int _selectedDresserPositionIndex;
         private PlaceableObjectItem _selectedObjectItem;
-        private List<HomeDecor.PlacedObject> _originalObjectPlacements = new List<HomeDecor.PlacedObject>();
-        private Dictionary<string, OriginalObjectPlacementInfo> _originalObjectPlacementInfo = new Dictionary<string, OriginalObjectPlacementInfo>();
+        private List<HomeDecor.PlacedObject> _originalObjectPlacements =
+            new List<HomeDecor.PlacedObject>();
+        private Dictionary<string, OriginalObjectPlacementInfo> _originalObjectPlacementInfo =
+            new Dictionary<string, OriginalObjectPlacementInfo>();
         private Image _draggedItemImage = null;
 
         public override void OnTransitioningIn()
@@ -71,7 +75,8 @@ namespace Tofuwu.StackCats.UI
             for (int i = 0; i < _originalObjectPlacements.Count; i++)
             {
                 HomeDecor.PlacedObject placedObject = _originalObjectPlacements[i];
-                PlaceableObjectItem placedObjectItem = placedObject != null ? placedObject.PlaceableObjectItem : null;
+                PlaceableObjectItem placedObjectItem =
+                    placedObject != null ? placedObject.PlaceableObjectItem : null;
                 PlaceWithData(placedObjectItem, i);
             }
 
@@ -84,10 +89,15 @@ namespace Tofuwu.StackCats.UI
 
             for (int i = 0; i < HomeDecor.NumObjectsPlaceableOnDresser; i++)
             {
-                DresserLocationDragButton dresserLocationDragButton = Instantiate(DresserLocationDragButtonPrefab, transform);
+                DresserLocationDragButton dresserLocationDragButton = Instantiate(
+                    DresserLocationDragButtonPrefab,
+                    transform
+                );
                 dresserLocationDragButton.DresserLocationIndex = i;
                 Vector3 dresserPlacementWorldPosition = HomeDecor.GetObjectWorldPositionByIndex(i);
-                dresserLocationDragButton.transform.position = MainCamera.WorldToScreenPoint(dresserPlacementWorldPosition + Vector3.up * 0.2f);
+                dresserLocationDragButton.transform.position = MainCamera.WorldToScreenPoint(
+                    dresserPlacementWorldPosition + Vector3.up * 0.2f
+                );
                 dresserLocationDragButton.onClickDresserLocation += OnSelectDresserLocation;
                 dresserLocationDragButton.onBeginDragDresserLocation += OnBeginDragDresserLocation;
                 dresserLocationDragButton.onEndDragDresserLocation += OnEndDragDresserLocation;
@@ -102,13 +112,19 @@ namespace Tofuwu.StackCats.UI
             if (this._isActive && _draggedItemImage != null)
             {
                 Vector2 currentPosition = _draggedItemImage.rectTransform.position;
-                _draggedItemImage.rectTransform.position = Vector2.MoveTowards(currentPosition, Input.mousePosition, 32.0f);
+                _draggedItemImage.rectTransform.position = Vector2.MoveTowards(
+                    currentPosition,
+                    Input.mousePosition,
+                    32.0f
+                );
             }
         }
 
         private List<PlaceableObjectItem> GetOwnedPlaceableObjects()
         {
-            return _stuffManager.PlaceableItems.List.Where(poi => _stuffManager.HasItem(poi)).ToList();
+            return _stuffManager
+                .PlaceableItems.List.Where(poi => _stuffManager.HasItem(poi))
+                .ToList();
         }
 
         private void SetOriginalObjectPlacements()
@@ -123,11 +139,20 @@ namespace Tofuwu.StackCats.UI
                 if (placedObject != null)
                 {
                     string placeableObjectId = placedObject.PlaceableObjectItem.GetId();
-                    _originalObjectPlacementInfo.Add(placeableObjectId, new OriginalObjectPlacementInfo
-                    {
-                        PlacedDateTime = GameManager.Instance.Data.HomeData.GetDresserObjectPlacedDateTime(placeableObjectId),
-                        ActivatedDateTime = GameManager.Instance.Data.HomeData.GetDresserObjectActivatedDateTime(placeableObjectId)
-                    });
+                    _originalObjectPlacementInfo.Add(
+                        placeableObjectId,
+                        new OriginalObjectPlacementInfo
+                        {
+                            PlacedDateTime =
+                                GameManager.Instance.Data.HomeData.GetDresserObjectPlacedDateTime(
+                                    placeableObjectId
+                                ),
+                            ActivatedDateTime =
+                                GameManager.Instance.Data.HomeData.GetDresserObjectActivatedDateTime(
+                                    placeableObjectId
+                                ),
+                        }
+                    );
                 }
             }
         }
@@ -145,7 +170,12 @@ namespace Tofuwu.StackCats.UI
                     activatedDateTime = _originalObjectPlacementInfo[objectId].ActivatedDateTime;
                 }
             }
-            HomeDecor.PlaceObject(placedObjectItem, dresserPosition, placedDateTime, activatedDateTime);
+            HomeDecor.PlaceObject(
+                placedObjectItem,
+                dresserPosition,
+                placedDateTime,
+                activatedDateTime
+            );
         }
 
         private void ClearPlacementMarkers()
@@ -167,8 +197,11 @@ namespace Tofuwu.StackCats.UI
             }
             else if (_selectedDresserPositionIndex != -1)
             {
-                HomeDecor.PlacedObject placedObject = HomeDecor.GetObjectPlacedAtIndex(dresserPositionIndex);
-                if (placedObject == null) placedObject = HomeDecor.GetObjectPlacedAtIndex(_selectedDresserPositionIndex);
+                HomeDecor.PlacedObject placedObject = HomeDecor.GetObjectPlacedAtIndex(
+                    dresserPositionIndex
+                );
+                if (placedObject == null)
+                    placedObject = HomeDecor.GetObjectPlacedAtIndex(_selectedDresserPositionIndex);
 
                 if (placedObject != null)
                 {
@@ -182,10 +215,15 @@ namespace Tofuwu.StackCats.UI
             }
         }
 
-        private void OnBeginDragDresserLocation(PointerEventData pointerEvent, int dresserLocationIndex)
+        private void OnBeginDragDresserLocation(
+            PointerEventData pointerEvent,
+            int dresserLocationIndex
+        )
         {
             ClearPlacementMarkers();
-            HomeDecor.PlacedObject placedObject = HomeDecor.GetObjectPlacedAtIndex(dresserLocationIndex);
+            HomeDecor.PlacedObject placedObject = HomeDecor.GetObjectPlacedAtIndex(
+                dresserLocationIndex
+            );
             if (placedObject != null)
             {
                 _draggedItemImage = Instantiate(DraggedItemImagePrefab, transform);
@@ -195,17 +233,25 @@ namespace Tofuwu.StackCats.UI
             }
         }
 
-        private void OnEndDragDresserLocation(PointerEventData pointerEvent, int dresserLocationIndex)
+        private void OnEndDragDresserLocation(
+            PointerEventData pointerEvent,
+            int dresserLocationIndex
+        )
         {
             if (dresserLocationIndex != -1)
             {
                 int hoveredDresserLocationIndex = -1;
-                foreach (DresserLocationDragButton dresserLocationDragButton in _dresserLocationDragButtons)
+                foreach (
+                    DresserLocationDragButton dresserLocationDragButton in _dresserLocationDragButtons
+                )
                 {
-                    if (dresserLocationDragButton.DresserLocationIndex != dresserLocationIndex &&
-                        dresserLocationDragButton.IsPositionWithinBounds(pointerEvent.position))
+                    if (
+                        dresserLocationDragButton.DresserLocationIndex != dresserLocationIndex
+                        && dresserLocationDragButton.IsPositionWithinBounds(pointerEvent.position)
+                    )
                     {
-                        hoveredDresserLocationIndex = dresserLocationDragButton.DresserLocationIndex;
+                        hoveredDresserLocationIndex =
+                            dresserLocationDragButton.DresserLocationIndex;
                         continue;
                     }
                 }
@@ -232,7 +278,10 @@ namespace Tofuwu.StackCats.UI
             }
         }
 
-        private void OnBeginDragPlaceableObjectItem(PointerEventData pointerEvent, PlaceableObjectItem draggedItem)
+        private void OnBeginDragPlaceableObjectItem(
+            PointerEventData pointerEvent,
+            PlaceableObjectItem draggedItem
+        )
         {
             ClearPlacementMarkers();
 
@@ -245,7 +294,10 @@ namespace Tofuwu.StackCats.UI
             }
         }
 
-        private void OnEndDragPlaceableObjectItem(PointerEventData pointerEvent, PlaceableObjectItem objectItem)
+        private void OnEndDragPlaceableObjectItem(
+            PointerEventData pointerEvent,
+            PlaceableObjectItem objectItem
+        )
         {
             foreach (DresserLocationDragButton locationButton in _dresserLocationDragButtons)
             {
@@ -272,7 +324,10 @@ namespace Tofuwu.StackCats.UI
 
             foreach (PlaceableObjectItem item in pageItems)
             {
-                PlaceableObjectItemDragButton newItemButton = Instantiate(ItemDragButtonPrefab, ItemButtonsRectTransform);
+                PlaceableObjectItemDragButton newItemButton = Instantiate(
+                    ItemDragButtonPrefab,
+                    ItemButtonsRectTransform
+                );
                 newItemButton.PlaceableObjectItem = item;
                 newItemButton.onClickPlaceableObjectItem += OnSelectPlaceableObjectItem;
                 newItemButton.onBeginDragPlaceableObjectItem += OnBeginDragPlaceableObjectItem;

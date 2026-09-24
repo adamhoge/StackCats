@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using RotaryHeart.Lib.SerializableDictionary;
+using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     [Serializable]
     public class ChallengePuzzleReward
@@ -15,7 +15,8 @@ namespace Tofuwu.StackCats
     }
 
     [Serializable]
-    public class DifficultyTrophyDictionary : SerializableDictionaryBase<ChallengeRunDifficulty, TrophyItem> { }
+    public class DifficultyTrophyDictionary
+        : SerializableDictionaryBase<ChallengeRunDifficulty, TrophyItem> { }
 
     [CreateAssetMenu(fileName = "Puzzle Area", menuName = "Stack Cats/Puzzle Area")]
     public class PuzzleArea : ScriptableObject, IIdentifiable
@@ -48,7 +49,10 @@ namespace Tofuwu.StackCats
 
         public string GetId()
         {
-            if (string.IsNullOrEmpty(_id)) { _id = Guid.NewGuid().ToString(); }
+            if (string.IsNullOrEmpty(_id))
+            {
+                _id = Guid.NewGuid().ToString();
+            }
 
             return _id;
         }

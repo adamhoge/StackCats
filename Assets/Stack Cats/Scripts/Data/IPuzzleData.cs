@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Tofuwu.StackCats.Data
+namespace RockhopperGames.StackCats.Data
 {
     public interface IPuzzleData
     {
@@ -17,23 +17,68 @@ namespace Tofuwu.StackCats.Data
         bool IsProgressionPuzzleLocked(string puzzleId);
         bool IsProgressionPuzzleCompleted(string puzzleId);
         int? GetStoryPuzzleBestMoveScore(string puzzleId);
-        void CompleteProgressionPuzzle(string puzzleId, DateTime completionDateTime, float duration, int numMovesMade);
+        void CompleteProgressionPuzzle(
+            string puzzleId,
+            DateTime completionDateTime,
+            float duration,
+            int numMovesMade
+        );
         void UnlockProgressionPuzzle(string puzzleId);
         IChallengeRunData StartChallengeRun(string areaId, ChallengeRunDifficulty difficulty);
-        IChallengePuzzleData StartChallengePuzzle(string areaId, string puzzleJsonData, int difficultyRating, int minMoves, int maxMoves, int numUndos);
-        void UpdateChallengePuzzle(string areaId, string puzzleStateJsonData, int movesMade, List<string> catsSeen, List<string> newCatsSeen, int numUndosRemaining);
+        IChallengePuzzleData StartChallengePuzzle(
+            string areaId,
+            string puzzleJsonData,
+            int difficultyRating,
+            int minMoves,
+            int maxMoves,
+            int numUndos
+        );
+        void UpdateChallengePuzzle(
+            string areaId,
+            string puzzleStateJsonData,
+            int movesMade,
+            List<string> catsSeen,
+            List<string> newCatsSeen,
+            int numUndosRemaining
+        );
         bool UseLuckPotion(string areaId, string puzzleJsonData);
-        void CompleteChallengePuzzle(string areaId, PuzzleCompletionType completionType, int movesMade);
-        void CompleteChallengeRun(string areaId, Dictionary<Currency, int> currencyReward, IPresentData presentData);
+        void CompleteChallengePuzzle(
+            string areaId,
+            PuzzleCompletionType completionType,
+            int movesMade
+        );
+        void CompleteChallengeRun(
+            string areaId,
+            Dictionary<Currency, int> currencyReward,
+            IPresentData presentData
+        );
         void EndChallengeRun(string areaId);
         IChallengeRunData GetCurrentChallengeRun(string areaId);
         IChallengeRunData GetLastCompletedChallengeRun(string areaId);
         List<IChallengeRunData> GetCompletedChallengeRuns(string areaId);
         bool IsChallengeRunDifficultyCompleted(string areaId, ChallengeRunDifficulty difficulty);
         IEndlessRunData StartEndlessRun(string areaId);
-        IEndlessPuzzleData StartEndlessPuzzle(string areaId, string puzzleJsonData, int difficultyRating, int minMoves, int maxMoves, int numUndoes);
-        void UpdateEndlessPuzzle(string areaId, string puzzleStateJsonData, int movesMade, List<string> catsSeen, List<string> newCatsSeen, int numUndosRemaining);
-        void CompleteEndlessPuzzle(string areaId, PuzzleCompletionType completionType, int movesMade);
+        IEndlessPuzzleData StartEndlessPuzzle(
+            string areaId,
+            string puzzleJsonData,
+            int difficultyRating,
+            int minMoves,
+            int maxMoves,
+            int numUndoes
+        );
+        void UpdateEndlessPuzzle(
+            string areaId,
+            string puzzleStateJsonData,
+            int movesMade,
+            List<string> catsSeen,
+            List<string> newCatsSeen,
+            int numUndosRemaining
+        );
+        void CompleteEndlessPuzzle(
+            string areaId,
+            PuzzleCompletionType completionType,
+            int movesMade
+        );
         void EndEndlessRun(string areaId);
         IEndlessRunData GetCurrentEndlessRun(string areaId);
         List<IEndlessRunData> GetCompletedEndlessRuns(string areaId);

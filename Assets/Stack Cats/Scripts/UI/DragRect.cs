@@ -1,13 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public delegate void BeginDrag(PointerEventData eventData);
     public delegate void Drag(PointerEventData eventData);
     public delegate void EndDrag(PointerEventData eventData);
 
-    public class DragRect : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerExitHandler
+    public class DragRect
+        : MonoBehaviour,
+            IBeginDragHandler,
+            IDragHandler,
+            IEndDragHandler,
+            IPointerExitHandler
     {
         public event BeginDrag onBeginDrag;
         public event Drag onDrag;
@@ -40,7 +45,8 @@ namespace Tofuwu.StackCats.UI
             if (_isButtonDragging)
             {
                 _isButtonDragging = false;
-                if (onEndDrag != null) onEndDrag(eventData);
+                if (onEndDrag != null)
+                    onEndDrag(eventData);
             }
         }
 
@@ -48,7 +54,8 @@ namespace Tofuwu.StackCats.UI
         {
             if (_isDragging && !_isButtonDragging)
             {
-                if (onBeginDrag != null) onBeginDrag(eventData);
+                if (onBeginDrag != null)
+                    onBeginDrag(eventData);
                 _isButtonDragging = true;
             }
         }

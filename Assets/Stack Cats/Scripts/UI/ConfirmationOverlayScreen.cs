@@ -1,9 +1,9 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using TMPro;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class ConfirmationOverlayScreen : OverlayScreen
     {
@@ -31,8 +31,11 @@ namespace Tofuwu.StackCats.UI
             ConfirmationCanvasGroup.transform.localScale = Vector2.one;
             //ConfirmationCanvasGroup.transform.localPosition = Vector2.down * 25.0f;
             LeanTween.cancel(ConfirmationCanvasGroup.gameObject);
-            LeanTween.alphaCanvas(ConfirmationCanvasGroup, 1.0f, TransitionInDuration).setEase(TransitionInTween);
-            LeanTween.scale(ConfirmationCanvasGroup.gameObject, Vector2.one * 1.05f, 0.5f)
+            LeanTween
+                .alphaCanvas(ConfirmationCanvasGroup, 1.0f, TransitionInDuration)
+                .setEase(TransitionInTween);
+            LeanTween
+                .scale(ConfirmationCanvasGroup.gameObject, Vector2.one * 1.05f, 0.5f)
                 .setEase(LeanTweenType.punch);
             //LeanTween.moveLocalY(ConfirmationCanvasGroup.gameObject, 0.0f, TransitionInDuration).setEase(TransitionInTween);
         }
@@ -45,8 +48,16 @@ namespace Tofuwu.StackCats.UI
             ConfirmationCanvasGroup.transform.localScale = Vector2.one;
             //ConfirmationCanvasGroup.transform.localPosition = Vector2.zero;
             LeanTween.cancel(ConfirmationCanvasGroup.gameObject);
-            LeanTween.alphaCanvas(ConfirmationCanvasGroup, 0.0f, TransitionOutDuration).setEase(TransitionInTween);
-            LeanTween.scale(ConfirmationCanvasGroup.gameObject, Vector2.one * 0.9f, TransitionOutDuration).setEase(TransitionOutTween);
+            LeanTween
+                .alphaCanvas(ConfirmationCanvasGroup, 0.0f, TransitionOutDuration)
+                .setEase(TransitionInTween);
+            LeanTween
+                .scale(
+                    ConfirmationCanvasGroup.gameObject,
+                    Vector2.one * 0.9f,
+                    TransitionOutDuration
+                )
+                .setEase(TransitionOutTween);
             //LeanTween.moveLocalY(ConfirmationCanvasGroup.gameObject, -25.0f, TransitionInDuration).setEase(TransitionInTween);
         }
 

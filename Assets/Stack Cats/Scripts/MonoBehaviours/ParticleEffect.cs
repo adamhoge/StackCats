@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class ParticleEffect : PoolObject
     {
@@ -10,7 +10,8 @@ namespace Tofuwu.StackCats
         {
             if (isActiveAndEnabled)
             {
-                if(!ParticleSystem.IsAlive(true)) Parent.ReturnInstance(this);
+                if (!ParticleSystem.IsAlive(true))
+                    Parent.ReturnInstance(this);
             }
         }
     }

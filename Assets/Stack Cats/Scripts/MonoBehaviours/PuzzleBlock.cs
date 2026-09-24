@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     [DisallowMultipleComponent]
     public class PuzzleBlock : BlockComponent

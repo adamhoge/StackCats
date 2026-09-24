@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public delegate void RaiseStacksMovesChanged(int movesRemaining);
 
@@ -14,13 +14,18 @@ namespace Tofuwu.StackCats
         public GalaxyBlock GalaxyBlockPrefab;
         public ObjectPooler GalaxyBlockEffectObjectPooler;
 
-        public int RaiseStacksMovesRemaining { get { return _raiseStacksMovesRemaining; } set { _raiseStacksMovesRemaining = value; } }
+        public int RaiseStacksMovesRemaining
+        {
+            get { return _raiseStacksMovesRemaining; }
+            set { _raiseStacksMovesRemaining = value; }
+        }
 
         private int _raiseStacksMovesRemaining;
 
         public GalaxyBlock CreateGalaxyBlock(int primaryNumber = 1, int secondaryNumber = 0)
         {
-            if (!GalaxyBlockPrefab) return null;
+            if (!GalaxyBlockPrefab)
+                return null;
 
             // Create the new galaxy block.
             GalaxyBlock newGalaxyBlock = Instantiate(GalaxyBlockPrefab);
@@ -35,7 +40,8 @@ namespace Tofuwu.StackCats
         public void RaiseStacksImmediate()
         {
             _raiseStacksMovesRemaining = RaiseStacksInterval;
-            if (onRaiseStacksMovesChanged != null) onRaiseStacksMovesChanged(_raiseStacksMovesRemaining);
+            if (onRaiseStacksMovesChanged != null)
+                onRaiseStacksMovesChanged(_raiseStacksMovesRemaining);
 
             RaiseStacks();
         }
@@ -44,7 +50,8 @@ namespace Tofuwu.StackCats
         {
             base.Start();
 
-            if (_raiseStacksMovesRemaining == 0) _raiseStacksMovesRemaining = RaiseStacksInterval;
+            if (_raiseStacksMovesRemaining == 0)
+                _raiseStacksMovesRemaining = RaiseStacksInterval;
         }
 
         protected override void OnAfterBlockMoved(Stack source, Block block, Stack destination)
@@ -53,7 +60,8 @@ namespace Tofuwu.StackCats
 
             if (!IsEditMode)
             {
-                if (_isComplete) return;
+                if (_isComplete)
+                    return;
 
                 --_raiseStacksMovesRemaining;
 
@@ -63,7 +71,8 @@ namespace Tofuwu.StackCats
                     _raiseStacksMovesRemaining = RaiseStacksInterval;
                 }
 
-                if (onRaiseStacksMovesChanged != null) onRaiseStacksMovesChanged(_raiseStacksMovesRemaining);
+                if (onRaiseStacksMovesChanged != null)
+                    onRaiseStacksMovesChanged(_raiseStacksMovesRemaining);
             }
         }
 
@@ -85,7 +94,9 @@ namespace Tofuwu.StackCats
                 float randomValue = Random.value;
 
                 Block bottomBlock = stack.Blocks.Count > 0 ? stack.Blocks[0] : null;
-                PuzzleBlock bottomPuzzleBlock = bottomBlock ? bottomBlock.GetComponent<PuzzleBlock>() : null;
+                PuzzleBlock bottomPuzzleBlock = bottomBlock
+                    ? bottomBlock.GetComponent<PuzzleBlock>()
+                    : null;
 
                 if (bottomBlock && randomValue > 0.6f)
                 {
@@ -93,7 +104,12 @@ namespace Tofuwu.StackCats
                 }
                 else if (randomValue > 0.5f)
                 {
-                    PuzzleBlock newPuzzleBlock = PuzzleBuilder.CreateAdjacentPuzzleBlock(this, bottomPuzzleBlock, 1, 5);
+                    PuzzleBlock newPuzzleBlock = PuzzleBuilder.CreateAdjacentPuzzleBlock(
+                        this,
+                        bottomPuzzleBlock,
+                        1,
+                        5
+                    );
                     block = newPuzzleBlock.Block;
                 }
                 else if (randomValue > 0.4f)
@@ -106,7 +122,12 @@ namespace Tofuwu.StackCats
                 }
                 else if (randomValue > 0.1f)
                 {
-                    GalaxyBlock galaxyBlock = GalaxyFlavoredPuzzleBuilder.CreateAdjacentGalaxyBlock(this, bottomPuzzleBlock, 1, 5);
+                    GalaxyBlock galaxyBlock = GalaxyFlavoredPuzzleBuilder.CreateAdjacentGalaxyBlock(
+                        this,
+                        bottomPuzzleBlock,
+                        1,
+                        5
+                    );
                     block = galaxyBlock.Block;
                 }
                 else
@@ -123,7 +144,13 @@ namespace Tofuwu.StackCats
 
                 foreach (FallingBlock fallingBlock in _fallingBlocks[stack])
                 {
-                    AnimateFallingBlock(stack, fallingBlock.Block, fallingBlock.FromIndex, fallingBlock.ToIndex + 1, fallingBlock.Delay);
+                    AnimateFallingBlock(
+                        stack,
+                        fallingBlock.Block,
+                        fallingBlock.FromIndex,
+                        fallingBlock.ToIndex + 1,
+                        fallingBlock.Delay
+                    );
                 }
             }
 
@@ -131,12 +158,19 @@ namespace Tofuwu.StackCats
             LeanTween.moveLocalY(gameObject, 0.0f, 1.0f).setEase(LeanTweenType.easeOutQuint);
         }
 
-        private void OnGalaxyBlockTriggered(GalaxyBlock sender, Stack stack, int fromIndex, int toIndex)
+        private void OnGalaxyBlockTriggered(
+            GalaxyBlock sender,
+            Stack stack,
+            int fromIndex,
+            int toIndex
+        )
         {
             for (int i = fromIndex; i <= toIndex; i++)
             {
-                ParticleEffect galaxyBlockEffect = (ParticleEffect)GalaxyBlockEffectObjectPooler.BorrowInstance();
-                galaxyBlockEffect.transform.position = stack.transform.position + stack.GetBlockLocalPosition(i) + Vector3.up * 0.5f;
+                ParticleEffect galaxyBlockEffect = (ParticleEffect)
+                    GalaxyBlockEffectObjectPooler.BorrowInstance();
+                galaxyBlockEffect.transform.position =
+                    stack.transform.position + stack.GetBlockLocalPosition(i) + Vector3.up * 0.5f;
             }
         }
     }

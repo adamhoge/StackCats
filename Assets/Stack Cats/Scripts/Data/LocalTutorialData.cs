@@ -2,18 +2,30 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace Tofuwu.StackCats.Data
+namespace RockhopperGames.StackCats.Data
 {
     [Serializable]
     [DataContract]
     public class LocalTutorialData : LocalData<LocalTutorialData>, ITutorialData
     {
-        public TutorialSceneState TutorialState { get { return _tutorialState; } set { _tutorialState = value; Save(); } }
+        public TutorialSceneState TutorialState
+        {
+            get { return _tutorialState; }
+            set
+            {
+                _tutorialState = value;
+                Save();
+            }
+        }
 
-        public LocalTutorialData(string dataPath) : base(dataPath) { }
+        public LocalTutorialData(string dataPath)
+            : base(dataPath) { }
 
-        [DataMember] private TutorialSceneState _tutorialState;
-        [DataMember] private List<string> _typesKnown = new List<string>();
+        [DataMember]
+        private TutorialSceneState _tutorialState;
+
+        [DataMember]
+        private List<string> _typesKnown = new List<string>();
 
         [OnDeserialized]
         public void OnDeserialized(StreamingContext context)

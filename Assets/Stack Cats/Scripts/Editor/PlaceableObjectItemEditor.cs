@@ -1,4 +1,4 @@
-﻿using Tofuwu.StackCats;
+﻿using RockhopperGames.StackCats;
 using UnityEditor;
 
 [CustomEditor(typeof(PlaceableObjectItem))]

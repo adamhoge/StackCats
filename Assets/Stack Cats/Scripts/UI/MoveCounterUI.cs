@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using TMPro;
+﻿using TMPro;
+using UnityEngine;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class MoveCounterUI : MonoBehaviour
     {
@@ -22,7 +22,8 @@ namespace Tofuwu.StackCats.UI
             PuzzleLoader.onPuzzleBeginLoad += OnPuzzleBeginLoad;
             PuzzleLoader.onPuzzleUnloaded += OnPuzzleUnloaded;
 
-            if (ContentRectTransform) ContentRectTransform.gameObject.SetActive(false);
+            if (ContentRectTransform)
+                ContentRectTransform.gameObject.SetActive(false);
         }
 
         private void OnPuzzleBeginLoad(Puzzle puzzle, bool wasRestarted, bool isUndo)
@@ -32,7 +33,9 @@ namespace Tofuwu.StackCats.UI
                 _puzzle = puzzle;
                 _puzzle.onBlockMoved += OnBlockMoved;
                 _puzzle.onPuzzleCompleted += OnPuzzleCompleted;
-                _puzzleBestMoveScore = _puzzles.GetStoryPuzzleBestMoveScore(_puzzles.CurrentStoryPuzzle);
+                _puzzleBestMoveScore = _puzzles.GetStoryPuzzleBestMoveScore(
+                    _puzzles.CurrentStoryPuzzle
+                );
 
                 if (ContentRectTransform)
                 {
@@ -46,12 +49,18 @@ namespace Tofuwu.StackCats.UI
 
                 if (BestMovesMadeText)
                 {
-                    BestMovesMadeText.text = _puzzleBestMoveScore != null ? _puzzleBestMoveScore.ToString() : "-";
+                    BestMovesMadeText.text =
+                        _puzzleBestMoveScore != null ? _puzzleBestMoveScore.ToString() : "-";
                 }
 
-                if (ThreeStarMovesText && _puzzles.CurrentStoryPuzzle.StarMoveRequirements.Count == 3)
+                if (
+                    ThreeStarMovesText
+                    && _puzzles.CurrentStoryPuzzle.StarMoveRequirements.Count == 3
+                )
                 {
-                    ThreeStarMovesText.text = _puzzles.CurrentStoryPuzzle.StarMoveRequirements[2].ToString();
+                    ThreeStarMovesText.text = _puzzles
+                        .CurrentStoryPuzzle.StarMoveRequirements[2]
+                        .ToString();
                 }
             }
         }
@@ -64,7 +73,8 @@ namespace Tofuwu.StackCats.UI
                 _puzzle.onPuzzleCompleted -= OnPuzzleCompleted;
                 _puzzle = null;
 
-                if (ContentRectTransform) ContentRectTransform.gameObject.SetActive(false);
+                if (ContentRectTransform)
+                    ContentRectTransform.gameObject.SetActive(false);
             }
         }
 
@@ -74,7 +84,9 @@ namespace Tofuwu.StackCats.UI
 
             LeanTween.cancel(MovesMadeText.gameObject);
             MovesMadeText.transform.localScale = Vector2.one;
-            LeanTween.scale(MovesMadeText.gameObject, Vector3.one * 1.25f, 0.5f).setEase(LeanTweenType.punch);
+            LeanTween
+                .scale(MovesMadeText.gameObject, Vector3.one * 1.25f, 0.5f)
+                .setEase(LeanTweenType.punch);
         }
 
         private void OnPuzzleCompleted(Puzzle puzzle, PuzzleCompletionType puzzleCompletionType)
@@ -84,7 +96,9 @@ namespace Tofuwu.StackCats.UI
             {
                 LeanTween.cancel(BestMovesMadeText.gameObject);
                 BestMovesMadeText.text = puzzle.NumMovesMade.ToString();
-                LeanTween.scale(BestMovesMadeText.gameObject, Vector3.one * 1.25f, 0.5f).setEase(LeanTweenType.punch);
+                LeanTween
+                    .scale(BestMovesMadeText.gameObject, Vector3.one * 1.25f, 0.5f)
+                    .setEase(LeanTweenType.punch);
             }
         }
     }

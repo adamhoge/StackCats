@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     /// <summary>
     /// Base object for any item that can be added to a stack.
@@ -22,7 +22,8 @@ namespace Tofuwu.StackCats
             if (ParentStack)
             {
                 int blockIndex = ParentStack.Blocks.IndexOf(this);
-                if (blockIndex > 0) return ParentStack.Blocks[blockIndex - 1];
+                if (blockIndex > 0)
+                    return ParentStack.Blocks[blockIndex - 1];
             }
 
             return null;
@@ -49,7 +50,8 @@ namespace Tofuwu.StackCats
             if (ParentStack)
             {
                 int nextBlockIndex = ParentStack.Blocks.IndexOf(this) + 1;
-                if (nextBlockIndex < ParentStack.Blocks.Count) return ParentStack.Blocks[nextBlockIndex];
+                if (nextBlockIndex < ParentStack.Blocks.Count)
+                    return ParentStack.Blocks[nextBlockIndex];
             }
 
             return null;
@@ -71,23 +73,36 @@ namespace Tofuwu.StackCats
             return blocksAbove;
         }
 
-        public bool HasBlockBelow<T>() where T : BlockComponent
+        public bool HasBlockBelow<T>()
+            where T : BlockComponent
         {
             Block blockBelow = GetBlockBelow();
             return blockBelow ? blockBelow.GetComponent<T>() != null : false;
         }
 
-        public void FlashBlock(Color color, float duration = 1.0f, LeanTweenType tweenType = LeanTweenType.easeInQuint)
+        public void FlashBlock(
+            Color color,
+            float duration = 1.0f,
+            LeanTweenType tweenType = LeanTweenType.easeInQuint
+        )
         {
             LeanTween.cancel(BlockOverlay.gameObject);
             BlockOverlay.color = color;
-            LeanTween.color(BlockOverlay.gameObject, new Color(color.r, color.g, color.b, 0.0f), duration).setEase(tweenType);
+            LeanTween
+                .color(
+                    BlockOverlay.gameObject,
+                    new Color(color.r, color.g, color.b, 0.0f),
+                    duration
+                )
+                .setEase(tweenType);
         }
 
         public void KnockBlock()
         {
             LeanTween.cancel(gameObject);
-            transform.localPosition = ParentStack ? ParentStack.GetBlockLocalPosition(this) : Vector3.zero;
+            transform.localPosition = ParentStack
+                ? ParentStack.GetBlockLocalPosition(this)
+                : Vector3.zero;
             LeanTween.moveLocalX(gameObject, 0.025f, 0.15f).setEase(LeanTweenType.easeShake);
             GameManager.Instance.Audio.PlaySoundEffect(KnockSoundEffect);
         }

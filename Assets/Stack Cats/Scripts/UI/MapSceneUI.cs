@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class MapSceneUI : MonoBehaviour
     {
@@ -30,8 +30,10 @@ namespace Tofuwu.StackCats.UI
         private AudioManager _audioManager;
         private CatManager _catManager;
         private PuzzleManager _puzzleManager;
-        private readonly Dictionary<MapScene.MapItem, PuzzleAreaMapUI> _puzzleAreaMaps = new Dictionary<MapScene.MapItem, PuzzleAreaMapUI>();
-        private readonly Dictionary<MapScene.MapItem, GameObject> _navigationDots = new Dictionary<MapScene.MapItem, GameObject>();
+        private readonly Dictionary<MapScene.MapItem, PuzzleAreaMapUI> _puzzleAreaMaps =
+            new Dictionary<MapScene.MapItem, PuzzleAreaMapUI>();
+        private readonly Dictionary<MapScene.MapItem, GameObject> _navigationDots =
+            new Dictionary<MapScene.MapItem, GameObject>();
         private MapScene.MapItem _currentMapItem;
         private int _currentStarsEarnedDisplayed;
         private int _totalStarsInArea;
@@ -48,7 +50,9 @@ namespace Tofuwu.StackCats.UI
 
             foreach (MapScene.MapItem mapItem in MapScene.MapItems)
             {
-                PuzzleAreaMapUI newPuzzleAreaMap = new GameObject(mapItem.PuzzleAreaMap.name + " UI").AddComponent<PuzzleAreaMapUI>();
+                PuzzleAreaMapUI newPuzzleAreaMap = new GameObject(
+                    mapItem.PuzzleAreaMap.name + " UI"
+                ).AddComponent<PuzzleAreaMapUI>();
                 newPuzzleAreaMap.transform.SetParent(WorldCanvas.transform);
                 newPuzzleAreaMap.PuzzleButtonPrefab = PuzzleButtonPrefab;
                 newPuzzleAreaMap.Initialize(mapItem.PuzzleArea, mapItem.PuzzleAreaMap);
@@ -96,12 +100,18 @@ namespace Tofuwu.StackCats.UI
 
             LeanTween.cancel(StarsEarnedIcon.gameObject);
             StarsEarnedIcon.transform.localScale = Vector3.one;
-            LeanTween.scaleX(StarsEarnedIcon.gameObject, Random.Range(1.15f, 1.35f), 0.35f).setEase(LeanTweenType.punch);
-            LeanTween.scaleY(StarsEarnedIcon.gameObject, Random.Range(1.15f, 1.35f), 0.35f).setEase(LeanTweenType.punch);
+            LeanTween
+                .scaleX(StarsEarnedIcon.gameObject, Random.Range(1.15f, 1.35f), 0.35f)
+                .setEase(LeanTweenType.punch);
+            LeanTween
+                .scaleY(StarsEarnedIcon.gameObject, Random.Range(1.15f, 1.35f), 0.35f)
+                .setEase(LeanTweenType.punch);
 
             LeanTween.cancel(StarsEarnedIconFlashCanvasGroup.gameObject);
             StarsEarnedIconFlashCanvasGroup.alpha = 0.9f;
-            LeanTween.alphaCanvas(StarsEarnedIconFlashCanvasGroup, 0.0f, 0.35f).setEase(LeanTweenType.easeInSine);
+            LeanTween
+                .alphaCanvas(StarsEarnedIconFlashCanvasGroup, 0.0f, 0.35f)
+                .setEase(LeanTweenType.easeInSine);
 
             _audioManager.PlaySoundEffect(IncrementStarsSoundEffect);
 
@@ -158,19 +168,27 @@ namespace Tofuwu.StackCats.UI
 
                 GameObject previousNavigationDot = _navigationDots[_currentMapItem];
                 LeanTween.cancel(previousNavigationDot);
-                LeanTween.scale(previousNavigationDot, Vector3.one, 0.5f).setEase(LeanTweenType.easeOutQuint);
+                LeanTween
+                    .scale(previousNavigationDot, Vector3.one, 0.5f)
+                    .setEase(LeanTweenType.easeOutQuint);
 
                 foreach (RectTransform themedImage in ThemedImages)
                 {
                     LeanTween.cancel(themedImage);
-                    LeanTween.color(themedImage, mapItem.PuzzleArea.PuzzleTheme.UIColor, 0.5f).setEase(LeanTweenType.easeOutQuint).setRecursive(false);
+                    LeanTween
+                        .color(themedImage, mapItem.PuzzleArea.PuzzleTheme.UIColor, 0.5f)
+                        .setEase(LeanTweenType.easeOutQuint)
+                        .setRecursive(false);
                 }
             }
             else
             {
                 foreach (RectTransform themedImage in ThemedImages)
                 {
-                    themedImage.GetComponent<Image>().color = mapItem.PuzzleArea.PuzzleTheme.UIColor;
+                    themedImage.GetComponent<Image>().color = mapItem
+                        .PuzzleArea
+                        .PuzzleTheme
+                        .UIColor;
                 }
             }
 
@@ -181,7 +199,9 @@ namespace Tofuwu.StackCats.UI
             {
                 GameObject currentNavigationDot = _navigationDots[_currentMapItem];
                 LeanTween.cancel(currentNavigationDot);
-                LeanTween.scale(currentNavigationDot, Vector3.one * 1.75f, 0.5f).setEase(LeanTweenType.easeOutQuint);
+                LeanTween
+                    .scale(currentNavigationDot, Vector3.one * 1.75f, 0.5f)
+                    .setEase(LeanTweenType.easeOutQuint);
             }
         }
 
@@ -209,20 +229,30 @@ namespace Tofuwu.StackCats.UI
                 _starImages.Add(starImage);
 
                 float expandX = (-numStarsEarned / 2.0f + i + 0.5f) * 48.0f;
-                Vector3 xShiftPosition = new Vector3(Random.Range(-64.0f, 64.0f), Random.Range(32.0f, 64.0f), 0.0f);
+                Vector3 xShiftPosition = new Vector3(
+                    Random.Range(-64.0f, 64.0f),
+                    Random.Range(32.0f, 64.0f),
+                    0.0f
+                );
                 float expandY = 48.0f;
                 float moveDelay = 0.4f + i * 0.15f;
-                Vector3 expandPosition = starImage.transform.position + new Vector3(expandX, expandY, 0.0f);
+                Vector3 expandPosition =
+                    starImage.transform.position + new Vector3(expandX, expandY, 0.0f);
 
-                LeanTween.move(starImage.gameObject, expandPosition, moveDelay)
+                LeanTween
+                    .move(starImage.gameObject, expandPosition, moveDelay)
                     .setEase(LeanTweenType.easeOutCubic);
-                LTBezierPath starPath = new LTBezierPath(new Vector3[]{
-                    expandPosition,
-                    expandPosition + xShiftPosition,
-                    expandPosition + xShiftPosition,
-                    starsEarnedIconPosition
-                });
-                LeanTween.move(starImage.gameObject, starPath, 0.4f)
+                LTBezierPath starPath = new LTBezierPath(
+                    new Vector3[]
+                    {
+                        expandPosition,
+                        expandPosition + xShiftPosition,
+                        expandPosition + xShiftPosition,
+                        starsEarnedIconPosition,
+                    }
+                );
+                LeanTween
+                    .move(starImage.gameObject, starPath, 0.4f)
                     .setDelay(moveDelay)
                     .setEase(LeanTweenType.easeInSine)
                     .setOnComplete(IncrementStars, starImage);
@@ -237,7 +267,9 @@ namespace Tofuwu.StackCats.UI
             int mapIndex = MapScene.MapItems.IndexOf(mapItem);
             PuzzleAreaMapUI revealedMap = _puzzleAreaMaps[MapScene.MapItems[mapIndex]];
 
-            foreach (KeyValuePair<MapScene.MapItem, PuzzleAreaMapUI> puzzleAreaMap in _puzzleAreaMaps)
+            foreach (
+                KeyValuePair<MapScene.MapItem, PuzzleAreaMapUI> puzzleAreaMap in _puzzleAreaMaps
+            )
             {
                 puzzleAreaMap.Value.SetActive(false);
             }
@@ -250,10 +282,15 @@ namespace Tofuwu.StackCats.UI
             foreach (RectTransform themedImage in ThemedImages)
             {
                 LeanTween.cancel(themedImage);
-                LeanTween.color(themedImage, mapItem.PuzzleArea.PuzzleTheme.UIColor, 0.5f).setEase(LeanTweenType.easeOutQuint).setRecursive(false);
+                LeanTween
+                    .color(themedImage, mapItem.PuzzleArea.PuzzleTheme.UIColor, 0.5f)
+                    .setEase(LeanTweenType.easeOutQuint)
+                    .setRecursive(false);
             }
 
-            foreach (KeyValuePair<MapScene.MapItem, PuzzleAreaMapUI> puzzleAreaMap in _puzzleAreaMaps)
+            foreach (
+                KeyValuePair<MapScene.MapItem, PuzzleAreaMapUI> puzzleAreaMap in _puzzleAreaMaps
+            )
             {
                 puzzleAreaMap.Value.SetActive(true);
             }

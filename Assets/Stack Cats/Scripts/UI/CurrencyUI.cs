@@ -1,9 +1,9 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class CurrencyUI : MonoBehaviour
     {
@@ -32,13 +32,13 @@ namespace Tofuwu.StackCats
                 {
                     _lastYarn = _curYarn;
                 }
-                else if (Time.time > _lastYarnIncrement + IncrementDelay)// / Mathf.Abs(_lastYarn - _curYarn) * 2.0f)
+                else if (Time.time > _lastYarnIncrement + IncrementDelay) // / Mathf.Abs(_lastYarn - _curYarn) * 2.0f)
                 {
                     _lastYarnIncrement = Time.time;
                     _lastYarn += _lastYarn < _curYarn ? 1 : -1;
                 }
-                if (YarnText) YarnText.text = CurrencyHelper.ToCurrencyString(Currency.SilverPaw, _lastYarn);
-
+                if (YarnText)
+                    YarnText.text = CurrencyHelper.ToCurrencyString(Currency.SilverPaw, _lastYarn);
             }
 
             if (_lastMonies != _curMonies)
@@ -47,11 +47,12 @@ namespace Tofuwu.StackCats
                 {
                     _lastMonies = _curMonies;
                 }
-                else if (Time.time > _lastMoniesIncrement + IncrementDelay)// / Mathf.Abs(_lastMonies - _curMonies) * 2.0f)
+                else if (Time.time > _lastMoniesIncrement + IncrementDelay) // / Mathf.Abs(_lastMonies - _curMonies) * 2.0f)
                 {
                     _lastMoniesIncrement = Time.time;
                     _lastMonies += _lastMonies < _curMonies ? 1 : -1;
-                    if (MoniesText) MoniesText.text = string.Format("{0:n0}", _lastMonies);
+                    if (MoniesText)
+                        MoniesText.text = string.Format("{0:n0}", _lastMonies);
                 }
             }
         }
@@ -64,8 +65,10 @@ namespace Tofuwu.StackCats
             _lastYarn = _curYarn;
             _curMonies = _currency.GetCurrencyHeld(Currency.GoldPaw);
             _lastMonies = _curMonies;
-            if (YarnText) YarnText.text = CurrencyHelper.ToCurrencyString(Currency.SilverPaw, _curYarn);
-            if (MoniesText) MoniesText.text = string.Format("{0:n0}", _curMonies);
+            if (YarnText)
+                YarnText.text = CurrencyHelper.ToCurrencyString(Currency.SilverPaw, _curYarn);
+            if (MoniesText)
+                MoniesText.text = string.Format("{0:n0}", _curMonies);
         }
 
         protected void OnDisable()

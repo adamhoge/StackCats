@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     [RequireComponent(typeof(CatAvatar))]
     public abstract class CatAvatarMannerisms : MonoBehaviour
@@ -23,7 +23,11 @@ namespace Tofuwu.StackCats
 
         protected virtual void Update()
         {
-            if (Time.time >= _lastCheckNewBehaviourTime + Random.Range(CheckNewBehaviourMinInterval, CheckNewBehaviourMaxInterval))
+            if (
+                Time.time
+                >= _lastCheckNewBehaviourTime
+                    + Random.Range(CheckNewBehaviourMinInterval, CheckNewBehaviourMaxInterval)
+            )
             {
                 CheckNewBehaviour();
                 _lastCheckNewBehaviourTime = Time.time;

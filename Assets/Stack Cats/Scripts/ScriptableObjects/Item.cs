@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
+using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public enum ItemRarity
     {
@@ -9,7 +9,7 @@ namespace Tofuwu.StackCats
         Common,
         Uncommon,
         Rare,
-        VeryRare
+        VeryRare,
     }
 
     [Serializable]
@@ -48,7 +48,10 @@ namespace Tofuwu.StackCats
 
         public string GetId()
         {
-            if (string.IsNullOrEmpty(_id)) { _id = Guid.NewGuid().ToString(); }
+            if (string.IsNullOrEmpty(_id))
+            {
+                _id = Guid.NewGuid().ToString();
+            }
 
             return _id;
         }

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class PointerGestureUI : MonoBehaviour
     {
@@ -44,10 +44,12 @@ namespace Tofuwu.StackCats.UI
             float alpha = isVisible ? 1.0f : 0.0f;
             if (isAnimated)
             {
-                _visibleTweens.Add(LeanTween
-                    .alphaCanvas(PointerCanvasGroup, alpha, VisibleAnimationDuration)
-                    .setEase(LeanTweenType.easeInOutSine)
-                    .id);
+                _visibleTweens.Add(
+                    LeanTween
+                        .alphaCanvas(PointerCanvasGroup, alpha, VisibleAnimationDuration)
+                        .setEase(LeanTweenType.easeInOutSine)
+                        .id
+                );
             }
             else
             {
@@ -61,10 +63,12 @@ namespace Tofuwu.StackCats.UI
 
             if (isAnimated)
             {
-                _positionTweens.Add(LeanTween
-                    .move(PointerCanvasGroup.gameObject, position, PositionAnimationDuration)
-                    .setEase(LeanTweenType.easeOutSine)
-                    .id);
+                _positionTweens.Add(
+                    LeanTween
+                        .move(PointerCanvasGroup.gameObject, position, PositionAnimationDuration)
+                        .setEase(LeanTweenType.easeOutSine)
+                        .id
+                );
             }
             else
             {
@@ -78,30 +82,47 @@ namespace Tofuwu.StackCats.UI
             {
                 float outDuration = PressedAnimationDuration * 0.9f;
                 float inDuration = PressedAnimationDuration * 0.1f;
-                _pressedTweens.Add(LeanTween
-                    .scale(PointerCanvasGroup.gameObject, PressedScale * 0.9f, outDuration)
-                    .setEase(LeanTweenType.easeOutSine)
-                    .id);
-                _pressedTweens.Add(LeanTween
-                    .scale(PointerCanvasGroup.gameObject, PressedScale, inDuration)
-                    .setEase(LeanTweenType.easeInSine)
-                    .setDelay(outDuration)
-                    .setOnComplete(delegate () { SetPressedSprite(true); })
-                    .id);
+                _pressedTweens.Add(
+                    LeanTween
+                        .scale(PointerCanvasGroup.gameObject, PressedScale * 0.9f, outDuration)
+                        .setEase(LeanTweenType.easeOutSine)
+                        .id
+                );
+                _pressedTweens.Add(
+                    LeanTween
+                        .scale(PointerCanvasGroup.gameObject, PressedScale, inDuration)
+                        .setEase(LeanTweenType.easeInSine)
+                        .setDelay(outDuration)
+                        .setOnComplete(
+                            delegate()
+                            {
+                                SetPressedSprite(true);
+                            }
+                        )
+                        .id
+                );
             }
             else
             {
                 SetPressedSprite(false);
-                _pressedTweens.Add(LeanTween
-                    .scale(PointerCanvasGroup.gameObject, Vector3.one, PressedAnimationDuration)
-                    .setEase(LeanTweenType.easeInSine)
-                    .id);
+                _pressedTweens.Add(
+                    LeanTween
+                        .scale(PointerCanvasGroup.gameObject, Vector3.one, PressedAnimationDuration)
+                        .setEase(LeanTweenType.easeInSine)
+                        .id
+                );
             }
 
-            _pressedTweens.Add(LeanTween
-                .color(PointerImage.gameObject, isPressed ? PressedColor : Color.white, PressedAnimationDuration)
-                .setEase(LeanTweenType.easeOutSine)
-                .id);
+            _pressedTweens.Add(
+                LeanTween
+                    .color(
+                        PointerImage.gameObject,
+                        isPressed ? PressedColor : Color.white,
+                        PressedAnimationDuration
+                    )
+                    .setEase(LeanTweenType.easeOutSine)
+                    .id
+            );
         }
 
         private void SetPressedSprite(bool isDown)

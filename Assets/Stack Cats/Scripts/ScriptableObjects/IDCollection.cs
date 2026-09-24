@@ -2,9 +2,10 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
-    public class IDCollection<T> : ScriptableObject where T : IIdentifiable
+    public class IDCollection<T> : ScriptableObject
+        where T : IIdentifiable
     {
         public List<T> List;
 

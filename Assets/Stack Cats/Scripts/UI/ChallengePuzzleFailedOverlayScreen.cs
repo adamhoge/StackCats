@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class ChallengePuzzleFailedOverlayScreen : OverlayScreen
     {
@@ -23,7 +23,10 @@ namespace Tofuwu.StackCats.UI
             base.OnTransitioningIn();
 
             LeanTween.alphaCanvas(BannerCanvasGroup, 1.0f, 0.25f).setDelay(0.5f);
-            LeanTween.scale(BannerCanvasGroup.gameObject, Vector3.one * 2, 0.5f).setEase(LeanTweenType.punch).setDelay(0.5f);
+            LeanTween
+                .scale(BannerCanvasGroup.gameObject, Vector3.one * 2, 0.5f)
+                .setEase(LeanTweenType.punch)
+                .setDelay(0.5f);
         }
 
         public override void OnTransitioningOut()

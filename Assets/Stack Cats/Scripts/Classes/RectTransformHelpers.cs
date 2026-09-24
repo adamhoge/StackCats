@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public static class RectTransformHelpers
     {
@@ -44,7 +44,10 @@ namespace Tofuwu.StackCats
             rectTransform.pivot = new Vector2(0.0f, 1.0f);
         }
 
-        public static bool IsPositionWithinBounds(this RectTransform rectTransform, Vector2 position)
+        public static bool IsPositionWithinBounds(
+            this RectTransform rectTransform,
+            Vector2 position
+        )
         {
             Vector2 localPosition = rectTransform.InverseTransformPoint(Input.mousePosition);
             return rectTransform.rect.Contains(localPosition);

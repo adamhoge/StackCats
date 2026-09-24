@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class AdInfo : MonoBehaviour
     {
@@ -24,7 +24,7 @@ namespace Tofuwu.StackCats.UI
 
         protected void Update()
         {
-            if(!_ads.AdsEnabled)
+            if (!_ads.AdsEnabled)
             {
                 WatchAdButton.gameObject.SetActive(false);
                 AdIntervalRemainingText.gameObject.SetActive(false);
@@ -34,7 +34,14 @@ namespace Tofuwu.StackCats.UI
             WatchAdButton.interactable = _ads.CanWatchAd;
 
             TimeSpan adIntervalRemaining = _ads.AdIntervalRemaining;
-            AdIntervalRemainingText.text = adIntervalRemaining == TimeSpan.Zero ? "" : string.Format("{0:D2}:{1:D2}", adIntervalRemaining.Minutes, adIntervalRemaining.Seconds);
+            AdIntervalRemainingText.text =
+                adIntervalRemaining == TimeSpan.Zero
+                    ? ""
+                    : string.Format(
+                        "{0:D2}:{1:D2}",
+                        adIntervalRemaining.Minutes,
+                        adIntervalRemaining.Seconds
+                    );
         }
     }
 }

@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     [CreateAssetMenu(fileName = "Window Item", menuName = "Stack Cats/Items/Decor/Window Item")]
     public class WindowItem : DecorItem

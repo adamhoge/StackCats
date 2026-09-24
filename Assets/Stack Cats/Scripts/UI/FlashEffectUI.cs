@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class FlashEffectUI : MonoBehaviour
     {
@@ -19,7 +19,8 @@ namespace Tofuwu.StackCats.UI
             if (FlashCanvasGroup)
             {
                 FlashCanvasGroup.alpha = 1.0f;
-                LeanTween.alphaCanvas(FlashCanvasGroup, 0.0f, FlashFadeDuration)
+                LeanTween
+                    .alphaCanvas(FlashCanvasGroup, 0.0f, FlashFadeDuration)
                     .setEase(FlashFadeEasing);
             }
 
@@ -27,9 +28,15 @@ namespace Tofuwu.StackCats.UI
             {
                 FlashRippleCanvasGroup.alpha = 1.0f;
                 FlashRippleCanvasGroup.transform.localScale = Vector3.one;
-                LeanTween.scale(FlashRippleCanvasGroup.gameObject, Vector3.one * RippleMaxScale, RippleDuration)
+                LeanTween
+                    .scale(
+                        FlashRippleCanvasGroup.gameObject,
+                        Vector3.one * RippleMaxScale,
+                        RippleDuration
+                    )
                     .setEase(RippleEasing);
-                LeanTween.alphaCanvas(FlashRippleCanvasGroup, 0.0f, RippleDuration)
+                LeanTween
+                    .alphaCanvas(FlashRippleCanvasGroup, 0.0f, RippleDuration)
                     .setEase(RippleFadeEasing);
             }
 

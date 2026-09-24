@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class PuzzleManagerUI : MonoBehaviour
     {
@@ -38,14 +38,18 @@ namespace Tofuwu.StackCats.UI
 
         private void OnChallengeModePuzzleAreaUnlocked(PuzzleArea puzzleArea)
         {
-            ChallengeModePuzzleAreaUnlockedBanner banner = Instantiate(ChallengeModePuzzleAreaUnlockedBanner);
+            ChallengeModePuzzleAreaUnlockedBanner banner = Instantiate(
+                ChallengeModePuzzleAreaUnlockedBanner
+            );
             banner.PuzzleArea = puzzleArea;
             GameManagerUI.Instance.BannerManagerUI.DisplayBanner(banner);
         }
 
         private void OnEndlessModePuzzleAreaUnlocked(PuzzleArea puzzleArea)
         {
-            EndlessModePuzzleAreaUnlockedBanner banner = Instantiate(EndlessModePuzzleAreaUnlockedBanner);
+            EndlessModePuzzleAreaUnlockedBanner banner = Instantiate(
+                EndlessModePuzzleAreaUnlockedBanner
+            );
             banner.PuzzleArea = puzzleArea;
             GameManagerUI.Instance.BannerManagerUI.DisplayBanner(banner);
         }

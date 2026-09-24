@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using RockhopperGames.StackCats;
 using UnityEditor;
-using Tofuwu.StackCats;
+using UnityEngine;
 
 [CustomEditor(typeof(CowCritter))]
 public class CowCritterEditor : Editor
@@ -9,8 +9,12 @@ public class CowCritterEditor : Editor
     {
         CowCritter cowCritter = (CowCritter)target;
 
-        Vector3 moveAreaMin = cowCritter.transform.position + Vector3.left * cowCritter.MovementArea / 2 * cowCritter.transform.localScale.x;
-        Vector3 moveAreaMax = cowCritter.transform.position + Vector3.right * cowCritter.MovementArea / 2 * cowCritter.transform.localScale.x;
+        Vector3 moveAreaMin =
+            cowCritter.transform.position
+            + Vector3.left * cowCritter.MovementArea / 2 * cowCritter.transform.localScale.x;
+        Vector3 moveAreaMax =
+            cowCritter.transform.position
+            + Vector3.right * cowCritter.MovementArea / 2 * cowCritter.transform.localScale.x;
         Handles.DrawLine(moveAreaMin, moveAreaMax);
     }
 }

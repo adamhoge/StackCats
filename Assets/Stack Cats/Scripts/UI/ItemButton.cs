@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     [RequireComponent(typeof(Button))]
     public class ItemButton : MonoBehaviour
@@ -9,7 +9,10 @@ namespace Tofuwu.StackCats
         public Item Item;
         public Image ButtonImage;
 
-        public Button Button { get { return _button; } }
+        public Button Button
+        {
+            get { return _button; }
+        }
 
         private Button _button;
 

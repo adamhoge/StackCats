@@ -1,4 +1,4 @@
-﻿using Tofuwu.StackCats;
+﻿using RockhopperGames.StackCats;
 using UnityEditor;
 using UnityEngine;
 
@@ -8,12 +8,11 @@ public class DecorItemEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-        DecorItem decorationItem = (DecorItem) target;
+        DecorItem decorationItem = (DecorItem)target;
 
         base.OnInspectorGUI();
         EditorGUILayout.Space();
         EditorGUILayout.TextField("ID:", decorationItem.GetId());
-
 
         if (GUILayout.Button("Regenerate ID"))
         {

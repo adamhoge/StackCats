@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public delegate void StartCutScene(CutScene cutScene);
     public delegate void StopCutScene(CutScene cutScene);
@@ -15,20 +15,23 @@ namespace Tofuwu.StackCats
 
         public void StartCutScene(CutScene cutScene)
         {
-            if (!cutScene) return;
+            if (!cutScene)
+                return;
 
             _currentCutScenePrefab = cutScene;
             _cutSceneInstance = Instantiate(cutScene, transform);
             _cutSceneInstance.onCutSceneEnded += OnCutSceneEnded;
 
-            if (onStartCutScene != null) onStartCutScene(_cutSceneInstance);
+            if (onStartCutScene != null)
+                onStartCutScene(_cutSceneInstance);
         }
 
         public void Stop()
         {
             if (_cutSceneInstance != null)
             {
-                if (onStopCutScene != null) onStopCutScene(_cutSceneInstance);
+                if (onStopCutScene != null)
+                    onStopCutScene(_cutSceneInstance);
 
                 Destroy(_cutSceneInstance.gameObject);
             }

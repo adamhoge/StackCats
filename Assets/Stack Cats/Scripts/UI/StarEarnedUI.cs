@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class StarEarnedUI : MonoBehaviour
     {
@@ -18,9 +18,15 @@ namespace Tofuwu.StackCats.UI
         public AudioEvent StarEarnedSoundEffect;
         public float Delay;
 
-        public bool IsAnimationExecuted { get { return _isAnimationExecuted; } }
+        public bool IsAnimationExecuted
+        {
+            get { return _isAnimationExecuted; }
+        }
 
-        public float AnimationExecutedAt { get { return _animationExecutedAt; } }
+        public float AnimationExecutedAt
+        {
+            get { return _animationExecutedAt; }
+        }
 
         private float _startTime;
         private bool _isAnimationExecuted;
@@ -78,9 +84,15 @@ namespace Tofuwu.StackCats.UI
         {
             StarImage.gameObject.SetActive(true);
             StarFlashCanvasGroup.alpha = 1.0f;
-            LeanTween.alphaCanvas(StarFlashCanvasGroup, 0.0f, 0.5f).setEase(LeanTweenType.easeOutSine);
-            LeanTween.scale(StarImage.gameObject, Vector2.one * 1.5f, 0.5f).setEase(LeanTweenType.punch);
-            LeanTween.scale(StarFlashCanvasGroup.gameObject, Vector2.one * 1.5f, 0.5f).setEase(LeanTweenType.punch);
+            LeanTween
+                .alphaCanvas(StarFlashCanvasGroup, 0.0f, 0.5f)
+                .setEase(LeanTweenType.easeOutSine);
+            LeanTween
+                .scale(StarImage.gameObject, Vector2.one * 1.5f, 0.5f)
+                .setEase(LeanTweenType.punch);
+            LeanTween
+                .scale(StarFlashCanvasGroup.gameObject, Vector2.one * 1.5f, 0.5f)
+                .setEase(LeanTweenType.punch);
         }
     }
 }

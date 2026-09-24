@@ -1,23 +1,44 @@
 ﻿using System;
 
-namespace Tofuwu.StackCats.Data
+namespace RockhopperGames.StackCats.Data
 {
     [Serializable]
     public class LocalEndlessPuzzleCompletionData : IEndlessPuzzleCompletionData
     {
-        public PuzzleCompletionType CompletionType { get { return _puzzleCompletionType; } }
+        public PuzzleCompletionType CompletionType
+        {
+            get { return _puzzleCompletionType; }
+        }
 
-        public string PuzzleAreaId { get { return _puzzleAreaId; } }
+        public string PuzzleAreaId
+        {
+            get { return _puzzleAreaId; }
+        }
 
-        public int DifficultyRating { get { return _difficultyRating; } }
+        public int DifficultyRating
+        {
+            get { return _difficultyRating; }
+        }
 
-        public int MinMoves { get { return _minMoves; } }
+        public int MinMoves
+        {
+            get { return _minMoves; }
+        }
 
-        public int MaxMoves { get { return _maxMoves; } }
+        public int MaxMoves
+        {
+            get { return _maxMoves; }
+        }
 
-        public int MovesMade { get { return _movesMade; } }
+        public int MovesMade
+        {
+            get { return _movesMade; }
+        }
 
-        public int UndosRemaining { get { return _undosRemaining; } }
+        public int UndosRemaining
+        {
+            get { return _undosRemaining; }
+        }
 
         private readonly PuzzleCompletionType _puzzleCompletionType;
         private readonly string _puzzleAreaId;
@@ -27,7 +48,14 @@ namespace Tofuwu.StackCats.Data
         private readonly int _movesMade;
         private readonly int _undosRemaining;
 
-        public LocalEndlessPuzzleCompletionData(PuzzleCompletionType completionType, int difficultyRating, int minMoves, int maxMoves, int movesMade, int undosRemaining)
+        public LocalEndlessPuzzleCompletionData(
+            PuzzleCompletionType completionType,
+            int difficultyRating,
+            int minMoves,
+            int maxMoves,
+            int movesMade,
+            int undosRemaining
+        )
         {
             _puzzleCompletionType = completionType;
             _difficultyRating = difficultyRating;

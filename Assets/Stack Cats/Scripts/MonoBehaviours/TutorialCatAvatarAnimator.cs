@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class TutorialCatAvatarAnimator : CatAvatarAnimator
     {
@@ -8,7 +8,9 @@ namespace Tofuwu.StackCats
         public int BondingWithCatTriggerHash = Animator.StringToHash("BondingWithCat");
         public int ChatIntroductionsTriggerHash = Animator.StringToHash("ChatIntroductions");
         public int NoticingHouseTriggerHash = Animator.StringToHash("NoticingHouse");
-        public int MovingToBlockStackingPuzzleTriggerHash = Animator.StringToHash("MovingToBlockStackingPuzzle");
+        public int MovingToBlockStackingPuzzleTriggerHash = Animator.StringToHash(
+            "MovingToBlockStackingPuzzle"
+        );
         public int HeadingHomeTriggerHash = Animator.StringToHash("HeadingHome");
 
         public void PlayMeetingCat()

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using Tofuwu.StackCats.Data;
+using RockhopperGames.StackCats.Data;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class DataManager : MonoBehaviour
     {
@@ -15,16 +15,46 @@ namespace Tofuwu.StackCats
         public List<DresserItem> StartingDressers;
         public int NumItemsPlaceableOnDresser = 5;
 
-        public IPreferencesData PreferencesData { get => _preferencesData; }
-        public ITutorialData TutorialData { get => _tutorialData; }
-        public IPuzzleData PuzzleData { get => _puzzleData; }
-        public ICatCollectionData CatCollectionData { get => _catCollectionData; }
-        public ICurrencyData CurrencyData { get => _currencyData; }
-        public IStuffData StuffData { get => _stuffData; }
-        public IHomeData HomeData { get => _homeData; }
-        public IMinigameData MinigameData { get => _minigameData; }
-        public IEventData EventData { get { return _eventData; } }
-        public IFlagData FlagData { get { return _flagData; } }
+        public IPreferencesData PreferencesData
+        {
+            get => _preferencesData;
+        }
+        public ITutorialData TutorialData
+        {
+            get => _tutorialData;
+        }
+        public IPuzzleData PuzzleData
+        {
+            get => _puzzleData;
+        }
+        public ICatCollectionData CatCollectionData
+        {
+            get => _catCollectionData;
+        }
+        public ICurrencyData CurrencyData
+        {
+            get => _currencyData;
+        }
+        public IStuffData StuffData
+        {
+            get => _stuffData;
+        }
+        public IHomeData HomeData
+        {
+            get => _homeData;
+        }
+        public IMinigameData MinigameData
+        {
+            get => _minigameData;
+        }
+        public IEventData EventData
+        {
+            get { return _eventData; }
+        }
+        public IFlagData FlagData
+        {
+            get { return _flagData; }
+        }
 
         private IPreferencesData _preferencesData;
         private ITutorialData _tutorialData;
@@ -61,14 +91,20 @@ namespace Tofuwu.StackCats
             string eventsPath = applicationPath + "/events.dat";
             string flagsPath = applicationPath + "/flags.dat";
 
-            _preferencesData = LocalPreferencesData.Load(preferencesPath) ?? CreatePreferencesData(preferencesPath);
-            _tutorialData = LocalTutorialData.Load(tutorialPath) ?? CreateTutorialData(tutorialPath);
+            _preferencesData =
+                LocalPreferencesData.Load(preferencesPath)
+                ?? CreatePreferencesData(preferencesPath);
+            _tutorialData =
+                LocalTutorialData.Load(tutorialPath) ?? CreateTutorialData(tutorialPath);
             _puzzleData = LocalPuzzleData.Load(puzzlesPath) ?? CreatePuzzleData(puzzlesPath);
-            _catCollectionData = LocalCatCollectionData.Load(catsPath) ?? CreateCatCollectionData(catsPath);
-            _currencyData = LocalCurrencyData.Load(currencyPath) ?? CreateCurrencyData(currencyPath);
+            _catCollectionData =
+                LocalCatCollectionData.Load(catsPath) ?? CreateCatCollectionData(catsPath);
+            _currencyData =
+                LocalCurrencyData.Load(currencyPath) ?? CreateCurrencyData(currencyPath);
             _stuffData = LocalStuffData.Load(stuffPath) ?? CreateStuffData(stuffPath);
             _homeData = LocalHomeData.Load(homePath) ?? CreateHomeData(homePath);
-            _minigameData = LocalMinigameData.Load(minigamesPath) ?? CreateMinigameData(minigamesPath);
+            _minigameData =
+                LocalMinigameData.Load(minigamesPath) ?? CreateMinigameData(minigamesPath);
             _eventData = LocalEventData.Load(eventsPath) ?? CreateEventData(eventsPath);
             _flagData = LocalFlagData.Load(flagsPath) ?? CreateFlagData(flagsPath);
         }
@@ -103,7 +139,9 @@ namespace Tofuwu.StackCats
             foreach (PuzzleArea area in StartingAreas)
             {
                 puzzleData.UnlockArea(area.GetId());
-                puzzleData.UnlockProgressionPuzzle(area.PuzzleAreaMap.ProgressionPuzzleRoute[0].NormalPuzzle.GetId());
+                puzzleData.UnlockProgressionPuzzle(
+                    area.PuzzleAreaMap.ProgressionPuzzleRoute[0].NormalPuzzle.GetId()
+                );
             }
             puzzleData.CurrentAreaId = StartingAreas[0].GetId();
             puzzleData.CurrentMode = PuzzleMode.Story;
@@ -126,10 +164,14 @@ namespace Tofuwu.StackCats
         private LocalStuffData CreateStuffData(string path)
         {
             LocalStuffData stuffData = new LocalStuffData(path);
-            foreach (WallpaperItem wallpaper in StartingWallpapers) stuffData.AddItem(wallpaper.GetId(), 1);
-            foreach (FloorItem floor in StartingFloors) stuffData.AddItem(floor.GetId(), 1);
-            foreach (WindowItem window in StartingWindows) stuffData.AddItem(window.GetId(), 1);
-            foreach (DresserItem dresser in StartingDressers) stuffData.AddItem(dresser.GetId(), 1);
+            foreach (WallpaperItem wallpaper in StartingWallpapers)
+                stuffData.AddItem(wallpaper.GetId(), 1);
+            foreach (FloorItem floor in StartingFloors)
+                stuffData.AddItem(floor.GetId(), 1);
+            foreach (WindowItem window in StartingWindows)
+                stuffData.AddItem(window.GetId(), 1);
+            foreach (DresserItem dresser in StartingDressers)
+                stuffData.AddItem(dresser.GetId(), 1);
             return stuffData;
         }
 

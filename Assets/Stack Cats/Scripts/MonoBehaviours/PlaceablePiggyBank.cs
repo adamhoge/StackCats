@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
-    public class PlaceablePiggyBank : PlaceableObject
-    {
-    }
+    public class PlaceablePiggyBank : PlaceableObject { }
 }

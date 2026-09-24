@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class ChallengePuzzleSolvedOverlayScreen : PuzzleSolvedOverlayScreen
     {

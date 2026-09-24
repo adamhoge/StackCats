@@ -2,17 +2,27 @@
 using UnityEngine;
 using UnityEngine.Advertisements;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
-    public class AdManager : MonoBehaviour, IUnityAdsShowListener, IUnityAdsInitializationListener, IUnityAdsLoadListener
+    public class AdManager
+        : MonoBehaviour,
+            IUnityAdsShowListener,
+            IUnityAdsInitializationListener,
+            IUnityAdsLoadListener
     {
         public string AppleAppStoreId;
         public string GooglePlayStoreId;
         public int AdMinuteInterval = 30;
 
-        public bool CanWatchAd { get { return AdIntervalRemaining == TimeSpan.Zero; } }
+        public bool CanWatchAd
+        {
+            get { return AdIntervalRemaining == TimeSpan.Zero; }
+        }
 
-        public bool AdsEnabled { get { return Advertisement.isInitialized && _isAdLoaded; } }
+        public bool AdsEnabled
+        {
+            get { return Advertisement.isInitialized && _isAdLoaded; }
+        }
 
         private StuffManager _stuffManager;
         private string _placementId;
@@ -22,8 +32,11 @@ namespace Tofuwu.StackCats
         {
             get
             {
-                TimeSpan intervalRemaining = _gameManager.Data.EventData.LastAdDateTime.AddMinutes(AdMinuteInterval) - DateTime.Now;
-                if (intervalRemaining < TimeSpan.Zero) intervalRemaining = TimeSpan.Zero;
+                TimeSpan intervalRemaining =
+                    _gameManager.Data.EventData.LastAdDateTime.AddMinutes(AdMinuteInterval)
+                    - DateTime.Now;
+                if (intervalRemaining < TimeSpan.Zero)
+                    intervalRemaining = TimeSpan.Zero;
                 return intervalRemaining;
             }
         }
@@ -39,7 +52,6 @@ namespace Tofuwu.StackCats
         {
             _gameManager = GameManager.Instance;
             _stuffManager = _gameManager.Stuff;
-
         }
 
         protected void Start()
@@ -92,7 +104,10 @@ namespace Tofuwu.StackCats
             }
         }
 
-        private void GetPresentContents(ref CurrencyAmountDictionary currencyReward, ref ItemAmountDictionary itemReward)
+        private void GetPresentContents(
+            ref CurrencyAmountDictionary currencyReward,
+            ref ItemAmountDictionary itemReward
+        )
         {
             float presentValue = UnityEngine.Random.value;
 
@@ -149,19 +164,20 @@ namespace Tofuwu.StackCats
             currencyReward.Add(Currency.SilverPaw, 50);
         }
 
-        public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message)
-        {
-        }
+        public void OnUnityAdsShowFailure(
+            string placementId,
+            UnityAdsShowError error,
+            string message
+        ) { }
 
-        public void OnUnityAdsShowStart(string placementId)
-        {
-        }
+        public void OnUnityAdsShowStart(string placementId) { }
 
-        public void OnUnityAdsShowClick(string placementId)
-        {
-        }
+        public void OnUnityAdsShowClick(string placementId) { }
 
-        public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
+        public void OnUnityAdsShowComplete(
+            string placementId,
+            UnityAdsShowCompletionState showCompletionState
+        )
         {
             switch (showCompletionState)
             {
@@ -184,17 +200,17 @@ namespace Tofuwu.StackCats
             Advertisement.Load(_placementId, this);
         }
 
-        public void OnInitializationFailed(UnityAdsInitializationError error, string message)
-        {
-        }
+        public void OnInitializationFailed(UnityAdsInitializationError error, string message) { }
 
         public void OnUnityAdsAdLoaded(string placementId)
         {
             _isAdLoaded = true;
         }
 
-        public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message)
-        {
-        }
+        public void OnUnityAdsFailedToLoad(
+            string placementId,
+            UnityAdsLoadError error,
+            string message
+        ) { }
     }
 }

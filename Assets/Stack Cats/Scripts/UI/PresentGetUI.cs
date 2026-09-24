@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class PresentGetUI : MonoBehaviour
     {
@@ -39,7 +39,12 @@ namespace Tofuwu.StackCats.UI
                 QuantityText.text = Quantity.ToString();
             }
 
-            BackgroundImage.color = new Color(BackgroundColor.r, BackgroundColor.g, BackgroundColor.b, 0.5f);
+            BackgroundImage.color = new Color(
+                BackgroundColor.r,
+                BackgroundColor.g,
+                BackgroundColor.b,
+                0.5f
+            );
             PresentImage.sprite = PresentSprite;
             PresentImage.SetMaterialForItem(PresentColorShift);
         }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     [RequireComponent(typeof(BannerManagerUI))]
     [RequireComponent(typeof(PuzzleManagerUI))]
@@ -13,11 +13,20 @@ namespace Tofuwu.StackCats.UI
         /// <summary>
         /// An instance of the GameManagerUI.
         /// </summary>
-        public static GameManagerUI Instance { get { return _instance; } }
+        public static GameManagerUI Instance
+        {
+            get { return _instance; }
+        }
 
-        public BannerManagerUI BannerManagerUI { get { return _bannerManagerUI; } }
+        public BannerManagerUI BannerManagerUI
+        {
+            get { return _bannerManagerUI; }
+        }
 
-        public PuzzleManagerUI PuzzleManagerUI { get { return _puzzleManagerUI; } }
+        public PuzzleManagerUI PuzzleManagerUI
+        {
+            get { return _puzzleManagerUI; }
+        }
 
         private static GameManagerUI _instance;
         private GameManager _gameManager;
@@ -45,7 +54,8 @@ namespace Tofuwu.StackCats.UI
         {
             ConfirmationOverlayScreen.ConfirmationAction = action;
             ConfirmationOverlayScreen.MessageText.text = message;
-            ConfirmationOverlayScreen.ConfirmationText.text = action != null ? "Confirm" : "Got it!";
+            ConfirmationOverlayScreen.ConfirmationText.text =
+                action != null ? "Confirm" : "Got it!";
             ConfirmationOverlayScreen.CancelButton.gameObject.SetActive(action != null);
             OverlayScreenManager.EnqueueScreen(ConfirmationOverlayScreen);
         }

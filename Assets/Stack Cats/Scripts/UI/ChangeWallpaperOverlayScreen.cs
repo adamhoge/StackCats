@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class ChangeWallpaperOverlayScreen : ChangeDecorSelectableOverlayScreen<WallpaperItem>
     {
@@ -9,7 +9,9 @@ namespace Tofuwu.StackCats.UI
 
         public override List<WallpaperItem> GetSelectionOptions()
         {
-            return _stuffManager.WallpaperItems.List.Where(wi => _stuffManager.HasItem(wi)).ToList();
+            return _stuffManager
+                .WallpaperItems.List.Where(wi => _stuffManager.HasItem(wi))
+                .ToList();
         }
 
         protected override void OnSelect(WallpaperItem selection)

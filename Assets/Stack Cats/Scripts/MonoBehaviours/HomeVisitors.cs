@@ -1,10 +1,10 @@
-﻿using Tofuwu.StackCats.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using RockhopperGames.StackCats.Data;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class HomeVisitors : MonoBehaviour
     {
@@ -18,7 +18,10 @@ namespace Tofuwu.StackCats
         public Transform VisitorAreaRectTransform;
         public CatAvatar CatAvatarPrefab;
 
-        public MinigameInformation VisitorsMinigame { get { return _visitorsMinigame; } }
+        public MinigameInformation VisitorsMinigame
+        {
+            get { return _visitorsMinigame; }
+        }
 
         private IHomeData _homeData;
         private HomeManager _homeManager;
@@ -69,11 +72,19 @@ namespace Tofuwu.StackCats
         /// <param name="index">Index of the visitor to pet.</param>
         public void InteractWithVisitor(int index)
         {
-            if (index < 0 || index >= _visitorsData.Count || string.IsNullOrEmpty(_visitorsData[index].CatId)) return;
+            if (
+                index < 0
+                || index >= _visitorsData.Count
+                || string.IsNullOrEmpty(_visitorsData[index].CatId)
+            )
+                return;
 
-            CatAvatar visitorAvatar = _visitorAvatars.First(a => a.Cat.GetId() == _visitorsData[index].CatId);
+            CatAvatar visitorAvatar = _visitorAvatars.First(a =>
+                a.Cat.GetId() == _visitorsData[index].CatId
+            );
 
-            if (!visitorAvatar) return;
+            if (!visitorAvatar)
+                return;
 
             visitorAvatar.Animator.Chuffing();
         }
@@ -114,9 +125,14 @@ namespace Tofuwu.StackCats
 
                 if (!string.IsNullOrEmpty(visitor.CatId))
                 {
-                    CatAvatar visitorAvatar = Instantiate(CatAvatarPrefab, VisitorAreaRectTransform);
+                    CatAvatar visitorAvatar = Instantiate(
+                        CatAvatarPrefab,
+                        VisitorAreaRectTransform
+                    );
                     visitorAvatar.transform.localPosition = GetVisitorLocalPositionByIndex(i);
-                    visitorAvatar.transform.localRotation = Quaternion.Euler(GetVisitorLocalRotationEulerByIndex(i));
+                    visitorAvatar.transform.localRotation = Quaternion.Euler(
+                        GetVisitorLocalRotationEulerByIndex(i)
+                    );
                     visitorAvatar.transform.localScale = Vector3.one * AvatarScale;
                     visitorAvatar.Cat = _catManager.CatCollection.GetById(visitor.CatId);
                     _visitorAvatars.Add(visitorAvatar);
@@ -136,9 +152,14 @@ namespace Tofuwu.StackCats
 
         private void UpdateMinigame()
         {
-            if ((DateTime.Now - _minigameManager.LastMinigamePlayedTime).TotalSeconds >= MinMinigameBreakInSeconds)
+            if (
+                (DateTime.Now - _minigameManager.LastMinigamePlayedTime).TotalSeconds
+                >= MinMinigameBreakInSeconds
+            )
             {
-                _visitorsMinigame = _minigameManager.GetMinigamesForCats(GetVisitors()).SelectRandom();
+                _visitorsMinigame = _minigameManager
+                    .GetMinigamesForCats(GetVisitors())
+                    .SelectRandom();
             }
             else
             {
@@ -153,21 +174,27 @@ namespace Tofuwu.StackCats
             return new VisitorData
             {
                 CatId = newVisitor ? newVisitor.GetId() : "",
-                LeaveDateTime = DateTime.Now.AddSeconds(UnityEngine.Random.Range(MinVisitInSeconds, MaxVisitInSeconds)),
-                VisitorGuid = Guid.NewGuid()
+                LeaveDateTime = DateTime.Now.AddSeconds(
+                    UnityEngine.Random.Range(MinVisitInSeconds, MaxVisitInSeconds)
+                ),
+                VisitorGuid = Guid.NewGuid(),
             };
         }
 
         // TODO: Implement invitations, add odds of getting one of invited cats.
         private Cat GetRandomCatVisitor()
         {
-            List<Cat> availableCats = _catManager.CatCollection.List.Where(c => _catManager.IsBonded(c) && !IsCatVisiting(c)).ToList();
+            List<Cat> availableCats = _catManager
+                .CatCollection.List.Where(c => _catManager.IsBonded(c) && !IsCatVisiting(c))
+                .ToList();
             List<Cat> alreadyVisitingCats = new List<Cat>();
             foreach (VisitorData visitorData in _visitorsData)
             {
                 alreadyVisitingCats.Add(_catManager.CatCollection.GetById(visitorData.CatId));
             }
-            List<Cat> invitedCats = new List<Cat>(_homeManager.InvitedCats).Except(alreadyVisitingCats).ToList();
+            List<Cat> invitedCats = new List<Cat>(_homeManager.InvitedCats)
+                .Except(alreadyVisitingCats)
+                .ToList();
 
             float catRng = UnityEngine.Random.value;
 
@@ -175,7 +202,9 @@ namespace Tofuwu.StackCats
             {
                 return null;
             }
-            else if (/*catRng < 0.6f || */invitedCats.Count == 0)
+            else if ( /*catRng < 0.6f || */
+                invitedCats.Count == 0
+            )
             {
                 return availableCats.Count == 0 ? null : availableCats.SelectRandom();
             }
@@ -202,7 +231,9 @@ namespace Tofuwu.StackCats
 
         private Vector3 GetVisitorLocalRotationEulerByIndex(int index)
         {
-            float yRotation = -(YRotationInDegrees / ((MaxNumVisitors + 1) / 2.0f)) + YRotationInDegrees * (index / (float)MaxNumVisitors);
+            float yRotation =
+                -(YRotationInDegrees / ((MaxNumVisitors + 1) / 2.0f))
+                + YRotationInDegrees * (index / (float)MaxNumVisitors);
 
             return new Vector3(0.0f, yRotation, 0.0f);
         }

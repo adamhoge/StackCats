@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Tofuwu.StackCats.Minigames.RpgRunner
+namespace RockhopperGames.StackCats.Minigames.RpgRunner
 {
     public enum RpgRunnerMinigameState
     {
@@ -9,7 +9,7 @@ namespace Tofuwu.StackCats.Minigames.RpgRunner
         CatsEntering,
         CatsRunning,
         CatsFighting,
-        GameOver
+        GameOver,
     }
 
     [RequireComponent(typeof(Minigame))]

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class PlayMenuOverlayScreen : OverlayScreen
     {
@@ -16,7 +16,7 @@ namespace Tofuwu.StackCats.UI
 
         public override void OnActive()
         {
-            foreach(Button menuButton in _menuButtons)
+            foreach (Button menuButton in _menuButtons)
             {
                 menuButton.interactable = true;
             }
@@ -26,14 +26,23 @@ namespace Tofuwu.StackCats.UI
 
         public override void OnTransitioningIn()
         {
-            if (!_isInitialized) Initialize();
+            if (!_isInitialized)
+                Initialize();
 
             for (int i = 0; i < _menuButtons.Count; i++)
             {
-                float delay = TransitionInDuration / _menuButtons.Count / 2 * (_menuButtons.Count - i);
-                if (delay < 0.0f) delay = 0.0f;
-                LeanTween.moveLocalY(_menuButtons[i].gameObject, 0.0f, TransitionInDuration / 2.0f).setDelay(delay).setEase(TransitionInTween);
-                LeanTween.alphaCanvas(_menuItemWrapperCanvasGroups[i], 1.0f, TransitionInDuration / 2.0f).setDelay(delay).setEase(LeanTweenType.easeOutSine);
+                float delay =
+                    TransitionInDuration / _menuButtons.Count / 2 * (_menuButtons.Count - i);
+                if (delay < 0.0f)
+                    delay = 0.0f;
+                LeanTween
+                    .moveLocalY(_menuButtons[i].gameObject, 0.0f, TransitionInDuration / 2.0f)
+                    .setDelay(delay)
+                    .setEase(TransitionInTween);
+                LeanTween
+                    .alphaCanvas(_menuItemWrapperCanvasGroups[i], 1.0f, TransitionInDuration / 2.0f)
+                    .setDelay(delay)
+                    .setEase(LeanTweenType.easeOutSine);
             }
         }
 
@@ -43,9 +52,24 @@ namespace Tofuwu.StackCats.UI
             {
                 _menuButtons[i].interactable = false;
                 float delay = TransitionOutDuration / _menuButtons.Count / 2 * i;
-                if (delay < 0.0f) delay = 0.0f;
-                LeanTween.moveLocalY(_menuButtons[i].gameObject, TransitionYOffset, TransitionOutDuration / 2.0f).setDelay(delay).setEase(TransitionOutTween);
-                LeanTween.alphaCanvas(_menuItemWrapperCanvasGroups[i], 0.0f, TransitionOutDuration / 2.0f).setDelay(delay).setEase(LeanTweenType.easeOutSine);
+                if (delay < 0.0f)
+                    delay = 0.0f;
+                LeanTween
+                    .moveLocalY(
+                        _menuButtons[i].gameObject,
+                        TransitionYOffset,
+                        TransitionOutDuration / 2.0f
+                    )
+                    .setDelay(delay)
+                    .setEase(TransitionOutTween);
+                LeanTween
+                    .alphaCanvas(
+                        _menuItemWrapperCanvasGroups[i],
+                        0.0f,
+                        TransitionOutDuration / 2.0f
+                    )
+                    .setDelay(delay)
+                    .setEase(LeanTweenType.easeOutSine);
             }
         }
 
@@ -53,10 +77,18 @@ namespace Tofuwu.StackCats.UI
         {
             if (MenuLayoutGroup)
             {
-                foreach (RectTransform transform in MenuLayoutGroup.transform) { _menuButtons.Add(transform.GetComponent<Button>()); }
+                foreach (RectTransform transform in MenuLayoutGroup.transform)
+                {
+                    _menuButtons.Add(transform.GetComponent<Button>());
+                }
 
                 MenuLayoutGroup.GetComponent<RectTransform>().WrapChildren();
-                foreach (RectTransform transform in MenuLayoutGroup.transform) { _menuItemWrapperCanvasGroups.Add(transform.gameObject.AddComponent<CanvasGroup>()); }
+                foreach (RectTransform transform in MenuLayoutGroup.transform)
+                {
+                    _menuItemWrapperCanvasGroups.Add(
+                        transform.gameObject.AddComponent<CanvasGroup>()
+                    );
+                }
             }
 
             for (int i = 0; i < _menuButtons.Count; i++)

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class PuzzleControllerUI : MonoBehaviour
     {
@@ -20,7 +20,11 @@ namespace Tofuwu.StackCats.UI
         {
             if (!PuzzleLoader)
             {
-                Debug.LogError("PuzzleLoader was not provided for " + gameObject.name + ". Destroying gameObject.");
+                Debug.LogError(
+                    "PuzzleLoader was not provided for "
+                        + gameObject.name
+                        + ". Destroying gameObject."
+                );
                 Destroy(gameObject);
                 return;
             }
@@ -65,9 +69,15 @@ namespace Tofuwu.StackCats.UI
             }
         }
 
-        protected virtual void OnChecked(PuzzleMarker source, PuzzleMarker destination, int numBlocks, bool isValid)
+        protected virtual void OnChecked(
+            PuzzleMarker source,
+            PuzzleMarker destination,
+            int numBlocks,
+            bool isValid
+        )
         {
-            if (destination.Stack == _focusedStack) return;
+            if (destination.Stack == _focusedStack)
+                return;
             _focusedStack = destination.Stack;
 
             if (_currentPuzzleController.Selection.Stack == destination.Stack)
@@ -81,8 +91,14 @@ namespace Tofuwu.StackCats.UI
             CanvasGroup canvasGroup = _stackFocusImage.gameObject.AddComponent<CanvasGroup>();
             canvasGroup.alpha = 0.0f;
             _stackFocusImage.transform.SetParent(WorldCanvas.transform);
-            _stackFocusImage.transform.position = destinationStack.transform.position + Vector3.forward * 8.0f + (Vector3.up * _currentPuzzle.MaxMovableStackHeight / 2);
-            _stackFocusImage.rectTransform.sizeDelta = new Vector2(1 + _currentPuzzle.StackSpacing, _currentPuzzle.MaxMovableStackHeight);
+            _stackFocusImage.transform.position =
+                destinationStack.transform.position
+                + Vector3.forward * 8.0f
+                + (Vector3.up * _currentPuzzle.MaxMovableStackHeight / 2);
+            _stackFocusImage.rectTransform.sizeDelta = new Vector2(
+                1 + _currentPuzzle.StackSpacing,
+                _currentPuzzle.MaxMovableStackHeight
+            );
             _stackFocusImage.color = isValid ? StackFocusValidColor : StackFocusInvalidColor;
 
             LeanTween.alphaCanvas(canvasGroup, 1.0f, 0.5f).setEase(LeanTweenType.easeOutQuint);
@@ -101,7 +117,9 @@ namespace Tofuwu.StackCats.UI
             if (_stackFocusImage)
             {
                 LeanTween.cancel(_stackFocusImage.gameObject);
-                LeanTween.alphaCanvas(_stackFocusImage.GetComponent<CanvasGroup>(), 0.0f, 0.25f).setEase(LeanTweenType.easeOutQuint);
+                LeanTween
+                    .alphaCanvas(_stackFocusImage.GetComponent<CanvasGroup>(), 0.0f, 0.25f)
+                    .setEase(LeanTweenType.easeOutQuint);
                 Destroy(_stackFocusImage.gameObject, 0.25f);
             }
         }

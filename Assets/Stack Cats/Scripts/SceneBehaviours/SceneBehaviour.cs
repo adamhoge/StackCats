@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     // TODO: Move background music logic out of behaviour.
     // TODO: Possibly remove this base implementation altogether.
@@ -13,7 +13,10 @@ namespace Tofuwu.StackCats
         /// <summary>
         /// The current state of the scene.
         /// </summary>
-        public SceneState SceneState { get { return _sceneState; } }
+        public SceneState SceneState
+        {
+            get { return _sceneState; }
+        }
 
         protected GameManager _gameManager;
         protected SceneState _sceneState;
@@ -39,7 +42,9 @@ namespace Tofuwu.StackCats
         {
             if (!_gameManager)
             {
-                Debug.Log("Game manager required to use a scene behaviour. Removing this component.");
+                Debug.Log(
+                    "Game manager required to use a scene behaviour. Removing this component."
+                );
                 Destroy(this);
                 return;
             }
@@ -51,7 +56,10 @@ namespace Tofuwu.StackCats
 
         protected virtual void OnTransitioningIn()
         {
-            if (_gameManager.Audio.BackgroundMusic.CurrentAudioLoop != BackgroundMusic && !InheritBackgroundMusic)
+            if (
+                _gameManager.Audio.BackgroundMusic.CurrentAudioLoop != BackgroundMusic
+                && !InheritBackgroundMusic
+            )
             {
                 _gameManager.Audio.PlayBackgroundMusic(BackgroundMusic);
             }
@@ -68,13 +76,16 @@ namespace Tofuwu.StackCats
                 case SceneState.ACTIVE:
                     break;
                 case SceneState.ENTERING:
-                    _backgroundVolumeModifierGuid = _gameManager.Audio.AddBackgroundMusicVolumeModifier();
+                    _backgroundVolumeModifierGuid =
+                        _gameManager.Audio.AddBackgroundMusicVolumeModifier();
                     break;
                 case SceneState.EXITING:
                     OnTransitioningOut();
                     break;
                 case SceneState.LOADING:
-                    _gameManager.Audio.RemoveBackgroundMusicVolumeModifier(_backgroundVolumeModifierGuid);
+                    _gameManager.Audio.RemoveBackgroundMusicVolumeModifier(
+                        _backgroundVolumeModifierGuid
+                    );
                     break;
             }
         }

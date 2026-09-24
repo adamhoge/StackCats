@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class CurrencyAmountUI : MonoBehaviour
     {
@@ -14,12 +14,20 @@ namespace Tofuwu.StackCats.UI
         /// <summary>
         /// The type of currency held to be displayed.
         /// </summary>
-        public Currency CurrencyType { get { return _currencyType; } set { SetCurrencyType(value); } }
+        public Currency CurrencyType
+        {
+            get { return _currencyType; }
+            set { SetCurrencyType(value); }
+        }
 
         /// <summary>
         /// The type of currency held to be displayed.
         /// </summary>
-        public int Amount { get { return _amount; } set { SetAmount(value); } }
+        public int Amount
+        {
+            get { return _amount; }
+            set { SetAmount(value); }
+        }
 
         private CurrencyManager _currencyManager;
 
@@ -44,7 +52,8 @@ namespace Tofuwu.StackCats.UI
 
         private void SetCurrencyType(Currency currencyType)
         {
-            if (_currencyType == currencyType) return;
+            if (_currencyType == currencyType)
+                return;
 
             _currencyType = currencyType;
             //EditorUtility.SetDirty(this);
@@ -56,7 +65,8 @@ namespace Tofuwu.StackCats.UI
 
         private void SetAmount(int amount)
         {
-            if (_amount == amount) return;
+            if (_amount == amount)
+                return;
 
             _amount = amount;
             //EditorUtility.SetDirty(this);

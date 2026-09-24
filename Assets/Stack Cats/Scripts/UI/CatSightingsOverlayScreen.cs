@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class CatSightingsOverlayScreen : OverlayScreen
     {

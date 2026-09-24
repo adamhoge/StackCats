@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using TMPro;
+﻿using TMPro;
+using UnityEngine;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     [RequireComponent(typeof(TextMeshProUGUI))]
     public class RainbowText : MonoBehaviour
@@ -17,7 +17,9 @@ namespace Tofuwu.StackCats.UI
 
         protected void Update()
         {
-            _text.color = HSBColor.ToColor(new HSBColor((Time.time / 4 + CycleOffsetInSeconds) % 1, 0.65f, 1));
+            _text.color = HSBColor.ToColor(
+                new HSBColor((Time.time / 4 + CycleOffsetInSeconds) % 1, 0.65f, 1)
+            );
         }
     }
 }

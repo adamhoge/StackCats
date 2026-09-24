@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class MapCameraAdjuster : MonoBehaviour
     {
@@ -48,40 +48,56 @@ namespace Tofuwu.StackCats
             float cameraY = MapScene.Camera.transform.position.y;
 
             MapScene.Camera.orthographicSize = _currentAspectSettings.OrthographicSize;
-            MapScene.Camera.transform.position = new Vector2(_currentAspectSettings.CameraOffsetX, cameraY);
+            MapScene.Camera.transform.position = new Vector2(
+                _currentAspectSettings.CameraOffsetX,
+                cameraY
+            );
         }
 
         public void FitCameraAndUIToMapAspect(Puzzle puzzle = null)
         {
-            bool screenSizeChanged = Screen.width != _screenSize.x || Screen.height != _screenSize.y;
+            bool screenSizeChanged =
+                Screen.width != _screenSize.x || Screen.height != _screenSize.y;
             _screenSize = new Vector2(Screen.width, Screen.height);
 
-            if (!screenSizeChanged && _currentAspectSettings != null) return;
+            if (!screenSizeChanged && _currentAspectSettings != null)
+                return;
 
             float minHeaderYPercent = 1.0f - HeaderRectTransform.anchorMin.y;
             float minFooterYPercent = FooterRectTransform.anchorMax.y;
             float minLeftPanelXPercent = LeftPanelRectTransorm.anchorMax.x;
             float cameraAspect = MapScene.Camera.aspect;
             float mapAspect = _mapWidth / _mapHeight;
-            float maxUsableCameraAspect = (_screenSize.x * (1.0f - minLeftPanelXPercent)) / (_screenSize.y * (1.0f - minHeaderYPercent - minFooterYPercent));
+            float maxUsableCameraAspect =
+                (_screenSize.x * (1.0f - minLeftPanelXPercent))
+                / (_screenSize.y * (1.0f - minHeaderYPercent - minFooterYPercent));
             float orthographicSize;
 
             if (mapAspect <= maxUsableCameraAspect)
             {
-                orthographicSize = (_mapWidth + _mapWidth * minLeftPanelXPercent) / 2 / mapAspect / cameraAspect * maxUsableCameraAspect;
+                orthographicSize =
+                    (_mapWidth + _mapWidth * minLeftPanelXPercent)
+                    / 2
+                    / mapAspect
+                    / cameraAspect
+                    * maxUsableCameraAspect;
             }
             else
             {
-                float addedPercent = (_screenSize.x / maxUsableCameraAspect - _screenSize.x / mapAspect) / _screenSize.y;
-                if (addedPercent < 0) addedPercent = 0;
-                orthographicSize = (_mapWidth + _mapWidth * minLeftPanelXPercent) / 2 / cameraAspect;
+                float addedPercent =
+                    (_screenSize.x / maxUsableCameraAspect - _screenSize.x / mapAspect)
+                    / _screenSize.y;
+                if (addedPercent < 0)
+                    addedPercent = 0;
+                orthographicSize =
+                    (_mapWidth + _mapWidth * minLeftPanelXPercent) / 2 / cameraAspect;
             }
             float cameraOffsetX = -orthographicSize * minLeftPanelXPercent / 2;
 
             AspectSettings newAspectSettings = new AspectSettings
             {
                 OrthographicSize = orthographicSize,
-                CameraOffsetX = cameraOffsetX
+                CameraOffsetX = cameraOffsetX,
                 //CameraPosition = Vector3.up * (puzzleHeight - 0.5f) / 2,
             };
 

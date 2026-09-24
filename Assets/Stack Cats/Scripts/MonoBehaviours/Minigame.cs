@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public delegate void MinigameStateChanged(MinigameState state);
     public delegate void MinigameComplete();
@@ -11,7 +11,7 @@ namespace Tofuwu.StackCats
         NotStarted,
         TitleScreen,
         Playing,
-        Completed
+        Completed,
     }
 
     public class Minigame : MonoBehaviour
@@ -23,10 +23,16 @@ namespace Tofuwu.StackCats
         public List<Cat> MinigameCats;
         public CatAvatar CatAvatarPrefab;
 
-        public MinigameState State { get { return _state; } }
+        public MinigameState State
+        {
+            get { return _state; }
+        }
         public Camera Camera { get; set; }
 
-        public bool IsComplete { get { return _state == MinigameState.Completed; } }
+        public bool IsComplete
+        {
+            get { return _state == MinigameState.Completed; }
+        }
 
         private MinigameState _state;
         private float _stateTimeElapsed;
@@ -42,7 +48,8 @@ namespace Tofuwu.StackCats
         {
             ChangeState(MinigameState.Completed);
 
-            if (onMinigameComplete != null) onMinigameComplete();
+            if (onMinigameComplete != null)
+                onMinigameComplete();
         }
 
         protected void Start()
@@ -59,7 +66,7 @@ namespace Tofuwu.StackCats
                 case MinigameState.NotStarted:
                     break;
                 case MinigameState.TitleScreen:
-                    if(_stateTimeElapsed > TitleScreenDuration)
+                    if (_stateTimeElapsed > TitleScreenDuration)
                     {
                         ChangeState(MinigameState.Playing);
                     }
@@ -86,7 +93,7 @@ namespace Tofuwu.StackCats
 
         private void HideCats()
         {
-            foreach(CatAvatar catAvatar in _titleCatAvatars)
+            foreach (CatAvatar catAvatar in _titleCatAvatars)
             {
                 Destroy(catAvatar.gameObject);
             }
@@ -119,7 +126,8 @@ namespace Tofuwu.StackCats
                     break;
             }
 
-            if (onMinigameStateChanged != null) onMinigameStateChanged(_state);
+            if (onMinigameStateChanged != null)
+                onMinigameStateChanged(_state);
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public delegate void ChangingDecor();
     public delegate void DoneChangingDecor();
@@ -33,7 +33,7 @@ namespace Tofuwu.StackCats.UI
 
         private void OnDresserSet(DresserItem dresser)
         {
-            foreach(Image image in DrawerImages)
+            foreach (Image image in DrawerImages)
             {
                 image.sprite = dresser.DrawerSprite;
                 image.SetMaterialForItem(dresser.ColorShift);
@@ -45,14 +45,16 @@ namespace Tofuwu.StackCats.UI
             OverlayScreenManager.EnqueueScreen(ChangeDecorOverlayScreen);
             OverlayScreenManager.OnHidden.AddListener(OnOverlayScreenManagerHidden);
 
-            if (onChangingDecor != null) onChangingDecor();
+            if (onChangingDecor != null)
+                onChangingDecor();
         }
 
         private void OnOverlayScreenManagerHidden()
         {
             OverlayScreenManager.OnHidden.RemoveListener(OnOverlayScreenManagerHidden);
 
-            if (onDoneChangingDecor != null) onDoneChangingDecor();
+            if (onDoneChangingDecor != null)
+                onDoneChangingDecor();
         }
     }
 }

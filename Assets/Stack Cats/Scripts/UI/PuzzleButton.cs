@@ -1,11 +1,11 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public delegate void StarsAdded(PuzzleButton sender, int numStars);
 
@@ -43,11 +43,22 @@ namespace Tofuwu.StackCats.UI
         public bool HasCutScene;
         public int NumStarsEarned;
 
-        public bool IsEnabled { get { return _isEnabled; } set { SetIsEnabled(value); } }
+        public bool IsEnabled
+        {
+            get { return _isEnabled; }
+            set { SetIsEnabled(value); }
+        }
 
-        public bool IsLocked { get { return _isLocked; } set { SetIsLocked(value); } }
+        public bool IsLocked
+        {
+            get { return _isLocked; }
+            set { SetIsLocked(value); }
+        }
 
-        public Button Button { get { return _button; } }
+        public Button Button
+        {
+            get { return _button; }
+        }
 
         private AudioManager _audioManager;
         private Button _button;
@@ -58,24 +69,30 @@ namespace Tofuwu.StackCats.UI
         {
             PuzzleCompleteCanvasGroup.alpha = 0.0f;
             PuzzleCompleteCanvasGroup.transform.localScale = Vector2.one * 3.0f;
-            LeanTween.alphaCanvas(PuzzleCompleteCanvasGroup, 1.0f, 0.5f)
+            LeanTween
+                .alphaCanvas(PuzzleCompleteCanvasGroup, 1.0f, 0.5f)
                 .setDelay(0.25f)
                 .setEase(LeanTweenType.easeInQuint);
-            LeanTween.scale(PuzzleCompleteCanvasGroup.gameObject, Vector2.one, 0.5f)
+            LeanTween
+                .scale(PuzzleCompleteCanvasGroup.gameObject, Vector2.one, 0.5f)
                 .setDelay(0.25f)
                 .setEase(LeanTweenType.easeInQuint)
-                .setOnComplete(delegate ()
-                {
-                    _audioManager.PlaySoundEffect(PuzzleCompleteSoundEffect);
-                });
-            LeanTween.scale(gameObject, Vector3.one * 0.75f, 0.5f)
+                .setOnComplete(
+                    delegate()
+                    {
+                        _audioManager.PlaySoundEffect(PuzzleCompleteSoundEffect);
+                    }
+                );
+            LeanTween
+                .scale(gameObject, Vector3.one * 0.75f, 0.5f)
                 .setDelay(0.75f)
                 .setEase(LeanTweenType.punch);
         }
 
         public void ChangeStars(int prevAmount, int curAmount, bool wasPreviouslyCompleted)
         {
-            if (prevAmount == curAmount) return;
+            if (prevAmount == curAmount)
+                return;
 
             NumStarsEarned = prevAmount;
             for (int i = prevAmount; i < PuzzleStars.Count; i++)
@@ -88,7 +105,10 @@ namespace Tofuwu.StackCats.UI
 
             if (curAmount == PuzzleStars.Count)
             {
-                LeanTween.alphaCanvas(ButtonFlashCanvasGroup, 1.0f, 0.1f).setDelay(0.75f).setOnComplete(AddFullCompletion, wasPreviouslyCompleted);
+                LeanTween
+                    .alphaCanvas(ButtonFlashCanvasGroup, 1.0f, 0.1f)
+                    .setDelay(0.75f)
+                    .setOnComplete(AddFullCompletion, wasPreviouslyCompleted);
             }
         }
 
@@ -98,7 +118,8 @@ namespace Tofuwu.StackCats.UI
             PuzzleStarsCanvasGroup.gameObject.SetActive(false);
             PuzzleLabelText.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
 
-            LeanTween.rotateAround(gameObject, Vector3.up, 180.0f, 0.3f)
+            LeanTween
+                .rotateAround(gameObject, Vector3.up, 180.0f, 0.3f)
                 .setDelay(1.0f)
                 .setEase(LeanTweenType.easeInQuint)
                 .setOnComplete(EnableButton);
@@ -119,12 +140,14 @@ namespace Tofuwu.StackCats.UI
             PuzzleHasCutSceneIcon.gameObject.SetActive(!IsComplete && HasCutScene);
             PuzzleStarsCanvasGroup.gameObject.SetActive(!IsLocked);
             PuzzleLabelText.color = IsLocked ? new Color(1.0f, 1.0f, 1.0f, 0.5f) : Color.white;
-            PuzzleLabelText.rectTransform.anchorMin = IsLocked && !UnlocksArea ? new Vector2(0.0f, 0.0f) : new Vector2(0.0f, 0.25f);
+            PuzzleLabelText.rectTransform.anchorMin =
+                IsLocked && !UnlocksArea ? new Vector2(0.0f, 0.0f) : new Vector2(0.0f, 0.25f);
             for (int i = 0; i < NumStarsEarned && i < PuzzleStars.Count; i++)
             {
                 PuzzleStars[i].StarImage.color = HasStarColor;
             }
-            if (NumStarsEarned == PuzzleStars.Count) ButtonFrameMask.showMaskGraphic = true;
+            if (NumStarsEarned == PuzzleStars.Count)
+                ButtonFrameMask.showMaskGraphic = true;
         }
 
         private void EnableButton()
@@ -133,7 +156,9 @@ namespace Tofuwu.StackCats.UI
             PuzzleStarsCanvasGroup.gameObject.SetActive(true);
             PuzzleLabelText.color = Color.white;
             PuzzleLabelText.rectTransform.anchorMin = new Vector2(0.0f, 0.25f);
-            LeanTween.rotateAround(gameObject, Vector3.up, 180.0f, 1.0f).setEase(LeanTweenType.easeOutElastic);
+            LeanTween
+                .rotateAround(gameObject, Vector3.up, 180.0f, 1.0f)
+                .setEase(LeanTweenType.easeOutElastic);
         }
 
         private IEnumerator AddStars(int prevAmount, int curAmount, float delay)
@@ -143,10 +168,13 @@ namespace Tofuwu.StackCats.UI
             for (int i = prevAmount; i < curAmount && i < PuzzleStars.Count; i++)
             {
                 PuzzleStar puzzleStar = PuzzleStars[i];
-                LeanTween.alphaCanvas(puzzleStar.StarFlashCanvasGroup, 1.0f, 0.1f).setOnComplete(AddStar, puzzleStar);
+                LeanTween
+                    .alphaCanvas(puzzleStar.StarFlashCanvasGroup, 1.0f, 0.1f)
+                    .setOnComplete(AddStar, puzzleStar);
             }
 
-            if (onStarsAdded != null) onStarsAdded(this, curAmount - prevAmount);
+            if (onStarsAdded != null)
+                onStarsAdded(this, curAmount - prevAmount);
 
             yield return null;
         }
@@ -155,20 +183,27 @@ namespace Tofuwu.StackCats.UI
         {
             PuzzleStar puzzleStar = (PuzzleStar)puzzleStarObj;
             puzzleStar.StarImage.color = HasStarColor;
-            LeanTween.scale(puzzleStar.StarImage.gameObject, Vector3.one * 1.25f, 0.25f).setEase(LeanTweenType.punch);
-            LeanTween.alphaCanvas(puzzleStar.StarFlashCanvasGroup, 0.0f, 1.0f).setEase(LeanTweenType.easeInSine);
+            LeanTween
+                .scale(puzzleStar.StarImage.gameObject, Vector3.one * 1.25f, 0.25f)
+                .setEase(LeanTweenType.punch);
+            LeanTween
+                .alphaCanvas(puzzleStar.StarFlashCanvasGroup, 0.0f, 1.0f)
+                .setEase(LeanTweenType.easeInSine);
         }
 
         private void AddFullCompletion(object wasPreviouslyCompleted)
         {
             ButtonFrameMask.showMaskGraphic = true;
-            LeanTween.alphaCanvas(ButtonFlashCanvasGroup, 0.0f, 1.0f).setEase(LeanTweenType.easeInSine);
+            LeanTween
+                .alphaCanvas(ButtonFlashCanvasGroup, 0.0f, 1.0f)
+                .setEase(LeanTweenType.easeInSine);
             //if((bool)wasPreviouslyCompleted == true) LeanTween.scale(gameObject, Vector3.one * 1.05f, 0.5f).setEase(LeanTweenType.punch);
         }
 
         private void SetIsEnabled(bool value)
         {
-            if (_isEnabled == value) return;
+            if (_isEnabled == value)
+                return;
 
             _isEnabled = value;
             _button.interactable = !_isLocked && _isEnabled;
@@ -176,7 +211,8 @@ namespace Tofuwu.StackCats.UI
 
         private void SetIsLocked(bool value)
         {
-            if (_isLocked == value) return;
+            if (_isLocked == value)
+                return;
 
             _isLocked = value;
             _button.interactable = !_isLocked && _isEnabled;

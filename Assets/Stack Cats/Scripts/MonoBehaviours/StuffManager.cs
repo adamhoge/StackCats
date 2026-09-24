@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
-using Tofuwu.StackCats.Data;
+using RockhopperGames.StackCats.Data;
 using RotaryHeart.Lib.SerializableDictionary;
+using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     [Serializable]
     public class ItemAmountDictionary : SerializableDictionaryBase<Item, int> { }
@@ -30,32 +30,50 @@ namespace Tofuwu.StackCats
         public ItemCollection AdPresentItems;
         public Cat DefaultFromCat;
 
-        public List<Item> AllItems { get { return _allItems; } }
+        public List<Item> AllItems
+        {
+            get { return _allItems; }
+        }
 
         private List<Item> _allItems;
         private GameManager _gameManager;
         private CatManager _catManager;
         private IStuffData _data;
 
-        public void AddPresent(Cat fromCat, CurrencyAmountDictionary currency, ItemAmountDictionary items)
+        public void AddPresent(
+            Cat fromCat,
+            CurrencyAmountDictionary currency,
+            ItemAmountDictionary items
+        )
         {
             Dictionary<string, int> itemsData = new Dictionary<string, int>();
 
-            foreach(KeyValuePair<Item, int> itemAmount in items)
+            foreach (KeyValuePair<Item, int> itemAmount in items)
             {
                 itemsData.Add(itemAmount.Key.GetId(), itemAmount.Value);
             }
 
-            if (!fromCat) fromCat = DefaultFromCat;
+            if (!fromCat)
+                fromCat = DefaultFromCat;
 
             string presentId = _data.AddPresent(fromCat.GetId(), currency, itemsData);
-            if (onPresentAdded != null) onPresentAdded(new PresentInfo { PresentId = presentId, FromCat = fromCat, CurrencyContents = currency, ItemContents = items });
+            if (onPresentAdded != null)
+                onPresentAdded(
+                    new PresentInfo
+                    {
+                        PresentId = presentId,
+                        FromCat = fromCat,
+                        CurrencyContents = currency,
+                        ItemContents = items,
+                    }
+                );
         }
 
         public void RemovePresent(string presentId)
         {
             _data.RemovePresent(presentId);
-            if (onPresentRemoved != null) onPresentRemoved(new PresentInfo { PresentId = presentId });
+            if (onPresentRemoved != null)
+                onPresentRemoved(new PresentInfo { PresentId = presentId });
         }
 
         public List<PresentInfo> GetPresents()
@@ -67,15 +85,18 @@ namespace Tofuwu.StackCats
                 IPresentData presentData = presents.Value;
 
                 CurrencyAmountDictionary currencyContents = new CurrencyAmountDictionary();
-                foreach(KeyValuePair<Currency, int> currency in presentData.Currency)
+                foreach (KeyValuePair<Currency, int> currency in presentData.Currency)
                 {
                     currencyContents.Add(currency.Key, currency.Value);
                 }
 
                 ItemAmountDictionary itemContents = new ItemAmountDictionary();
-                foreach(KeyValuePair<string, int> itemData in presentData.Items)
+                foreach (KeyValuePair<string, int> itemData in presentData.Items)
                 {
-                    itemContents.Add(_allItems.Find(i => i.GetId() == itemData.Key), itemData.Value);
+                    itemContents.Add(
+                        _allItems.Find(i => i.GetId() == itemData.Key),
+                        itemData.Value
+                    );
                 }
 
                 PresentInfo presentInfo = new PresentInfo
@@ -83,7 +104,7 @@ namespace Tofuwu.StackCats
                     PresentId = presents.Key,
                     FromCat = _catManager.CatCollection.GetById(presentData.FromCatID),
                     CurrencyContents = currencyContents,
-                    ItemContents = itemContents
+                    ItemContents = itemContents,
                 };
 
                 result.Add(presentInfo);
@@ -95,7 +116,8 @@ namespace Tofuwu.StackCats
         public void AddItem(Item item, int amount = 1)
         {
             _data.AddItem(item.GetId(), amount);
-            if (onItemAdded != null) onItemAdded(item, amount);
+            if (onItemAdded != null)
+                onItemAdded(item, amount);
         }
 
         public void RemoveItem(Item item, int amount = 1)
@@ -116,7 +138,7 @@ namespace Tofuwu.StackCats
         public Item GetRandomAdPresentItem(ItemRarity? rarity = null, bool unowned = false)
         {
             IEnumerable<Item> itemPool = AdPresentItems.List;
-            if(rarity != null)
+            if (rarity != null)
             {
                 itemPool = itemPool.Where(i => i.Rarity == rarity.Value);
             }
@@ -126,7 +148,9 @@ namespace Tofuwu.StackCats
             }
 
             List<Item> itemPoolList = itemPool.ToList();
-            return itemPoolList.Count > 0 ? itemPoolList[UnityEngine.Random.Range(0, itemPoolList.Count)] : null;
+            return itemPoolList.Count > 0
+                ? itemPoolList[UnityEngine.Random.Range(0, itemPoolList.Count)]
+                : null;
         }
 
         protected void Awake()

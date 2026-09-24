@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Tofuwu.StackCats.Data
+namespace RockhopperGames.StackCats.Data
 {
     [Serializable]
     public class LocalFlagData : LocalData<LocalFlagData>, IFlagData
     {
         private Dictionary<string, bool> _flags = new Dictionary<string, bool>();
 
-        public LocalFlagData(string dataPath) : base(dataPath) { }
+        public LocalFlagData(string dataPath)
+            : base(dataPath) { }
 
         public bool IsFlagSet(string flagLabel)
         {

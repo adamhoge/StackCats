@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class PlayModeSelectionOverlayScreen : OverlayScreen
     {
@@ -28,18 +28,30 @@ namespace Tofuwu.StackCats.UI
 
         protected void Start()
         {
-            StoryPuzzlesCompletedText.text = _puzzleManager.GetNumCompletedStoryPuzzles() + "/" + _puzzleManager.GetNumStoryPuzzlesInAllAreas();
-            StoryPuzzleStarsEarnedText.text = _puzzleManager.GetTotalNumStarsEarned() + "/" + _puzzleManager.GetNumStarsInAllAreas();
+            StoryPuzzlesCompletedText.text =
+                _puzzleManager.GetNumCompletedStoryPuzzles()
+                + "/"
+                + _puzzleManager.GetNumStoryPuzzlesInAllAreas();
+            StoryPuzzleStarsEarnedText.text =
+                _puzzleManager.GetTotalNumStarsEarned()
+                + "/"
+                + _puzzleManager.GetNumStarsInAllAreas();
 
             foreach (PuzzleArea puzzleArea in _puzzleManager.PuzzleAreaCollection.List)
             {
                 bool isAreaLocked = _puzzleManager.IsAreaLocked(puzzleArea);
 
-                PuzzleAreaChallengeCompletionUI challengeCompletion = Instantiate(PuzzleAreaChallengeCompletionPrefab, PuzzleAreaChallengeCompletionRectTransform);
+                PuzzleAreaChallengeCompletionUI challengeCompletion = Instantiate(
+                    PuzzleAreaChallengeCompletionPrefab,
+                    PuzzleAreaChallengeCompletionRectTransform
+                );
                 challengeCompletion.IsLocked = _puzzleManager.IsChallengeModeLocked(puzzleArea);
                 challengeCompletion.PuzzleArea = isAreaLocked ? null : puzzleArea;
 
-                PuzzleAreaEndlessCompletionUI endlessCompletion = Instantiate(PuzzleAreaEndlessCompletionPrefab, PuzzleAreaEndlessCompletionRectTransform);
+                PuzzleAreaEndlessCompletionUI endlessCompletion = Instantiate(
+                    PuzzleAreaEndlessCompletionPrefab,
+                    PuzzleAreaEndlessCompletionRectTransform
+                );
                 endlessCompletion.IsLocked = _puzzleManager.IsEndlessModeLocked(puzzleArea);
                 endlessCompletion.PuzzleArea = isAreaLocked ? null : puzzleArea;
             }
@@ -49,15 +61,26 @@ namespace Tofuwu.StackCats.UI
         {
             base.OnTransitioningIn();
 
-            if (!_isInitialized) Initialize();
+            if (!_isInitialized)
+                Initialize();
 
             for (int i = 0; i < _playModesCanvasGroups.Count; i++)
             {
                 float delay = TransitionInDuration / _playModesCanvasGroups.Count / 2 * i;
-                if (delay < 0.0f) delay = 0.0f;
-                _playModesCanvasGroups[i].transform.localPosition = new Vector2(-TransitionXOffset, 0);
-                LeanTween.moveLocalX(_playModesCanvasGroups[i].gameObject, 0.0f, TransitionInDuration).setDelay(delay).setEase(LeanTweenType.easeOutQuart);
-                LeanTween.alphaCanvas(_playModesCanvasGroups[i], 1.0f, TransitionInDuration / 2.0f).setDelay(delay).setEase(LeanTweenType.easeOutQuart);
+                if (delay < 0.0f)
+                    delay = 0.0f;
+                _playModesCanvasGroups[i].transform.localPosition = new Vector2(
+                    -TransitionXOffset,
+                    0
+                );
+                LeanTween
+                    .moveLocalX(_playModesCanvasGroups[i].gameObject, 0.0f, TransitionInDuration)
+                    .setDelay(delay)
+                    .setEase(LeanTweenType.easeOutQuart);
+                LeanTween
+                    .alphaCanvas(_playModesCanvasGroups[i], 1.0f, TransitionInDuration / 2.0f)
+                    .setDelay(delay)
+                    .setEase(LeanTweenType.easeOutQuart);
             }
         }
 
@@ -68,9 +91,20 @@ namespace Tofuwu.StackCats.UI
             for (int i = _playModesCanvasGroups.Count - 1; i >= 0; i--)
             {
                 float delay = TransitionOutDuration / _playModesCanvasGroups.Count / 2 * i;
-                if (delay < 0.0f) delay = 0.0f;
-                LeanTween.moveLocalX(_playModesCanvasGroups[i].gameObject, TransitionXOffset, TransitionOutDuration / 2.0f).setDelay(delay).setEase(LeanTweenType.easeOutQuart);
-                LeanTween.alphaCanvas(_playModesCanvasGroups[i], 0.0f, TransitionOutDuration).setDelay(delay).setEase(LeanTweenType.easeOutQuart);
+                if (delay < 0.0f)
+                    delay = 0.0f;
+                LeanTween
+                    .moveLocalX(
+                        _playModesCanvasGroups[i].gameObject,
+                        TransitionXOffset,
+                        TransitionOutDuration / 2.0f
+                    )
+                    .setDelay(delay)
+                    .setEase(LeanTweenType.easeOutQuart);
+                LeanTween
+                    .alphaCanvas(_playModesCanvasGroups[i], 0.0f, TransitionOutDuration)
+                    .setDelay(delay)
+                    .setEase(LeanTweenType.easeOutQuart);
             }
         }
 
@@ -94,6 +128,5 @@ namespace Tofuwu.StackCats.UI
 
             _isInitialized = true;
         }
-
     }
 }

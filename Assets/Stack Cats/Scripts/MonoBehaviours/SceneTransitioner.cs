@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public enum SceneState
     {
         ACTIVE,
         ENTERING,
         EXITING,
-        LOADING
+        LOADING,
     }
 
     [Serializable]
@@ -62,12 +62,18 @@ namespace Tofuwu.StackCats
         /// <summary>
         /// The current state of the scene transitioner.
         /// </summary>
-        public SceneState State { get { return _state; } }
+        public SceneState State
+        {
+            get { return _state; }
+        }
 
         /// <summary>
         /// The position of the scene transitioner.
         /// </summary>
-        public float TransitionPosition { get { return _transitionPosition; } }
+        public float TransitionPosition
+        {
+            get { return _transitionPosition; }
+        }
 
         private SceneState _state = SceneState.ENTERING;
         private float _stateTimeElapsed;
@@ -112,9 +118,7 @@ namespace Tofuwu.StackCats
             }
             else if (_state == SceneState.LOADING)
             {
-                if (_stateTimeElapsed > 0.5f)
-                {
-                }
+                if (_stateTimeElapsed > 0.5f) { }
             }
 
             if (_state != SceneState.ACTIVE)
@@ -122,7 +126,10 @@ namespace Tofuwu.StackCats
                 _screenOverlay.SetAlpha(1 - _transitionPosition);
                 if (_activeSceneTransitionSettings.ShouldFadeBackgroundMusic)
                 {
-                    _audioManager.SetBackgroundMusicVolumeModifier(_backgroundMusicVolumeModifierGuid, _transitionPosition);
+                    _audioManager.SetBackgroundMusicVolumeModifier(
+                        _backgroundMusicVolumeModifierGuid,
+                        _transitionPosition
+                    );
                 }
             }
         }
@@ -159,13 +166,18 @@ namespace Tofuwu.StackCats
                         _screenOverlay.SetAlpha(0.0f);
                         if (_activeSceneTransitionSettings.ShouldFadeBackgroundMusic)
                         {
-                            _audioManager.SetBackgroundMusicVolumeModifier(_backgroundMusicVolumeModifierGuid, 1.0f);
+                            _audioManager.SetBackgroundMusicVolumeModifier(
+                                _backgroundMusicVolumeModifierGuid,
+                                1.0f
+                            );
                         }
                         break;
                     case SceneState.ENTERING:
                         break;
                     case SceneState.EXITING:
-                        if (EventSystem.current) EventSystem.current.enabled = _activeSceneTransitionSettings.IsInputEnabledOnTransition;
+                        if (EventSystem.current)
+                            EventSystem.current.enabled =
+                                _activeSceneTransitionSettings.IsInputEnabledOnTransition;
                         break;
                     case SceneState.LOADING:
                         break;
@@ -175,7 +187,8 @@ namespace Tofuwu.StackCats
 
                 _state = state;
                 _stateTimeElapsed = 0.0f;
-                if (onSceneStateChanged != null) onSceneStateChanged(_state);
+                if (onSceneStateChanged != null)
+                    onSceneStateChanged(_state);
             }
         }
 
@@ -184,11 +197,21 @@ namespace Tofuwu.StackCats
             bool transitionCompleted = false;
 
             // Update the transition position.
-            float transitionDuration = direction > 0 ? _activeSceneTransitionSettings.TransitionInDuration : _activeSceneTransitionSettings.TransitionOutDuration;
-            _transitionPosition = transitionDuration > 0 ? _transitionPosition + (Time.unscaledDeltaTime / transitionDuration) * direction : direction;
+            float transitionDuration =
+                direction > 0
+                    ? _activeSceneTransitionSettings.TransitionInDuration
+                    : _activeSceneTransitionSettings.TransitionOutDuration;
+            _transitionPosition =
+                transitionDuration > 0
+                    ? _transitionPosition
+                        + (Time.unscaledDeltaTime / transitionDuration) * direction
+                    : direction;
 
             // Determine if the transition is complete.
-            if ((direction < 0 && _transitionPosition <= -1) || (direction > 0 && _transitionPosition >= 1))
+            if (
+                (direction < 0 && _transitionPosition <= -1)
+                || (direction > 0 && _transitionPosition >= 1)
+            )
             {
                 _transitionPosition = Mathf.Clamp(_transitionPosition, 0, 1);
                 transitionCompleted = true;

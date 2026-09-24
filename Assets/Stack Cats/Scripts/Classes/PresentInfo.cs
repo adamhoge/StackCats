@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     [Serializable]
     public class PresentInfo

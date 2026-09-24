@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     [CreateAssetMenu(fileName = "Medal Collection", menuName = "Stack Cats/Medal Collection")]
     public class MedalSpriteCollection : ScriptableObject

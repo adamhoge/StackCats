@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class MedalFlashEffectUI : FlashEffectUI
     {
@@ -9,9 +9,17 @@ namespace Tofuwu.StackCats.UI
         public Image MedalOutlineMaskImage;
         public MedalSpriteCollection MedalSpriteCollection;
 
-        public bool HasOutline { get { return _hasOutline; } set { SetHasOutline(value); } }
+        public bool HasOutline
+        {
+            get { return _hasOutline; }
+            set { SetHasOutline(value); }
+        }
 
-        public int NumPuzzlesCompleted { get { return _numPuzzlesCompleted; } set { SetNumPuzzlesCompleted(value); } }
+        public int NumPuzzlesCompleted
+        {
+            get { return _numPuzzlesCompleted; }
+            set { SetNumPuzzlesCompleted(value); }
+        }
 
         [SerializeField]
         [HideInInspector]
@@ -29,7 +37,8 @@ namespace Tofuwu.StackCats.UI
 
         private void SetHasOutline(bool value)
         {
-            if (value == _hasOutline) return;
+            if (value == _hasOutline)
+                return;
 
             _hasOutline = value;
 
@@ -46,7 +55,8 @@ namespace Tofuwu.StackCats.UI
 
         private void SetNumPuzzlesCompleted(int value)
         {
-            if (value == _numPuzzlesCompleted) return;
+            if (value == _numPuzzlesCompleted)
+                return;
 
             _numPuzzlesCompleted = value;
 
@@ -60,20 +70,24 @@ namespace Tofuwu.StackCats.UI
 
         private Sprite GetMedalSprite(int numPuzzlesCompleted)
         {
-            if (numPuzzlesCompleted <= 0) return null;
+            if (numPuzzlesCompleted <= 0)
+                return null;
 
             var medalSprites = MedalSpriteCollection.MedalSprites;
-            if (numPuzzlesCompleted >= medalSprites.Count) return medalSprites[medalSprites.Count - 1];
+            if (numPuzzlesCompleted >= medalSprites.Count)
+                return medalSprites[medalSprites.Count - 1];
 
             return medalSprites[numPuzzlesCompleted - 1];
         }
 
         private Sprite GetMedalOutlineSprite(int numPuzzlesCompleted)
         {
-            if (numPuzzlesCompleted <= 0) return null;
+            if (numPuzzlesCompleted <= 0)
+                return null;
 
             var medalOutlineSprites = MedalSpriteCollection.MedalOutlineSprites;
-            if (numPuzzlesCompleted >= medalOutlineSprites.Count) return medalOutlineSprites[medalOutlineSprites.Count - 1];
+            if (numPuzzlesCompleted >= medalOutlineSprites.Count)
+                return medalOutlineSprites[medalOutlineSprites.Count - 1];
 
             return medalOutlineSprites[numPuzzlesCompleted - 1];
         }

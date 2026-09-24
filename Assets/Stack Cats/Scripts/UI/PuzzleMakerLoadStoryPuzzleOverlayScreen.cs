@@ -1,9 +1,9 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using System.Collections.Generic;
 using TMPro;
-using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     [RequireComponent(typeof(PuzzleLoader))]
     public class PuzzleMakerLoadStoryPuzzleOverlayScreen : OverlayScreen
@@ -25,7 +25,9 @@ namespace Tofuwu.StackCats.UI
         {
             base.OnTransitioningIn();
 
-            _storyPuzzles = _puzzleManager.GetStoryPuzzles(PuzzleMakerScene.CurrentAreaEditor.PuzzleArea);
+            _storyPuzzles = _puzzleManager.GetStoryPuzzles(
+                PuzzleMakerScene.CurrentAreaEditor.PuzzleArea
+            );
 
             while (_storyPuzzleButtonInstances.Count > 0)
             {
@@ -36,10 +38,21 @@ namespace Tofuwu.StackCats.UI
             for (int i = 0; i < _storyPuzzles.Count; i++)
             {
                 StoryPuzzle storyPuzzle = _storyPuzzles[i];
-                if (storyPuzzle == null) continue;
-                Button storyPuzzleButton = Instantiate(StoryPuzzleButtonPrefab, StoryPuzzleButtonsRectTransform);
-                storyPuzzleButton.onClick.AddListener(delegate () { SelectPuzzle(storyPuzzle); });
-                storyPuzzleButton.GetComponentInChildren<TextMeshProUGUI>().text = (i + 1).ToString();
+                if (storyPuzzle == null)
+                    continue;
+                Button storyPuzzleButton = Instantiate(
+                    StoryPuzzleButtonPrefab,
+                    StoryPuzzleButtonsRectTransform
+                );
+                storyPuzzleButton.onClick.AddListener(
+                    delegate()
+                    {
+                        SelectPuzzle(storyPuzzle);
+                    }
+                );
+                storyPuzzleButton.GetComponentInChildren<TextMeshProUGUI>().text = (
+                    i + 1
+                ).ToString();
                 _storyPuzzleButtonInstances.Add(storyPuzzleButton);
             }
         }

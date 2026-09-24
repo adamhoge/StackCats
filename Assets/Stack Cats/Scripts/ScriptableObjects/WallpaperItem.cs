@@ -1,9 +1,12 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
-    [CreateAssetMenu(fileName = "Wallpaper Item", menuName = "Stack Cats/Items/Decor/Wallpaper Item")]
+    [CreateAssetMenu(
+        fileName = "Wallpaper Item",
+        menuName = "Stack Cats/Items/Decor/Wallpaper Item"
+    )]
     public class WallpaperItem : DecorItem
     {
         public Sprite WallpaperSprite;

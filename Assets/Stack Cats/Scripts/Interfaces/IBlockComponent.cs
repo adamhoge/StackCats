@@ -1,4 +1,4 @@
-﻿namespace Tofuwu.StackCats
+﻿namespace RockhopperGames.StackCats
 {
     public interface IBlockComponent
     {

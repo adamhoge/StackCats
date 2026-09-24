@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats.Models
+namespace RockhopperGames.StackCats.Models
 {
     [System.Serializable]
     public class SumBlockComponentModel
     {
-        public int SumValue { get { return _sumValue; } set { _sumValue = value; } }
+        public int SumValue
+        {
+            get { return _sumValue; }
+            set { _sumValue = value; }
+        }
 
         [SerializeField]
         private int _sumValue;

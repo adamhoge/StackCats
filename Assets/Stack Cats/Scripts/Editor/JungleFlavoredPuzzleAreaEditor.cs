@@ -1,4 +1,4 @@
-﻿using Tofuwu.StackCats;
+﻿using RockhopperGames.StackCats;
 using UnityEditor;
 
 [CustomEditor(typeof(JungleFlavoredPuzzleArea))]
@@ -6,7 +6,7 @@ public class JungleFlavoredPuzzleAreaEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-        JungleFlavoredPuzzleArea puzzleArea = (JungleFlavoredPuzzleArea) target;
+        JungleFlavoredPuzzleArea puzzleArea = (JungleFlavoredPuzzleArea)target;
 
         base.OnInspectorGUI();
         EditorGUILayout.Space();

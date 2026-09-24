@@ -2,7 +2,7 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class StandardButton : MonoBehaviour, IPointerDownHandler
     {

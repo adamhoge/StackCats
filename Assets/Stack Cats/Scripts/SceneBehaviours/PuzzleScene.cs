@@ -1,16 +1,16 @@
-﻿using UnityEngine;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 using System.Runtime.CompilerServices;
+using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public enum PuzzleSceneState
     {
         Playing,
         Completing,
-        Complete
+        Complete,
     }
 
     public delegate void PuzzleSceneCompleting();
@@ -38,27 +38,44 @@ namespace Tofuwu.StackCats
         /// <summary>
         /// The puzzle loader used to load the puzzle.
         /// </summary>
-        public PuzzleLoader PuzzleLoader { get { return _puzzleLoader; } }
+        public PuzzleLoader PuzzleLoader
+        {
+            get { return _puzzleLoader; }
+        }
 
         /// <summary>
         /// The subject puzzle area of the puzzle scene.
         /// </summary>
-        public PuzzleArea PuzzleArea { get { return _puzzleArea; } }
+        public PuzzleArea PuzzleArea
+        {
+            get { return _puzzleArea; }
+        }
 
         /// <summary>
         /// Any currency found while playing the puzzle.
         /// </summary>
-        public Dictionary<Currency, int> CurrencyFound { get { return _currencyFound; } }
+        public Dictionary<Currency, int> CurrencyFound
+        {
+            get { return _currencyFound; }
+        }
 
         /// <summary>
         /// A list of cats seen while playing the puzzle.
         /// </summary>
-        public List<Cat> CatsSeen { get { return _catsSeen; } set { _catsSeen = value; } }
+        public List<Cat> CatsSeen
+        {
+            get { return _catsSeen; }
+            set { _catsSeen = value; }
+        }
 
         /// <summary>
         /// A list of new cats seen while playing the puzzle.
         /// </summary>
-        public List<Cat> NewCatsSeen { get { return _newCatsSeen; } set { _newCatsSeen = value; } }
+        public List<Cat> NewCatsSeen
+        {
+            get { return _newCatsSeen; }
+            set { _newCatsSeen = value; }
+        }
 
         /// <summary>
         /// The camera used for rendering.
@@ -133,7 +150,9 @@ namespace Tofuwu.StackCats
                 if (!stackCatAvatar.IsExiting)
                 {
                     Block topBlock = stackCatAvatar.OnStack.TopBlock;
-                    stackCatAvatar.CatAvatar.transform.position = topBlock ? topBlock.transform.position + Vector3.up : stackCatAvatar.OnStack.transform.position;
+                    stackCatAvatar.CatAvatar.transform.position = topBlock
+                        ? topBlock.transform.position + Vector3.up
+                        : stackCatAvatar.OnStack.transform.position;
                 }
             }
 
@@ -154,17 +173,28 @@ namespace Tofuwu.StackCats
         protected void ShowPuzzleBackdrop(Puzzle puzzle)
         {
             LeanTween.cancel(PuzzleBackdropSpriteRenderer.gameObject);
-            float backdropWidth = puzzle.Stacks.Count * (1 + puzzle.StackSpacing) + puzzle.StackSpacing + PuzzleBorder * 2;
-            float backdropHeight = puzzle.MaxStackHeight + puzzle.StackSpacing * 4 + PuzzleBorder * 2;
+            float backdropWidth =
+                puzzle.Stacks.Count * (1 + puzzle.StackSpacing)
+                + puzzle.StackSpacing
+                + PuzzleBorder * 2;
+            float backdropHeight =
+                puzzle.MaxStackHeight + puzzle.StackSpacing * 4 + PuzzleBorder * 2;
             PuzzleBackdropSpriteRenderer.size = new Vector2(backdropWidth, backdropHeight);
-            PuzzleBackdropSpriteRenderer.transform.localPosition = new Vector2(0.0f, backdropHeight / 2 - puzzle.StackSpacing - PuzzleBorder);
-            LeanTween.alpha(PuzzleBackdropSpriteRenderer.gameObject, 1.0f, 1.0f).setEase(LeanTweenType.easeInOutSine);
+            PuzzleBackdropSpriteRenderer.transform.localPosition = new Vector2(
+                0.0f,
+                backdropHeight / 2 - puzzle.StackSpacing - PuzzleBorder
+            );
+            LeanTween
+                .alpha(PuzzleBackdropSpriteRenderer.gameObject, 1.0f, 1.0f)
+                .setEase(LeanTweenType.easeInOutSine);
         }
 
         protected void HidePuzzleBackdrop()
         {
             LeanTween.cancel(PuzzleBackdropSpriteRenderer.gameObject);
-            LeanTween.alpha(PuzzleBackdropSpriteRenderer.gameObject, 0.0f, 0.5f).setEase(LeanTweenType.easeInOutSine);
+            LeanTween
+                .alpha(PuzzleBackdropSpriteRenderer.gameObject, 0.0f, 0.5f)
+                .setEase(LeanTweenType.easeInOutSine);
         }
 
         protected virtual void OnPuzzleCompleted(Puzzle puzzle, PuzzleCompletionType completionType)
@@ -184,16 +214,23 @@ namespace Tofuwu.StackCats
             }
         }
 
-        protected virtual void OnPuzzleSceneCompleted(Puzzle puzzle, PuzzleCompletionType puzzleCompletionType)
+        protected virtual void OnPuzzleSceneCompleted(
+            Puzzle puzzle,
+            PuzzleCompletionType puzzleCompletionType
+        )
         {
-            if (onPuzzleSceneCompleted != null) onPuzzleSceneCompleted(puzzle, puzzleCompletionType);
+            if (onPuzzleSceneCompleted != null)
+                onPuzzleSceneCompleted(puzzle, puzzleCompletionType);
         }
 
         private void ExitCatAvatar(CatAvatar catAvatar)
         {
             _stackCatAvatars.First(c => c.CatAvatar == catAvatar).IsExiting = true;
             float jumpDelay = UnityEngine.Random.Range(0.0f, 0.1f);
-            LeanTween.moveY(catAvatar.gameObject, -5.0f, 0.5f + catAvatar.transform.position.y / 32.0f).setEase(LeanTweenType.easeInCubic).setDelay(jumpDelay + 0.15f);
+            LeanTween
+                .moveY(catAvatar.gameObject, -5.0f, 0.5f + catAvatar.transform.position.y / 32.0f)
+                .setEase(LeanTweenType.easeInCubic)
+                .setDelay(jumpDelay + 0.15f);
             catAvatar.Animator.Jump();
             Destroy(catAvatar.gameObject, 1.0f);
         }
@@ -209,7 +246,8 @@ namespace Tofuwu.StackCats
 
         private void ChangeState(PuzzleSceneState state)
         {
-            if (_puzzleSceneState == state) return;
+            if (_puzzleSceneState == state)
+                return;
 
             _puzzleSceneState = state;
             _stateTimeElapsed = 0.0f;
@@ -219,7 +257,8 @@ namespace Tofuwu.StackCats
                 case PuzzleSceneState.Playing:
                     break;
                 case PuzzleSceneState.Completing:
-                    if (onPuzzleSceneCompleting != null) onPuzzleSceneCompleting();
+                    if (onPuzzleSceneCompleting != null)
+                        onPuzzleSceneCompleting();
                     break;
                 case PuzzleSceneState.Complete:
                     OnPuzzleSceneCompleted(_completedPuzzle, _completionType);
@@ -232,7 +271,9 @@ namespace Tofuwu.StackCats
             if (!wasRestarted)
             {
                 LeanTween.cancel(TopBoundarySprite.gameObject);
-                LeanTween.moveY(TopBoundarySprite.gameObject, puzzle.MaxStackHeight - 5.0f + 0.25f, 1.0f).setEase(LeanTweenType.easeInOutSine);
+                LeanTween
+                    .moveY(TopBoundarySprite.gameObject, puzzle.MaxStackHeight - 5.0f + 0.25f, 1.0f)
+                    .setEase(LeanTweenType.easeInOutSine);
             }
         }
 
@@ -240,7 +281,8 @@ namespace Tofuwu.StackCats
         {
             if (_sceneState != SceneState.EXITING)
             {
-                PointerPuzzleController controller = puzzle.gameObject.AddComponent<PointerPuzzleController>();
+                PointerPuzzleController controller =
+                    puzzle.gameObject.AddComponent<PointerPuzzleController>();
                 controller.Camera = Camera;
 
                 puzzle.onCatSighting += OnCatSighting;
@@ -248,7 +290,8 @@ namespace Tofuwu.StackCats
                 puzzle.onBlockMoved += OnBlockMoved;
                 puzzle.onPuzzleCompleted += OnPuzzleCompleted;
                 puzzle.onBlockMoveResolved += OnAfterBlockResolved;
-                if (controller) controller.onBlocksSelected += OnBlocksSelected;
+                if (controller)
+                    controller.onBlocksSelected += OnBlocksSelected;
 
                 _tutorialManager.BeginTutorialsForPuzzle(puzzle);
             }
@@ -268,8 +311,10 @@ namespace Tofuwu.StackCats
 
         private void OnCatSighting(Cat cat, Puzzle puzzle, int stackIndex, int blockIndex)
         {
-            if (!_catsSeen.Contains(cat)) _catsSeen.Add(cat);
-            if (!_catManager.WasCatSeen(cat) && !_newCatsSeen.Contains(cat)) _newCatsSeen.Add(cat);
+            if (!_catsSeen.Contains(cat))
+                _catsSeen.Add(cat);
+            if (!_catManager.WasCatSeen(cat) && !_newCatsSeen.Contains(cat))
+                _newCatsSeen.Add(cat);
 
             Stack stack = puzzle.Stacks[stackIndex];
             CatAvatar catAvatar = Instantiate(CatAvatarPrefab, transform);
@@ -279,7 +324,9 @@ namespace Tofuwu.StackCats
             catAvatar.transform.position = stack.transform.position + Vector3.up * blockIndex;
             catAvatar.Animator.Jump();
             catAvatar.transform.localScale = Vector3.one * 0.25f;
-            LeanTween.scale(catAvatar.gameObject, Vector3.one * 0.9f, 0.5f).setEase(LeanTweenType.easeOutSine);
+            LeanTween
+                .scale(catAvatar.gameObject, Vector3.one * 0.9f, 0.5f)
+                .setEase(LeanTweenType.easeOutSine);
             _stackCatAvatars.Add(new StackCatAvatar { CatAvatar = catAvatar, OnStack = stack });
             _gameManager.Audio.PlaySoundEffect(cat.Meow);
             switch (cat.Rarity)
@@ -298,7 +345,9 @@ namespace Tofuwu.StackCats
 
         private void OnBlocksSelected(PuzzleMarker marker)
         {
-            List<StackCatAvatar> affectedCatAvatars = _stackCatAvatars.Where(a => a.OnStack == marker.Stack).ToList();
+            List<StackCatAvatar> affectedCatAvatars = _stackCatAvatars
+                .Where(a => a.OnStack == marker.Stack)
+                .ToList();
 
             while (affectedCatAvatars.Count > 0)
             {
@@ -310,7 +359,9 @@ namespace Tofuwu.StackCats
 
         private void OnBlockMoved(Puzzle puzzle, Stack source, Block block, Stack destination)
         {
-            List<StackCatAvatar> affectedCatAvatars = _stackCatAvatars.Where(a => a.OnStack == destination).ToList();
+            List<StackCatAvatar> affectedCatAvatars = _stackCatAvatars
+                .Where(a => a.OnStack == destination)
+                .ToList();
 
             while (affectedCatAvatars.Count > 0)
             {
@@ -320,9 +371,16 @@ namespace Tofuwu.StackCats
             }
         }
 
-        private void OnAfterBlockResolved(Puzzle puzzle, Stack source, Block block, Stack destination)
+        private void OnAfterBlockResolved(
+            Puzzle puzzle,
+            Stack source,
+            Block block,
+            Stack destination
+        )
         {
-            List<StackCatAvatar> affectedCatAvatars = _stackCatAvatars.Where(a => a.OnStack.Blocks.Count == puzzle.MaxMovableStackHeight).ToList();
+            List<StackCatAvatar> affectedCatAvatars = _stackCatAvatars
+                .Where(a => a.OnStack.Blocks.Count == puzzle.MaxMovableStackHeight)
+                .ToList();
 
             while (affectedCatAvatars.Count > 0)
             {
@@ -337,7 +395,9 @@ namespace Tofuwu.StackCats
             ExitAllCatAvatars();
 
             LeanTween.cancel(TopBoundarySprite.gameObject);
-            LeanTween.moveY(TopBoundarySprite.gameObject, 6.25f, 1.0f).setEase(LeanTweenType.easeInOutSine);
+            LeanTween
+                .moveY(TopBoundarySprite.gameObject, 6.25f, 1.0f)
+                .setEase(LeanTweenType.easeInOutSine);
         }
     }
 }

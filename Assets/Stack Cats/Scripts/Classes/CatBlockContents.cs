@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     [Serializable]
     public class CatBlockContents

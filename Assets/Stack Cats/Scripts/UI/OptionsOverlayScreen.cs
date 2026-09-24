@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class OptionsOverlayScreen : OverlayScreen
     {
@@ -33,14 +32,30 @@ namespace Tofuwu.StackCats.UI
         {
             base.OnTransitioningIn();
 
-            if (!_isInitialized) Initialize();
+            if (!_isInitialized)
+                Initialize();
 
             for (int i = 0; i < _optionsCanvasGroups.Count; i++)
             {
-                float delay = TransitionInDuration / _optionsCanvasGroups.Count / 2 * (_optionsCanvasGroups.Count - i - 1);
-                if (delay < 0.0f) delay = 0.0f;
-                LeanTween.moveLocalY(_optionsCanvasGroups[i].gameObject, 0.0f, TransitionInDuration / 2.0f).setDelay(delay).setEase(TransitionInTween);
-                LeanTween.alphaCanvas(_optionsCanvasGroups[i], 1.0f, TransitionInDuration / 2.0f).setDelay(delay).setEase(LeanTweenType.easeOutSine);
+                float delay =
+                    TransitionInDuration
+                    / _optionsCanvasGroups.Count
+                    / 2
+                    * (_optionsCanvasGroups.Count - i - 1);
+                if (delay < 0.0f)
+                    delay = 0.0f;
+                LeanTween
+                    .moveLocalY(
+                        _optionsCanvasGroups[i].gameObject,
+                        0.0f,
+                        TransitionInDuration / 2.0f
+                    )
+                    .setDelay(delay)
+                    .setEase(TransitionInTween);
+                LeanTween
+                    .alphaCanvas(_optionsCanvasGroups[i], 1.0f, TransitionInDuration / 2.0f)
+                    .setDelay(delay)
+                    .setEase(LeanTweenType.easeOutSine);
             }
         }
 
@@ -52,9 +67,20 @@ namespace Tofuwu.StackCats.UI
             {
                 _optionsCanvasGroups[i].interactable = false;
                 float delay = TransitionOutDuration / _optionsCanvasGroups.Count / 2 * i;
-                if (delay < 0.0f) delay = 0.0f;
-                LeanTween.moveLocalY(_optionsCanvasGroups[i].gameObject, TransitionYOffset, TransitionOutDuration / 2.0f).setDelay(delay).setEase(TransitionOutTween);
-                LeanTween.alphaCanvas(_optionsCanvasGroups[i], 0.0f, TransitionOutDuration / 2.0f).setDelay(delay).setEase(LeanTweenType.easeOutSine);
+                if (delay < 0.0f)
+                    delay = 0.0f;
+                LeanTween
+                    .moveLocalY(
+                        _optionsCanvasGroups[i].gameObject,
+                        TransitionYOffset,
+                        TransitionOutDuration / 2.0f
+                    )
+                    .setDelay(delay)
+                    .setEase(TransitionOutTween);
+                LeanTween
+                    .alphaCanvas(_optionsCanvasGroups[i], 0.0f, TransitionOutDuration / 2.0f)
+                    .setDelay(delay)
+                    .setEase(LeanTweenType.easeOutSine);
             }
         }
 

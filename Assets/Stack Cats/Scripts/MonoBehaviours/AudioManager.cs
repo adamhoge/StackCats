@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Tofuwu.StackCats.Data;
+using RockhopperGames.StackCats.Data;
 using UnityEditor;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     // TODO: Possibly handle fade out logic here, possibly handle it in the GameSceneTransitioner, possibly in the GameSceneManager
     public class AudioManager : MonoBehaviour

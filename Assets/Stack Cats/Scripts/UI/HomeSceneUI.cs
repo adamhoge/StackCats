@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using System;
-using System.Linq;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     [RequireComponent(typeof(HomeDecorUI))]
     public class HomeSceneUI : MonoBehaviour
@@ -64,7 +64,7 @@ namespace Tofuwu.StackCats.UI
         protected void Start()
         {
             var cats = GameManager.Instance.Cats.CatCollection.List;
-            CatsButtonText.text = $"{ cats.Count(c => _catManager.IsBonded(c)) }";
+            CatsButtonText.text = $"{cats.Count(c => _catManager.IsBonded(c))}";
             UpdatePresentsButton();
             PuzzleMakerButton.gameObject.SetActive(Debug.isDebugBuild);
         }
@@ -112,10 +112,12 @@ namespace Tofuwu.StackCats.UI
 
         private void OnChangingDecor()
         {
-            LeanTween.alphaCanvas(HomeMenuLayoutCanvasGroup, 0.0f, 0.0f).setEase(LeanTweenType.easeOutSine);
+            LeanTween
+                .alphaCanvas(HomeMenuLayoutCanvasGroup, 0.0f, 0.0f)
+                .setEase(LeanTweenType.easeOutSine);
             foreach (Button button in DrawerButtons)
             {
-                foreach(Transform child in button.transform)
+                foreach (Transform child in button.transform)
                 {
                     child.gameObject.SetActive(false);
                 }
@@ -124,7 +126,9 @@ namespace Tofuwu.StackCats.UI
 
         private void OnDoneChangingDecor()
         {
-            LeanTween.alphaCanvas(HomeMenuLayoutCanvasGroup, 1.0f, 0.0f).setEase(LeanTweenType.easeOutSine);
+            LeanTween
+                .alphaCanvas(HomeMenuLayoutCanvasGroup, 1.0f, 0.0f)
+                .setEase(LeanTweenType.easeOutSine);
             foreach (Button button in DrawerButtons)
             {
                 foreach (Transform child in button.transform)

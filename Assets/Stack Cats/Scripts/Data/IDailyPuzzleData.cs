@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Tofuwu.StackCats.Models;
+using RockhopperGames.StackCats.Models;
 
-namespace Tofuwu.StackCats.Data
+namespace RockhopperGames.StackCats.Data
 {
     public interface IDailyPuzzleData
     {

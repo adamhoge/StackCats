@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public delegate void ConfirmAction(string message, UnityAction action);
 
@@ -29,92 +29,146 @@ namespace Tofuwu.StackCats
         /// <summary>
         /// An instance of the GameManager.
         /// </summary>
-        public static GameManager Instance { get { return _instance; } }
+        public static GameManager Instance
+        {
+            get { return _instance; }
+        }
 
         /// <summary>
         /// The current game scene.
         /// </summary>
-        public GameScene CurrentGameScene { get { return _gameSceneManager.CurrentGameScene; } }
+        public GameScene CurrentGameScene
+        {
+            get { return _gameSceneManager.CurrentGameScene; }
+        }
 
         /// <summary>
         /// The previous game scene.
         /// </summary>
-        public GameScene PreviousGameScene { get { return _gameSceneManager.PreviousGameScene; } }
+        public GameScene PreviousGameScene
+        {
+            get { return _gameSceneManager.PreviousGameScene; }
+        }
 
         /// <summary>
         /// Manages all saved game data.
         /// </summary>
-        public DataManager Data { get { return _data; } }
+        public DataManager Data
+        {
+            get { return _data; }
+        }
 
         /// <summary>
         /// Manages game audio.
         /// </summary>
-        public AudioManager Audio { get { return _audio; } }
+        public AudioManager Audio
+        {
+            get { return _audio; }
+        }
 
         /// <summary>
         /// Manages in-game events.
         /// </summary>
-        public EventManager Events { get { return _events; } }
+        public EventManager Events
+        {
+            get { return _events; }
+        }
 
         /// <summary>
         /// Manages all game scenes.
         /// </summary>
-        public GameSceneManager GameScenes { get { return _gameSceneManager; } }
+        public GameSceneManager GameScenes
+        {
+            get { return _gameSceneManager; }
+        }
 
         /// <summary>
         /// Manages cut scene playback.
         /// </summary>
-        public CutSceneManager CutScenes { get { return _cutScenes; } }
+        public CutSceneManager CutScenes
+        {
+            get { return _cutScenes; }
+        }
 
         /// <summary>
         /// Manages type-related tutorials.
         /// </summary>
-        public TutorialManager TutorialManager { get { return _tutorialManager; } }
+        public TutorialManager TutorialManager
+        {
+            get { return _tutorialManager; }
+        }
 
         /// <summary>
         /// Manages cat data.
         /// </summary>
-        public CatManager Cats { get { return _cats; } }
+        public CatManager Cats
+        {
+            get { return _cats; }
+        }
 
         /// <summary>
         /// Manages standard puzzle data.
         /// </summary>
-        public PuzzleManager Puzzles { get { return _puzzles; } }
+        public PuzzleManager Puzzles
+        {
+            get { return _puzzles; }
+        }
 
         /// <summary>
         /// Manages game currency.
         /// </summary>
-        public CurrencyManager Currency { get { return _currency; } }
+        public CurrencyManager Currency
+        {
+            get { return _currency; }
+        }
 
         /// <summary>
         /// Manages presents, furniture, items, etc.
         /// </summary>
-        public StuffManager Stuff { get { return _stuff; } }
+        public StuffManager Stuff
+        {
+            get { return _stuff; }
+        }
 
         /// <summary>
         /// Manages the player's home (cat visitors, invited cats, decor, etc.)
         /// </summary>
-        public HomeManager Home { get { return _home; } }
+        public HomeManager Home
+        {
+            get { return _home; }
+        }
 
         /// <summary>
         /// Manages ads and ad-based rewards.
         /// </summary>
-        public AdManager Ads { get { return _ads; } }
+        public AdManager Ads
+        {
+            get { return _ads; }
+        }
 
         /// <summary>
         /// Manages minigames and minigame-related information.
         /// </summary>
-        public MinigameManager Minigames { get { return _minigames; } }
+        public MinigameManager Minigames
+        {
+            get { return _minigames; }
+        }
 
         /// <summary>
         /// Chat Cat companion.
         /// </summary>
-        public ChatCat ChatCat { get { return _chatCat; } }
+        public ChatCat ChatCat
+        {
+            get { return _chatCat; }
+        }
 
         /// <summary>
         /// Get the current time of day.
         /// </summary>
-        public TimeOfDay TimeOfDay { get { return GetTimeOfDay(); } }
+        public TimeOfDay TimeOfDay
+        {
+            get { return GetTimeOfDay(); }
+        }
 
         private static GameManager _instance;
         private GameSceneManager _gameSceneManager;
@@ -153,7 +207,11 @@ namespace Tofuwu.StackCats
                 transitionSettings.TransitionOutDuration = 1.0f;
                 transitionSettings.TransitionInDuration = 0.75f;
             }
-            else if (currentScene == GameScene.Cats || currentScene == GameScene.ReplayCutScenes || currentScene == GameScene.OpenPresents)
+            else if (
+                currentScene == GameScene.Cats
+                || currentScene == GameScene.ReplayCutScenes
+                || currentScene == GameScene.OpenPresents
+            )
             {
                 transitionSettings.ShouldFadeBackgroundMusic = false;
             }
@@ -183,14 +241,16 @@ namespace Tofuwu.StackCats
         public void GoToMap()
         {
             SceneTransitionSettings transitionSettings = StandardSceneTransitionSettings;
-            if (_gameSceneManager.CurrentGameScene == GameScene.ChallengeRun || _gameSceneManager.CurrentGameScene == GameScene.StoryPuzzle)
+            if (
+                _gameSceneManager.CurrentGameScene == GameScene.ChallengeRun
+                || _gameSceneManager.CurrentGameScene == GameScene.StoryPuzzle
+            )
             {
                 transitionSettings.ShouldFadeBackgroundMusic = false;
             }
 
             _gameSceneManager.GoToScene(GameScene.Map, transitionSettings);
         }
-
 
         /// <summary>
         /// Play the specified puzzle.
@@ -311,7 +371,8 @@ namespace Tofuwu.StackCats
 
         public void ConfirmAction(string message, UnityAction action = null)
         {
-            if (onConfirmAction != null) onConfirmAction(message, action);
+            if (onConfirmAction != null)
+                onConfirmAction(message, action);
         }
 
         protected void Awake()

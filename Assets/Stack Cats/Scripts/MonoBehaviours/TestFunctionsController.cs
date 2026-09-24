@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class TestFunctionsController : MonoBehaviour
     {

@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
-    [CreateAssetMenu(fileName = "Jigsaw Puzzle Object", menuName = "Stack Cats/Jigsaw Puzzle Object")]
+    [CreateAssetMenu(
+        fileName = "Jigsaw Puzzle Object",
+        menuName = "Stack Cats/Jigsaw Puzzle Object"
+    )]
     public class JigsawPuzzleObject : ScriptableObject, IIdentifiable
     {
         public List<Sprite> JigsawSprites;
@@ -15,7 +18,10 @@ namespace Tofuwu.StackCats
 
         public string GetId()
         {
-            if (string.IsNullOrEmpty(_id)) { _id = Guid.NewGuid().ToString(); }
+            if (string.IsNullOrEmpty(_id))
+            {
+                _id = Guid.NewGuid().ToString();
+            }
 
             return _id;
         }

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     [RequireComponent(typeof(Button))]
     public class FeatureButton : MonoBehaviour
@@ -31,13 +31,20 @@ namespace Tofuwu.StackCats.UI
 
         protected void Start()
         {
-            LeanTween.alphaCanvas(HighlightCanvasGroup, 0.5f, 0.5f).setEase(LeanTweenType.easeOutSine).setLoopPingPong();
+            LeanTween
+                .alphaCanvas(HighlightCanvasGroup, 0.5f, 0.5f)
+                .setEase(LeanTweenType.easeOutSine)
+                .setLoopPingPong();
         }
 
         protected void Update()
         {
             GameObject highlightGameObject = HighlightCanvasGroup.gameObject;
-            highlightGameObject.SetActive(highlightGameObject.activeSelf && _button.interactable && !_dataManager.FlagData.IsFlagSet(FeatureLabel));
+            highlightGameObject.SetActive(
+                highlightGameObject.activeSelf
+                    && _button.interactable
+                    && !_dataManager.FlagData.IsFlagSet(FeatureLabel)
+            );
         }
 
         private void OnButtonClicked()

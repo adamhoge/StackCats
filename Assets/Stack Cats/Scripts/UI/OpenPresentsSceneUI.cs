@@ -1,9 +1,9 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using System.Collections.Generic;
 using TMPro;
-using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class OpenPresentsSceneUI : MonoBehaviour
     {
@@ -39,7 +39,9 @@ namespace Tofuwu.StackCats.UI
 
         protected void Update()
         {
-            BackButton.interactable = !OpenPresentsScene.IsOpeningPresent && Time.time > OpenPresentsScene.LastPresentOpenedTime + 0.5f;
+            BackButton.interactable =
+                !OpenPresentsScene.IsOpeningPresent
+                && Time.time > OpenPresentsScene.LastPresentOpenedTime + 0.5f;
         }
 
         private void Awake()
@@ -57,8 +59,13 @@ namespace Tofuwu.StackCats.UI
         {
             foreach (KeyValuePair<Currency, int> currency in present.PresentInfo.CurrencyContents)
             {
-                PresentGetUI presentGet = Instantiate(PresentGetPrefab, PresentItemsAreaRectTransform);
-                presentGet.PresentSprite = _currencyManager.CurrencyDetails[currency.Key].IconSprite;
+                PresentGetUI presentGet = Instantiate(
+                    PresentGetPrefab,
+                    PresentItemsAreaRectTransform
+                );
+                presentGet.PresentSprite = _currencyManager
+                    .CurrencyDetails[currency.Key]
+                    .IconSprite;
                 presentGet.Quantity = currency.Value;
                 if (currency.Key == Currency.GoldPaw)
                 {
@@ -69,7 +76,10 @@ namespace Tofuwu.StackCats.UI
 
             foreach (KeyValuePair<Item, int> item in present.PresentInfo.ItemContents)
             {
-                PresentGetUI presentGet = Instantiate(PresentGetPrefab, PresentItemsAreaRectTransform);
+                PresentGetUI presentGet = Instantiate(
+                    PresentGetPrefab,
+                    PresentItemsAreaRectTransform
+                );
                 presentGet.PresentLabel = item.Key.Name;
                 presentGet.PresentSprite = item.Key.Icon;
                 presentGet.PresentColorShift = item.Key.ColorShift;
@@ -78,17 +88,28 @@ namespace Tofuwu.StackCats.UI
             }
 
             Vector2 presentAreaRectSize = PresentItemsAreaRectTransform.rect.size;
-            Vector2 presentScreenPosition = OpenPresentsScene.Camera.WorldToScreenPoint(present.transform.position);
+            Vector2 presentScreenPosition = OpenPresentsScene.Camera.WorldToScreenPoint(
+                present.transform.position
+            );
             for (int i = 0; i < _presentGets.Count; i++)
             {
                 PresentGetUI presentGet = _presentGets[i];
                 float offset = -(_presentGets.Count - 1.0f) / 2 + i;
-                Vector2 targetPosition = new Vector2(offset * presentAreaRectSize.x / _presentGets.Count, 0.0f);
+                Vector2 targetPosition = new Vector2(
+                    offset * presentAreaRectSize.x / _presentGets.Count,
+                    0.0f
+                );
                 presentGet.transform.position = presentScreenPosition;
                 presentGet.transform.localScale = Vector2.one * 0.5f;
-                LeanTween.moveLocal(presentGet.gameObject, targetPosition, 0.5f).setEase(LeanTweenType.easeOutCubic);
-                LeanTween.scale(presentGet.gameObject, Vector2.one, 0.5f).setEase(LeanTweenType.easeOutCubic);
-                LeanTween.rotateAround(presentGet.PresentImage.gameObject, Vector3.up, 360.0f, 1.5f).setEase(LeanTweenType.easeOutElastic);
+                LeanTween
+                    .moveLocal(presentGet.gameObject, targetPosition, 0.5f)
+                    .setEase(LeanTweenType.easeOutCubic);
+                LeanTween
+                    .scale(presentGet.gameObject, Vector2.one, 0.5f)
+                    .setEase(LeanTweenType.easeOutCubic);
+                LeanTween
+                    .rotateAround(presentGet.PresentImage.gameObject, Vector3.up, 360.0f, 1.5f)
+                    .setEase(LeanTweenType.easeOutElastic);
             }
 
             UpdatePresentCountText();

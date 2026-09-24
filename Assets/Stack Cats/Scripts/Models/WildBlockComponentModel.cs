@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Tofuwu.StackCats.Models
+namespace RockhopperGames.StackCats.Models
 {
     [Serializable]
     public class WildBlockComponentModel { }

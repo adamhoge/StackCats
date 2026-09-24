@@ -1,9 +1,9 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class CutScenePlayerUI : MonoBehaviour
     {
@@ -32,7 +32,8 @@ namespace Tofuwu.StackCats.UI
         private void OnTalking(ChatCatExpression expression)
         {
             ChatCatOverlayScreen.MessageQueue.Enqueue(expression);
-            if (!ChatCatOverlayScreen.DisplayedBy) OverlayScreenManager.EnqueueScreen(ChatCatOverlayScreen);
+            if (!ChatCatOverlayScreen.DisplayedBy)
+                OverlayScreenManager.EnqueueScreen(ChatCatOverlayScreen);
         }
 
         private void OnPlayCutScene(CutScene cutScene)

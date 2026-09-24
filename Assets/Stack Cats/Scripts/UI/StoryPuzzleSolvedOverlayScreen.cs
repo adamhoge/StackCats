@@ -4,7 +4,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class StoryPuzzleSolvedOverlayScreen : PuzzleSolvedOverlayScreen
     {
@@ -50,10 +50,22 @@ namespace Tofuwu.StackCats.UI
         {
             base.OnActive();
 
-            LeanTween.alphaCanvas(MoveCountLabelCanvasGroup, 1.0f, 0.0f).setDelay(0.5f).setEase(LeanTweenType.easeOutQuint);
-            LeanTween.alphaCanvas(MoveCountTextCanvasGroup, 1.0f, 0.0f).setDelay(0.75f).setEase(LeanTweenType.easeOutQuint);
-            LeanTween.scale(MoveCountLabelCanvasGroup.gameObject, Vector2.one * 1.25f, 0.5f).setDelay(0.5f).setEase(LeanTweenType.punch);
-            LeanTween.scale(MoveCountTextCanvasGroup.gameObject, Vector2.one * 1.25f, 0.5f).setDelay(0.75f).setEase(LeanTweenType.punch);
+            LeanTween
+                .alphaCanvas(MoveCountLabelCanvasGroup, 1.0f, 0.0f)
+                .setDelay(0.5f)
+                .setEase(LeanTweenType.easeOutQuint);
+            LeanTween
+                .alphaCanvas(MoveCountTextCanvasGroup, 1.0f, 0.0f)
+                .setDelay(0.75f)
+                .setEase(LeanTweenType.easeOutQuint);
+            LeanTween
+                .scale(MoveCountLabelCanvasGroup.gameObject, Vector2.one * 1.25f, 0.5f)
+                .setDelay(0.5f)
+                .setEase(LeanTweenType.punch);
+            LeanTween
+                .scale(MoveCountTextCanvasGroup.gameObject, Vector2.one * 1.25f, 0.5f)
+                .setDelay(0.75f)
+                .setEase(LeanTweenType.punch);
         }
 
         protected void Awake()
@@ -77,7 +89,9 @@ namespace Tofuwu.StackCats.UI
                             if (!starEarned.IsAnimationExecuted)
                             {
                                 starEarned.SkipAnimation();
-                                shouldPlaySound = shouldPlaySound || starEarned.NumMovesMade <= starEarned.MoveRequirement;
+                                shouldPlaySound =
+                                    shouldPlaySound
+                                    || starEarned.NumMovesMade <= starEarned.MoveRequirement;
                             }
                         }
 
@@ -86,7 +100,10 @@ namespace Tofuwu.StackCats.UI
                             GameManager.Instance.Audio.PlaySoundEffect(StarEarnedSoundEffect);
                         }
                     }
-                    else if (!_isExiting && _starsEarned.All(s => s.AnimationExecutedAt + 0.5f < Time.time))
+                    else if (
+                        !_isExiting
+                        && _starsEarned.All(s => s.AnimationExecutedAt + 0.5f < Time.time)
+                    )
                     {
                         StoryPuzzleScene.StopPlaying();
                         _isExiting = true;
@@ -102,7 +119,10 @@ namespace Tofuwu.StackCats.UI
                 {
                     int moveRequirement = StoryPuzzle.StarMoveRequirements[i];
 
-                    StarEarnedUI starEarned = Instantiate(StarsEarnedPrefab, StarRequirementsContainer);
+                    StarEarnedUI starEarned = Instantiate(
+                        StarsEarnedPrefab,
+                        StarRequirementsContainer
+                    );
                     starEarned.MoveRequirement = moveRequirement;
                     starEarned.NumMovesMade = NumMovesMade;
                     starEarned.Delay = 0.25f + i * 0.25f;

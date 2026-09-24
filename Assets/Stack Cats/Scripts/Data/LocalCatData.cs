@@ -1,13 +1,20 @@
 ﻿using System;
 
-namespace Tofuwu.StackCats.Data
+namespace RockhopperGames.StackCats.Data
 {
     [Serializable]
     public class LocalCatData : ICatData
     {
-        public string CatID { get { return _catId; } }
+        public string CatID
+        {
+            get { return _catId; }
+        }
 
-        public int SightingsCount { get { return _sightingsCount; } set { SetSightingsCount(value); } }
+        public int SightingsCount
+        {
+            get { return _sightingsCount; }
+            set { SetSightingsCount(value); }
+        }
 
         public LocalCatData(string catID)
         {

@@ -2,9 +2,12 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
-    public delegate void PlaceableObjectActivated(PlaceableObject placeableObject, DateTime activationTime);
+    public delegate void PlaceableObjectActivated(
+        PlaceableObject placeableObject,
+        DateTime activationTime
+    );
 
     public class PlaceableObject : MonoBehaviour, IPointerClickHandler
     {
@@ -48,7 +51,8 @@ namespace Tofuwu.StackCats
         protected virtual void OnActivate()
         {
             LastActivationTime = DateTime.Now;
-            if (onPlaceableObjectActivated != null) onPlaceableObjectActivated(this, LastActivationTime);
+            if (onPlaceableObjectActivated != null)
+                onPlaceableObjectActivated(this, LastActivationTime);
         }
     }
 }

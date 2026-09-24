@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class PuzzleMakerJungleFlavoredActions : PuzzleMakerActions
     {
@@ -19,12 +19,17 @@ namespace Tofuwu.StackCats
         public void AddRandomJigsawObjectBlocksToTop(Stack stack)
         {
             int maxJigsawSize = stack.MaxBlocks - stack.Blocks.Count;
-            List<JigsawPuzzleObject> usableJigsawPuzzleObjects = _jungleFlavoredPuzzleArea.JigsawPuzzleObjects.List.Where(jo => jo.JigsawSprites.Count <= maxJigsawSize).ToList();
+            List<JigsawPuzzleObject> usableJigsawPuzzleObjects = _jungleFlavoredPuzzleArea
+                .JigsawPuzzleObjects.List.Where(jo => jo.JigsawSprites.Count <= maxJigsawSize)
+                .ToList();
             int jigsawsCount = usableJigsawPuzzleObjects.Count;
 
-            if (usableJigsawPuzzleObjects.Count == 0) return;
+            if (usableJigsawPuzzleObjects.Count == 0)
+                return;
 
-            JigsawPuzzleObject jigsawPuzzleObject = usableJigsawPuzzleObjects[Random.Range(0, jigsawsCount)];
+            JigsawPuzzleObject jigsawPuzzleObject = usableJigsawPuzzleObjects[
+                Random.Range(0, jigsawsCount)
+            ];
 
             for (int i = 0; i < jigsawPuzzleObject.JigsawSprites.Count; i++)
             {

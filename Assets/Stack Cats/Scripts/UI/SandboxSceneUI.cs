@@ -1,9 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
-    public class SandboxSceneUI : MonoBehaviour
-    {
-    }
+    public class SandboxSceneUI : MonoBehaviour { }
 }

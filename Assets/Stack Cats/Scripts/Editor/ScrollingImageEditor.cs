@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
+using RockhopperGames.StackCats.UI;
 using UnityEditor;
-using Tofuwu.StackCats.UI;
+using UnityEngine;
 
 [CustomEditor(typeof(ScrollingImage), true)]
 [CanEditMultipleObjects]

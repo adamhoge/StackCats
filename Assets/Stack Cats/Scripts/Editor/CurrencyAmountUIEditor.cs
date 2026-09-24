@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+﻿using RockhopperGames.StackCats;
+using RockhopperGames.StackCats.UI;
 using UnityEditor;
-using Tofuwu.StackCats;
-using Tofuwu.StackCats.UI;
+using UnityEngine;
 
 [CustomEditor(typeof(CurrencyAmountUI))]
 public class CurrencyAmountUIEditor : Editor
@@ -12,7 +12,8 @@ public class CurrencyAmountUIEditor : Editor
 
         CurrencyAmountUI currencyAmountUI = (CurrencyAmountUI)target;
 
-        currencyAmountUI.CurrencyType = (Currency)EditorGUILayout.EnumPopup("Currency", currencyAmountUI.CurrencyType);
+        currencyAmountUI.CurrencyType = (Currency)
+            EditorGUILayout.EnumPopup("Currency", currencyAmountUI.CurrencyType);
 
         currencyAmountUI.Amount = EditorGUILayout.IntField("Amount:", currencyAmountUI.Amount);
     }

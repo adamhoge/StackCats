@@ -1,23 +1,34 @@
-﻿using System.Collections.Generic;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using RockhopperGames.StackCats.Models;
 using UnityEngine;
-using Tofuwu.StackCats.Models;
 
-namespace Tofuwu.StackCats.Procedural
+namespace RockhopperGames.StackCats.Procedural
 {
-    public class JungleFlavoredPuzzleGenerator : PuzzleGenerator<JungleFlavoredPuzzleArea, JungleFlavoredPuzzle>
+    public class JungleFlavoredPuzzleGenerator
+        : PuzzleGenerator<JungleFlavoredPuzzleArea, JungleFlavoredPuzzle>
     {
-        public JungleFlavoredPuzzleGenerator(JungleFlavoredPuzzleArea puzzleArea) : base(puzzleArea) { }
+        public JungleFlavoredPuzzleGenerator(JungleFlavoredPuzzleArea puzzleArea)
+            : base(puzzleArea) { }
 
-        private IMoveStrategy<JungleFlavoredPuzzleArea, JungleFlavoredPuzzle> _moveOrCoverJigsawPieceStrategy;
+        private IMoveStrategy<
+            JungleFlavoredPuzzleArea,
+            JungleFlavoredPuzzle
+        > _moveOrCoverJigsawPieceStrategy;
 
-        public override Stack GetPreferredSourceStack(JungleFlavoredPuzzle puzzle, List<Stack> usableStacks)
+        public override Stack GetPreferredSourceStack(
+            JungleFlavoredPuzzle puzzle,
+            List<Stack> usableStacks
+        )
         {
             throw new System.NotImplementedException();
         }
 
-        public override Stack GetPreferredDestinationStack(JungleFlavoredPuzzle puzzle, List<Stack> usableStacks)
+        public override Stack GetPreferredDestinationStack(
+            JungleFlavoredPuzzle puzzle,
+            List<Stack> usableStacks
+        )
         {
             List<Stack> excludeStacks = new List<Stack>();
             foreach (Stack stack in usableStacks)
@@ -34,17 +45,27 @@ namespace Tofuwu.StackCats.Procedural
             }
 
             // TODO: Come up with a pattern to ensure this doesn't happen.
-            if (excludeStacks.Count == usableStacks.Count) return usableStacks.SelectRandom();
+            if (excludeStacks.Count == usableStacks.Count)
+                return usableStacks.SelectRandom();
 
             usableStacks = usableStacks.Except(excludeStacks).ToList();
 
             int minMovableBlocks = usableStacks.Min(s => puzzle.GetNumMovableBlocksInStack(s));
-            return usableStacks.First(s => puzzle.GetNumMovableBlocksInStack(s) == minMovableBlocks);
+            return usableStacks.First(s =>
+                puzzle.GetNumMovableBlocksInStack(s) == minMovableBlocks
+            );
         }
 
-        protected override IMoveStrategy<JungleFlavoredPuzzleArea, JungleFlavoredPuzzle> GetMoveStrategy(
-            Dictionary<IMoveStrategy<JungleFlavoredPuzzleArea, JungleFlavoredPuzzle>, float> moveStrategies,
-            GeneratedPuzzleInfo<JungleFlavoredPuzzleArea, JungleFlavoredPuzzle> generatedPuzzleInfo)
+        protected override IMoveStrategy<
+            JungleFlavoredPuzzleArea,
+            JungleFlavoredPuzzle
+        > GetMoveStrategy(
+            Dictionary<
+                IMoveStrategy<JungleFlavoredPuzzleArea, JungleFlavoredPuzzle>,
+                float
+            > moveStrategies,
+            GeneratedPuzzleInfo<JungleFlavoredPuzzleArea, JungleFlavoredPuzzle> generatedPuzzleInfo
+        )
         {
             if (generatedPuzzleInfo.NumMovesMade < 2)
             {
@@ -56,24 +77,48 @@ namespace Tofuwu.StackCats.Procedural
             }
         }
 
-        protected override Dictionary<IMoveStrategy<JungleFlavoredPuzzleArea, JungleFlavoredPuzzle>, float> GetMoveStrategies(int difficulty)
+        protected override Dictionary<
+            IMoveStrategy<JungleFlavoredPuzzleArea, JungleFlavoredPuzzle>,
+            float
+        > GetMoveStrategies(int difficulty)
         {
-            Dictionary<IMoveStrategy<JungleFlavoredPuzzleArea, JungleFlavoredPuzzle>, float> moveStrategies = new Dictionary<IMoveStrategy<JungleFlavoredPuzzleArea, JungleFlavoredPuzzle>, float>();
+            Dictionary<
+                IMoveStrategy<JungleFlavoredPuzzleArea, JungleFlavoredPuzzle>,
+                float
+            > moveStrategies =
+                new Dictionary<
+                    IMoveStrategy<JungleFlavoredPuzzleArea, JungleFlavoredPuzzle>,
+                    float
+                >();
 
-            _moveOrCoverJigsawPieceStrategy = new MoveOrCoverJigsawPieceStrategy<JungleFlavoredPuzzleArea, JungleFlavoredPuzzle>();
+            _moveOrCoverJigsawPieceStrategy =
+                new MoveOrCoverJigsawPieceStrategy<
+                    JungleFlavoredPuzzleArea,
+                    JungleFlavoredPuzzle
+                >();
             moveStrategies.Add(_moveOrCoverJigsawPieceStrategy, 0.0f);
 
-            var moveBlocksStrategy = new MoveBlocksStrategy<JungleFlavoredPuzzleArea, JungleFlavoredPuzzle>();
+            var moveBlocksStrategy =
+                new MoveBlocksStrategy<JungleFlavoredPuzzleArea, JungleFlavoredPuzzle>();
             moveStrategies.Add(moveBlocksStrategy, 0.0f);
 
             int maxSumBlocks = Mathf.CeilToInt((difficulty - 25.0f) / (MAX_DIFFICULTY - 25.0f) * 4);
-            var addSumBlockStrategy = new AddSumBlockStrategy<JungleFlavoredPuzzleArea, JungleFlavoredPuzzle>(maxSumBlocks);
+            var addSumBlockStrategy = new AddSumBlockStrategy<
+                JungleFlavoredPuzzleArea,
+                JungleFlavoredPuzzle
+            >(maxSumBlocks);
             moveStrategies.Add(addSumBlockStrategy, 0.0f);
 
-            int maxWildBlocks = Mathf.CeilToInt((difficulty - 50.0f) / (MAX_DIFFICULTY - 50.0f) * 4);
-            var addWildBlockStategy = new AddWildBlockStrategy<JungleFlavoredPuzzleArea, JungleFlavoredPuzzle>(maxWildBlocks);
+            int maxWildBlocks = Mathf.CeilToInt(
+                (difficulty - 50.0f) / (MAX_DIFFICULTY - 50.0f) * 4
+            );
+            var addWildBlockStategy = new AddWildBlockStrategy<
+                JungleFlavoredPuzzleArea,
+                JungleFlavoredPuzzle
+            >(maxWildBlocks);
 
-            moveStrategies.Add(addWildBlockStategy, 0.0f); float strategyPercentageRemaining = 1.0f;
+            moveStrategies.Add(addWildBlockStategy, 0.0f);
+            float strategyPercentageRemaining = 1.0f;
 
             if (difficulty > 80)
             {
@@ -127,7 +172,9 @@ namespace Tofuwu.StackCats.Procedural
             return moveStrategies;
         }
 
-        protected override void CreateFinishedPuzzle(GeneratedPuzzleInfo<JungleFlavoredPuzzleArea, JungleFlavoredPuzzle> generatedPuzzleInfo)
+        protected override void CreateFinishedPuzzle(
+            GeneratedPuzzleInfo<JungleFlavoredPuzzleArea, JungleFlavoredPuzzle> generatedPuzzleInfo
+        )
         {
             #region LoadFromString
             //if (generatedPuzzleInfo.ObjectiveDifficulty >= 70)
@@ -170,7 +217,8 @@ namespace Tofuwu.StackCats.Procedural
             int numJigsawBlocks = 4 + Mathf.FloorToInt(12.0f / 100.0f * difficulty);
             int numSumBlocks = Mathf.FloorToInt(4.0f / 100.0f * difficulty);
             int maxPuzzleBlocks = puzzle.MaxBlocks - numJigsawBlocks - numSumBlocks;
-            int numPuzzleBlocks = (5 + Mathf.FloorToInt((maxPuzzleBlocks - 5) / 100.0f * difficulty)) / 2;
+            int numPuzzleBlocks =
+                (5 + Mathf.FloorToInt((maxPuzzleBlocks - 5) / 100.0f * difficulty)) / 2;
 
             // Designate lowest stack
             Stack lowStack = puzzle.Stacks[Random.Range(0, puzzle.Stacks.Count)];
@@ -189,10 +237,15 @@ namespace Tofuwu.StackCats.Procedural
                 int blockTypeNumber = Random.Range(0, 2);
                 if (blockTypeNumber == 0 && puzzle.GetNumBlocksPlaceableOnStack(stack) >= 2) // Jigsaw object
                 {
-                    int jigsawBlocksAdded = AddRandomJigsawObjectBlocksToTop(generatedPuzzleInfo, stack, numJigsawBlocks);
+                    int jigsawBlocksAdded = AddRandomJigsawObjectBlocksToTop(
+                        generatedPuzzleInfo,
+                        stack,
+                        numJigsawBlocks
+                    );
                     numJigsawBlocks -= jigsawBlocksAdded;
-                    if (numJigsawBlocks == 1) numJigsawBlocks = 0;
-                    if(!jigsawStackRemoved)
+                    if (numJigsawBlocks == 1)
+                        numJigsawBlocks = 0;
+                    if (!jigsawStackRemoved)
                     {
                         usableStacks.Remove(stack);
                         jigsawStackRemoved = true;
@@ -201,7 +254,8 @@ namespace Tofuwu.StackCats.Procedural
                 else // Puzzle block
                 {
                     int numPuzzleBlocksToPlace = Random.Range(1, 4);
-                    if (numPuzzleBlocksToPlace > numPuzzleBlocks) numPuzzleBlocksToPlace = numPuzzleBlocks;
+                    if (numPuzzleBlocksToPlace > numPuzzleBlocks)
+                        numPuzzleBlocksToPlace = numPuzzleBlocks;
                     for (int i = 0; i < numPuzzleBlocksToPlace; i++)
                     {
                         PuzzleBuilder.AddRandomPuzzleBlockToTop(puzzle, stack, 7, 9);
@@ -209,23 +263,34 @@ namespace Tofuwu.StackCats.Procedural
                     numPuzzleBlocks -= numPuzzleBlocksToPlace;
                 }
 
-                if (puzzle.GetNumBlocksPlaceableOnStack(stack) == 0) usableStacks.Remove(stack);
+                if (puzzle.GetNumBlocksPlaceableOnStack(stack) == 0)
+                    usableStacks.Remove(stack);
             }
         }
 
-        private static int AddRandomJigsawObjectBlocksToTop(GeneratedPuzzleInfo<JungleFlavoredPuzzleArea, JungleFlavoredPuzzle> generatedPuzzleInfo, Stack stack, int limitSize = 5)
+        private static int AddRandomJigsawObjectBlocksToTop(
+            GeneratedPuzzleInfo<JungleFlavoredPuzzleArea, JungleFlavoredPuzzle> generatedPuzzleInfo,
+            Stack stack,
+            int limitSize = 5
+        )
         {
             JungleFlavoredPuzzleArea puzzleArea = generatedPuzzleInfo.PuzzleArea;
             JungleFlavoredPuzzle puzzle = generatedPuzzleInfo.Puzzle;
 
             int maxJigsawSize = generatedPuzzleInfo.MaxBlocks - stack.Blocks.Count;
-            if (maxJigsawSize > limitSize) maxJigsawSize = limitSize;
-            List<JigsawPuzzleObject> usableJigsawPuzzleObjects = puzzleArea.JigsawPuzzleObjects.List.Where(jo => jo.JigsawSprites.Count <= maxJigsawSize).ToList();
+            if (maxJigsawSize > limitSize)
+                maxJigsawSize = limitSize;
+            List<JigsawPuzzleObject> usableJigsawPuzzleObjects = puzzleArea
+                .JigsawPuzzleObjects.List.Where(jo => jo.JigsawSprites.Count <= maxJigsawSize)
+                .ToList();
             int jigsawsCount = usableJigsawPuzzleObjects.Count;
 
-            if (usableJigsawPuzzleObjects.Count == 0) return 0;
+            if (usableJigsawPuzzleObjects.Count == 0)
+                return 0;
 
-            JigsawPuzzleObject jigsawPuzzleObject = usableJigsawPuzzleObjects[Random.Range(0, jigsawsCount)];
+            JigsawPuzzleObject jigsawPuzzleObject = usableJigsawPuzzleObjects[
+                Random.Range(0, jigsawsCount)
+            ];
 
             for (int i = 0; i < jigsawPuzzleObject.JigsawSprites.Count; i++)
             {

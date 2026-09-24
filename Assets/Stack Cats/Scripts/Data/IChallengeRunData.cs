@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Tofuwu.StackCats.Data
+namespace RockhopperGames.StackCats.Data
 {
     public interface IChallengeRunData
     {
@@ -10,10 +10,25 @@ namespace Tofuwu.StackCats.Data
         IPresentData PresentReward { get; }
         IChallengePuzzleData CurrentPuzzle { get; }
         List<IChallengePuzzleCompletionData> CompletedPuzzles { get; }
-        void StartNewPuzzle(string puzzleJsonData, int difficultyRating, int minMoves, int maxMoves, int numUndos);
-        void UpdateCurrentPuzzle(string puzzleStateJsonData, int movesMade, List<string> catsSeen, List<string> newCatsSeen, int numUndosRemaining);
+        void StartNewPuzzle(
+            string puzzleJsonData,
+            int difficultyRating,
+            int minMoves,
+            int maxMoves,
+            int numUndos
+        );
+        void UpdateCurrentPuzzle(
+            string puzzleStateJsonData,
+            int movesMade,
+            List<string> catsSeen,
+            List<string> newCatsSeen,
+            int numUndosRemaining
+        );
         bool UseLuckPotion(string puzzleJsonData);
         void CompleteCurrentPuzzle(PuzzleCompletionType completionType, int movesMade);
-        void CompleteChallengeRun(Dictionary<Currency, int> currencyReward, IPresentData presentReward);
+        void CompleteChallengeRun(
+            Dictionary<Currency, int> currencyReward,
+            IPresentData presentReward
+        );
     }
 }

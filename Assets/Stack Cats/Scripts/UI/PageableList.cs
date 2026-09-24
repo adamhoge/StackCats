@@ -1,19 +1,29 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public delegate void PageChanged<T>(List<T> pageItems);
 
-    public class PageableList<T> where T : class
+    public class PageableList<T>
+        where T : class
     {
         public event PageChanged<T> onPageChanged;
 
-        public List<T> CurrentPageItems { get { return _currentPageItems; } }
+        public List<T> CurrentPageItems
+        {
+            get { return _currentPageItems; }
+        }
 
-        public bool IsFirstPage { get { return _currentPageIndex == 0; } }
+        public bool IsFirstPage
+        {
+            get { return _currentPageIndex == 0; }
+        }
 
-        public bool IsLastPage { get { return _currentPageIndex + 1 == _pageCount; } }
+        public bool IsLastPage
+        {
+            get { return _currentPageIndex + 1 == _pageCount; }
+        }
 
         protected List<T> _list;
         protected int _pageCount;
@@ -32,12 +42,14 @@ namespace Tofuwu.StackCats.UI
 
         public void GoToPage(int pageNumber)
         {
-            if (pageNumber < 0 || pageNumber > _pageCount) return;
+            if (pageNumber < 0 || pageNumber > _pageCount)
+                return;
 
             _currentPageIndex = pageNumber;
             int count = _itemsPerPage < _list.Count ? _itemsPerPage : _list.Count;
             _currentPageItems = _list.GetRange(_currentPageIndex * _itemsPerPage, count);
-            if (onPageChanged != null) onPageChanged(_currentPageItems);
+            if (onPageChanged != null)
+                onPageChanged(_currentPageItems);
         }
 
         public void GoToPreviousPage()

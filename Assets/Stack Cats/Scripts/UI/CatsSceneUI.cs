@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class CatsSceneUI : MonoBehaviour
     {
@@ -25,9 +25,15 @@ namespace Tofuwu.StackCats.UI
         {
             switch (dropdown.value)
             {
-                case 0: DisplayListByNumber(); break;
-                case 1: DisplayListByName(); break;
-                case 2: DisplayListByRarity(); break;
+                case 0:
+                    DisplayListByNumber();
+                    break;
+                case 1:
+                    DisplayListByName();
+                    break;
+                case 2:
+                    DisplayListByRarity();
+                    break;
             }
         }
 
@@ -56,7 +62,8 @@ namespace Tofuwu.StackCats.UI
         {
             List<Cat> catsSeen = _cats.Where(c => _catManager.WasCatSeen(c)).ToList();
             int previousCatIndex = catsSeen.IndexOf(_currentCatDisplayed) - 1;
-            if (previousCatIndex < 0) previousCatIndex = catsSeen.Count - 1;
+            if (previousCatIndex < 0)
+                previousCatIndex = catsSeen.Count - 1;
             return catsSeen[previousCatIndex];
         }
 
@@ -64,7 +71,8 @@ namespace Tofuwu.StackCats.UI
         {
             List<Cat> catsSeen = _cats.Where(c => _catManager.WasCatSeen(c)).ToList();
             int nextCatIndex = catsSeen.IndexOf(fromCat) + 1;
-            if (nextCatIndex >= catsSeen.Count) nextCatIndex = 0;
+            if (nextCatIndex >= catsSeen.Count)
+                nextCatIndex = 0;
             return (catsSeen[nextCatIndex]);
         }
 
@@ -86,7 +94,8 @@ namespace Tofuwu.StackCats.UI
 
         protected void Start()
         {
-            if (!PortraitsRect || !CatPortraitButtonPrefab) return;
+            if (!PortraitsRect || !CatPortraitButtonPrefab)
+                return;
 
             int catsCount = _cats.Count;
             int catsSeenCount = _cats.Count(c => _catManager.WasCatSeen(c));
@@ -100,7 +109,14 @@ namespace Tofuwu.StackCats.UI
 
         protected void Update()
         {
-            if (!_currentCatDisplayed && (CatsScene.SceneState == SceneState.ENTERING || CatsScene.SceneState == SceneState.ACTIVE) && Input.GetButtonDown("Cancel"))
+            if (
+                !_currentCatDisplayed
+                && (
+                    CatsScene.SceneState == SceneState.ENTERING
+                    || CatsScene.SceneState == SceneState.ACTIVE
+                )
+                && Input.GetButtonDown("Cancel")
+            )
             {
                 CatsScene.GoHome();
             }
@@ -119,9 +135,17 @@ namespace Tofuwu.StackCats.UI
         {
             foreach (Cat cat in _cats)
             {
-                CatPortraitButton catPortraitButton = Instantiate(CatPortraitButtonPrefab, PortraitsRect);
+                CatPortraitButton catPortraitButton = Instantiate(
+                    CatPortraitButtonPrefab,
+                    PortraitsRect
+                );
                 catPortraitButton.Cat = cat;
-                catPortraitButton.Button.onClick.AddListener(delegate { DisplayCatInfo(cat); });
+                catPortraitButton.Button.onClick.AddListener(
+                    delegate
+                    {
+                        DisplayCatInfo(cat);
+                    }
+                );
                 Random.InitState(_cats.IndexOf(cat));
                 float randomRotation = (0.5f - Random.value) * 2.0f;
                 catPortraitButton.transform.Rotate(new Vector3(0.0f, 0.0f, 10.0f * randomRotation));
@@ -139,7 +163,10 @@ namespace Tofuwu.StackCats.UI
         private void DisplayListByName()
         {
             ClearCurrentList();
-            _cats = _cats.OrderByDescending(c => _catManager.WasCatSeen(c)).ThenBy(c => c.Name).ToList();
+            _cats = _cats
+                .OrderByDescending(c => _catManager.WasCatSeen(c))
+                .ThenBy(c => c.Name)
+                .ToList();
             DisplayList();
         }
 

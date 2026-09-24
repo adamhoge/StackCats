@@ -1,7 +1,7 @@
-﻿using Tofuwu.StackCats;
+﻿using System.Linq;
+using RockhopperGames.StackCats;
 using UnityEditor;
 using UnityEngine;
-using System.Linq;
 
 [CustomEditor(typeof(CatCollection))]
 public class CatCollectionEditor : Editor
@@ -27,7 +27,7 @@ public class CatCollectionEditor : Editor
 
         if (GUILayout.Button("Number by Order"))
         {
-            foreach(var cat in catCollection.List)
+            foreach (var cat in catCollection.List)
             {
                 cat.Number = catCollection.List.IndexOf(cat);
             }
@@ -35,7 +35,9 @@ public class CatCollectionEditor : Editor
 
         if (GUILayout.Button("Sort"))
         {
-            catCollection.List = catCollection.List.OrderBy(c => c.Number != 0 ? c.Number : 999).ToList();
+            catCollection.List = catCollection
+                .List.OrderBy(c => c.Number != 0 ? c.Number : 999)
+                .ToList();
             EditorUtility.SetDirty(catCollection);
         }
     }

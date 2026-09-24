@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     [Serializable]
     public class CatReward
@@ -25,7 +25,7 @@ namespace Tofuwu.StackCats
         Hungry,
         Coy,
         Mysterious,
-        Territorial
+        Territorial,
     }
 
     [CreateAssetMenu(fileName = "Cat", menuName = "Stack Cats/Cat")]
@@ -48,7 +48,10 @@ namespace Tofuwu.StackCats
 
         public string GetId()
         {
-            if (string.IsNullOrEmpty(_id)) { _id = Guid.NewGuid().ToString(); }
+            if (string.IsNullOrEmpty(_id))
+            {
+                _id = Guid.NewGuid().ToString();
+            }
 
             return _id;
         }

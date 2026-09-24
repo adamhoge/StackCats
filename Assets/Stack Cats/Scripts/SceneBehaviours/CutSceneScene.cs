@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
 using System.Collections.Generic;
-using System;
+using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class CutSceneScene : SceneBehaviour
     {
@@ -42,8 +42,14 @@ namespace Tofuwu.StackCats
 
         private void OnStopCutScene(CutScene cutScene)
         {
-            GameScene returnScene = _cutSceneManager.ReturnScene != null ? _cutSceneManager.ReturnScene.Value : GameScene.Home;
-            _gameManager.GameScenes.GoToScene(returnScene, _cutSceneManager.ReturnSceneTransitionSettings);
+            GameScene returnScene =
+                _cutSceneManager.ReturnScene != null
+                    ? _cutSceneManager.ReturnScene.Value
+                    : GameScene.Home;
+            _gameManager.GameScenes.GoToScene(
+                returnScene,
+                _cutSceneManager.ReturnSceneTransitionSettings
+            );
         }
     }
 }

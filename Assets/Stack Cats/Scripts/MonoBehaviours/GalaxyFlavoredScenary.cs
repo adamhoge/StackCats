@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class GalaxyFlavoredScenary : MonoBehaviour
     {
@@ -31,12 +31,18 @@ namespace Tofuwu.StackCats
             float deltaRotation = Time.deltaTime * RotationSpeed;
             Background.transform.Rotate(Vector3.back, deltaRotation);
 
-            float currentConstellationDegrees = Background.transform.eulerAngles.z % _degreesPerConstellation;
+            float currentConstellationDegrees =
+                Background.transform.eulerAngles.z % _degreesPerConstellation;
 
             int updatedConstellationIndex = -1;
-            if (currentConstellationDegrees > _degreesPerConstellation * 0.25f && currentConstellationDegrees < _degreesPerConstellation * 0.75f)
+            if (
+                currentConstellationDegrees > _degreesPerConstellation * 0.25f
+                && currentConstellationDegrees < _degreesPerConstellation * 0.75f
+            )
             {
-                updatedConstellationIndex = Mathf.FloorToInt(Background.transform.eulerAngles.z / _degreesPerConstellation) % Constellations.Count;
+                updatedConstellationIndex =
+                    Mathf.FloorToInt(Background.transform.eulerAngles.z / _degreesPerConstellation)
+                    % Constellations.Count;
             }
 
             if (_currentConstellationIndex != updatedConstellationIndex)

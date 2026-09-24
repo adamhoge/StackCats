@@ -1,12 +1,12 @@
-﻿using System.Linq;
+﻿using System;
 using System.Collections.Generic;
-using Tofuwu.StackCats.Models;
+using System.Linq;
+using RockhopperGames.StackCats.Models;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class ChallengeProgressOverlayScreen : OverlayScreen
     {
@@ -27,7 +27,8 @@ namespace Tofuwu.StackCats.UI
         public float MaxRewardBagHeight = 400.0f;
         private PuzzleManager _puzzleManager;
         private ChallengeRunModel _currentChallengeRun;
-        private List<ChallengePuzzleCompletionUI> _completedPuzzleItems = new List<ChallengePuzzleCompletionUI>();
+        private List<ChallengePuzzleCompletionUI> _completedPuzzleItems =
+            new List<ChallengePuzzleCompletionUI>();
 
         public override void OnTransitioningIn()
         {
@@ -38,10 +39,15 @@ namespace Tofuwu.StackCats.UI
             bool isStarted = _currentChallengeRun.CurrentPuzzle.MovesMade > 0;
 
             UsePotionButton.gameObject.SetActive(ChallengeRunScene.CanUseLuckPotion);
-            LuckyPositionActiveRectTransform.gameObject.SetActive(_currentChallengeRun.CurrentPuzzle.WasLuckPotionUsed);
-            PlayPuzzleButton.GetComponentInChildren<TextMeshProUGUI>().text = isStarted ? "Resume Puzzle" : "Start Puzzle";
+            LuckyPositionActiveRectTransform.gameObject.SetActive(
+                _currentChallengeRun.CurrentPuzzle.WasLuckPotionUsed
+            );
+            PlayPuzzleButton.GetComponentInChildren<TextMeshProUGUI>().text = isStarted
+                ? "Resume Puzzle"
+                : "Start Puzzle";
             PlayPuzzleButton.image.color = ChallengeRunScene.PuzzleArea.PuzzleTheme.UIColor;
-            DifficultyText.text = "Difficulty: " + _currentChallengeRun.Difficulty.ToChallengeRunDifficultyString();
+            DifficultyText.text =
+                "Difficulty: " + _currentChallengeRun.Difficulty.ToChallengeRunDifficultyString();
             RewardBagAreaIconImage.sprite = ChallengeRunScene.PuzzleArea.PuzzleAreaIconSprite;
             UpdatePuzzleCompletion();
             UpdateRewardsEarned();
@@ -82,16 +88,28 @@ namespace Tofuwu.StackCats.UI
             }
             _completedPuzzleItems.Clear();
 
-            List<ChallengePuzzleCompletionModel> completedPuzzles = _currentChallengeRun.CompletedPuzzles;
-            List<ChallengePuzzleReward> rewards = ChallengeRunScene.PuzzleArea.ChallengeRunRewards.Where(r => r.AtDifficulty == _currentChallengeRun.Difficulty).ToList();
+            List<ChallengePuzzleCompletionModel> completedPuzzles =
+                _currentChallengeRun.CompletedPuzzles;
+            List<ChallengePuzzleReward> rewards = ChallengeRunScene
+                .PuzzleArea.ChallengeRunRewards.Where(r =>
+                    r.AtDifficulty == _currentChallengeRun.Difficulty
+                )
+                .ToList();
             int numCompletedPuzzles = completedPuzzles.Count;
             int numCompletionItems = _puzzleManager.MaxChallengeRunPuzzles;
             for (int i = 0; i < numCompletionItems; i++)
             {
-                ChallengePuzzleCompletionUI newCompletionItem = Instantiate(CompletionPrefab, CompletionRectTransform);
-                newCompletionItem.CompletedColor = ChallengeRunScene.PuzzleArea.PuzzleTheme.BackgroundColor;
+                ChallengePuzzleCompletionUI newCompletionItem = Instantiate(
+                    CompletionPrefab,
+                    CompletionRectTransform
+                );
+                newCompletionItem.CompletedColor = ChallengeRunScene
+                    .PuzzleArea
+                    .PuzzleTheme
+                    .BackgroundColor;
                 newCompletionItem.PuzzleIndex = i;
-                if (i < completedPuzzles.Count) newCompletionItem.IsComplete = completedPuzzles[i] != null;
+                if (i < completedPuzzles.Count)
+                    newCompletionItem.IsComplete = completedPuzzles[i] != null;
                 newCompletionItem.onPuzzleCompleted += OnPuzzleCompleted;
                 _completedPuzzleItems.Add(newCompletionItem);
             }
@@ -99,9 +117,11 @@ namespace Tofuwu.StackCats.UI
 
         private void UpdateRewardsEarned(bool excludeLastPuzzle = false)
         {
-            List<ChallengePuzzleCompletionModel> completedPuzzles = _currentChallengeRun.CompletedPuzzles;
+            List<ChallengePuzzleCompletionModel> completedPuzzles =
+                _currentChallengeRun.CompletedPuzzles;
             int numCompletedPuzzles = completedPuzzles.Count;
-            if (excludeLastPuzzle) --numCompletedPuzzles;
+            if (excludeLastPuzzle)
+                --numCompletedPuzzles;
             Sprite rewardBagSprite = GetRewardBagSprite(numCompletedPuzzles);
             if (rewardBagSprite)
             {
@@ -118,7 +138,8 @@ namespace Tofuwu.StackCats.UI
 
         private Sprite GetRewardBagSprite(int numCompletedPuzzles)
         {
-            if (numCompletedPuzzles <= 0) return null;
+            if (numCompletedPuzzles <= 0)
+                return null;
 
             int rewardBagInterval = 10 / (RewardBagSprites.Count - 1);
             int rewardBagSpriteIndex = numCompletedPuzzles / rewardBagInterval;
@@ -147,11 +168,16 @@ namespace Tofuwu.StackCats.UI
             LuckyPositionActiveRectTransform.gameObject.SetActive(true);
         }
 
-        private void OnChallengePuzzleCompleted(PuzzleManager.ChallengePuzzleCompletionEvent completionInfo)
+        private void OnChallengePuzzleCompleted(
+            PuzzleManager.ChallengePuzzleCompletionEvent completionInfo
+        )
         {
-            if (completionInfo.CompletionType != PuzzleCompletionType.PuzzleSolved) return;
+            if (completionInfo.CompletionType != PuzzleCompletionType.PuzzleSolved)
+                return;
 
-            ChallengePuzzleCompletionUI lastCompletedPuzzle = _completedPuzzleItems.Last(cp => cp.IsComplete);
+            ChallengePuzzleCompletionUI lastCompletedPuzzle = _completedPuzzleItems.Last(cp =>
+                cp.IsComplete
+            );
             RewardBagImage.gameObject.transform.localScale = Vector3.one;
             UpdateRewardsEarned(true);
             lastCompletedPuzzle.Complete();
@@ -160,7 +186,9 @@ namespace Tofuwu.StackCats.UI
         private void OnPuzzleCompleted(int puzzleIndex)
         {
             UpdateRewardsEarned();
-            LeanTween.scale(RewardBagImage.gameObject, Vector3.one * 1.1f, 0.75f).setEase(LeanTweenType.easeOutElastic);
+            LeanTween
+                .scale(RewardBagImage.gameObject, Vector3.one * 1.1f, 0.75f)
+                .setEase(LeanTweenType.easeOutElastic);
         }
     }
 }

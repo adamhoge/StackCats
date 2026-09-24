@@ -1,8 +1,8 @@
 ﻿using System.Linq;
+using RockhopperGames.StackCats.Data;
 using UnityEngine;
-using Tofuwu.StackCats.Data;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class CatManager : MonoBehaviour
     {

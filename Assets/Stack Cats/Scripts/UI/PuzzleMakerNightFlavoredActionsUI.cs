@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class PuzzleMakerNightFlavoredActionsUI : PuzzleMakerActionsUI
     {
@@ -18,7 +18,9 @@ namespace Tofuwu.StackCats.UI
             base.OnEnable();
 
             AutoDropCurtainToggle.onValueChanged.AddListener(OnToggleAutoDropCurtainChanged);
-            CurtainDropMoveCountInputField.onEndEdit.AddListener(OnCurtainDropMoveCountInputChanged);
+            CurtainDropMoveCountInputField.onEndEdit.AddListener(
+                OnCurtainDropMoveCountInputChanged
+            );
             CurtainIntervalInputField.onEndEdit.AddListener(OnCurtainIntervalInputChanged);
             RaiseCurtainButton.onClick.AddListener(OnRaiseCurtainButtonClicked);
             DropCurtainButton.onClick.AddListener(OnDropCurtainButtonClicked);
@@ -29,7 +31,9 @@ namespace Tofuwu.StackCats.UI
             base.OnDisable();
 
             AutoDropCurtainToggle.onValueChanged.RemoveListener(OnToggleAutoDropCurtainChanged);
-            CurtainDropMoveCountInputField.onEndEdit.RemoveListener(OnCurtainDropMoveCountInputChanged);
+            CurtainDropMoveCountInputField.onEndEdit.RemoveListener(
+                OnCurtainDropMoveCountInputChanged
+            );
             CurtainIntervalInputField.onEndEdit.RemoveListener(OnCurtainIntervalInputChanged);
             RaiseCurtainButton.onClick.RemoveListener(OnRaiseCurtainButtonClicked);
             DropCurtainButton.onClick.RemoveListener(OnDropCurtainButtonClicked);
@@ -40,15 +44,17 @@ namespace Tofuwu.StackCats.UI
             base.Start();
 
             _puzzleMakerNightFlavoredActions = (PuzzleMakerNightFlavoredActions)PuzzleMakerActions;
-            _puzzleMakerNightFlavoredActions.onCurtainDropMoveCountChanged += OnCurtainDropMoveCountChanged;
+            _puzzleMakerNightFlavoredActions.onCurtainDropMoveCountChanged +=
+                OnCurtainDropMoveCountChanged;
             AutoDropCurtainToggle.isOn = _puzzleMakerNightFlavoredActions.IsAutoLiftCurtainEnabled;
             CurtainDropMoveCountInputField.text = "0";
-            CurtainIntervalInputField.text = _puzzleMakerNightFlavoredActions.NightFlavoredPuzzle.CurtainDropInterval.ToString();
+            CurtainIntervalInputField.text =
+                _puzzleMakerNightFlavoredActions.NightFlavoredPuzzle.CurtainDropInterval.ToString();
         }
 
         private void OnToggleAutoDropCurtainChanged(bool value)
         {
-            _puzzleMakerNightFlavoredActions.IsAutoLiftCurtainEnabled = value; 
+            _puzzleMakerNightFlavoredActions.IsAutoLiftCurtainEnabled = value;
         }
 
         private void OnCurtainDropMoveCountChanged(int moveCount)

@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class CurrencyHeldUI : MonoBehaviour
     {
@@ -15,7 +15,11 @@ namespace Tofuwu.StackCats.UI
         /// <summary>
         /// The type of currency held to be displayed.
         /// </summary>
-        public Currency CurrencyType { get { return _currencyType; } set { SetCurrencyType(value); } }
+        public Currency CurrencyType
+        {
+            get { return _currencyType; }
+            set { SetCurrencyType(value); }
+        }
 
         private CurrencyManager _currencyManager;
         private PuzzleManager _puzzleManager;
@@ -48,7 +52,8 @@ namespace Tofuwu.StackCats.UI
 
         private void SetCurrencyType(Currency currencyType)
         {
-            if (_currencyType == currencyType) return;
+            if (_currencyType == currencyType)
+                return;
 
             _currencyType = currencyType;
             //EditorUtility.SetDirty(this);
@@ -62,7 +67,10 @@ namespace Tofuwu.StackCats.UI
         private void UpdateCurrencyIcon()
         {
             CurrencyDetails currencyDetails = _currencyManager.CurrencyDetails[CurrencyType];
-            if (currencyDetails.PuzzleArea && _puzzleManager.IsAreaLocked(currencyDetails.PuzzleArea))
+            if (
+                currencyDetails.PuzzleArea
+                && _puzzleManager.IsAreaLocked(currencyDetails.PuzzleArea)
+            )
             {
                 IconImage.sprite = PlaceholderSprite;
             }
@@ -75,13 +83,18 @@ namespace Tofuwu.StackCats.UI
         private void UpdateCurrencyText()
         {
             CurrencyDetails currencyDetails = _currencyManager.CurrencyDetails[CurrencyType];
-            if (currencyDetails.PuzzleArea && _puzzleManager.IsAreaLocked(currencyDetails.PuzzleArea))
+            if (
+                currencyDetails.PuzzleArea
+                && _puzzleManager.IsAreaLocked(currencyDetails.PuzzleArea)
+            )
             {
                 AmountText.text = "";
             }
             else
             {
-                AmountText.text = CurrencyType.ToCurrencyString(_currencyManager.GetCurrencyHeld(CurrencyType));
+                AmountText.text = CurrencyType.ToCurrencyString(
+                    _currencyManager.GetCurrencyHeld(CurrencyType)
+                );
             }
         }
 

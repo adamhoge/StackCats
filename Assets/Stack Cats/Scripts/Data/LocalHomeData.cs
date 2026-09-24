@@ -2,18 +2,51 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-namespace Tofuwu.StackCats.Data
+
+namespace RockhopperGames.StackCats.Data
 {
     [Serializable]
     public class LocalHomeData : LocalData<LocalHomeData>, IHomeData
     {
-        public string CurrentWallpaperId { get => _currentWallpaperId; set { _currentWallpaperId = value; Save(); } }
+        public string CurrentWallpaperId
+        {
+            get => _currentWallpaperId;
+            set
+            {
+                _currentWallpaperId = value;
+                Save();
+            }
+        }
 
-        public string CurrentFloorId { get => _currentFloorId; set { _currentFloorId = value; Save(); } }
+        public string CurrentFloorId
+        {
+            get => _currentFloorId;
+            set
+            {
+                _currentFloorId = value;
+                Save();
+            }
+        }
 
-        public string CurrentWindowId { get => _currentWindowId; set { _currentWindowId = value; Save(); } }
+        public string CurrentWindowId
+        {
+            get => _currentWindowId;
+            set
+            {
+                _currentWindowId = value;
+                Save();
+            }
+        }
 
-        public string CurrentDresserId { get => _currentDresserId; set { _currentDresserId = value; Save(); } }
+        public string CurrentDresserId
+        {
+            get => _currentDresserId;
+            set
+            {
+                _currentDresserId = value;
+                Save();
+            }
+        }
 
         private string _currentWallpaperId;
         private string _currentFloorId;
@@ -23,7 +56,8 @@ namespace Tofuwu.StackCats.Data
         private List<string> _invitedCatIds;
         private List<VisitorData> _visitors;
 
-        public LocalHomeData(string dataPath, int dresserObjectsSize) : base(dataPath)
+        public LocalHomeData(string dataPath, int dresserObjectsSize)
+            : base(dataPath)
         {
             _dresserObjects = new LocalPlacedObjectData[dresserObjectsSize];
             _invitedCatIds = new List<string>();
@@ -34,12 +68,20 @@ namespace Tofuwu.StackCats.Data
 
         public string GetDresserObjectId(int index)
         {
-            if (index < 0 || index >= _dresserObjects.Length) return null;
+            if (index < 0 || index >= _dresserObjects.Length)
+                return null;
 
-            return _dresserObjects[index] != null ? _dresserObjects[index].PlaceableObjectItemId : null;
+            return _dresserObjects[index] != null
+                ? _dresserObjects[index].PlaceableObjectItemId
+                : null;
         }
 
-        public void SetDresserObjectId(int index, string dresserObjectId, DateTime? placedDateTime = null, DateTime? activatedDateTime = null)
+        public void SetDresserObjectId(
+            int index,
+            string dresserObjectId,
+            DateTime? placedDateTime = null,
+            DateTime? activatedDateTime = null
+        )
         {
             if (index > -1 && index < _dresserObjects.Length)
             {
@@ -49,14 +91,16 @@ namespace Tofuwu.StackCats.Data
                 }
                 else
                 {
-                    if (placedDateTime == null) placedDateTime = DateTime.Now;
-                    if (activatedDateTime == null) activatedDateTime = placedDateTime;
+                    if (placedDateTime == null)
+                        placedDateTime = DateTime.Now;
+                    if (activatedDateTime == null)
+                        activatedDateTime = placedDateTime;
 
                     _dresserObjects[index] = new LocalPlacedObjectData
                     {
                         PlaceableObjectItemId = dresserObjectId,
                         PlacedDateTime = placedDateTime.Value,
-                        ActivatedDateTime = activatedDateTime.Value
+                        ActivatedDateTime = activatedDateTime.Value,
                     };
                 }
 
@@ -66,7 +110,8 @@ namespace Tofuwu.StackCats.Data
 
         public void ActivateDresserObject(int index)
         {
-            if (index < 0 || _dresserObjects[index] == null) return;
+            if (index < 0 || _dresserObjects[index] == null)
+                return;
 
             _dresserObjects[index].ActivatedDateTime = DateTime.Now;
 
@@ -75,7 +120,9 @@ namespace Tofuwu.StackCats.Data
 
         public DateTime GetDresserObjectPlacedDateTime(string placeableObjectId)
         {
-            LocalPlacedObjectData placedObject = _dresserObjects.FirstOrDefault(po => po != null && po.PlaceableObjectItemId == placeableObjectId);
+            LocalPlacedObjectData placedObject = _dresserObjects.FirstOrDefault(po =>
+                po != null && po.PlaceableObjectItemId == placeableObjectId
+            );
             return placedObject != null ? placedObject.ActivatedDateTime : DateTime.MinValue;
         }
 
@@ -87,17 +134,21 @@ namespace Tofuwu.StackCats.Data
 
         public DateTime GetDresserObjectActivatedDateTime(string placeableObjectId)
         {
-            LocalPlacedObjectData placedObject = _dresserObjects.FirstOrDefault(po => po != null && po.PlaceableObjectItemId == placeableObjectId);
+            LocalPlacedObjectData placedObject = _dresserObjects.FirstOrDefault(po =>
+                po != null && po.PlaceableObjectItemId == placeableObjectId
+            );
             return placedObject != null ? placedObject.ActivatedDateTime : DateTime.Now;
         }
 
         public void ActivateDresserObjectId(string dresserObjectItemId, DateTime activationDateTime)
         {
-            LocalPlacedObjectData placedObject = _dresserObjects.FirstOrDefault(po => po != null && po.PlaceableObjectItemId == dresserObjectItemId);
+            LocalPlacedObjectData placedObject = _dresserObjects.FirstOrDefault(po =>
+                po != null && po.PlaceableObjectItemId == dresserObjectItemId
+            );
             if (placedObject != null)
             {
                 placedObject.ActivatedDateTime = activationDateTime;
-               
+
                 Save();
             }
         }
@@ -105,7 +156,7 @@ namespace Tofuwu.StackCats.Data
         public void AddInvitedCatId(string catId)
         {
             _invitedCatIds.Add(catId);
-            
+
             Save();
         }
 
@@ -124,14 +175,14 @@ namespace Tofuwu.StackCats.Data
         public void AddVisitor(VisitorData visitor)
         {
             _visitors.Add(visitor);
-           
+
             Save();
         }
 
         public void RemoveVisitor(Guid visitorId)
         {
             _visitors.Remove(_visitors.FirstOrDefault(v => v.VisitorGuid == visitorId));
-           
+
             Save();
         }
 

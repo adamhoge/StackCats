@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class TutorialManagerUI : MonoBehaviour
     {
@@ -34,14 +34,20 @@ namespace Tofuwu.StackCats.UI
 
         private void OnPuzzleTutorialStarted(PuzzleTutorial puzzleTutorial)
         {
-            PuzzleTutorialOverlayScreen puzzleTutorialInstance = Instantiate(PuzzleTutorialOverlayScreenPrefab, OverlayScreensRectTransform);
+            PuzzleTutorialOverlayScreen puzzleTutorialInstance = Instantiate(
+                PuzzleTutorialOverlayScreenPrefab,
+                OverlayScreensRectTransform
+            );
             puzzleTutorialInstance.Initialize(puzzleTutorial, PointerGestureUI);
             OverlayScreenManager.EnqueueScreen(puzzleTutorialInstance);
         }
 
         private void OnBlockTutorialStarted(BlockTutorial blockTutorial)
         {
-            BlockTutorialOverlayScreen blockTutorialInstance = Instantiate(BlockTutorialOverlayScreenPrefab, OverlayScreensRectTransform);
+            BlockTutorialOverlayScreen blockTutorialInstance = Instantiate(
+                BlockTutorialOverlayScreenPrefab,
+                OverlayScreensRectTransform
+            );
             blockTutorialInstance.Initialize(blockTutorial, PointerGestureUI);
             OverlayScreenManager.EnqueueScreen(blockTutorialInstance);
         }

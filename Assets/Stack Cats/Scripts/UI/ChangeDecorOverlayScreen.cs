@@ -1,6 +1,6 @@
 ﻿using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class ChangeDecorOverlayScreen : OverlayScreen
     {
@@ -16,17 +16,26 @@ namespace Tofuwu.StackCats.UI
         {
             base.OnTransitioningIn();
 
-            WallpaperItem wallpaperItem = _stuffManager.WallpaperItems.GetById(_dataManager.HomeData.CurrentWallpaperId);
+            WallpaperItem wallpaperItem = _stuffManager.WallpaperItems.GetById(
+                _dataManager.HomeData.CurrentWallpaperId
+            );
             ChangeWallpaperButtonImage.sprite = wallpaperItem.Icon;
-            ChangeWallpaperButtonImage.SetMaterialForItem(wallpaperItem.ColorShift); ;
+            ChangeWallpaperButtonImage.SetMaterialForItem(wallpaperItem.ColorShift);
+            ;
 
-            FloorItem floorItem = _stuffManager.FloorItems.GetById(_dataManager.HomeData.CurrentFloorId);
+            FloorItem floorItem = _stuffManager.FloorItems.GetById(
+                _dataManager.HomeData.CurrentFloorId
+            );
             ChangeFloorButtonImage.sprite = floorItem.Icon;
             ChangeFloorButtonImage.SetMaterialForItem(floorItem.ColorShift);
 
-            ChangeWindowButtonImage.sprite = _stuffManager.WindowItems.GetById(_dataManager.HomeData.CurrentWindowId).Icon;
+            ChangeWindowButtonImage.sprite = _stuffManager
+                .WindowItems.GetById(_dataManager.HomeData.CurrentWindowId)
+                .Icon;
 
-            DresserItem dresserItem = _stuffManager.DresserItems.GetById(_dataManager.HomeData.CurrentDresserId);
+            DresserItem dresserItem = _stuffManager.DresserItems.GetById(
+                _dataManager.HomeData.CurrentDresserId
+            );
             ChangeDresserButtonImage.sprite = dresserItem.Icon;
             ChangeDresserButtonImage.SetMaterialForItem(dresserItem.ColorShift);
         }

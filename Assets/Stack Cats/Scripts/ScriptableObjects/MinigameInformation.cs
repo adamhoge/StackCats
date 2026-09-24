@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
-    [CreateAssetMenu(fileName = "Minigame Information", menuName = "Stack Cats/Minigame Information")]
+    [CreateAssetMenu(
+        fileName = "Minigame Information",
+        menuName = "Stack Cats/Minigame Information"
+    )]
     public class MinigameInformation : ScriptableObject, IIdentifiable
     {
         public string MinigameTitle;
@@ -21,7 +24,10 @@ namespace Tofuwu.StackCats
 
         public string GetId()
         {
-            if (string.IsNullOrEmpty(_id)) { _id = Guid.NewGuid().ToString(); }
+            if (string.IsNullOrEmpty(_id))
+            {
+                _id = Guid.NewGuid().ToString();
+            }
 
             return _id;
         }

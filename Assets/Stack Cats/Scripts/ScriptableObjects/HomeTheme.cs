@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     [CreateAssetMenu(fileName = "Home Theme", menuName = "Stack Cats/Home Theme")]
     public class HomeTheme : ScriptableObject

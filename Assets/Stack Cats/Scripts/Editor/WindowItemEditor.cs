@@ -1,4 +1,4 @@
-﻿using Tofuwu.StackCats;
+﻿using RockhopperGames.StackCats;
 using UnityEditor;
 using UnityEngine;
 
@@ -13,7 +13,6 @@ public class WindowItemEditor : Editor
         base.OnInspectorGUI();
         EditorGUILayout.Space();
         EditorGUILayout.TextField("ID:", windowItem.GetId());
-
 
         if (GUILayout.Button("Regenerate ID"))
         {

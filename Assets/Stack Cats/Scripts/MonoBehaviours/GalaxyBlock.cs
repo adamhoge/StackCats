@@ -1,9 +1,14 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
-    public delegate void GalaxyBlockTriggered(GalaxyBlock sender, Stack stack, int fromIndex, int toIndex);
+    public delegate void GalaxyBlockTriggered(
+        GalaxyBlock sender,
+        Stack stack,
+        int fromIndex,
+        int toIndex
+    );
 
     public class GalaxyBlock : PuzzleBlock
     {
@@ -22,13 +27,15 @@ namespace Tofuwu.StackCats
             {
                 Block targetBlock = _block.ParentStack.Blocks[i];
                 PuzzleBlock puzzleBlock = targetBlock.GetComponent<PuzzleBlock>();
-                if (!puzzleBlock) return;
+                if (!puzzleBlock)
+                    return;
 
                 GalaxyBlock galaxyBlock = targetBlock.GetComponent<GalaxyBlock>();
                 if (galaxyBlock)
                 {
                     parentStack.RemoveBlocks(targetBlock, thisBlock, true);
-                    if (onGalaxyBlockTriggered != null) onGalaxyBlockTriggered(this, parentStack, i, blockIndex);
+                    if (onGalaxyBlockTriggered != null)
+                        onGalaxyBlockTriggered(this, parentStack, i, blockIndex);
                     break;
                 }
             }

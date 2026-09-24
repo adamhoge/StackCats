@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public delegate void DresserSet(DresserItem dresser);
 
@@ -25,13 +25,25 @@ namespace Tofuwu.StackCats
         public float DresserWidth;
         public int NumObjectsPlaceableOnDresser = 5;
 
-        public WallpaperItem CurrentWallpaper { get => _currentWallpaper; }
+        public WallpaperItem CurrentWallpaper
+        {
+            get => _currentWallpaper;
+        }
 
-        public FloorItem CurrentFloor { get => _currentFloor; }
+        public FloorItem CurrentFloor
+        {
+            get => _currentFloor;
+        }
 
-        public WindowItem CurrentWindow { get => _currentWindow; }
+        public WindowItem CurrentWindow
+        {
+            get => _currentWindow;
+        }
 
-        public DresserItem CurrentDresser { get => _currentDresser; }
+        public DresserItem CurrentDresser
+        {
+            get => _currentDresser;
+        }
 
         private DataManager _dataManager;
         private StuffManager _stuffManager;
@@ -52,7 +64,8 @@ namespace Tofuwu.StackCats
         public void SetFloor(FloorItem floor)
         {
             Floor.sprite = floor.FloorSprite;
-            Floor.SetMaterialForItem(floor.ColorShift); ;
+            Floor.SetMaterialForItem(floor.ColorShift);
+            ;
             _dataManager.HomeData.CurrentFloorId = floor.GetId();
             _currentFloor = floor;
         }
@@ -71,21 +84,35 @@ namespace Tofuwu.StackCats
             _currentDresser = dresser;
             _dataManager.HomeData.CurrentDresserId = dresser.GetId();
 
-            if (onDresserSet != null) onDresserSet(dresser);
+            if (onDresserSet != null)
+                onDresserSet(dresser);
         }
 
-        public void PlaceObject(PlaceableObjectItem placeableObject, int dresserPositionIndex, DateTime? placedDateTime = null, DateTime? activatedDateTime = null)
+        public void PlaceObject(
+            PlaceableObjectItem placeableObject,
+            int dresserPositionIndex,
+            DateTime? placedDateTime = null,
+            DateTime? activatedDateTime = null
+        )
         {
             int currentIndex = GetPlaceableObjectIndex(placeableObject);
-            if (currentIndex != -1) PutAwayObject(currentIndex);
+            if (currentIndex != -1)
+                PutAwayObject(currentIndex);
 
             PutAwayObject(dresserPositionIndex);
 
-            if (placeableObject == null) return;
+            if (placeableObject == null)
+                return;
 
-            if (activatedDateTime == null) activatedDateTime = DateTime.Now;
+            if (activatedDateTime == null)
+                activatedDateTime = DateTime.Now;
             LoadPlaceableObject(placeableObject, dresserPositionIndex, activatedDateTime.Value);
-            _dataManager.HomeData.SetDresserObjectId(dresserPositionIndex, placeableObject.GetId(), placedDateTime, activatedDateTime);
+            _dataManager.HomeData.SetDresserObjectId(
+                dresserPositionIndex,
+                placeableObject.GetId(),
+                placedDateTime,
+                activatedDateTime
+            );
         }
 
         public void PutAwayObject(int dresserPositionIndex)
@@ -95,7 +122,8 @@ namespace Tofuwu.StackCats
             if (placedObject != null)
             {
                 placedObject.PlaceableObjectInstance.OnPutAway();
-                placedObject.PlaceableObjectInstance.onPlaceableObjectActivated -= OnPlaceableObjectActivated;
+                placedObject.PlaceableObjectInstance.onPlaceableObjectActivated -=
+                    OnPlaceableObjectActivated;
                 Destroy(placedObject.PlaceableObjectInstance.gameObject);
                 _objectsPlacedOnDresser[dresserPositionIndex] = null;
                 _dataManager.HomeData.SetDresserObjectId(dresserPositionIndex, null);
@@ -111,8 +139,12 @@ namespace Tofuwu.StackCats
             if (fromPlacement != null)
             {
                 fromPlaceableObjectItem = fromPlacement.PlaceableObjectItem;
-                fromPlacedDateTime = _dataManager.HomeData.GetDresserObjectPlacedDateTime(fromPlaceableObjectItem.GetId());
-                fromActivatedDateTime = _dataManager.HomeData.GetDresserObjectActivatedDateTime(fromPlaceableObjectItem.GetId());
+                fromPlacedDateTime = _dataManager.HomeData.GetDresserObjectPlacedDateTime(
+                    fromPlaceableObjectItem.GetId()
+                );
+                fromActivatedDateTime = _dataManager.HomeData.GetDresserObjectActivatedDateTime(
+                    fromPlaceableObjectItem.GetId()
+                );
             }
 
             PlacedObject toPlacement = _objectsPlacedOnDresser[toDresserPositionIndex];
@@ -122,11 +154,25 @@ namespace Tofuwu.StackCats
             if (toPlacement != null)
             {
                 toPlaceableObjectItem = toPlacement.PlaceableObjectItem;
-                toPlacedDateTime = _dataManager.HomeData.GetDresserObjectPlacedDateTime(toPlaceableObjectItem.GetId());
-                toActivatedDateTime = _dataManager.HomeData.GetDresserObjectActivatedDateTime(toPlaceableObjectItem.GetId());
+                toPlacedDateTime = _dataManager.HomeData.GetDresserObjectPlacedDateTime(
+                    toPlaceableObjectItem.GetId()
+                );
+                toActivatedDateTime = _dataManager.HomeData.GetDresserObjectActivatedDateTime(
+                    toPlaceableObjectItem.GetId()
+                );
             }
-            PlaceObject(fromPlaceableObjectItem, toDresserPositionIndex, fromPlacedDateTime, fromActivatedDateTime);
-            PlaceObject(toPlaceableObjectItem, fromDresserPositionIndex, toPlacedDateTime, toActivatedDateTime);
+            PlaceObject(
+                fromPlaceableObjectItem,
+                toDresserPositionIndex,
+                fromPlacedDateTime,
+                fromActivatedDateTime
+            );
+            PlaceObject(
+                toPlaceableObjectItem,
+                fromDresserPositionIndex,
+                toPlacedDateTime,
+                toActivatedDateTime
+            );
         }
 
         public PlacedObject GetObjectPlacedAtIndex(int dresserPositionIndex)
@@ -159,23 +205,39 @@ namespace Tofuwu.StackCats
 
         protected void Start()
         {
-            SetWallpaper(_stuffManager.WallpaperItems.GetById(_dataManager.HomeData.CurrentWallpaperId));
+            SetWallpaper(
+                _stuffManager.WallpaperItems.GetById(_dataManager.HomeData.CurrentWallpaperId)
+            );
             SetFloor(_stuffManager.FloorItems.GetById(_dataManager.HomeData.CurrentFloorId));
             SetWindow(_stuffManager.WindowItems.GetById(_dataManager.HomeData.CurrentWindowId));
             SetDresser(_stuffManager.DresserItems.GetById(_dataManager.HomeData.CurrentDresserId));
             LoadPlaceableObjects();
         }
 
-        private void LoadPlaceableObject(PlaceableObjectItem placeableObjectItem, int dresserPositionIndex, DateTime lastActivationTime)
+        private void LoadPlaceableObject(
+            PlaceableObjectItem placeableObjectItem,
+            int dresserPositionIndex,
+            DateTime lastActivationTime
+        )
         {
-            if (placeableObjectItem == null) return;
+            if (placeableObjectItem == null)
+                return;
 
-            PlaceableObject objectInstance = Instantiate(placeableObjectItem.PlaceableObjectPrefab, DresserSurfaceTransform);
+            PlaceableObject objectInstance = Instantiate(
+                placeableObjectItem.PlaceableObjectPrefab,
+                DresserSurfaceTransform
+            );
             objectInstance.LastActivationTime = lastActivationTime;
             objectInstance.onPlaceableObjectActivated += OnPlaceableObjectActivated;
-            objectInstance.transform.localPosition = GetObjectLocalPositionByIndex(dresserPositionIndex);
+            objectInstance.transform.localPosition = GetObjectLocalPositionByIndex(
+                dresserPositionIndex
+            );
             objectInstance.transform.localScale = GetPlaceableObjectScale();
-            _objectsPlacedOnDresser[dresserPositionIndex] = new PlacedObject { PlaceableObjectItem = placeableObjectItem, PlaceableObjectInstance = objectInstance };
+            _objectsPlacedOnDresser[dresserPositionIndex] = new PlacedObject
+            {
+                PlaceableObjectItem = placeableObjectItem,
+                PlaceableObjectInstance = objectInstance,
+            };
             objectInstance.OnPlaced();
         }
 
@@ -186,8 +248,11 @@ namespace Tofuwu.StackCats
             {
                 _objectsPlacedOnDresser.Add(null);
                 string placeableObjectId = _dataManager.HomeData.GetDresserObjectId(i);
-                DateTime lastActivationTime = _dataManager.HomeData.GetDresserObjectActivatedDateTime(placeableObjectId);
-                PlaceableObjectItem placeableObjectItem = _stuffManager.PlaceableItems.GetById(placeableObjectId);
+                DateTime lastActivationTime =
+                    _dataManager.HomeData.GetDresserObjectActivatedDateTime(placeableObjectId);
+                PlaceableObjectItem placeableObjectItem = _stuffManager.PlaceableItems.GetById(
+                    placeableObjectId
+                );
                 LoadPlaceableObject(placeableObjectItem, i, lastActivationTime);
             }
         }
@@ -197,7 +262,10 @@ namespace Tofuwu.StackCats
             for (int i = 0; i < NumObjectsPlaceableOnDresser; i++)
             {
                 PlacedObject currentPlacedObject = _objectsPlacedOnDresser[i];
-                if (currentPlacedObject != null && currentPlacedObject.PlaceableObjectItem == placeableObjectItem)
+                if (
+                    currentPlacedObject != null
+                    && currentPlacedObject.PlaceableObjectItem == placeableObjectItem
+                )
                 {
                     return i;
                 }
@@ -211,12 +279,20 @@ namespace Tofuwu.StackCats
             return Vector3.one * (DresserWidth / NumObjectsPlaceableOnDresser);
         }
 
-        private void OnPlaceableObjectActivated(PlaceableObject placeableObject, DateTime activationTime)
+        private void OnPlaceableObjectActivated(
+            PlaceableObject placeableObject,
+            DateTime activationTime
+        )
         {
-            PlacedObject placedObject = _objectsPlacedOnDresser.FirstOrDefault(po => po != null && po.PlaceableObjectInstance == placeableObject);
+            PlacedObject placedObject = _objectsPlacedOnDresser.FirstOrDefault(po =>
+                po != null && po.PlaceableObjectInstance == placeableObject
+            );
             if (placedObject != null)
             {
-                _dataManager.HomeData.ActivateDresserObjectId(placedObject.PlaceableObjectItem.GetId(), activationTime);
+                _dataManager.HomeData.ActivateDresserObjectId(
+                    placedObject.PlaceableObjectItem.GetId(),
+                    activationTime
+                );
             }
         }
     }

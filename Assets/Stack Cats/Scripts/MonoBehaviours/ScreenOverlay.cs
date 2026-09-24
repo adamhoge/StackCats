@@ -1,14 +1,22 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class ScreenOverlay : MonoBehaviour
     {
         /// <summary>
         /// The color of the screen overlay.
         /// </summary>
-        public Color OverlayColor { get { return _overlay ? _overlay.color : Color.clear; } set { if(_overlay) _overlay.color = value; } }
+        public Color OverlayColor
+        {
+            get { return _overlay ? _overlay.color : Color.clear; }
+            set
+            {
+                if (_overlay)
+                    _overlay.color = value;
+            }
+        }
 
         /// <summary>
         /// For full overlay, the sorting order value should be higher than that of any other canvas.

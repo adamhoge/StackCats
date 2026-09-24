@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class NewCatsInCollectionOverlayScreen : OverlayScreen
     {
@@ -14,7 +14,7 @@ namespace Tofuwu.StackCats.UI
             NavigatingToCatPortrait,
             RevealingCatPortrait,
             DisplayingCatPortrait,
-            Complete
+            Complete,
         }
 
         public List<Cat> NewCats = new List<Cat>();
@@ -94,7 +94,7 @@ namespace Tofuwu.StackCats.UI
 
         private void LoadCatPortraits()
         {
-            foreach(CatPortrait catPortrait in _allCatPortraits)
+            foreach (CatPortrait catPortrait in _allCatPortraits)
             {
                 Destroy(catPortrait.gameObject);
             }
@@ -102,7 +102,10 @@ namespace Tofuwu.StackCats.UI
 
             foreach (Cat cat in _catManager.CatCollection.List)
             {
-                CatPortrait catPortrait = Instantiate(CatPortraitPrefab, CatPortraitsGrid.transform);
+                CatPortrait catPortrait = Instantiate(
+                    CatPortraitPrefab,
+                    CatPortraitsGrid.transform
+                );
                 catPortrait.Cat = cat;
                 catPortrait.WasSeen = _catManager.WasCatSeen(cat);
                 catPortrait.IsBonded = _catManager.IsBonded(cat);
@@ -138,31 +141,41 @@ namespace Tofuwu.StackCats.UI
         private void NavigateToCatPortrait()
         {
             float yOffset = GetCatYOffset(_currentPortrait.Cat);
-            LeanTween.moveLocalY(CatPortraitsGrid.gameObject, yOffset, NavigationDuration - 0.1f).setEase(LeanTweenType.easeInOutQuad);
+            LeanTween
+                .moveLocalY(CatPortraitsGrid.gameObject, yOffset, NavigationDuration - 0.1f)
+                .setEase(LeanTweenType.easeInOutQuad);
         }
 
         private float GetCatYOffset(Cat cat)
         {
             int catPortraitRow = _allCatPortraits.IndexOf(_currentPortrait) / NumColumns;
-            float gridOffset = (catPortraitRow + 0.5f) * (CatPortraitsGrid.cellSize.y + CatPortraitsGrid.spacing.y);
+            float gridOffset =
+                (catPortraitRow + 0.5f)
+                * (CatPortraitsGrid.cellSize.y + CatPortraitsGrid.spacing.y);
             float minOffset = -CatPortraitsRectTransform.rect.y / 2;
             float maxOffset = minOffset + (GetGridTotalHeight() - minOffset * 2);
-            if (maxOffset < minOffset) maxOffset = minOffset;
+            if (maxOffset < minOffset)
+                maxOffset = minOffset;
             float gridOffsetClamped = Mathf.Clamp(gridOffset, minOffset, maxOffset);
             return gridOffsetClamped;
         }
 
         private float GetGridTotalHeight()
         {
-            float gridHeight = (CatPortraitsGrid.cellSize.y + CatPortraitsGrid.spacing.y) * Mathf.CeilToInt(_allCatPortraits.Count / (float)NumColumns);
-            float gridHeightPadding = (CatPortraitsGrid.padding.top + CatPortraitsGrid.padding.bottom);
+            float gridHeight =
+                (CatPortraitsGrid.cellSize.y + CatPortraitsGrid.spacing.y)
+                * Mathf.CeilToInt(_allCatPortraits.Count / (float)NumColumns);
+            float gridHeightPadding = (
+                CatPortraitsGrid.padding.top + CatPortraitsGrid.padding.bottom
+            );
             return gridHeight + gridHeightPadding;
         }
 
         private void SkipNavigation()
         {
             LeanTween.cancel(CatPortraitsGrid.gameObject);
-            CatPortraitsGrid.transform.localPosition = Vector2.up * GetCatYOffset(_currentPortrait.Cat);
+            CatPortraitsGrid.transform.localPosition =
+                Vector2.up * GetCatYOffset(_currentPortrait.Cat);
             ChangeState(State.RevealingCatPortrait);
         }
 
@@ -186,7 +199,7 @@ namespace Tofuwu.StackCats.UI
 
         private void UpdateNotStarted()
         {
-            if(_stateTimeElapsed >= StartDelay)
+            if (_stateTimeElapsed >= StartDelay)
             {
                 ShowNextCat();
             }
@@ -210,7 +223,8 @@ namespace Tofuwu.StackCats.UI
 
         private void ChangeState(State state)
         {
-            if (_state == state) return;
+            if (_state == state)
+                return;
 
             _state = state;
             _stateTimeElapsed = 0.0f;

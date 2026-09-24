@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using RotaryHeart.Lib.SerializableDictionary;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     [Serializable]
     public class EmoteSpritesDictionary : SerializableDictionaryBase<ChatCatEmote, Sprite> { }
@@ -43,15 +43,21 @@ namespace Tofuwu.StackCats.UI
 
             PortraitCanvasGroup.alpha = 0.0f;
             LeanTween.cancel(PortraitCanvasGroup.gameObject);
-            LeanTween.alphaCanvas(PortraitCanvasGroup, 1.0f, TransitionInDuration).setEase(TransitionInTween);
+            LeanTween
+                .alphaCanvas(PortraitCanvasGroup, 1.0f, TransitionInDuration)
+                .setEase(TransitionInTween);
 
             MessageCanvasGroup.alpha = 0.0f;
             LeanTween.cancel(MessageCanvasGroup.gameObject);
-            LeanTween.alphaCanvas(MessageCanvasGroup, 1.0f, TransitionInDuration).setEase(TransitionInTween);
+            LeanTween
+                .alphaCanvas(MessageCanvasGroup, 1.0f, TransitionInDuration)
+                .setEase(TransitionInTween);
 
             NameLabelCanvasGroup.alpha = 0.0f;
             LeanTween.cancel(NameLabelCanvasGroup.gameObject);
-            LeanTween.alphaCanvas(NameLabelCanvasGroup, 1.0f, TransitionInDuration).setEase(TransitionInTween);
+            LeanTween
+                .alphaCanvas(NameLabelCanvasGroup, 1.0f, TransitionInDuration)
+                .setEase(TransitionInTween);
 
             LoadNextMessage();
         }
@@ -66,13 +72,19 @@ namespace Tofuwu.StackCats.UI
             base.OnTransitioningOut();
 
             LeanTween.cancel(PortraitCanvasGroup.gameObject);
-            LeanTween.alphaCanvas(PortraitCanvasGroup, 0.0f, TransitionOutDuration).setEase(TransitionOutTween);
+            LeanTween
+                .alphaCanvas(PortraitCanvasGroup, 0.0f, TransitionOutDuration)
+                .setEase(TransitionOutTween);
 
             LeanTween.cancel(MessageCanvasGroup.gameObject);
-            LeanTween.alphaCanvas(MessageCanvasGroup, 0.0f, TransitionOutDuration).setEase(TransitionOutTween);
+            LeanTween
+                .alphaCanvas(MessageCanvasGroup, 0.0f, TransitionOutDuration)
+                .setEase(TransitionOutTween);
 
             LeanTween.cancel(NameLabelCanvasGroup.gameObject);
-            LeanTween.alphaCanvas(NameLabelCanvasGroup, 0.0f, TransitionOutDuration).setEase(TransitionOutTween);
+            LeanTween
+                .alphaCanvas(NameLabelCanvasGroup, 0.0f, TransitionOutDuration)
+                .setEase(TransitionOutTween);
 
             LeanTween.cancel(PromptContinueRectTransform.gameObject);
         }
@@ -106,7 +118,10 @@ namespace Tofuwu.StackCats.UI
 
         private void UpdateMessageText()
         {
-            if (_currentLetterIndex < _currentMessage.Message.Length && Time.time > _lastLetterOutputTime + _currentMessage.LetterInterval)
+            if (
+                _currentLetterIndex < _currentMessage.Message.Length
+                && Time.time > _lastLetterOutputTime + _currentMessage.LetterInterval
+            )
             {
                 _lastLetterOutputTime = Time.time;
 
@@ -146,13 +161,16 @@ namespace Tofuwu.StackCats.UI
 
         private void SetEmoteSprite(Sprite sprite)
         {
-            if (EmoteImage.sprite == sprite) return;
+            if (EmoteImage.sprite == sprite)
+                return;
 
             EmoteImage.sprite = sprite;
             if (EmoteImage.enabled)
             {
                 LeanTween.cancel(EmoteImage.gameObject);
-                LeanTween.scale(EmoteImage.gameObject, Vector3.one * 1.25f, 0.5f).setEase(LeanTweenType.punch);
+                LeanTween
+                    .scale(EmoteImage.gameObject, Vector3.one * 1.25f, 0.5f)
+                    .setEase(LeanTweenType.punch);
             }
             else
             {
@@ -170,7 +188,14 @@ namespace Tofuwu.StackCats.UI
         {
             PromptContinueRectTransform.gameObject.SetActive(true);
             PromptContinueRectTransform.localPosition = _promptContinueRectTransformPosition;
-            LeanTween.moveLocalY(PromptContinueRectTransform.gameObject, PromptContinueRectTransform.localPosition.y + 20.0f, 0.5f).setEase(LeanTweenType.easeOutQuad).setLoopPingPong();
+            LeanTween
+                .moveLocalY(
+                    PromptContinueRectTransform.gameObject,
+                    PromptContinueRectTransform.localPosition.y + 20.0f,
+                    0.5f
+                )
+                .setEase(LeanTweenType.easeOutQuad)
+                .setLoopPingPong();
         }
 
         private void HidePromptContinue()

@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public delegate void StarsEarned(int numStarsEarned);
     public delegate void ButtonStarsAdded(Vector3 worldSpaceLocation, int numStarsEarned);
@@ -26,14 +26,16 @@ namespace Tofuwu.StackCats.UI
         private PuzzleArea _puzzleArea;
         private PuzzleAreaMap _puzzleAreaMap;
         private bool _isActive = true;
-        private readonly Dictionary<StoryPuzzle, PuzzleButton> _puzzleButtons = new Dictionary<StoryPuzzle, PuzzleButton>();
+        private readonly Dictionary<StoryPuzzle, PuzzleButton> _puzzleButtons =
+            new Dictionary<StoryPuzzle, PuzzleButton>();
 
         public void Initialize(PuzzleArea puzzleArea, PuzzleAreaMap puzzleAreaMap)
         {
             _puzzleArea = puzzleArea;
             _puzzleAreaMap = puzzleAreaMap;
 
-            if (_puzzleManager.IsAreaLocked(_puzzleArea)) return;
+            if (_puzzleManager.IsAreaLocked(_puzzleArea))
+                return;
 
             transform.position = _puzzleAreaMap.transform.position;
 
@@ -45,15 +47,29 @@ namespace Tofuwu.StackCats.UI
                 puzzleSelectButton.transform.localPosition = routeItem.Coordinates;
                 puzzleSelectButton.IsSelected = puzzle == _puzzleManager.CurrentStoryPuzzle;
                 puzzleSelectButton.IsLocked = _puzzleManager.IsStoryPuzzleLocked(puzzle);
-                if (!puzzleSelectButton.IsLocked) puzzleSelectButton.NumStarsEarned = _puzzleManager.GetStoryPuzzleNumStarsEarned(puzzle);
+                if (!puzzleSelectButton.IsLocked)
+                    puzzleSelectButton.NumStarsEarned = _puzzleManager.GetStoryPuzzleNumStarsEarned(
+                        puzzle
+                    );
                 puzzleSelectButton.IsComplete = _puzzleManager.IsStoryPuzzleCompleted(puzzle);
                 puzzleSelectButton.Button.image.color = _puzzleArea.PuzzleTheme.BackgroundColor;
                 puzzleSelectButton.PuzzleLabelText.text = (i + 1).ToString();
                 if (puzzle)
                 {
-                    puzzleSelectButton.Button.onClick.AddListener(delegate { SelectPuzzle(puzzle); });
-                    puzzleSelectButton.UnlocksArea = i == _puzzleAreaMap.RouteIndexToNextArea && !_puzzleManager.IsStoryPuzzleCompleted(puzzle);
-                    puzzleSelectButton.HasCutScene = _gameManager.Events.StoryFirstCompletionEvents.Exists(e => e.StoryPuzzle == puzzle && e.EventResponses.Exists(er => er.PlayCutScene != null));
+                    puzzleSelectButton.Button.onClick.AddListener(
+                        delegate
+                        {
+                            SelectPuzzle(puzzle);
+                        }
+                    );
+                    puzzleSelectButton.UnlocksArea =
+                        i == _puzzleAreaMap.RouteIndexToNextArea
+                        && !_puzzleManager.IsStoryPuzzleCompleted(puzzle);
+                    puzzleSelectButton.HasCutScene =
+                        _gameManager.Events.StoryFirstCompletionEvents.Exists(e =>
+                            e.StoryPuzzle == puzzle
+                            && e.EventResponses.Exists(er => er.PlayCutScene != null)
+                        );
                     puzzleSelectButton.onStarsAdded += OnStarsAdded;
                     _puzzleButtons.Add(puzzle, puzzleSelectButton);
                 }
@@ -68,7 +84,8 @@ namespace Tofuwu.StackCats.UI
 
         protected void Start()
         {
-            if (_puzzleManager.IsAreaLocked(_puzzleArea)) return;
+            if (_puzzleManager.IsAreaLocked(_puzzleArea))
+                return;
 
             if (_puzzleArea == _puzzleManager.CurrentArea)
             {
@@ -79,11 +96,13 @@ namespace Tofuwu.StackCats.UI
 
         public void SetActive(bool isActive)
         {
-            if (isActive == _isActive) return;
+            if (isActive == _isActive)
+                return;
 
             _isActive = isActive;
 
-            if (_puzzleManager.IsAreaLocked(_puzzleArea)) return;
+            if (_puzzleManager.IsAreaLocked(_puzzleArea))
+                return;
 
             foreach (KeyValuePair<StoryPuzzle, PuzzleButton> puzzleButton in _puzzleButtons)
             {
@@ -102,7 +121,10 @@ namespace Tofuwu.StackCats.UI
                     CanvasGroup buttonCanvas = button.GetComponent<CanvasGroup>();
                     buttonCanvas.alpha = 0.0f;
                     LeanTween.alphaCanvas(buttonCanvas, 1.0f, 0.25f).setDelay(3.0f + 0.1f * i);
-                    LeanTween.scale(button.gameObject, Vector2.one * 1.5f, 0.5f).setEase(LeanTweenType.punch).setDelay(3.0f + 0.1f * i);
+                    LeanTween
+                        .scale(button.gameObject, Vector2.one * 1.5f, 0.5f)
+                        .setEase(LeanTweenType.punch)
+                        .setDelay(3.0f + 0.1f * i);
                 }
             }
         }
@@ -120,25 +142,39 @@ namespace Tofuwu.StackCats.UI
         private void OnStarsAdded(PuzzleButton sender, int numStars)
         {
             Vector3 buttonPosition = sender.transform.position;
-            if (onButtonStarsAdded != null) onButtonStarsAdded(buttonPosition, numStars);
+            if (onButtonStarsAdded != null)
+                onButtonStarsAdded(buttonPosition, numStars);
         }
 
         private void OnPuzzleUnlocked(StoryPuzzle puzzle)
         {
-            if (!_puzzleButtons.ContainsKey(puzzle)) return;
+            if (!_puzzleButtons.ContainsKey(puzzle))
+                return;
 
             PuzzleButton puzzleButton = _puzzleButtons[puzzle];
             puzzleButton.Unlock();
         }
 
-        private void OnPuzzleCompleted(PuzzleManager.StoryPuzzleCompletionEvent puzzleCompletionEvent)
+        private void OnPuzzleCompleted(
+            PuzzleManager.StoryPuzzleCompletionEvent puzzleCompletionEvent
+        )
         {
-            if (!_puzzleButtons.ContainsKey(puzzleCompletionEvent.Puzzle)) return;
+            if (!_puzzleButtons.ContainsKey(puzzleCompletionEvent.Puzzle))
+                return;
 
             PuzzleButton puzzleButton = _puzzleButtons[puzzleCompletionEvent.Puzzle];
-            if (!puzzleCompletionEvent.WasPreviouslyCompleted) puzzleButton.Complete();
-            puzzleButton.ChangeStars(puzzleCompletionEvent.PreviousNumStarsEarned, puzzleCompletionEvent.CurrentNumStarsEarned, puzzleCompletionEvent.WasPreviouslyCompleted);
-            if (onStarsEarned != null) onStarsEarned(puzzleCompletionEvent.CurrentNumStarsEarned - puzzleCompletionEvent.PreviousNumStarsEarned);
+            if (!puzzleCompletionEvent.WasPreviouslyCompleted)
+                puzzleButton.Complete();
+            puzzleButton.ChangeStars(
+                puzzleCompletionEvent.PreviousNumStarsEarned,
+                puzzleCompletionEvent.CurrentNumStarsEarned,
+                puzzleCompletionEvent.WasPreviouslyCompleted
+            );
+            if (onStarsEarned != null)
+                onStarsEarned(
+                    puzzleCompletionEvent.CurrentNumStarsEarned
+                        - puzzleCompletionEvent.PreviousNumStarsEarned
+                );
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     [RequireComponent(typeof(MapScene))]
     public class MapSceneController : MonoBehaviour
@@ -33,14 +33,16 @@ namespace Tofuwu.StackCats
 
         private void OnMouseDown()
         {
-            if (!enabled) return;
+            if (!enabled)
+                return;
 
             _dragYStart = Input.mousePosition.y;
         }
 
         private void OnMouseDrag()
         {
-            if (!enabled || _isDragDisabled) return;
+            if (!enabled || _isDragDisabled)
+                return;
 
             _dragYDistance = Input.mousePosition.y - _dragYStart;
 
@@ -61,7 +63,8 @@ namespace Tofuwu.StackCats
 
         private void OnMouseUp()
         {
-            if (!enabled) return;
+            if (!enabled)
+                return;
 
             _isDragDisabled = false;
         }
@@ -75,7 +78,8 @@ namespace Tofuwu.StackCats
         protected void Start()
         {
             _boxCollider.size = _mapScene.FullMapSize;
-            _boxCollider.offset = Vector2.up * (_mapScene.FullMapSize.y / 2 - _mapScene.UsableAreaMapHeight / 2);
+            _boxCollider.offset =
+                Vector2.up * (_mapScene.FullMapSize.y / 2 - _mapScene.UsableAreaMapHeight / 2);
             _lastMapNavigationTime = -AxisControllerRepeatDelay;
         }
 

@@ -2,14 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using RockhopperGames.StackCats.Data;
+using RockhopperGames.StackCats.Models;
+using RockhopperGames.StackCats.Procedural;
 using UnityEngine;
 using UnityEngine.Networking;
-using Tofuwu.StackCats.Data;
-using Tofuwu.StackCats.Models;
-using Tofuwu.StackCats.Procedural;
-using static Tofuwu.StackCats.Procedural.CatBlockContentsGenerator;
+using static RockhopperGames.StackCats.Procedural.CatBlockContentsGenerator;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public delegate void StoryPuzzleFirstCompletion(StoryPuzzle storyPuzzle);
     public delegate void PuzzleAreaUnlocked(PuzzleArea puzzleArea);
@@ -57,72 +57,120 @@ namespace Tofuwu.StackCats
         /// <summary>
         /// The puzzle area that is currently used to generate puzzles.
         /// </summary>
-        public PuzzleArea CurrentArea { get { return _currentArea; } set { SetCurrentArea(value); } }
+        public PuzzleArea CurrentArea
+        {
+            get { return _currentArea; }
+            set { SetCurrentArea(value); }
+        }
 
         /// <summary>
         /// The game mode of the current area.
         /// </summary>
-        public PuzzleMode CurrentMode { get { return _currentMode; } set { SetCurrentAreaMode(value); } }
+        public PuzzleMode CurrentMode
+        {
+            get { return _currentMode; }
+            set { SetCurrentAreaMode(value); }
+        }
 
         /// <summary>
         /// The currently selected progression puzzle.
         /// </summary>
-        public StoryPuzzle CurrentStoryPuzzle { get { return _currentStoryPuzzle; } set { SetCurrentStoryPuzzle(value); } }
+        public StoryPuzzle CurrentStoryPuzzle
+        {
+            get { return _currentStoryPuzzle; }
+            set { SetCurrentStoryPuzzle(value); }
+        }
 
         /// <summary>
         /// Flag indicating whether or not all story puzzles have been completed.
         /// </summary>
-        public bool HasCompletedAllStoryPuzzles { get { return GetNumCompletedStoryPuzzles() == GetNumStoryPuzzlesInAllAreas(); } }
+        public bool HasCompletedAllStoryPuzzles
+        {
+            get { return GetNumCompletedStoryPuzzles() == GetNumStoryPuzzlesInAllAreas(); }
+        }
 
         /// <summary>
         /// The selected difficulty of a challenge run.
         /// </summary>
-        public ChallengeRunDifficulty DefaultChallengeRunDifficulty { get { return _data.DefaultChallengeRunDifficulty; } set { _data.DefaultChallengeRunDifficulty = value; } }
+        public ChallengeRunDifficulty DefaultChallengeRunDifficulty
+        {
+            get { return _data.DefaultChallengeRunDifficulty; }
+            set { _data.DefaultChallengeRunDifficulty = value; }
+        }
 
         /// <summary>
         /// The maximum number of challenge puzzles played in a run.
         /// </summary>
-        public int MaxChallengeRunPuzzles { get { return MAX_CHALLENGE_RUN_PUZZLES; } }
+        public int MaxChallengeRunPuzzles
+        {
+            get { return MAX_CHALLENGE_RUN_PUZZLES; }
+        }
 
         /// <summary>
         /// The player's current luck bonus.
         /// </summary>
-        public float CurrentLuck { get { return _data.CurrentLuck; } set { _data.CurrentLuck = value; } }
+        public float CurrentLuck
+        {
+            get { return _data.CurrentLuck; }
+            set { _data.CurrentLuck = value; }
+        }
 
         /// <summary>
         /// The number of automatic special puzzles remaining.
         /// </summary>
-        public int SpecialPuzzlesRemaining { get { return _data.SpecialPuzzlesRemaining; } set { _data.SpecialPuzzlesRemaining = value; } }
+        public int SpecialPuzzlesRemaining
+        {
+            get { return _data.SpecialPuzzlesRemaining; }
+            set { _data.SpecialPuzzlesRemaining = value; }
+        }
 
         /// <summary>
         /// Indicates whether or not there are any daily puzzles to play.
         /// </summary>
-        public bool HasDailyPuzzles { get { return _data.DailyPuzzles != null; } }
+        public bool HasDailyPuzzles
+        {
+            get { return _data.DailyPuzzles != null; }
+        }
 
         /// <summary>
         /// One off event for unlocked puzzles.
         /// </summary>
-        public OneOffEvent<StoryPuzzle> OneOffProgressionPuzzleUnlocked { get { return _oneOffProgressionPuzzleUnlocked; } }
+        public OneOffEvent<StoryPuzzle> OneOffProgressionPuzzleUnlocked
+        {
+            get { return _oneOffProgressionPuzzleUnlocked; }
+        }
 
         /// <summary>
         /// One off event for completed challenge puzzles.
         /// </summary>
-        public OneOffEvent<ChallengePuzzleCompletionEvent> OneOffChallengePuzzleCompleted { get { return _oneOffChallengePuzzleCompleted; } }
+        public OneOffEvent<ChallengePuzzleCompletionEvent> OneOffChallengePuzzleCompleted
+        {
+            get { return _oneOffChallengePuzzleCompleted; }
+        }
 
         /// <summary>
         /// One off event for completed challenge puzzles.
         /// </summary>
-        public OneOffEvent<EndlessPuzzleCompletionEvent> OneOffEndlessPuzzleCompleted { get { return _oneOffEndlessPuzzleCompleted; } }
+        public OneOffEvent<EndlessPuzzleCompletionEvent> OneOffEndlessPuzzleCompleted
+        {
+            get { return _oneOffEndlessPuzzleCompleted; }
+        }
 
         /// <summary>
         /// One off event for completed story puzzles.
         /// </summary>
-        public OneOffEvent<StoryPuzzleCompletionEvent> OneOffStoryPuzzleCompleted { get { return _oneOffStoryPuzzleCompleted; } }
+        public OneOffEvent<StoryPuzzleCompletionEvent> OneOffStoryPuzzleCompleted
+        {
+            get { return _oneOffStoryPuzzleCompleted; }
+        }
 
         /// <summary>
         /// One off event for unlocked areas.
         /// </summary>
-        public OneOffEvent<PuzzleAreaUnlockedEvent> OneOffPuzzleAreaUnlocked { get { return _oneOffPuzzleAreaUnlocked; } }
+        public OneOffEvent<PuzzleAreaUnlockedEvent> OneOffPuzzleAreaUnlocked
+        {
+            get { return _oneOffPuzzleAreaUnlocked; }
+        }
 
         /// <summary>
         /// One off event for completed daily puzzles.
@@ -140,11 +188,16 @@ namespace Tofuwu.StackCats
         private PuzzleMode _currentMode;
         private StoryPuzzle _currentStoryPuzzle;
         private StoryPuzzle _currentDailyPuzzle;
-        private readonly OneOffEvent<StoryPuzzle> _oneOffProgressionPuzzleUnlocked = new OneOffEvent<StoryPuzzle>();
-        private readonly OneOffEvent<StoryPuzzleCompletionEvent> _oneOffStoryPuzzleCompleted = new OneOffEvent<StoryPuzzleCompletionEvent>();
-        private readonly OneOffEvent<ChallengePuzzleCompletionEvent> _oneOffChallengePuzzleCompleted = new OneOffEvent<ChallengePuzzleCompletionEvent>();
-        private readonly OneOffEvent<EndlessPuzzleCompletionEvent> _oneOffEndlessPuzzleCompleted = new OneOffEvent<EndlessPuzzleCompletionEvent>();
-        private readonly OneOffEvent<PuzzleAreaUnlockedEvent> _oneOffPuzzleAreaUnlocked = new OneOffEvent<PuzzleAreaUnlockedEvent>();
+        private readonly OneOffEvent<StoryPuzzle> _oneOffProgressionPuzzleUnlocked =
+            new OneOffEvent<StoryPuzzle>();
+        private readonly OneOffEvent<StoryPuzzleCompletionEvent> _oneOffStoryPuzzleCompleted =
+            new OneOffEvent<StoryPuzzleCompletionEvent>();
+        private readonly OneOffEvent<ChallengePuzzleCompletionEvent> _oneOffChallengePuzzleCompleted =
+            new OneOffEvent<ChallengePuzzleCompletionEvent>();
+        private readonly OneOffEvent<EndlessPuzzleCompletionEvent> _oneOffEndlessPuzzleCompleted =
+            new OneOffEvent<EndlessPuzzleCompletionEvent>();
+        private readonly OneOffEvent<PuzzleAreaUnlockedEvent> _oneOffPuzzleAreaUnlocked =
+            new OneOffEvent<PuzzleAreaUnlockedEvent>();
         private float _newDailyPuzzlesTime;
         private float _lastTryGetDailyPuzzlesAt;
 
@@ -155,7 +208,8 @@ namespace Tofuwu.StackCats
         /// <returns>A flag indicating whether or not the area is locked.</returns>
         public bool IsAreaLocked(PuzzleArea puzzleArea)
         {
-            if (!puzzleArea) return false;
+            if (!puzzleArea)
+                return false;
 
             return _data.IsAreaLocked(puzzleArea.GetId());
         }
@@ -166,18 +220,24 @@ namespace Tofuwu.StackCats
         /// <param name="puzzleArea">The puzzle area to unlock.</param>
         public void UnlockArea(PuzzleArea puzzleArea)
         {
-            if (!puzzleArea) return;
+            if (!puzzleArea)
+                return;
 
             if (IsAreaLocked(puzzleArea))
             {
                 _data.UnlockArea(puzzleArea.GetId());
                 List<StoryPuzzle> storyPuzzles = GetStoryPuzzles(puzzleArea);
-                if (storyPuzzles.Count > 0) UnlockStoryPuzzle(storyPuzzles[0]);
-                if (onPuzzleAreaUnlocked != null) onPuzzleAreaUnlocked(puzzleArea);
-                _oneOffPuzzleAreaUnlocked.AddEvent(new PuzzleAreaUnlockedEvent { PuzzleArea = puzzleArea });
+                if (storyPuzzles.Count > 0)
+                    UnlockStoryPuzzle(storyPuzzles[0]);
+                if (onPuzzleAreaUnlocked != null)
+                    onPuzzleAreaUnlocked(puzzleArea);
+                _oneOffPuzzleAreaUnlocked.AddEvent(
+                    new PuzzleAreaUnlockedEvent { PuzzleArea = puzzleArea }
+                );
             }
 
-            if (!_currentArea) SetCurrentArea(puzzleArea);
+            if (!_currentArea)
+                SetCurrentArea(puzzleArea);
         }
 
         /// <summary>
@@ -186,11 +246,17 @@ namespace Tofuwu.StackCats
         /// <param name="puzzleArea">The puzzle area.</param>
         public bool IsStoryPuzzleAreaCompleted(PuzzleArea puzzleArea)
         {
-            List<ProgressionPuzzleRouteItem> route = puzzleArea.PuzzleAreaMap.ProgressionPuzzleRoute;
+            List<ProgressionPuzzleRouteItem> route = puzzleArea
+                .PuzzleAreaMap
+                .ProgressionPuzzleRoute;
 
-            if (puzzleArea.PuzzleAreaMap.RouteIndexToNextArea == -1) return true;
+            if (puzzleArea.PuzzleAreaMap.RouteIndexToNextArea == -1)
+                return true;
 
-            return route.Count == 0 || _data.IsProgressionPuzzleCompleted(route[puzzleArea.PuzzleAreaMap.RouteIndexToNextArea].NormalPuzzle.GetId());
+            return route.Count == 0
+                || _data.IsProgressionPuzzleCompleted(
+                    route[puzzleArea.PuzzleAreaMap.RouteIndexToNextArea].NormalPuzzle.GetId()
+                );
         }
 
         /// <summary>
@@ -200,7 +266,9 @@ namespace Tofuwu.StackCats
         /// <returns></returns>
         public List<StoryPuzzle> GetStoryPuzzles(PuzzleArea puzzleArea)
         {
-            return puzzleArea.PuzzleAreaMap.ProgressionPuzzleRoute.Select(r => r.NormalPuzzle).ToList();
+            return puzzleArea
+                .PuzzleAreaMap.ProgressionPuzzleRoute.Select(r => r.NormalPuzzle)
+                .ToList();
         }
 
         /// <summary>
@@ -210,7 +278,8 @@ namespace Tofuwu.StackCats
         /// <returns>A flag indicating whether or not a puzle is locked.</returns>
         public bool IsStoryPuzzleLocked(StoryPuzzle puzzle)
         {
-            if (!puzzle) return true;
+            if (!puzzle)
+                return true;
 
             return _data.IsProgressionPuzzleLocked(puzzle.GetId());
         }
@@ -222,7 +291,8 @@ namespace Tofuwu.StackCats
         /// <returns>A flag indicating whether or not the puzzle is completed.</returns>
         public bool IsStoryPuzzleCompleted(StoryPuzzle puzzle)
         {
-            if (!puzzle) return false;
+            if (!puzzle)
+                return false;
 
             return _data.IsProgressionPuzzleCompleted(puzzle.GetId());
         }
@@ -234,7 +304,8 @@ namespace Tofuwu.StackCats
         /// <returns>The best move score of the puzzle.</returns>
         public int? GetStoryPuzzleBestMoveScore(StoryPuzzle puzzle)
         {
-            if (!puzzle) return null;
+            if (!puzzle)
+                return null;
 
             return _data.GetStoryPuzzleBestMoveScore(puzzle.GetId());
         }
@@ -246,15 +317,18 @@ namespace Tofuwu.StackCats
         /// <returns>The number of stars earned.</returns>
         public int GetStoryPuzzleNumStarsEarned(StoryPuzzle puzzle)
         {
-            if (!puzzle) return 0;
+            if (!puzzle)
+                return 0;
 
             int? bestMoveScore = GetStoryPuzzleBestMoveScore(puzzle);
-            if (bestMoveScore == null) return 0;
+            if (bestMoveScore == null)
+                return 0;
 
             int starsEarned = 0;
             foreach (int starRequirement in puzzle.StarMoveRequirements)
             {
-                if (bestMoveScore <= starRequirement) ++starsEarned;
+                if (bestMoveScore <= starRequirement)
+                    ++starsEarned;
             }
 
             return starsEarned;
@@ -262,7 +336,9 @@ namespace Tofuwu.StackCats
 
         public int GetNumStoryPuzzlesInAllAreas()
         {
-            return PuzzleAreaCollection.List.Sum(pa => pa.PuzzleAreaMap.ProgressionPuzzleRoute.Count);
+            return PuzzleAreaCollection.List.Sum(pa =>
+                pa.PuzzleAreaMap.ProgressionPuzzleRoute.Count
+            );
         }
 
         /// <summary>
@@ -309,7 +385,9 @@ namespace Tofuwu.StackCats
         /// </summary>
         public int GetNumStarsInAllAreas()
         {
-            return PuzzleAreaCollection.List.Sum(pa => GetStoryPuzzles(pa).Sum(p => p ? p.StarMoveRequirements.Count : 0));
+            return PuzzleAreaCollection.List.Sum(pa =>
+                GetStoryPuzzles(pa).Sum(p => p ? p.StarMoveRequirements.Count : 0)
+            );
         }
 
         /// <summary>
@@ -328,7 +406,8 @@ namespace Tofuwu.StackCats
         /// <param name="puzzle">The puzzle to unlock.</param>
         public void UnlockStoryPuzzle(StoryPuzzle puzzle)
         {
-            if (!puzzle) return;
+            if (!puzzle)
+                return;
 
             string puzzleId = puzzle.GetId();
             if (_data.IsProgressionPuzzleLocked(puzzleId))
@@ -345,30 +424,41 @@ namespace Tofuwu.StackCats
         /// <param name="duration">The puzzled time elapsed.</param>
         public void CompleteStoryPuzzle(StoryPuzzle puzzle, float duration, int numMovesMade)
         {
-            if (!puzzle) return;
+            if (!puzzle)
+                return;
 
             bool wasPrevCompleted = IsStoryPuzzleCompleted(puzzle);
             int prevNumStarsEarned = GetStoryPuzzleNumStarsEarned(puzzle);
 
-            _data.CompleteProgressionPuzzle(puzzle.GetId(), System.DateTime.Now, duration, numMovesMade);
+            _data.CompleteProgressionPuzzle(
+                puzzle.GetId(),
+                System.DateTime.Now,
+                duration,
+                numMovesMade
+            );
             PuzzleAreaMap currentMap = CurrentArea.PuzzleAreaMap;
-            int currentPuzzleIndex = currentMap.ProgressionPuzzleRoute.FindIndex(ri => ri.NormalPuzzle == puzzle);
+            int currentPuzzleIndex = currentMap.ProgressionPuzzleRoute.FindIndex(ri =>
+                ri.NormalPuzzle == puzzle
+            );
             if (currentPuzzleIndex == currentMap.RouteIndexToNextArea)
             {
                 PuzzleArea nextPuzzleArea = GetNextPuzzleArea(_currentArea);
-                if (nextPuzzleArea && IsAreaLocked(nextPuzzleArea)) UnlockArea(nextPuzzleArea);
+                if (nextPuzzleArea && IsAreaLocked(nextPuzzleArea))
+                    UnlockArea(nextPuzzleArea);
             }
 
             if (!wasPrevCompleted)
             {
                 if (currentPuzzleIndex == currentMap.RouteIndexToChallengeMode)
                 {
-                    if (onChallengeModePuzzleAreaUnlocked != null) onChallengeModePuzzleAreaUnlocked(currentMap.PuzzleArea);
+                    if (onChallengeModePuzzleAreaUnlocked != null)
+                        onChallengeModePuzzleAreaUnlocked(currentMap.PuzzleArea);
                 }
 
                 if (currentPuzzleIndex == currentMap.RouteIndexToEndlessMode)
                 {
-                    if (onEndlessModePuzzleAreaUnlocked != null) onEndlessModePuzzleAreaUnlocked(currentMap.PuzzleArea);
+                    if (onEndlessModePuzzleAreaUnlocked != null)
+                        onEndlessModePuzzleAreaUnlocked(currentMap.PuzzleArea);
                 }
             }
 
@@ -379,11 +469,12 @@ namespace Tofuwu.StackCats
                 Puzzle = puzzle,
                 WasPreviouslyCompleted = wasPrevCompleted,
                 PreviousNumStarsEarned = prevNumStarsEarned,
-                CurrentNumStarsEarned = currentNumStarsEarned
+                CurrentNumStarsEarned = currentNumStarsEarned,
             };
             _oneOffStoryPuzzleCompleted.AddEvent(completionEvent);
 
-            if (!wasPrevCompleted && onStoryPuzzleFirstCompletion != null) onStoryPuzzleFirstCompletion(puzzle);
+            if (!wasPrevCompleted && onStoryPuzzleFirstCompletion != null)
+                onStoryPuzzleFirstCompletion(puzzle);
         }
 
         /// <summary>
@@ -393,9 +484,12 @@ namespace Tofuwu.StackCats
         /// <returns>The next progression puzzle.</returns>
         public StoryPuzzle GetNextStoryPuzzle(StoryPuzzle progressionPuzzle)
         {
-            List<ProgressionPuzzleRouteItem> routeItems = CurrentArea.PuzzleAreaMap.ProgressionPuzzleRoute;
+            List<ProgressionPuzzleRouteItem> routeItems = CurrentArea
+                .PuzzleAreaMap
+                .ProgressionPuzzleRoute;
             int puzzleIndex = routeItems.FindIndex(ri => ri.NormalPuzzle == progressionPuzzle);
-            int nextPuzzleIndex = puzzleIndex == -1 || puzzleIndex == routeItems.Count - 1 ? -1 : puzzleIndex + 1;
+            int nextPuzzleIndex =
+                puzzleIndex == -1 || puzzleIndex == routeItems.Count - 1 ? -1 : puzzleIndex + 1;
 
             return nextPuzzleIndex == -1 ? null : routeItems[nextPuzzleIndex].NormalPuzzle;
         }
@@ -409,7 +503,10 @@ namespace Tofuwu.StackCats
         {
             List<PuzzleArea> puzzleAreas = PuzzleAreaCollection.List;
             int puzzleAreaIndex = puzzleAreas.IndexOf(puzzleArea);
-            int nextPuzzleAreaIndex = puzzleAreaIndex == -1 || puzzleAreaIndex == puzzleAreas.Count - 1 ? -1 : puzzleAreaIndex + 1;
+            int nextPuzzleAreaIndex =
+                puzzleAreaIndex == -1 || puzzleAreaIndex == puzzleAreas.Count - 1
+                    ? -1
+                    : puzzleAreaIndex + 1;
 
             return nextPuzzleAreaIndex == -1 ? null : puzzleAreas[nextPuzzleAreaIndex];
         }
@@ -420,16 +517,21 @@ namespace Tofuwu.StackCats
         /// <returns>A flag indicating whether or not challenge mode is locked</returns>
         public bool IsChallengeModeLocked(PuzzleArea puzzleArea = null)
         {
-            if (puzzleArea == null) puzzleArea = PuzzleAreaCollection.List[0];
+            if (puzzleArea == null)
+                puzzleArea = PuzzleAreaCollection.List[0];
 
-            if (IsAreaLocked(puzzleArea)) return true;
+            if (IsAreaLocked(puzzleArea))
+                return true;
 
             var puzzleAreaMap = puzzleArea.PuzzleAreaMap;
             var challengeUnlockedIndex = puzzleAreaMap.RouteIndexToChallengeMode;
 
-            if (puzzleAreaMap.ProgressionPuzzleRoute.Count == 0) return false;
+            if (puzzleAreaMap.ProgressionPuzzleRoute.Count == 0)
+                return false;
 
-            return !IsStoryPuzzleCompleted(puzzleAreaMap.ProgressionPuzzleRoute[challengeUnlockedIndex].NormalPuzzle);
+            return !IsStoryPuzzleCompleted(
+                puzzleAreaMap.ProgressionPuzzleRoute[challengeUnlockedIndex].NormalPuzzle
+            );
         }
 
         /// <summary>
@@ -438,10 +540,14 @@ namespace Tofuwu.StackCats
         /// <param name="puzzleArea"></param>
         /// <param name="difficulty"></param>
         /// <returns></returns>
-        public ChallengeRunModel StartChallengeRun(PuzzleArea puzzleArea, ChallengeRunDifficulty difficulty)
+        public ChallengeRunModel StartChallengeRun(
+            PuzzleArea puzzleArea,
+            ChallengeRunDifficulty difficulty
+        )
         {
             ChallengeRunModel currentChallengeRun = GetCurrentChallengeRun(puzzleArea);
-            if (currentChallengeRun != null) return currentChallengeRun;
+            if (currentChallengeRun != null)
+                return currentChallengeRun;
 
             _data.StartChallengeRun(puzzleArea.GetId(), difficulty);
 
@@ -456,16 +562,21 @@ namespace Tofuwu.StackCats
         /// <returns>A flag indicating whether or not challenge mode is locked</returns>
         public bool IsEndlessModeLocked(PuzzleArea puzzleArea = null)
         {
-            if (puzzleArea == null) puzzleArea = PuzzleAreaCollection.List[0];
+            if (puzzleArea == null)
+                puzzleArea = PuzzleAreaCollection.List[0];
 
-            if (IsAreaLocked(puzzleArea)) return true;
+            if (IsAreaLocked(puzzleArea))
+                return true;
 
             var puzzleAreaMap = puzzleArea.PuzzleAreaMap;
             var endlessUnlockedIndex = puzzleAreaMap.RouteIndexToEndlessMode;
 
-            if (puzzleAreaMap.ProgressionPuzzleRoute.Count <= endlessUnlockedIndex) return false;
+            if (puzzleAreaMap.ProgressionPuzzleRoute.Count <= endlessUnlockedIndex)
+                return false;
 
-            return !IsStoryPuzzleCompleted(puzzleAreaMap.ProgressionPuzzleRoute[endlessUnlockedIndex].NormalPuzzle);
+            return !IsStoryPuzzleCompleted(
+                puzzleAreaMap.ProgressionPuzzleRoute[endlessUnlockedIndex].NormalPuzzle
+            );
         }
 
         /// <summary>
@@ -475,7 +586,8 @@ namespace Tofuwu.StackCats
         public EndlessRunModel StartEndlessRun(PuzzleArea puzzleArea)
         {
             EndlessRunModel currentEndlessRun = GetCurrentEndlessRun(puzzleArea);
-            if (currentEndlessRun != null) return currentEndlessRun;
+            if (currentEndlessRun != null)
+                return currentEndlessRun;
 
             _data.StartEndlessRun(puzzleArea.GetId());
 
@@ -490,11 +602,25 @@ namespace Tofuwu.StackCats
         /// <param name="puzzleArea"></param>
         /// <param name="puzzleStateJsonData"></param>
         /// <param name="movesMade"></param>
-        public void UpdateCurrentChallengePuzzle(PuzzleArea puzzleArea, string puzzleStateJsonData, int movesMade, List<Cat> catsSeen, List<Cat> newCatsSeen, int numUndosRemaining)
+        public void UpdateCurrentChallengePuzzle(
+            PuzzleArea puzzleArea,
+            string puzzleStateJsonData,
+            int movesMade,
+            List<Cat> catsSeen,
+            List<Cat> newCatsSeen,
+            int numUndosRemaining
+        )
         {
             List<string> catsSeenIds = catsSeen.Select(c => c.GetId()).ToList();
             List<string> newCatsSeenIds = newCatsSeen.Select(c => c.GetId()).ToList();
-            _data.UpdateChallengePuzzle(puzzleArea.GetId(), puzzleStateJsonData, movesMade, catsSeenIds, newCatsSeenIds, numUndosRemaining);
+            _data.UpdateChallengePuzzle(
+                puzzleArea.GetId(),
+                puzzleStateJsonData,
+                movesMade,
+                catsSeenIds,
+                newCatsSeenIds,
+                numUndosRemaining
+            );
         }
 
         /// <summary>
@@ -502,11 +628,25 @@ namespace Tofuwu.StackCats
         /// </summary>
         /// <param name="puzzleStateJsonData"></param>
         /// <param name="movesMade"></param>
-        public void UpdateCurrentEndlessPuzzle(PuzzleArea puzzleArea, string puzzleStateJsonData, int movesMade, List<Cat> catsSeen, List<Cat> newCatsSeen, int numUndosRemaining)
+        public void UpdateCurrentEndlessPuzzle(
+            PuzzleArea puzzleArea,
+            string puzzleStateJsonData,
+            int movesMade,
+            List<Cat> catsSeen,
+            List<Cat> newCatsSeen,
+            int numUndosRemaining
+        )
         {
             List<string> catsSeenIds = catsSeen.Select(c => c.GetId()).ToList();
             List<string> newCatsSeenIds = newCatsSeen.Select(c => c.GetId()).ToList();
-            _data.UpdateEndlessPuzzle(puzzleArea.GetId(), puzzleStateJsonData, movesMade, catsSeenIds, newCatsSeenIds, numUndosRemaining);
+            _data.UpdateEndlessPuzzle(
+                puzzleArea.GetId(),
+                puzzleStateJsonData,
+                movesMade,
+                catsSeenIds,
+                newCatsSeenIds,
+                numUndosRemaining
+            );
         }
 
         /// <summary>
@@ -528,14 +668,27 @@ namespace Tofuwu.StackCats
         /// <summary>
         /// Complete the current challenge puzzle.
         /// </summary>
-        public void CompleteCurrentChallengePuzzle(PuzzleArea puzzleArea, PuzzleCompletionType completionType, int movesMade)
+        public void CompleteCurrentChallengePuzzle(
+            PuzzleArea puzzleArea,
+            PuzzleCompletionType completionType,
+            int movesMade
+        )
         {
             _data.CompleteChallengePuzzle(puzzleArea.GetId(), completionType, movesMade);
 
-            IChallengeRunData currentChallengeRun = _data.GetCurrentChallengeRun(puzzleArea.GetId());
-            if (completionType == PuzzleCompletionType.PuzzleFailed || currentChallengeRun.CompletedPuzzles.Count == 10)
+            IChallengeRunData currentChallengeRun = _data.GetCurrentChallengeRun(
+                puzzleArea.GetId()
+            );
+            if (
+                completionType == PuzzleCompletionType.PuzzleFailed
+                || currentChallengeRun.CompletedPuzzles.Count == 10
+            )
             {
-                _data.CompleteChallengeRun(puzzleArea.GetId(), new Dictionary<Currency, int>(), null);
+                _data.CompleteChallengeRun(
+                    puzzleArea.GetId(),
+                    new Dictionary<Currency, int>(),
+                    null
+                );
             }
             else
             {
@@ -544,32 +697,38 @@ namespace Tofuwu.StackCats
 
             ChallengePuzzleCompletionEvent completionEvent = new ChallengePuzzleCompletionEvent
             {
-                CompletionType = completionType
+                CompletionType = completionType,
             };
             _oneOffChallengePuzzleCompleted.AddEvent(completionEvent);
         }
 
-
         /// <summary>
         /// Complete the current endless puzzle.
         /// </summary>
-        public void CompleteCurrentEndlessPuzzle(PuzzleArea puzzleArea, PuzzleCompletionType completionType, int movesMade)
+        public void CompleteCurrentEndlessPuzzle(
+            PuzzleArea puzzleArea,
+            PuzzleCompletionType completionType,
+            int movesMade
+        )
         {
             _data.CompleteEndlessPuzzle(puzzleArea.GetId(), completionType, movesMade);
 
             IEndlessRunData currentEndlessRun = _data.GetCurrentEndlessRun(puzzleArea.GetId());
-            int pointsEarned = currentEndlessRun.GetCompletedPuzzleScore(currentEndlessRun.CompletedPuzzles.Last());
+            int pointsEarned = currentEndlessRun.GetCompletedPuzzleScore(
+                currentEndlessRun.CompletedPuzzles.Last()
+            );
             int numPuzzlesCompleted = currentEndlessRun.CompletedPuzzles.Count;
 
             EndlessPuzzleCompletionEvent completionEvent = new EndlessPuzzleCompletionEvent
             {
                 CompletionType = completionType,
                 PointsEarned = pointsEarned,
-                TotalPuzzlesCompleted = numPuzzlesCompleted
+                TotalPuzzlesCompleted = numPuzzlesCompleted,
             };
             _oneOffEndlessPuzzleCompleted.AddEvent(completionEvent);
 
-            if (!currentEndlessRun.IsComplete) GenerateNextEndlessPuzzle(puzzleArea);
+            if (!currentEndlessRun.IsComplete)
+                GenerateNextEndlessPuzzle(puzzleArea);
         }
 
         /// <summary>
@@ -578,15 +737,22 @@ namespace Tofuwu.StackCats
         /// <param name="puzzleArea"></param>
         public void EndChallengeRun(PuzzleArea puzzleArea)
         {
-            IChallengeRunData currentChallengeRun = _data.GetCurrentChallengeRun(puzzleArea.GetId());
-            List<ChallengePuzzleReward> rewards = puzzleArea.ChallengeRunRewards.Where(r => r.AtDifficulty == currentChallengeRun.Difficulty).ToList();
-            List<IChallengePuzzleCompletionData> completedPuzzles = currentChallengeRun.CompletedPuzzles;
+            IChallengeRunData currentChallengeRun = _data.GetCurrentChallengeRun(
+                puzzleArea.GetId()
+            );
+            List<ChallengePuzzleReward> rewards = puzzleArea
+                .ChallengeRunRewards.Where(r => r.AtDifficulty == currentChallengeRun.Difficulty)
+                .ToList();
+            List<IChallengePuzzleCompletionData> completedPuzzles =
+                currentChallengeRun.CompletedPuzzles;
             int numCompletedPuzzles = completedPuzzles.Count;
 
             // Add trophy reward.
             if (numCompletedPuzzles == MAX_CHALLENGE_RUN_PUZZLES)
             {
-                _stuffManager.AddItem(puzzleArea.ChallengeRunTrophies[currentChallengeRun.Difficulty]);
+                _stuffManager.AddItem(
+                    puzzleArea.ChallengeRunTrophies[currentChallengeRun.Difficulty]
+                );
             }
 
             // Add currency rewards.
@@ -598,14 +764,23 @@ namespace Tofuwu.StackCats
             int galaxyGems = 0;
             for (int i = 0; i < numCompletedPuzzles; i++)
             {
-                ChallengePuzzleReward rewardAtIndex = rewards.FirstOrDefault(r => r.AtPuzzleIndex == i);
-                CurrencyAmountDictionary currencyRewards = rewardAtIndex != null ? rewardAtIndex.CurrencyReward : DefaultCurrencyReward;
-                if (currencyRewards.ContainsKey(Currency.GoldPaw)) goldPaws += currencyRewards[Currency.GoldPaw];
-                if (currencyRewards.ContainsKey(Currency.FarmGem)) farmGems += currencyRewards[Currency.FarmGem];
-                if (currencyRewards.ContainsKey(Currency.JungleGem)) jungleGems += currencyRewards[Currency.JungleGem];
-                if (currencyRewards.ContainsKey(Currency.CityGem)) cityGems += currencyRewards[Currency.CityGem];
-                if (currencyRewards.ContainsKey(Currency.DesertGem)) desertGems += currencyRewards[Currency.DesertGem];
-                if (currencyRewards.ContainsKey(Currency.GalaxyGem)) galaxyGems += currencyRewards[Currency.GalaxyGem];
+                ChallengePuzzleReward rewardAtIndex = rewards.FirstOrDefault(r =>
+                    r.AtPuzzleIndex == i
+                );
+                CurrencyAmountDictionary currencyRewards =
+                    rewardAtIndex != null ? rewardAtIndex.CurrencyReward : DefaultCurrencyReward;
+                if (currencyRewards.ContainsKey(Currency.GoldPaw))
+                    goldPaws += currencyRewards[Currency.GoldPaw];
+                if (currencyRewards.ContainsKey(Currency.FarmGem))
+                    farmGems += currencyRewards[Currency.FarmGem];
+                if (currencyRewards.ContainsKey(Currency.JungleGem))
+                    jungleGems += currencyRewards[Currency.JungleGem];
+                if (currencyRewards.ContainsKey(Currency.CityGem))
+                    cityGems += currencyRewards[Currency.CityGem];
+                if (currencyRewards.ContainsKey(Currency.DesertGem))
+                    desertGems += currencyRewards[Currency.DesertGem];
+                if (currencyRewards.ContainsKey(Currency.GalaxyGem))
+                    galaxyGems += currencyRewards[Currency.GalaxyGem];
             }
 
             if (goldPaws > 0)
@@ -633,7 +808,6 @@ namespace Tofuwu.StackCats
                 _currencyManager.ChangeCurrency(Currency.GalaxyGem, galaxyGems);
             }
 
-
             _data.EndChallengeRun(puzzleArea.GetId());
         }
 
@@ -645,7 +819,6 @@ namespace Tofuwu.StackCats
             _data.EndEndlessRun(puzzleArea.GetId());
         }
 
-
         /// <summary>
         /// Get the current challenge run.
         /// </summary>
@@ -653,28 +826,42 @@ namespace Tofuwu.StackCats
         /// <returns></returns>
         public ChallengeRunModel GetCurrentChallengeRun(PuzzleArea puzzleArea)
         {
-            IChallengeRunData currentChallengeRunData = _data.GetCurrentChallengeRun(puzzleArea.GetId());
+            IChallengeRunData currentChallengeRunData = _data.GetCurrentChallengeRun(
+                puzzleArea.GetId()
+            );
 
-            if (currentChallengeRunData == null) return null;
+            if (currentChallengeRunData == null)
+                return null;
 
-            ChallengePuzzleModel currentPuzzleModel = DataModelMapper.MapToChallengePuzzleModel(currentChallengeRunData.CurrentPuzzle);
+            ChallengePuzzleModel currentPuzzleModel = DataModelMapper.MapToChallengePuzzleModel(
+                currentChallengeRunData.CurrentPuzzle
+            );
             if (currentPuzzleModel != null)
             {
-                currentPuzzleModel.CatsSeen = currentChallengeRunData.CurrentPuzzle.CatsSeen.Select(c => _catManager.CatCollection.GetById(c)).ToList();
-                currentPuzzleModel.NewCatsSeen = currentChallengeRunData.CurrentPuzzle.NewCatsSeen.Select(c => _catManager.CatCollection.GetById(c)).ToList();
+                currentPuzzleModel.CatsSeen = currentChallengeRunData
+                    .CurrentPuzzle.CatsSeen.Select(c => _catManager.CatCollection.GetById(c))
+                    .ToList();
+                currentPuzzleModel.NewCatsSeen = currentChallengeRunData
+                    .CurrentPuzzle.NewCatsSeen.Select(c => _catManager.CatCollection.GetById(c))
+                    .ToList();
             }
 
-            List<ChallengePuzzleCompletionModel> completedPuzzles = new List<ChallengePuzzleCompletionModel>();
-            foreach (IChallengePuzzleCompletionData puzzleCompletionData in currentChallengeRunData.CompletedPuzzles)
+            List<ChallengePuzzleCompletionModel> completedPuzzles =
+                new List<ChallengePuzzleCompletionModel>();
+            foreach (
+                IChallengePuzzleCompletionData puzzleCompletionData in currentChallengeRunData.CompletedPuzzles
+            )
             {
-                completedPuzzles.Add(DataModelMapper.MapToChallengePuzzleCompletionModel(puzzleCompletionData));
+                completedPuzzles.Add(
+                    DataModelMapper.MapToChallengePuzzleCompletionModel(puzzleCompletionData)
+                );
             }
 
             ChallengeRunModel currentChallengeRun = new ChallengeRunModel
             {
                 Difficulty = currentChallengeRunData.Difficulty,
                 CurrentPuzzle = currentPuzzleModel,
-                CompletedPuzzles = completedPuzzles
+                CompletedPuzzles = completedPuzzles,
             };
 
             return currentChallengeRun;
@@ -689,19 +876,32 @@ namespace Tofuwu.StackCats
         {
             IEndlessRunData currentEndlessRunData = _data.GetCurrentEndlessRun(puzzleArea.GetId());
 
-            if (currentEndlessRunData == null) return null;
+            if (currentEndlessRunData == null)
+                return null;
 
-            EndlessPuzzleModel currentPuzzleModel = DataModelMapper.MapToEndlessPuzzleModel(currentEndlessRunData.CurrentPuzzle, this);
+            EndlessPuzzleModel currentPuzzleModel = DataModelMapper.MapToEndlessPuzzleModel(
+                currentEndlessRunData.CurrentPuzzle,
+                this
+            );
             if (currentPuzzleModel != null)
             {
-                currentPuzzleModel.CatsSeen = currentEndlessRunData.CurrentPuzzle.CatsSeen.Select(c => _catManager.CatCollection.GetById(c)).ToList();
-                currentPuzzleModel.NewCatsSeen = currentEndlessRunData.CurrentPuzzle.NewCatsSeen.Select(c => _catManager.CatCollection.GetById(c)).ToList();
+                currentPuzzleModel.CatsSeen = currentEndlessRunData
+                    .CurrentPuzzle.CatsSeen.Select(c => _catManager.CatCollection.GetById(c))
+                    .ToList();
+                currentPuzzleModel.NewCatsSeen = currentEndlessRunData
+                    .CurrentPuzzle.NewCatsSeen.Select(c => _catManager.CatCollection.GetById(c))
+                    .ToList();
             }
 
-            List<EndlessPuzzleCompletionModel> completedPuzzles = new List<EndlessPuzzleCompletionModel>();
-            foreach (IEndlessPuzzleCompletionData puzzleCompletionData in currentEndlessRunData.CompletedPuzzles)
+            List<EndlessPuzzleCompletionModel> completedPuzzles =
+                new List<EndlessPuzzleCompletionModel>();
+            foreach (
+                IEndlessPuzzleCompletionData puzzleCompletionData in currentEndlessRunData.CompletedPuzzles
+            )
             {
-                completedPuzzles.Add(DataModelMapper.MapToEndlessPuzzleCompletionModel(puzzleCompletionData, this));
+                completedPuzzles.Add(
+                    DataModelMapper.MapToEndlessPuzzleCompletionModel(puzzleCompletionData, this)
+                );
             }
 
             EndlessRunModel currentEndlessRun = new EndlessRunModel
@@ -709,7 +909,7 @@ namespace Tofuwu.StackCats
                 CurrentPuzzle = currentPuzzleModel,
                 CompletedPuzzles = completedPuzzles,
                 Score = currentEndlessRunData.GetScore(),
-                IsComplete = currentEndlessRunData.IsComplete
+                IsComplete = currentEndlessRunData.IsComplete,
             };
 
             return currentEndlessRun;
@@ -721,7 +921,10 @@ namespace Tofuwu.StackCats
         /// <param name="puzzleArea"></param>
         /// <param name="difficulty"></param>
         /// <returns></returns>
-        public bool IsChallengeRunDifficultyComplete(PuzzleArea puzzleArea, ChallengeRunDifficulty difficulty)
+        public bool IsChallengeRunDifficultyComplete(
+            PuzzleArea puzzleArea,
+            ChallengeRunDifficulty difficulty
+        )
         {
             return _data.IsChallengeRunDifficultyCompleted(puzzleArea.GetId(), difficulty);
         }
@@ -731,7 +934,9 @@ namespace Tofuwu.StackCats
         /// </summary>
         /// <param name="puzzleArea"></param>
         /// <returns></returns>
-        public ChallengeRunDifficulty? GetChallengeRunHighestDifficultyCompletion(PuzzleArea puzzleArea)
+        public ChallengeRunDifficulty? GetChallengeRunHighestDifficultyCompletion(
+            PuzzleArea puzzleArea
+        )
         {
             for (int i = 4; i >= 0; i--)
             {
@@ -751,9 +956,12 @@ namespace Tofuwu.StackCats
         /// <returns>The highest achieved score, or 0 if none.</returns>
         public int GetEndlessRunHighScore(PuzzleArea puzzleArea)
         {
-            List<IEndlessRunData> endlessRuns = new List<IEndlessRunData>(_data.GetCompletedEndlessRuns(puzzleArea.GetId()));
+            List<IEndlessRunData> endlessRuns = new List<IEndlessRunData>(
+                _data.GetCompletedEndlessRuns(puzzleArea.GetId())
+            );
             IEndlessRunData currentEndlessRun = _data.GetCurrentEndlessRun(puzzleArea.GetId());
-            if (currentEndlessRun != null) endlessRuns.Add(currentEndlessRun);
+            if (currentEndlessRun != null)
+                endlessRuns.Add(currentEndlessRun);
 
             return endlessRuns.Any() ? endlessRuns.Max(r => r.GetScore()) : 0;
         }
@@ -774,9 +982,12 @@ namespace Tofuwu.StackCats
         /// <returns></returns>
         public int GetEndlessRunMostPuzzlesCompleted(PuzzleArea puzzleArea)
         {
-            List<IEndlessRunData> endlessRuns = new List<IEndlessRunData>(_data.GetCompletedEndlessRuns(puzzleArea.GetId()));
+            List<IEndlessRunData> endlessRuns = new List<IEndlessRunData>(
+                _data.GetCompletedEndlessRuns(puzzleArea.GetId())
+            );
             IEndlessRunData currentEndlessRun = _data.GetCurrentEndlessRun(puzzleArea.GetId());
-            if (currentEndlessRun != null) endlessRuns.Add(currentEndlessRun);
+            if (currentEndlessRun != null)
+                endlessRuns.Add(currentEndlessRun);
             return endlessRuns.Any() ? endlessRuns.Max(r => r.CompletedPuzzles.Count) : 0;
         }
 
@@ -788,7 +999,12 @@ namespace Tofuwu.StackCats
         /// <param name="puzzleMode"></param>
         /// <param name="wasRestarted"></param>
         /// <returns></returns>
-        public Puzzle AddStuffToCatBlocks(Puzzle puzzle, PuzzleArea puzzleArea, PuzzleMode puzzleMode, bool wasRestarted)
+        public Puzzle AddStuffToCatBlocks(
+            Puzzle puzzle,
+            PuzzleArea puzzleArea,
+            PuzzleMode puzzleMode,
+            bool wasRestarted
+        )
         {
             List<CatBlock> catBlocks = new List<CatBlock>();
             foreach (Stack stack in puzzle.Stacks)
@@ -813,11 +1029,13 @@ namespace Tofuwu.StackCats
             {
                 PuzzleArea = puzzleArea,
                 PuzzleMode = puzzleMode,
-                IsLuckyPuzzle = puzzle.IsSpecial
+                IsLuckyPuzzle = puzzle.IsSpecial,
             };
             foreach (CatBlock catBlock in catBlocks)
             {
-                CatBlockContents contents = CatBlockContentsGenerator.GenerateCatBlockContents(catBlockContentsInfo);
+                CatBlockContents contents = CatBlockContentsGenerator.GenerateCatBlockContents(
+                    catBlockContentsInfo
+                );
                 if (contents.Cat)
                 {
                     catBlock.Cat = contents.Cat;
@@ -827,7 +1045,6 @@ namespace Tofuwu.StackCats
                 {
                     catBlock.Yarn = contents.NumSilverPaws;
                 }
-
             }
 
             return puzzle;
@@ -863,21 +1080,32 @@ namespace Tofuwu.StackCats
 
             if (string.IsNullOrEmpty(storyPuzzleId))
             {
-                StoryPuzzle currentStoryPuzzle = _currentArea.PuzzleAreaMap.ProgressionPuzzleRoute[0].NormalPuzzle;
+                StoryPuzzle currentStoryPuzzle = _currentArea
+                    .PuzzleAreaMap
+                    .ProgressionPuzzleRoute[0]
+                    .NormalPuzzle;
                 _data.CurrentStoryPuzzleId = currentStoryPuzzle.GetId();
                 return currentStoryPuzzle;
             }
 
-            return _currentArea.PuzzleAreaMap.ProgressionPuzzleRoute.FirstOrDefault(ri => ri.NormalPuzzle?.GetId() == storyPuzzleId)?.NormalPuzzle;
+            return _currentArea
+                .PuzzleAreaMap.ProgressionPuzzleRoute.FirstOrDefault(ri =>
+                    ri.NormalPuzzle?.GetId() == storyPuzzleId
+                )
+                ?.NormalPuzzle;
         }
 
         private ChallengePuzzleModel GenerateNextChallengePuzzle(PuzzleArea puzzleArea)
         {
             ChallengeRunModel challengeRunModel = GetCurrentChallengeRun(puzzleArea);
 
-            if (challengeRunModel == null) return null;
+            if (challengeRunModel == null)
+                return null;
 
-            int difficulty = 12 + (int)challengeRunModel.Difficulty * 14 + challengeRunModel.CompletedPuzzles.Count * 2;
+            int difficulty =
+                12
+                + (int)challengeRunModel.Difficulty * 14
+                + challengeRunModel.CompletedPuzzles.Count * 2;
             //Puzzle challengePuzzle = OldPuzzleGenerator.GenerateChallengePuzzle(puzzleArea, difficulty);
 
             Type puzzlePrefabType = puzzleArea.PuzzlePrefab.GetType();
@@ -886,29 +1114,42 @@ namespace Tofuwu.StackCats
 
             if (puzzlePrefabType == typeof(GalaxyFlavoredPuzzle))
             {
-                challengePuzzle = GalaxyFlavoredPuzzleBuilder.GenerateNew(puzzleArea, 5, 8, difficulty);
+                challengePuzzle = GalaxyFlavoredPuzzleBuilder.GenerateNew(
+                    puzzleArea,
+                    5,
+                    8,
+                    difficulty
+                );
             }
             else if (puzzlePrefabType == typeof(NightFlavoredPuzzle))
             {
-                GeneratedPuzzleInfo<PuzzleArea, NightFlavoredPuzzle> generatedPuzzleInfo = new NightFlavoredPuzzleGenerator(puzzleArea).Generate(difficulty);
+                GeneratedPuzzleInfo<PuzzleArea, NightFlavoredPuzzle> generatedPuzzleInfo =
+                    new NightFlavoredPuzzleGenerator(puzzleArea).Generate(difficulty);
                 challengePuzzle = generatedPuzzleInfo.Puzzle;
                 generationMovesMade = generatedPuzzleInfo.NumMovesMade;
             }
             else if (puzzlePrefabType == typeof(JungleFlavoredPuzzle))
             {
-                GeneratedPuzzleInfo<JungleFlavoredPuzzleArea, JungleFlavoredPuzzle> generatedPuzzleInfo = new JungleFlavoredPuzzleGenerator((JungleFlavoredPuzzleArea)puzzleArea).Generate(difficulty);
+                GeneratedPuzzleInfo<
+                    JungleFlavoredPuzzleArea,
+                    JungleFlavoredPuzzle
+                > generatedPuzzleInfo = new JungleFlavoredPuzzleGenerator(
+                    (JungleFlavoredPuzzleArea)puzzleArea
+                ).Generate(difficulty);
                 challengePuzzle = generatedPuzzleInfo.Puzzle;
                 generationMovesMade = generatedPuzzleInfo.NumMovesMade;
             }
             else if (puzzlePrefabType == typeof(DesertFlavoredPuzzle))
             {
-                GeneratedPuzzleInfo<PuzzleArea, DesertFlavoredPuzzle> generatedPuzzleInfo = new DesertFlavoredPuzzleGenerator(puzzleArea).Generate(difficulty);
+                GeneratedPuzzleInfo<PuzzleArea, DesertFlavoredPuzzle> generatedPuzzleInfo =
+                    new DesertFlavoredPuzzleGenerator(puzzleArea).Generate(difficulty);
                 challengePuzzle = generatedPuzzleInfo.Puzzle;
                 generationMovesMade = generatedPuzzleInfo.NumMovesMade;
             }
             else if (puzzlePrefabType == typeof(FarmFlavoredPuzzle))
             {
-                GeneratedPuzzleInfo<PuzzleArea, FarmFlavoredPuzzle> generatedPuzzleInfo = new FarmFlavoredPuzzleGenerator(puzzleArea).Generate(difficulty);
+                GeneratedPuzzleInfo<PuzzleArea, FarmFlavoredPuzzle> generatedPuzzleInfo =
+                    new FarmFlavoredPuzzleGenerator(puzzleArea).Generate(difficulty);
                 challengePuzzle = generatedPuzzleInfo.Puzzle;
                 generationMovesMade = generatedPuzzleInfo.NumMovesMade;
             }
@@ -920,8 +1161,16 @@ namespace Tofuwu.StackCats
             string challengePuzzleJsonData = PuzzleBuilder.GetPuzzleJsonData(challengePuzzle);
             Destroy(challengePuzzle.gameObject);
             int minMoves = generationMovesMade;
-            int maxMoves = minMoves > 0 ? (generationMovesMade + 10 - Mathf.FloorToInt(0.1f * difficulty)) : 0;
-            IChallengePuzzleData newChallengePuzzle = _data.StartChallengePuzzle(puzzleArea.GetId(), challengePuzzleJsonData, difficulty, minMoves, maxMoves, StartingNumUndos);
+            int maxMoves =
+                minMoves > 0 ? (generationMovesMade + 10 - Mathf.FloorToInt(0.1f * difficulty)) : 0;
+            IChallengePuzzleData newChallengePuzzle = _data.StartChallengePuzzle(
+                puzzleArea.GetId(),
+                challengePuzzleJsonData,
+                difficulty,
+                minMoves,
+                maxMoves,
+                StartingNumUndos
+            );
 
             return DataModelMapper.MapToChallengePuzzleModel(newChallengePuzzle);
         }
@@ -930,7 +1179,8 @@ namespace Tofuwu.StackCats
         {
             EndlessRunModel endlessRunModel = GetCurrentEndlessRun(puzzleArea);
 
-            if (endlessRunModel == null) return null;
+            if (endlessRunModel == null)
+                return null;
 
             int difficulty = 12 + endlessRunModel.CompletedPuzzles.Count * 4;
 
@@ -940,29 +1190,42 @@ namespace Tofuwu.StackCats
 
             if (puzzlePrefabType == typeof(GalaxyFlavoredPuzzle))
             {
-                endlessPuzzle = GalaxyFlavoredPuzzleBuilder.GenerateNew(puzzleArea, 5, 8, difficulty);
+                endlessPuzzle = GalaxyFlavoredPuzzleBuilder.GenerateNew(
+                    puzzleArea,
+                    5,
+                    8,
+                    difficulty
+                );
             }
             else if (puzzlePrefabType == typeof(NightFlavoredPuzzle))
             {
-                GeneratedPuzzleInfo<PuzzleArea, NightFlavoredPuzzle> generatedPuzzleInfo = new NightFlavoredPuzzleGenerator(puzzleArea).Generate(difficulty);
+                GeneratedPuzzleInfo<PuzzleArea, NightFlavoredPuzzle> generatedPuzzleInfo =
+                    new NightFlavoredPuzzleGenerator(puzzleArea).Generate(difficulty);
                 endlessPuzzle = generatedPuzzleInfo.Puzzle;
                 generationMovesMade = generatedPuzzleInfo.NumMovesMade;
             }
             else if (puzzlePrefabType == typeof(JungleFlavoredPuzzle))
             {
-                GeneratedPuzzleInfo<JungleFlavoredPuzzleArea, JungleFlavoredPuzzle> generatedPuzzleInfo = new JungleFlavoredPuzzleGenerator((JungleFlavoredPuzzleArea)puzzleArea).Generate(difficulty);
+                GeneratedPuzzleInfo<
+                    JungleFlavoredPuzzleArea,
+                    JungleFlavoredPuzzle
+                > generatedPuzzleInfo = new JungleFlavoredPuzzleGenerator(
+                    (JungleFlavoredPuzzleArea)puzzleArea
+                ).Generate(difficulty);
                 endlessPuzzle = generatedPuzzleInfo.Puzzle;
                 generationMovesMade = generatedPuzzleInfo.NumMovesMade;
             }
             else if (puzzlePrefabType == typeof(DesertFlavoredPuzzle))
             {
-                GeneratedPuzzleInfo<PuzzleArea, DesertFlavoredPuzzle> generatedPuzzleInfo = new DesertFlavoredPuzzleGenerator(puzzleArea).Generate(difficulty);
+                GeneratedPuzzleInfo<PuzzleArea, DesertFlavoredPuzzle> generatedPuzzleInfo =
+                    new DesertFlavoredPuzzleGenerator(puzzleArea).Generate(difficulty);
                 endlessPuzzle = generatedPuzzleInfo.Puzzle;
                 generationMovesMade = generatedPuzzleInfo.NumMovesMade;
             }
             else if (puzzlePrefabType == typeof(FarmFlavoredPuzzle))
             {
-                GeneratedPuzzleInfo<PuzzleArea, FarmFlavoredPuzzle> generatedPuzzleInfo = new FarmFlavoredPuzzleGenerator(puzzleArea).Generate(difficulty);
+                GeneratedPuzzleInfo<PuzzleArea, FarmFlavoredPuzzle> generatedPuzzleInfo =
+                    new FarmFlavoredPuzzleGenerator(puzzleArea).Generate(difficulty);
                 endlessPuzzle = generatedPuzzleInfo.Puzzle;
                 generationMovesMade = generatedPuzzleInfo.NumMovesMade;
             }
@@ -974,8 +1237,16 @@ namespace Tofuwu.StackCats
             string endlessPuzzleJsonData = PuzzleBuilder.GetPuzzleJsonData(endlessPuzzle);
             Destroy(endlessPuzzle.gameObject);
             int minMoves = generationMovesMade;
-            int maxMoves = minMoves > 0 ? (generationMovesMade + 10 - Mathf.FloorToInt(0.1f * difficulty)) : 0;
-            IEndlessPuzzleData newEndlessPuzzle = _data.StartEndlessPuzzle(puzzleArea.GetId(), endlessPuzzleJsonData, difficulty, minMoves, maxMoves, StartingNumUndos);
+            int maxMoves =
+                minMoves > 0 ? (generationMovesMade + 10 - Mathf.FloorToInt(0.1f * difficulty)) : 0;
+            IEndlessPuzzleData newEndlessPuzzle = _data.StartEndlessPuzzle(
+                puzzleArea.GetId(),
+                endlessPuzzleJsonData,
+                difficulty,
+                minMoves,
+                maxMoves,
+                StartingNumUndos
+            );
 
             return DataModelMapper.MapToEndlessPuzzleModel(newEndlessPuzzle, this);
         }
@@ -1040,7 +1311,6 @@ namespace Tofuwu.StackCats
                 rareRequirement = 0.9975f;
                 uncommonRequirement = 0.96f;
             }
-
 
             if (rarityValue >= rareRequirement)
             {

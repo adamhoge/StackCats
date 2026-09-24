@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public enum TrophyMaterial
     {
@@ -8,7 +8,7 @@ namespace Tofuwu.StackCats
         Silver,
         Gold,
         Platinum,
-        Diamond
+        Diamond,
     }
 
     [CreateAssetMenu(fileName = "Trophy Item", menuName = "Stack Cats/Items/Trophy Item")]

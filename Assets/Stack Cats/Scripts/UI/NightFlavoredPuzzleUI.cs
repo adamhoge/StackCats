@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using TMPro;
+﻿using TMPro;
+using UnityEngine;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class NightFlavoredPuzzleUI : MonoBehaviour
     {
@@ -17,12 +17,14 @@ namespace Tofuwu.StackCats.UI
             PuzzleLoader.onPuzzleUnloaded += OnPuzzleUnloaded;
             PuzzleLoader.onPuzzleRestarted += OnPuzzleRestarted;
 
-            if (CurtainTimerRectTransform) CurtainTimerRectTransform.gameObject.SetActive(false);
+            if (CurtainTimerRectTransform)
+                CurtainTimerRectTransform.gameObject.SetActive(false);
         }
 
         private void UpdateCurtainTimer()
         {
-            if (CurtainTimerText) CurtainTimerText.text = _puzzle.CurtainTurnsRemaining.ToString();// + "/" + Puzzle.CurtainDropMoveCount;
+            if (CurtainTimerText)
+                CurtainTimerText.text = _puzzle.CurtainTurnsRemaining.ToString(); // + "/" + Puzzle.CurtainDropMoveCount;
         }
 
         private void OnPuzzleBeginLoad(Puzzle puzzle, bool wasRestarted, bool isUndo)
@@ -48,7 +50,8 @@ namespace Tofuwu.StackCats.UI
                 _puzzle.onCurtainTurnsChanged -= OnCurtainTurnsChanged;
                 _puzzle = null;
 
-                if (CurtainTimerRectTransform) CurtainTimerRectTransform.gameObject.SetActive(false);
+                if (CurtainTimerRectTransform)
+                    CurtainTimerRectTransform.gameObject.SetActive(false);
             }
         }
 
@@ -56,16 +59,20 @@ namespace Tofuwu.StackCats.UI
         {
             if (puzzle.GetType() == typeof(NightFlavoredPuzzle))
             {
-                if (_puzzle) _puzzle.onCurtainTurnsChanged -= OnCurtainTurnsChanged;
+                if (_puzzle)
+                    _puzzle.onCurtainTurnsChanged -= OnCurtainTurnsChanged;
 
                 _puzzle = (NightFlavoredPuzzle)puzzle;
                 _puzzle.onCurtainTurnsChanged += OnCurtainTurnsChanged;
 
-                if (CurtainTimerText) CurtainTimerText.text = _puzzle.CurtainDropInterval.ToString();// + "/" + Puzzle.CurtainDropMoveCount;
+                if (CurtainTimerText)
+                    CurtainTimerText.text = _puzzle.CurtainDropInterval.ToString(); // + "/" + Puzzle.CurtainDropMoveCount;
 
                 if (CurtainTimerRectTransform)
                 {
-                    LeanTween.scale(CurtainTimerRectTransform.gameObject, Vector3.one * 1.2f, 0.25f).setEase(LeanTweenType.punch);
+                    LeanTween
+                        .scale(CurtainTimerRectTransform.gameObject, Vector3.one * 1.2f, 0.25f)
+                        .setEase(LeanTweenType.punch);
                 }
             }
         }

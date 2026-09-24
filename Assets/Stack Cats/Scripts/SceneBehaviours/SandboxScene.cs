@@ -1,6 +1,4 @@
-﻿namespace Tofuwu.StackCats
+﻿namespace RockhopperGames.StackCats
 {
-    public class SandboxScene : SceneBehaviour
-    {
-    }
+    public class SandboxScene : SceneBehaviour { }
 }

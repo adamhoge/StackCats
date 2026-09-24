@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Tofuwu.StackCats.Models;
+using RockhopperGames.StackCats.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public delegate void PuzzleCompleted(int puzzleIndex);
 
@@ -32,14 +32,17 @@ namespace Tofuwu.StackCats.UI
             BackgroundImage.color = _notCompletedColor;
             CompletionImage.alpha = 0.0f;
             CompletionImage.transform.localScale = Vector3.one * 3.0f;
-            LeanTween.alphaCanvas(CompletionImage, 1.0f, 0.75f)
+            LeanTween
+                .alphaCanvas(CompletionImage, 1.0f, 0.75f)
                 .setDelay(0.25f)
                 .setEase(LeanTweenType.easeInQuint);
-            LeanTween.scale(CompletionImage.gameObject, Vector3.one, 0.75f)
+            LeanTween
+                .scale(CompletionImage.gameObject, Vector3.one, 0.75f)
                 .setDelay(0.25f)
                 .setEase(LeanTweenType.easeInQuint)
                 .setOnComplete(OnCompleteEffect);
-            LeanTween.scale(BackgroundImage.gameObject, Vector3.one * 0.75f, CompletionScaleDuration)
+            LeanTween
+                .scale(BackgroundImage.gameObject, Vector3.one * 0.75f, CompletionScaleDuration)
                 .setEase(LeanTweenType.punch)
                 .setDelay(1.0f);
 
@@ -74,14 +77,17 @@ namespace Tofuwu.StackCats.UI
             _audioManager.PlaySoundEffect(CompletionSound);
             BackgroundImage.color = CompletedColor;
             CompletionEffectImage.alpha = 1.0f;
-            LeanTween.alphaCanvas(CompletionEffectImage, 0.0f, 0.25f)
+            LeanTween
+                .alphaCanvas(CompletionEffectImage, 0.0f, 0.25f)
                 .setEase(LeanTweenType.easeOutCubic);
-            LeanTween.scale(CompletionEffectImage.gameObject, Vector3.one * 3.0f, 0.25f)
+            LeanTween
+                .scale(CompletionEffectImage.gameObject, Vector3.one * 3.0f, 0.25f)
                 .setEase(LeanTweenType.easeOutCubic);
 
             // TODO?: Clear puzzle number
 
-            if (onPuzzleCompleted != null) onPuzzleCompleted(PuzzleIndex);
+            if (onPuzzleCompleted != null)
+                onPuzzleCompleted(PuzzleIndex);
         }
     }
 }

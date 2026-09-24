@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class PointerPuzzleControllerUI : PuzzleControllerUI
     {
@@ -15,14 +15,18 @@ namespace Tofuwu.StackCats.UI
             base.OnBlocksBlocksSelected(marker);
 
             List<Block> blocksSelected = marker.Stack.GetBlocksAt(marker.Block);
-            foreach(Block block in blocksSelected)
+            foreach (Block block in blocksSelected)
             {
                 Image placeholderImage = new GameObject("Placeholder Block").AddComponent<Image>();
                 placeholderImage.transform.SetParent(WorldCanvas.transform);
                 placeholderImage.sprite = PlaceholderSprite;
                 placeholderImage.color = new Color(1.0f, 1.0f, 1.0f, 0.75f);
                 placeholderImage.rectTransform.sizeDelta = Vector3.one;
-                placeholderImage.rectTransform.position = _currentPuzzle.transform.position + _currentPuzzle.GetStackLocalPosition(marker.Stack) + marker.Stack.GetBlockLocalPosition(block) + (Vector3.up * 0.5f);
+                placeholderImage.rectTransform.position =
+                    _currentPuzzle.transform.position
+                    + _currentPuzzle.GetStackLocalPosition(marker.Stack)
+                    + marker.Stack.GetBlockLocalPosition(block)
+                    + (Vector3.up * 0.5f);
                 _placeholderImages.Add(placeholderImage);
             }
         }
@@ -31,7 +35,7 @@ namespace Tofuwu.StackCats.UI
         {
             base.OnCancelled(marker);
 
-            foreach(Image placeholderImage in _placeholderImages)
+            foreach (Image placeholderImage in _placeholderImages)
             {
                 Destroy(placeholderImage.gameObject);
             }

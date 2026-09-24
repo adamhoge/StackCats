@@ -1,4 +1,4 @@
-﻿namespace Tofuwu.StackCats
+﻿namespace RockhopperGames.StackCats
 {
     public struct MoveStrategyResult
     {
@@ -8,8 +8,13 @@
         public float estimatedDifficulty;
     }
 
-    public interface IMoveStrategy<TPuzzleArea, TPuzzle> where TPuzzleArea : PuzzleArea where TPuzzle : Puzzle
+    public interface IMoveStrategy<TPuzzleArea, TPuzzle>
+        where TPuzzleArea : PuzzleArea
+        where TPuzzle : Puzzle
     {
-        MoveStrategyResult PerformMoveStrategy(PuzzleGenerator<TPuzzleArea, TPuzzle> puzzleGenerator, GeneratedPuzzleInfo<TPuzzleArea, TPuzzle> generatedPuzzleInfo);
+        MoveStrategyResult PerformMoveStrategy(
+            PuzzleGenerator<TPuzzleArea, TPuzzle> puzzleGenerator,
+            GeneratedPuzzleInfo<TPuzzleArea, TPuzzle> generatedPuzzleInfo
+        );
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class Lifespan : MonoBehaviour
     {
@@ -14,7 +14,8 @@ namespace Tofuwu.StackCats
         {
             _aliveDuration += Time.deltaTime;
 
-            if (_aliveDuration >= Duration) Destroy(gameObject);
+            if (_aliveDuration >= Duration)
+                Destroy(gameObject);
         }
     }
 }

@@ -1,11 +1,11 @@
-﻿using Tofuwu.StackCats.Data;
-using Tofuwu.StackCats.UI;
-using System;
-using System.Linq;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using RockhopperGames.StackCats.Data;
+using RockhopperGames.StackCats.UI;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public delegate void PuzzleTutorialStarted(PuzzleTutorial puzzleTutorial);
     public delegate void BlockTutorialStarted(BlockTutorial blockTutorial);
@@ -32,7 +32,8 @@ namespace Tofuwu.StackCats
             {
                 PuzzleTutorial puzzleTutorial = GetPuzzleTutorialForType(puzzleType);
 
-                if (puzzleTutorial) BeginPuzzleTutorial(puzzleTutorial);
+                if (puzzleTutorial)
+                    BeginPuzzleTutorial(puzzleTutorial);
             }
 
             foreach (Type blockType in puzzle.GetAllBlockTypes())
@@ -40,7 +41,8 @@ namespace Tofuwu.StackCats
                 if (!IsTypeKnown(blockType))
                 {
                     BlockTutorial blockTutorial = GetBlockTutorialForType(blockType);
-                    if (blockTutorial) BeginBlockTutorial(blockTutorial);
+                    if (blockTutorial)
+                        BeginBlockTutorial(blockTutorial);
                 }
             }
         }
@@ -62,12 +64,14 @@ namespace Tofuwu.StackCats
 
         public void BeginPuzzleTutorial(PuzzleTutorial puzzleTutorial)
         {
-            if (onPuzzleTutorialStarted != null) onPuzzleTutorialStarted(puzzleTutorial);
+            if (onPuzzleTutorialStarted != null)
+                onPuzzleTutorialStarted(puzzleTutorial);
         }
 
         public void BeginBlockTutorial(BlockTutorial blockTutorial)
         {
-            if (onBlockTutorialStarted != null) onBlockTutorialStarted(blockTutorial);
+            if (onBlockTutorialStarted != null)
+                onBlockTutorialStarted(blockTutorial);
         }
 
         public void CompleteTutorial(string typeName)

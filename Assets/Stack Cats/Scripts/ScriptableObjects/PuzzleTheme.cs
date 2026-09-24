@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     [CreateAssetMenu(fileName = "Puzzle Theme", menuName = "Stack Cats/Puzzle Theme")]
     public class PuzzleTheme : ScriptableObject

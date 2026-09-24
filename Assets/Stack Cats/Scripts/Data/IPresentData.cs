@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public interface IPresentData
     {

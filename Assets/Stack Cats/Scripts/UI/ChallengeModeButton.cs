@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     [RequireComponent(typeof(Button))]
     public class ChallengeModeButton : MonoBehaviour
@@ -19,7 +19,10 @@ namespace Tofuwu.StackCats.UI
         public List<int> CompletedDifficulties;
         public Color HasntTrophyColor;
 
-        public Button Button { get { return _button; } }
+        public Button Button
+        {
+            get { return _button; }
+        }
 
         private Button _button;
 

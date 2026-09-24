@@ -5,10 +5,15 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public delegate void BlockInserted(Stack sender, Block block, int atIndex);
-    public delegate void BlocksRemoved(Stack sender, List<Block> blocks, int fromIndex, int toIndex);
+    public delegate void BlocksRemoved(
+        Stack sender,
+        List<Block> blocks,
+        int fromIndex,
+        int toIndex
+    );
 
     public class Stack : MonoBehaviour, IComparable<Stack>
     {
@@ -18,32 +23,52 @@ namespace Tofuwu.StackCats
         /// <summary>
         /// All blocks belonging to the stack.
         /// </summary>
-        public ReadOnlyCollection<Block> Blocks { get { return _blocks.AsReadOnly(); } }
+        public ReadOnlyCollection<Block> Blocks
+        {
+            get { return _blocks.AsReadOnly(); }
+        }
 
         /// <summary>
         /// The maximum number of blocks which may be placed on the stack.
         /// </summary>
-        public int MaxBlocks { get { return _maxBlocks; } set { SetMaxBlocks(value); } }
+        public int MaxBlocks
+        {
+            get { return _maxBlocks; }
+            set { SetMaxBlocks(value); }
+        }
 
         /// <summary>
         /// The height of blocks contained on the stack.
         /// </summary>
-        public float BlockHeight { get { return _blockHeight; } set { SetBlockHeight(value); } }
+        public float BlockHeight
+        {
+            get { return _blockHeight; }
+            set { SetBlockHeight(value); }
+        }
 
         /// <summary>
         /// The block currently at the top of the stack.
         /// </summary>
-        public Block TopBlock { get { return _blocks.Count > 0 ? _blocks[_blocks.Count - 1] : null; } }
+        public Block TopBlock
+        {
+            get { return _blocks.Count > 0 ? _blocks[_blocks.Count - 1] : null; }
+        }
 
         /// <summary>
         /// A flag indicating whether or not the stack is empty.
         /// </summary>
-        public bool IsEmpty { get { return _blocks.Count == 0; } }
+        public bool IsEmpty
+        {
+            get { return _blocks.Count == 0; }
+        }
 
         /// <summary>
         /// A flag indicating whether or not the stack is a maximum block capacity.
         /// </summary>
-        public bool IsAtMaxCapacity { get { return _blocks.Count == MaxBlocks; } }
+        public bool IsAtMaxCapacity
+        {
+            get { return _blocks.Count == MaxBlocks; }
+        }
 
         [SerializeField]
         [HideInInspector]
@@ -74,7 +99,8 @@ namespace Tofuwu.StackCats
         /// <returns>A flag indicating whether or not the blocks were successfully added.</returns>
         public bool AddBlocks(List<Block> blocks)
         {
-            if (MaxBlocks - _blocks.Count < blocks.Count) return false;
+            if (MaxBlocks - _blocks.Count < blocks.Count)
+                return false;
 
             foreach (Block block in blocks)
             {
@@ -92,16 +118,19 @@ namespace Tofuwu.StackCats
         /// <returns></returns>
         public bool InsertBlock(Block block, int atIndex)
         {
-            if (IsAtMaxCapacity) return false;
+            if (IsAtMaxCapacity)
+                return false;
 
-            if (!block || _blocks.Contains(block) || atIndex > _blocks.Count) return false;
+            if (!block || _blocks.Contains(block) || atIndex > _blocks.Count)
+                return false;
 
             _blocks.Insert(atIndex, block);
             block.ParentStack = this;
             block.transform.SetParent(transform);
 
             UpdateBlockPositions(atIndex);
-            if (onBlockInserted != null) onBlockInserted(this, block, atIndex);
+            if (onBlockInserted != null)
+                onBlockInserted(this, block, atIndex);
             return true;
         }
 
@@ -134,7 +163,8 @@ namespace Tofuwu.StackCats
         public bool RemoveBlocks(Block from, Block to, bool destroy = false)
         {
             // If the block doesn't exist in the stack, don't attempt to remove it.
-            if (!_blocks.Contains(from) || !_blocks.Contains(to)) return false;
+            if (!_blocks.Contains(from) || !_blocks.Contains(to))
+                return false;
 
             // Get the indices of the blocks.
             int fromBlockIndex = _blocks.IndexOf(from);
@@ -164,7 +194,8 @@ namespace Tofuwu.StackCats
             }
             UpdateBlockPositions(fromBlockIndex);
 
-            if (onBlocksRemoved != null) onBlocksRemoved(this, blocksRemoved, fromBlockIndex, toBlockIndex);
+            if (onBlocksRemoved != null)
+                onBlocksRemoved(this, blocksRemoved, fromBlockIndex, toBlockIndex);
 
             return true;
         }
@@ -179,7 +210,8 @@ namespace Tofuwu.StackCats
             List<Block> blocks = new List<Block>();
 
             int blockIndex = _blocks.IndexOf(block);
-            if (blockIndex == -1) return blocks;
+            if (blockIndex == -1)
+                return blocks;
 
             for (int i = blockIndex; i < _blocks.Count; i++)
             {
@@ -196,7 +228,8 @@ namespace Tofuwu.StackCats
         /// <returns></returns>
         public Vector3 GetBlockLocalPosition(Block block)
         {
-            if (!_blocks.Contains(block)) return Vector3.zero;
+            if (!_blocks.Contains(block))
+                return Vector3.zero;
 
             return GetBlockLocalPosition(_blocks.IndexOf(block));
         }
@@ -221,8 +254,10 @@ namespace Tofuwu.StackCats
         {
             List<Block> blocks = new List<Block>();
 
-            if (minIndex < 0) minIndex = 0;
-            if (maxIndex >= _maxBlocks) maxIndex = _maxBlocks - 1;
+            if (minIndex < 0)
+                minIndex = 0;
+            if (maxIndex >= _maxBlocks)
+                maxIndex = _maxBlocks - 1;
 
             while (minIndex <= maxIndex && minIndex < _blocks.Count)
             {
@@ -264,7 +299,8 @@ namespace Tofuwu.StackCats
 
         private void SetMaxBlocks(int value)
         {
-            if (value == _maxBlocks) return;
+            if (value == _maxBlocks)
+                return;
 
             _maxBlocks = value;
             while (_blocks.Count > MaxBlocks)
@@ -277,7 +313,8 @@ namespace Tofuwu.StackCats
 
         private void SetBlockHeight(float value)
         {
-            if (value == _blockHeight) return;
+            if (value == _blockHeight)
+                return;
 
             _blockHeight = value;
             UpdateBlockPositions();

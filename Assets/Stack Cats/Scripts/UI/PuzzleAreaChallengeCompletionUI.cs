@@ -1,13 +1,14 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
+using RotaryHeart.Lib.SerializableDictionary;
 using UnityEngine;
 using UnityEngine.UI;
-using RotaryHeart.Lib.SerializableDictionary;
-using System;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     [Serializable]
-    public class TrophySpriteDictionary : SerializableDictionaryBase<ChallengeRunDifficulty, Sprite> { }
+    public class TrophySpriteDictionary
+        : SerializableDictionaryBase<ChallengeRunDifficulty, Sprite> { }
 
     public class PuzzleAreaChallengeCompletionUI : MonoBehaviour
     {
@@ -57,8 +58,12 @@ namespace Tofuwu.StackCats
             LockedImage.gameObject.SetActive(false);
 
             PuzzleAreaTrophyImage.gameObject.SetActive(true);
-            ChallengeRunDifficulty? highestCompletionDifficulty = _puzzleManager.GetChallengeRunHighestDifficultyCompletion(PuzzleArea);
-            if (highestCompletionDifficulty != null && TrophySprites.ContainsKey(highestCompletionDifficulty.Value))
+            ChallengeRunDifficulty? highestCompletionDifficulty =
+                _puzzleManager.GetChallengeRunHighestDifficultyCompletion(PuzzleArea);
+            if (
+                highestCompletionDifficulty != null
+                && TrophySprites.ContainsKey(highestCompletionDifficulty.Value)
+            )
             {
                 PuzzleAreaTrophyImage.sprite = TrophySprites[highestCompletionDifficulty.Value];
             }

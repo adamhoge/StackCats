@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     [Serializable]
     public class PuzzleMakerAreaEditor
@@ -11,7 +11,10 @@ namespace Tofuwu.StackCats
     }
 
     public delegate void AreaEditorChanged(PuzzleMakerAreaEditor areaEditor);
-    public delegate void ActionEditorStarted(PuzzleMakerActions actionsEditor, PuzzleMakerActionsController actionsEditorController);
+    public delegate void ActionEditorStarted(
+        PuzzleMakerActions actionsEditor,
+        PuzzleMakerActionsController actionsEditorController
+    );
     public delegate void ActionEditorStopped();
     public delegate void PuzzleMakerPuzzleLoaded(Puzzle puzzle);
     public delegate void PuzzleMakerPuzzleUnloaded();
@@ -54,13 +57,19 @@ namespace Tofuwu.StackCats
         /// <summary>
         /// The puzzle area for which puzzles will be made.
         /// </summary>
-        public PuzzleMakerAreaEditor CurrentAreaEditor { get { return _currentAreaEditor; } set { SetCurrentAreaEditor(value); } }
+        public PuzzleMakerAreaEditor CurrentAreaEditor
+        {
+            get { return _currentAreaEditor; }
+            set { SetCurrentAreaEditor(value); }
+        }
 
         /// <summary>
         /// Indicates whether or not a puzzle is currently being tested.
         /// </summary>
-        public bool IsTesting { get { return _isTesting; } }
-
+        public bool IsTesting
+        {
+            get { return _isTesting; }
+        }
 
         private PuzzleLoader _puzzleLoader;
         private PuzzleLoader _playtestPuzzleLoader;
@@ -76,7 +85,10 @@ namespace Tofuwu.StackCats
         /// </summary>
         public void GoHome()
         {
-            _gameManager.ConfirmAction("Are you sure you want to exit the puzzle maker?", ConfirmGoHome);
+            _gameManager.ConfirmAction(
+                "Are you sure you want to exit the puzzle maker?",
+                ConfirmGoHome
+            );
         }
 
         /// <summary>
@@ -84,7 +96,8 @@ namespace Tofuwu.StackCats
         /// </summary>
         public void NewPuzzle()
         {
-            if (_isTesting) return;
+            if (_isTesting)
+                return;
 
             Puzzle puzzle = Instantiate(_currentAreaEditor.PuzzleArea.PuzzlePrefab, transform);
             puzzle.MaxStackHeight = 8;
@@ -94,7 +107,8 @@ namespace Tofuwu.StackCats
             }
             puzzle.IsEditMode = true;
             _puzzleLoader.LoadPuzzle(puzzle);
-            if (onPuzzleMakerPuzzleLoaded != null) onPuzzleMakerPuzzleLoaded(puzzle);
+            if (onPuzzleMakerPuzzleLoaded != null)
+                onPuzzleMakerPuzzleLoaded(puzzle);
         }
 
         /// <summary>
@@ -102,9 +116,16 @@ namespace Tofuwu.StackCats
         /// </summary>
         public void LoadPuzzle(string puzzleJsonData)
         {
-            _puzzleLoader.LoadPuzzle(puzzleJsonData, _currentAreaEditor.PuzzleArea, false, false, false);
+            _puzzleLoader.LoadPuzzle(
+                puzzleJsonData,
+                _currentAreaEditor.PuzzleArea,
+                false,
+                false,
+                false
+            );
             _puzzleLoader.Puzzle.IsEditMode = true;
-            if (onPuzzleMakerPuzzleLoaded != null) onPuzzleMakerPuzzleLoaded(_puzzleLoader.Puzzle);
+            if (onPuzzleMakerPuzzleLoaded != null)
+                onPuzzleMakerPuzzleLoaded(_puzzleLoader.Puzzle);
         }
 
         public void LoadPuzzleFromClipboard()
@@ -124,13 +145,21 @@ namespace Tofuwu.StackCats
         {
             Puzzle currentPuzzle = _puzzleLoader.Puzzle;
 
-            if (!currentPuzzle) return;
+            if (!currentPuzzle)
+                return;
 
             _puzzleJsonData = PuzzleBuilder.GetPuzzleJsonData(currentPuzzle);
             _puzzleLoader.UnloadPuzzle();
-            _playtestPuzzleLoader.LoadPuzzle(_puzzleJsonData, _currentAreaEditor.PuzzleArea, false, false, false);
+            _playtestPuzzleLoader.LoadPuzzle(
+                _puzzleJsonData,
+                _currentAreaEditor.PuzzleArea,
+                false,
+                false,
+                false
+            );
             _isTesting = true;
-            if (onPuzzleMakerPuzzleLoaded != null) onPuzzleMakerPuzzleLoaded(_playtestPuzzleLoader.Puzzle);
+            if (onPuzzleMakerPuzzleLoaded != null)
+                onPuzzleMakerPuzzleLoaded(_playtestPuzzleLoader.Puzzle);
         }
 
         /// <summary>
@@ -138,7 +167,8 @@ namespace Tofuwu.StackCats
         /// </summary>
         public void EndPlaytest()
         {
-            if (!_isTesting) return;
+            if (!_isTesting)
+                return;
 
             _playtestPuzzleLoader.UnloadPuzzle();
             _isTesting = false;
@@ -166,7 +196,8 @@ namespace Tofuwu.StackCats
         public void UnloadPuzzle()
         {
             _puzzleLoader.UnloadPuzzle();
-            if (onPuzzleMakerPuzzleUnloaded != null) onPuzzleMakerPuzzleUnloaded();
+            if (onPuzzleMakerPuzzleUnloaded != null)
+                onPuzzleMakerPuzzleUnloaded();
         }
 
         /// <summary>
@@ -176,14 +207,16 @@ namespace Tofuwu.StackCats
         {
             Puzzle currentPuzzle = _puzzleLoader.Puzzle;
 
-            if (!currentPuzzle) return;
+            if (!currentPuzzle)
+                return;
 
             GUIUtility.systemCopyBuffer = PuzzleBuilder.GetPuzzleJsonData(currentPuzzle);
         }
 
         public void SetControllerEnabled(bool isEnabled)
         {
-            if (_currentPuzzleMakerActionsController) _currentPuzzleMakerActionsController.IsEnabled = isEnabled;
+            if (_currentPuzzleMakerActionsController)
+                _currentPuzzleMakerActionsController.IsEnabled = isEnabled;
         }
 
         protected override void Awake()
@@ -222,7 +255,7 @@ namespace Tofuwu.StackCats
 
         protected void Update()
         {
-            if(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
+            if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
             {
                 if (Input.GetKeyDown(KeyCode.V))
                 {
@@ -242,32 +275,40 @@ namespace Tofuwu.StackCats
             if (puzzle.GetType() == typeof(NightFlavoredPuzzle))
             {
                 // TODO: Add actions specific to Night Flavored Puzzles.
-                _currentPuzzleMakerActions = gameObject.AddComponent<PuzzleMakerNightFlavoredActions>();
-                controller = puzzle.gameObject.AddComponent<PuzzleMakerNightFlavoredActionsController>();
+                _currentPuzzleMakerActions =
+                    gameObject.AddComponent<PuzzleMakerNightFlavoredActions>();
+                controller =
+                    puzzle.gameObject.AddComponent<PuzzleMakerNightFlavoredActionsController>();
                 controller.Camera = Camera;
                 controller.PuzzleMakerActions = _currentPuzzleMakerActions;
             }
             else if (puzzle.GetType() == typeof(DesertFlavoredPuzzle))
             {
                 // TODO: Add actions specific to Desert Flavored Puzzles.
-                _currentPuzzleMakerActions = gameObject.AddComponent<PuzzleMakerDesertFlavoredActions>();
-                controller = puzzle.gameObject.AddComponent<PuzzleMakerDesertFlavoredActionsController>();
+                _currentPuzzleMakerActions =
+                    gameObject.AddComponent<PuzzleMakerDesertFlavoredActions>();
+                controller =
+                    puzzle.gameObject.AddComponent<PuzzleMakerDesertFlavoredActionsController>();
                 controller.Camera = Camera;
                 controller.PuzzleMakerActions = _currentPuzzleMakerActions;
             }
             else if (puzzle.GetType() == typeof(JungleFlavoredPuzzle))
             {
                 // TODO: Add actions specific to Jungle Flavored Puzzles.
-                _currentPuzzleMakerActions = gameObject.AddComponent<PuzzleMakerJungleFlavoredActions>();
-                controller = puzzle.gameObject.AddComponent<PuzzleMakerJungleFlavoredActionsController>();
+                _currentPuzzleMakerActions =
+                    gameObject.AddComponent<PuzzleMakerJungleFlavoredActions>();
+                controller =
+                    puzzle.gameObject.AddComponent<PuzzleMakerJungleFlavoredActionsController>();
                 controller.Camera = Camera;
                 controller.PuzzleMakerActions = _currentPuzzleMakerActions;
             }
             else if (puzzle.GetType() == typeof(FarmFlavoredPuzzle))
             {
                 // TODO: Add actions specific to Farm Flavored Puzzles.
-                _currentPuzzleMakerActions = gameObject.AddComponent<PuzzleMakerFarmFlavoredActions>();
-                controller = puzzle.gameObject.AddComponent<PuzzleMakerFarmFlavoredActionsController>();
+                _currentPuzzleMakerActions =
+                    gameObject.AddComponent<PuzzleMakerFarmFlavoredActions>();
+                controller =
+                    puzzle.gameObject.AddComponent<PuzzleMakerFarmFlavoredActionsController>();
                 controller.Camera = Camera;
                 controller.PuzzleMakerActions = _currentPuzzleMakerActions;
             }
@@ -277,25 +318,29 @@ namespace Tofuwu.StackCats
                 _currentPuzzleMakerActions.Puzzle = puzzle;
                 _currentPuzzleMakerActions.PuzzleArea = _currentAreaEditor.PuzzleArea;
                 _currentPuzzleMakerActionsController = controller;
-                if (onActionsEditorStarted != null) onActionsEditorStarted(_currentPuzzleMakerActions, controller);
+                if (onActionsEditorStarted != null)
+                    onActionsEditorStarted(_currentPuzzleMakerActions, controller);
             }
         }
 
         private void OnPuzzleBeginUnload(Puzzle puzzle)
         {
             DestroyImmediate(_currentPuzzleMakerActions);
-            if (onActionsEditorStopped != null) onActionsEditorStopped();
+            if (onActionsEditorStopped != null)
+                onActionsEditorStopped();
         }
 
         private void OnPlaytestPuzzleBeginLoad(Puzzle puzzle, bool isRestarted, bool isUndo)
         {
-            PointerPuzzleController controller = puzzle.gameObject.AddComponent<PointerPuzzleController>();
+            PointerPuzzleController controller =
+                puzzle.gameObject.AddComponent<PointerPuzzleController>();
             controller.Camera = Camera;
         }
 
         private void SetCurrentAreaEditor(PuzzleMakerAreaEditor areaEditor)
         {
-            if (_currentAreaEditor == areaEditor) return;
+            if (_currentAreaEditor == areaEditor)
+                return;
 
             if (_currentAreaEditor != null)
             {
@@ -304,9 +349,13 @@ namespace Tofuwu.StackCats
             }
 
             _currentAreaEditor = areaEditor;
-            _puzzleAreaScenary = Instantiate(_currentAreaEditor.PuzzleArea.PuzzleTheme.PuzzleScenaryPrefab, transform);
+            _puzzleAreaScenary = Instantiate(
+                _currentAreaEditor.PuzzleArea.PuzzleTheme.PuzzleScenaryPrefab,
+                transform
+            );
             Camera.backgroundColor = _currentAreaEditor.PuzzleArea.PuzzleTheme.BackgroundColor;
-            if (onAreaEditorChanged != null) onAreaEditorChanged(_currentAreaEditor);
+            if (onAreaEditorChanged != null)
+                onAreaEditorChanged(_currentAreaEditor);
         }
     }
 }

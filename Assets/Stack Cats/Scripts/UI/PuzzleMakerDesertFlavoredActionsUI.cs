@@ -1,6 +1,6 @@
 ﻿using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class PuzzleMakerDesertFlavoredActionsUI : PuzzleMakerActionsUI
     {
@@ -26,7 +26,8 @@ namespace Tofuwu.StackCats.UI
         {
             base.Start();
 
-            _puzzleMakerDesertFlavoredActions = (PuzzleMakerDesertFlavoredActions)PuzzleMakerActions;
+            _puzzleMakerDesertFlavoredActions =
+                (PuzzleMakerDesertFlavoredActions)PuzzleMakerActions;
         }
 
         private void OnFitToPuzzle()

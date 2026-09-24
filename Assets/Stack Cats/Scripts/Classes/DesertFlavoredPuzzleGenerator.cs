@@ -2,24 +2,35 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Tofuwu.StackCats.Procedural
+namespace RockhopperGames.StackCats.Procedural
 {
     public class DesertFlavoredPuzzleGenerator : PuzzleGenerator<PuzzleArea, DesertFlavoredPuzzle>
     {
-        public DesertFlavoredPuzzleGenerator(PuzzleArea puzzleArea) : base(puzzleArea) { }
+        public DesertFlavoredPuzzleGenerator(PuzzleArea puzzleArea)
+            : base(puzzleArea) { }
 
-        public override Stack GetPreferredDestinationStack(DesertFlavoredPuzzle puzzle, List<Stack> usableStacks)
+        public override Stack GetPreferredDestinationStack(
+            DesertFlavoredPuzzle puzzle,
+            List<Stack> usableStacks
+        )
         {
             int minMovableBlocks = usableStacks.Min(s => puzzle.GetNumMovableBlocksInStack(s));
-            return usableStacks.First(s => puzzle.GetNumMovableBlocksInStack(s) == minMovableBlocks);
+            return usableStacks.First(s =>
+                puzzle.GetNumMovableBlocksInStack(s) == minMovableBlocks
+            );
         }
 
-        public override Stack GetPreferredSourceStack(DesertFlavoredPuzzle puzzle, List<Stack> usableStacks)
+        public override Stack GetPreferredSourceStack(
+            DesertFlavoredPuzzle puzzle,
+            List<Stack> usableStacks
+        )
         {
             throw new System.NotImplementedException();
         }
 
-        protected override void CreateFinishedPuzzle(GeneratedPuzzleInfo<PuzzleArea, DesertFlavoredPuzzle> generatedPuzzleInfo)
+        protected override void CreateFinishedPuzzle(
+            GeneratedPuzzleInfo<PuzzleArea, DesertFlavoredPuzzle> generatedPuzzleInfo
+        )
         {
             DesertFlavoredPuzzle puzzle = generatedPuzzleInfo.Puzzle;
 
@@ -45,10 +56,12 @@ namespace Tofuwu.StackCats.Procedural
             int lowStackMinSize = generatedPuzzleInfo.ObjectiveDifficulty >= 30 ? 1 : 0;
             int lowStackSize = Random.Range(lowStackMinSize, 3);
             int avgStackSize = Mathf.CeilToInt(generatedPuzzleInfo.ObjectiveDifficulty / 30.0f + 1);
-            if (avgStackSize > generatedPuzzleInfo.MaxBlocks / 2) avgStackSize = generatedPuzzleInfo.MaxBlocks / 2;
+            if (avgStackSize > generatedPuzzleInfo.MaxBlocks / 2)
+                avgStackSize = generatedPuzzleInfo.MaxBlocks / 2;
             foreach (Stack stack in puzzle.Stacks)
             {
-                int stackSize = stack == lowStack ? lowStackSize : avgStackSize + Random.Range(-1, 2);
+                int stackSize =
+                    stack == lowStack ? lowStackSize : avgStackSize + Random.Range(-1, 2);
 
                 for (int i = 0; i < stackSize; i++)
                 {
@@ -57,24 +70,30 @@ namespace Tofuwu.StackCats.Procedural
 
                 puzzle.StackHeightRequirements[puzzle.Stacks.IndexOf(stack)] = stack.Blocks.Count;
             }
-
         }
 
-        protected override Dictionary<IMoveStrategy<PuzzleArea, DesertFlavoredPuzzle>, float> GetMoveStrategies(int difficulty)
+        protected override Dictionary<
+            IMoveStrategy<PuzzleArea, DesertFlavoredPuzzle>,
+            float
+        > GetMoveStrategies(int difficulty)
         {
-            Dictionary<IMoveStrategy<PuzzleArea, DesertFlavoredPuzzle>, float> moveStrategies = new Dictionary<IMoveStrategy<PuzzleArea, DesertFlavoredPuzzle>, float>();
+            Dictionary<IMoveStrategy<PuzzleArea, DesertFlavoredPuzzle>, float> moveStrategies =
+                new Dictionary<IMoveStrategy<PuzzleArea, DesertFlavoredPuzzle>, float>();
 
-            MoveBlocksStrategy<PuzzleArea, DesertFlavoredPuzzle> moveBlocksStrategy = new MoveBlocksStrategy<PuzzleArea, DesertFlavoredPuzzle>();
+            MoveBlocksStrategy<PuzzleArea, DesertFlavoredPuzzle> moveBlocksStrategy =
+                new MoveBlocksStrategy<PuzzleArea, DesertFlavoredPuzzle>();
             moveStrategies.Add(moveBlocksStrategy, 0.0f);
 
             float difficultyMultiplier = difficulty / MAX_DIFFICULTY;
 
             int maxSumBlocks = Mathf.CeilToInt(difficultyMultiplier * difficultyMultiplier * 6.0f);
-            AddSumBlockStrategy<PuzzleArea, DesertFlavoredPuzzle> addSumBlockStrategy = new AddSumBlockStrategy<PuzzleArea, DesertFlavoredPuzzle>(maxSumBlocks);
+            AddSumBlockStrategy<PuzzleArea, DesertFlavoredPuzzle> addSumBlockStrategy =
+                new AddSumBlockStrategy<PuzzleArea, DesertFlavoredPuzzle>(maxSumBlocks);
             moveStrategies.Add(addSumBlockStrategy, 0.0f);
 
             int maxWildBlocks = Mathf.CeilToInt(difficultyMultiplier * difficultyMultiplier * 6.0f);
-            AddWildBlockStrategy<PuzzleArea, DesertFlavoredPuzzle> addWildBlockStategy = new AddWildBlockStrategy<PuzzleArea, DesertFlavoredPuzzle>(maxWildBlocks);
+            AddWildBlockStrategy<PuzzleArea, DesertFlavoredPuzzle> addWildBlockStategy =
+                new AddWildBlockStrategy<PuzzleArea, DesertFlavoredPuzzle>(maxWildBlocks);
             moveStrategies.Add(addWildBlockStategy, 0.0f);
 
             float strategyPercentageRemaining = 1.0f;

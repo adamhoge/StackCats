@@ -1,12 +1,15 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class ReplayCutScenesScene : SceneBehaviour
     {
         public CutScene TutorialCutScene;
-        public List<CutScene> UnlockedCutScenes { get { return _unlockedCutScenes; } }
+        public List<CutScene> UnlockedCutScenes
+        {
+            get { return _unlockedCutScenes; }
+        }
 
         private List<CutScene> _unlockedCutScenes = new List<CutScene>();
 
@@ -31,11 +34,14 @@ namespace Tofuwu.StackCats
 
             _unlockedCutScenes.Add(TutorialCutScene);
 
-            foreach(StoryFirstCompletionEvent e in eventManager.StoryFirstCompletionEvents)
+            foreach (StoryFirstCompletionEvent e in eventManager.StoryFirstCompletionEvents)
             {
-                foreach(EventResponse eventResponse in e.EventResponses)
+                foreach (EventResponse eventResponse in e.EventResponses)
                 {
-                    if (eventResponse.PlayCutScene != null && puzzleManager.IsStoryPuzzleCompleted(e.StoryPuzzle))
+                    if (
+                        eventResponse.PlayCutScene != null
+                        && puzzleManager.IsStoryPuzzleCompleted(e.StoryPuzzle)
+                    )
                     {
                         _unlockedCutScenes.Add(eventResponse.PlayCutScene);
                     }

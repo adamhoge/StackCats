@@ -1,9 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
-    public abstract class FarmFlavoredIntervalPuzzleGenerator
-    {
-
-    }
+    public abstract class FarmFlavoredIntervalPuzzleGenerator { }
 }

@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using Tofuwu.StackCats;
+﻿using RockhopperGames.StackCats;
+using UnityEngine;
 
 namespace RotaryHeart.Lib.SerializableDictionary
 {
@@ -13,10 +13,13 @@ namespace RotaryHeart.Lib.SerializableDictionary
         //Use [SerializeField] so that the editor draws the property field and sets a default value
         [SerializeField]
         private GameObject _gameObject;
+
         [SerializeField]
         private Material _material;
+
         [SerializeField]
         private AudioClip _audioClip;
+
         [SerializeField]
         private Item _item;
     }

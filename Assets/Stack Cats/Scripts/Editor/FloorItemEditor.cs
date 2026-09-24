@@ -1,4 +1,4 @@
-﻿using Tofuwu.StackCats;
+﻿using RockhopperGames.StackCats;
 using UnityEditor;
 using UnityEngine;
 
@@ -14,7 +14,7 @@ public class FloorItemEditor : Editor
         EditorGUILayout.Space();
         EditorGUILayout.TextField("ID:", floorItem.GetId());
 
-        if(GUILayout.Button("Regenerate ID"))
+        if (GUILayout.Button("Regenerate ID"))
         {
             floorItem.RegenerateId();
             EditorUtility.SetDirty(floorItem);

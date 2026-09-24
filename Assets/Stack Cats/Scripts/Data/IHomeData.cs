@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Tofuwu.StackCats.Data
+namespace RockhopperGames.StackCats.Data
 {
     [Serializable]
     public class VisitorData
@@ -18,7 +18,12 @@ namespace Tofuwu.StackCats.Data
         string CurrentWindowId { get; set; }
         string CurrentDresserId { get; set; }
         string GetDresserObjectId(int index);
-        void SetDresserObjectId(int index, string dresserObjectItemId, DateTime? placedDateTime = null, DateTime? activatedDateTime = null);
+        void SetDresserObjectId(
+            int index,
+            string dresserObjectItemId,
+            DateTime? placedDateTime = null,
+            DateTime? activatedDateTime = null
+        );
         DateTime GetDresserObjectPlacedDateTime(string placeableObjectId);
         DateTime GetDresserObjectActivatedDateTime(int index);
         DateTime GetDresserObjectActivatedDateTime(string placeableObjectId);

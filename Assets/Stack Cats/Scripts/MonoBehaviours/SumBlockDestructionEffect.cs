@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class SumBlockDestructionEffect : MonoBehaviour
     {
@@ -11,8 +11,12 @@ namespace Tofuwu.StackCats
 
         protected void Start()
         {
-            LeanTween.moveLocalY(SumBlock.gameObject, 0.5f, 0.25f).setEase(LeanTweenType.easeOutSine);
-            LeanTween.scale(SumBlock.gameObject, Vector3.zero, BlockShrinkDuration).setEase(LeanTweenType.easeOutSine);
+            LeanTween
+                .moveLocalY(SumBlock.gameObject, 0.5f, 0.25f)
+                .setEase(LeanTweenType.easeOutSine);
+            LeanTween
+                .scale(SumBlock.gameObject, Vector3.zero, BlockShrinkDuration)
+                .setEase(LeanTweenType.easeOutSine);
             LeanTween.alpha(SumBlock.gameObject, 0.0f, 0.25f).setEase(LeanTweenType.easeOutQuint);
 
             PlusBurst.SetActive(SumBlock.SumValue > 0);

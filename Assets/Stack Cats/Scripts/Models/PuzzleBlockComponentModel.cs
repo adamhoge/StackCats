@@ -1,13 +1,21 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats.Models
+namespace RockhopperGames.StackCats.Models
 {
     [System.Serializable]
     public class PuzzleBlockComponentModel
     {
-        public int PrimaryNumber { get { return _primaryNumber; } set { _primaryNumber = value; } }
+        public int PrimaryNumber
+        {
+            get { return _primaryNumber; }
+            set { _primaryNumber = value; }
+        }
 
-        public int SecondaryNumber { get { return _secondaryNumber; } set { _secondaryNumber = value; } }
+        public int SecondaryNumber
+        {
+            get { return _secondaryNumber; }
+            set { _secondaryNumber = value; }
+        }
 
         [SerializeField]
         private int _primaryNumber;

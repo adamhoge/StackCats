@@ -1,10 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
 using System.Collections.Generic;
-using System;
 using System.Linq;
-using Tofuwu.StackCats.Data;
+using RockhopperGames.StackCats.Data;
+using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class MinigameManager : MonoBehaviour
     {
@@ -14,7 +14,11 @@ namespace Tofuwu.StackCats
 
         public MinigameInformation CurrentMinigame { get; set; }
         public List<Cat> MinigameCats { get; set; }
-        public DateTime LastMinigamePlayedTime { get { return _minigameData.LastMinigamePlayedTime; } set { _minigameData.LastMinigamePlayedTime = value; } }
+        public DateTime LastMinigamePlayedTime
+        {
+            get { return _minigameData.LastMinigamePlayedTime; }
+            set { _minigameData.LastMinigamePlayedTime = value; }
+        }
 
         protected void Awake()
         {
@@ -24,9 +28,13 @@ namespace Tofuwu.StackCats
         public List<MinigameInformation> GetMinigamesForCats(List<Cat> cats)
         {
             int numCats = cats.Count;
-            return Minigames.List.Where(m =>
-                m.RequiredCats.All(c => cats.Contains(c)) &&
-                numCats >= m.MinimumCats && numCats <= m.MaximumCats).ToList();
+            return Minigames
+                .List.Where(m =>
+                    m.RequiredCats.All(c => cats.Contains(c))
+                    && numCats >= m.MinimumCats
+                    && numCats <= m.MaximumCats
+                )
+                .ToList();
         }
     }
 }

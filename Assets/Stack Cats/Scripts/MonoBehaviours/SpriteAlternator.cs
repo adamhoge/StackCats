@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public enum AlternationDirection
     {
         Forward,
         Reverse,
-        PingPong
+        PingPong,
     }
 
     public class SpriteAlternator : MonoBehaviour
@@ -94,7 +94,13 @@ namespace Tofuwu.StackCats
             }
             else
             {
-                LeanTween.alpha(CurrentSpriteRenderer.gameObject, 1.0f, TransitionInDuration + OverlapDuration).setEase(TransitionInTween);
+                LeanTween
+                    .alpha(
+                        CurrentSpriteRenderer.gameObject,
+                        1.0f,
+                        TransitionInDuration + OverlapDuration
+                    )
+                    .setEase(TransitionInTween);
             }
         }
 
@@ -106,12 +112,14 @@ namespace Tofuwu.StackCats
             PreviousSpriteRenderer.color = Color.white;
             if (TransitionOutDuration == 0 || TransitionOutTween == LeanTweenType.notUsed)
             {
-                LeanTween.alpha(PreviousSpriteRenderer.gameObject, 0.0f, 0.0f)
+                LeanTween
+                    .alpha(PreviousSpriteRenderer.gameObject, 0.0f, 0.0f)
                     .setDelay(OverlapDuration);
             }
             else
             {
-                LeanTween.alpha(PreviousSpriteRenderer.gameObject, 0.0f, TransitionOutDuration)
+                LeanTween
+                    .alpha(PreviousSpriteRenderer.gameObject, 0.0f, TransitionOutDuration)
                     .setEase(TransitionOutTween)
                     .setDelay(OverlapDuration);
             }

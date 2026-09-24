@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public delegate void Talking(ChatCatExpression expression);
 
@@ -11,7 +11,7 @@ namespace Tofuwu.StackCats
         Normal,
         Surprised,
         Thinking,
-        Heart
+        Heart,
     }
 
     [Serializable]
@@ -26,11 +26,21 @@ namespace Tofuwu.StackCats
     {
         public event Talking onTalking;
 
-        public void Say(string message, ChatCatEmote emote = ChatCatEmote.Normal, float letterInterval = 0.01f)
+        public void Say(
+            string message,
+            ChatCatEmote emote = ChatCatEmote.Normal,
+            float letterInterval = 0.01f
+        )
         {
-            ChatCatExpression expression = new ChatCatExpression { Message = message, Emote = emote, LetterInterval = letterInterval };
+            ChatCatExpression expression = new ChatCatExpression
+            {
+                Message = message,
+                Emote = emote,
+                LetterInterval = letterInterval,
+            };
 
-            if (onTalking != null) onTalking(expression);
+            if (onTalking != null)
+                onTalking(expression);
         }
 
         public void Say(List<string> messages)

@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class ChallengeAreaSelectionOverlayScreen : OverlayScreen
     {
@@ -20,10 +20,20 @@ namespace Tofuwu.StackCats.UI
         {
             foreach (PuzzleArea puzzleArea in _puzzleManager.PuzzleAreaCollection.List)
             {
-                ChallengeAreaInfoUI challengeAreaInfoInstance = Instantiate(ChallengeAreaInfoPrefab, ChallengeAreasRectTransform);
+                ChallengeAreaInfoUI challengeAreaInfoInstance = Instantiate(
+                    ChallengeAreaInfoPrefab,
+                    ChallengeAreasRectTransform
+                );
                 challengeAreaInfoInstance.PuzzleArea = puzzleArea;
-                challengeAreaInfoInstance.IsLocked = _puzzleManager.IsChallengeModeLocked(puzzleArea);
-                challengeAreaInfoInstance.Button.onClick.AddListener(delegate () { HomeScene.PlayChallengeMode(challengeAreaInfoInstance.PuzzleArea); });
+                challengeAreaInfoInstance.IsLocked = _puzzleManager.IsChallengeModeLocked(
+                    puzzleArea
+                );
+                challengeAreaInfoInstance.Button.onClick.AddListener(
+                    delegate()
+                    {
+                        HomeScene.PlayChallengeMode(challengeAreaInfoInstance.PuzzleArea);
+                    }
+                );
             }
         }
     }

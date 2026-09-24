@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class ChangeDresserOverlayScreen : ChangeDecorSelectableOverlayScreen<DresserItem>
     {

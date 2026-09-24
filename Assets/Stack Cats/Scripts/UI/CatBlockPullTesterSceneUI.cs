@@ -1,10 +1,10 @@
-using Tofuwu.StackCats.Procedural;
 using System;
 using System.Collections.Generic;
+using RockhopperGames.StackCats.Procedural;
 using TMPro;
 using UnityEngine;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class CatBlockPullTesterSceneUI : MonoBehaviour
     {
@@ -22,15 +22,18 @@ namespace Tofuwu.StackCats.UI
             CatBlockPullTesterScene.onPulled += OnPulled;
             CatBlockPullTesterScene.onTotalsChanged += OnTotalsChanged;
         }
+
         private void OnPulled(List<CatBlockContents> catBlockContentsList)
         {
-            if (ResetPullTextOnNewPull) PullTextInfo.text = string.Empty;
+            if (ResetPullTextOnNewPull)
+                PullTextInfo.text = string.Empty;
 
             foreach (var catBlockContents in catBlockContentsList)
             {
                 if (catBlockContents.Cat)
                 {
-                    PullTextInfo.text += $"Cat: {catBlockContents.Cat.Name} ({catBlockContents.Cat.Rarity})\n";
+                    PullTextInfo.text +=
+                        $"Cat: {catBlockContents.Cat.Name} ({catBlockContents.Cat.Rarity})\n";
                 }
                 else if (catBlockContents.NumSilverPaws > 0)
                 {
@@ -42,9 +45,17 @@ namespace Tofuwu.StackCats.UI
                 }
             }
         }
-        private void OnTotalsChanged(int totalNumPulls, int numCommonCats, int numUncommonCats, int numRareCats, int numSilverPaws)
+
+        private void OnTotalsChanged(
+            int totalNumPulls,
+            int numCommonCats,
+            int numUncommonCats,
+            int numRareCats,
+            int numSilverPaws
+        )
         {
-            if (totalNumPulls == 0) PullTextInfo.text = string.Empty;
+            if (totalNumPulls == 0)
+                PullTextInfo.text = string.Empty;
             TotalNumPulls.text = totalNumPulls.ToString();
             TotalCommonCatsText.text = numCommonCats.ToString();
             TotalUncommonCatsText.text = numUncommonCats.ToString();

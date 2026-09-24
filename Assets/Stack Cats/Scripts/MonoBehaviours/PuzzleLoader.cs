@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Security.Cryptography;
+using RockhopperGames.StackCats.Models;
 using UnityEngine;
-using Tofuwu.StackCats.Models;
 using Random = UnityEngine.Random;
 
-
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public delegate void PuzzleBeginLoad(Puzzle puzzle, bool wasRestarted, bool isUndo);
     public delegate void PuzzleLoaded(Puzzle puzzle);
@@ -17,7 +16,7 @@ namespace Tofuwu.StackCats
     {
         Idle,
         LoadingPuzzle,
-        UnloadingPuzzle
+        UnloadingPuzzle,
     }
 
     /// <summary>
@@ -59,7 +58,10 @@ namespace Tofuwu.StackCats
         /// <summary>
         /// The puzzle currently loaded.
         /// </summary>
-        public Puzzle Puzzle { get { return _puzzle; } }
+        public Puzzle Puzzle
+        {
+            get { return _puzzle; }
+        }
 
         private PuzzleLoaderState _state;
         private AudioManager _audio;
@@ -80,14 +82,17 @@ namespace Tofuwu.StackCats
         /// <param name="isInteractable"></param>
         public void SetInteractable(bool isInteractable)
         {
-            if (_isInteractable == isInteractable) return;
+            if (_isInteractable == isInteractable)
+                return;
 
             _isInteractable = isInteractable;
 
             if (_puzzle)
             {
-                PointerPuzzleController pointerPuzzleController = _puzzle.GetComponent<PointerPuzzleController>();
-                if (pointerPuzzleController) pointerPuzzleController.enabled = _isInteractable;
+                PointerPuzzleController pointerPuzzleController =
+                    _puzzle.GetComponent<PointerPuzzleController>();
+                if (pointerPuzzleController)
+                    pointerPuzzleController.enabled = _isInteractable;
             }
         }
 
@@ -96,20 +101,37 @@ namespace Tofuwu.StackCats
         /// </summary>
         /// <param name="puzzleData">The puzzle data from which to load the puzzle.</param>
         /// <param name="puzzleArea">The area used to build the puzzle.</param>
-        public void LoadPuzzle(string puzzleJsonData, PuzzleArea puzzleArea, bool wasRestarted = false, bool isUndo = false, bool isAnimated = true)
+        public void LoadPuzzle(
+            string puzzleJsonData,
+            PuzzleArea puzzleArea,
+            bool wasRestarted = false,
+            bool isUndo = false,
+            bool isAnimated = true
+        )
         {
-            if (_state != PuzzleLoaderState.Idle) return;
+            if (_state != PuzzleLoaderState.Idle)
+                return;
 
-            Puzzle puzzle = PuzzleBuilder.BuildFromModel(puzzleJsonData, puzzleArea, GameManager.Instance.Cats);
+            Puzzle puzzle = PuzzleBuilder.BuildFromModel(
+                puzzleJsonData,
+                puzzleArea,
+                GameManager.Instance.Cats
+            );
 
-            if (puzzle) LoadPuzzle(puzzle, wasRestarted, isUndo, isAnimated);
+            if (puzzle)
+                LoadPuzzle(puzzle, wasRestarted, isUndo, isAnimated);
         }
 
         /// <summary>
         /// Load a puzzle.
         /// </summary>
         /// <param name="puzzle">The puzzle to load.</param>
-        public void LoadPuzzle(Puzzle puzzle, bool wasRestarted = false, bool isUndo = false, bool animated = true)
+        public void LoadPuzzle(
+            Puzzle puzzle,
+            bool wasRestarted = false,
+            bool isUndo = false,
+            bool animated = true
+        )
         {
             if (_state == PuzzleLoaderState.Idle && _puzzle)
             {
@@ -118,7 +140,8 @@ namespace Tofuwu.StackCats
 
             if (_state == PuzzleLoaderState.UnloadingPuzzle)
             {
-                if (_puzzleToLoad) Destroy(_puzzleToLoad.gameObject);
+                if (_puzzleToLoad)
+                    Destroy(_puzzleToLoad.gameObject);
 
                 _puzzleToLoad = puzzle;
                 _puzzleToLoadWasRestarted = wasRestarted;
@@ -133,7 +156,8 @@ namespace Tofuwu.StackCats
                 Destroy(puzzle.gameObject);
             }
 
-            if (_state != PuzzleLoaderState.Idle || _puzzle) return;
+            if (_state != PuzzleLoaderState.Idle || _puzzle)
+                return;
 
             _puzzle = puzzle;
             _puzzle.name = "Puzzle";
@@ -152,7 +176,8 @@ namespace Tofuwu.StackCats
                 _loadTimer = 0.0f;
             }
 
-            if (onPuzzleBeginLoad != null) onPuzzleBeginLoad(_puzzle, wasRestarted, isUndo);
+            if (onPuzzleBeginLoad != null)
+                onPuzzleBeginLoad(_puzzle, wasRestarted, isUndo);
         }
 
         /// <summary>
@@ -160,10 +185,12 @@ namespace Tofuwu.StackCats
         /// </summary>
         public void UnloadPuzzle()
         {
-            if (_state != PuzzleLoaderState.Idle || !_puzzle) return;
+            if (_state != PuzzleLoaderState.Idle || !_puzzle)
+                return;
 
             _state = PuzzleLoaderState.UnloadingPuzzle;
-            if (onPuzzleBeginUnload != null) onPuzzleBeginUnload(_puzzle);
+            if (onPuzzleBeginUnload != null)
+                onPuzzleBeginUnload(_puzzle);
         }
 
         /// <summary>
@@ -171,7 +198,8 @@ namespace Tofuwu.StackCats
         /// </summary>
         public void ReloadPuzzle()
         {
-            if (_state != PuzzleLoaderState.Idle || !_puzzle) return;
+            if (_state != PuzzleLoaderState.Idle || !_puzzle)
+                return;
 
             UnloadPuzzle();
             _reloadPuzzle = true;
@@ -211,7 +239,8 @@ namespace Tofuwu.StackCats
 
         private void CompleteLoadPuzzle()
         {
-            if (onPuzzleLoaded != null) onPuzzleLoaded(_puzzle);
+            if (onPuzzleLoaded != null)
+                onPuzzleLoaded(_puzzle);
 
             ChangeState(PuzzleLoaderState.Idle);
         }
@@ -227,7 +256,8 @@ namespace Tofuwu.StackCats
                 _puzzleCopy.gameObject.SetActive(true);
                 LoadPuzzle(_puzzleCopy, true);
                 _reloadPuzzle = false;
-                if (onPuzzleRestarted != null) onPuzzleRestarted(_puzzle);
+                if (onPuzzleRestarted != null)
+                    onPuzzleRestarted(_puzzle);
             }
             else
             {
@@ -235,12 +265,18 @@ namespace Tofuwu.StackCats
                 _puzzle = null;
                 Destroy(_puzzleCopy.gameObject);
                 _puzzleCopy = null;
-                if (onPuzzleUnloaded != null) onPuzzleUnloaded(_puzzle);
+                if (onPuzzleUnloaded != null)
+                    onPuzzleUnloaded(_puzzle);
             }
 
             if (_puzzleToLoad != null)
             {
-                LoadPuzzle(_puzzleToLoad, _puzzleToLoadWasRestarted, _puzzleToLoadIsUndo, _puzzleToLoadIsAnimated);
+                LoadPuzzle(
+                    _puzzleToLoad,
+                    _puzzleToLoadWasRestarted,
+                    _puzzleToLoadIsUndo,
+                    _puzzleToLoadIsAnimated
+                );
                 _puzzleToLoad = null;
             }
         }
@@ -265,7 +301,8 @@ namespace Tofuwu.StackCats
                         .setEase(LeanTweenType.easeInSine)
                         .setOnComplete(playSound, stack);
                 }
-                if (delay > _loadTimer) _loadTimer = delay;
+                if (delay > _loadTimer)
+                    _loadTimer = delay;
             }
 
             _loadTimer += fallDuration;
@@ -276,7 +313,8 @@ namespace Tofuwu.StackCats
             Stack stack = (Stack)stackObject;
             int stackIndex = _puzzle.Stacks.IndexOf(stack);
             float panning = (float)stackIndex / (_puzzle.Stacks.Count - 1) * 0.5f - 0.25f;
-            if (BlockMovedSoundEffect) _audio.PlaySoundEffect(BlockMovedSoundEffect, panning);
+            if (BlockMovedSoundEffect)
+                _audio.PlaySoundEffect(BlockMovedSoundEffect, panning);
         }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using System;
-using UnityEngine;
-using Tofuwu.StackCats.Models;
+using RockhopperGames.StackCats.Models;
 using TMPro;
+using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public enum ChallengeRunSceneState
     {
@@ -11,13 +11,16 @@ namespace Tofuwu.StackCats
         NotStarted,
         PlayingPuzzle,
         ViewingProgress,
-        RunCompleted
+        RunCompleted,
     }
 
     public delegate void DifficultyChanged(ChallengeRunDifficulty difficulty);
     public delegate void ChallengePuzzleLoaded(Puzzle puzzle, ChallengePuzzleModel challengePuzzle);
     public delegate void ChallengePuzzleUnloaded();
-    public delegate void ChallengePuzzleCompleted(Puzzle puzzle, PuzzleCompletionType completionType);
+    public delegate void ChallengePuzzleCompleted(
+        Puzzle puzzle,
+        PuzzleCompletionType completionType
+    );
     public delegate void MovesRemainingChanged(int movesRemaining);
     public delegate void UndoUsed(int numUndosRemaining);
     public delegate void LuckPotionUsed();
@@ -41,12 +44,18 @@ namespace Tofuwu.StackCats
         /// <summary>
         /// The current challenge run (if any).
         /// </summary>
-        public ChallengeRunModel CurrentChallengeRun { get { return _currentChallengeRun; } }
+        public ChallengeRunModel CurrentChallengeRun
+        {
+            get { return _currentChallengeRun; }
+        }
 
         /// <summary>
         /// Whether or not the challenge run can be played.
         /// </summary>
-        public bool CanPlay { get { return _currencyManager.GetCurrencyHeld(Currency.SilverPaw) >= _yarnCost; } }
+        public bool CanPlay
+        {
+            get { return _currencyManager.GetCurrencyHeld(Currency.SilverPaw) >= _yarnCost; }
+        }
 
         /// <summary>
         /// Indicates whether or not a luck potion can be used.
@@ -55,23 +64,29 @@ namespace Tofuwu.StackCats
         {
             get
             {
-                return _currentChallengeRun != null &&
-                    _currentChallengeRun.CurrentPuzzle != null &&
-                    !_currentChallengeRun.CurrentPuzzle.WasLuckPotionUsed &&
-                    !_currentChallengeRun.CurrentPuzzle.WasStarted && 
-                    _stuffManager.HasItem(LuckPotionItem);
+                return _currentChallengeRun != null
+                    && _currentChallengeRun.CurrentPuzzle != null
+                    && !_currentChallengeRun.CurrentPuzzle.WasLuckPotionUsed
+                    && !_currentChallengeRun.CurrentPuzzle.WasStarted
+                    && _stuffManager.HasItem(LuckPotionItem);
             }
         }
 
         /// <summary>
         /// The selected challenge run difficulty.
         /// </summary>
-        public ChallengeRunDifficulty SelectedDifficulty { get { return _puzzleManager.DefaultChallengeRunDifficulty; } }
+        public ChallengeRunDifficulty SelectedDifficulty
+        {
+            get { return _puzzleManager.DefaultChallengeRunDifficulty; }
+        }
 
         /// <summary>
         /// The number of automatic special puzzles remaining.
         /// </summary>
-        public int LuckPotionsRemaining { get { return _puzzleManager.SpecialPuzzlesRemaining; } }
+        public int LuckPotionsRemaining
+        {
+            get { return _puzzleManager.SpecialPuzzlesRemaining; }
+        }
 
         private ChallengeRunSceneState _state;
         private CurrencyManager _currencyManager;
@@ -88,9 +103,21 @@ namespace Tofuwu.StackCats
                 if (_puzzleUndoer.UndoMove())
                 {
                     int undosRemaining = _currentChallengeRun.CurrentPuzzle.UndosRemaining - 1;
-                    _puzzleManager.UpdateCurrentChallengePuzzle(_puzzleArea, PuzzleBuilder.GetPuzzleJsonData(_puzzle), _puzzle.NumMovesMade, CatsSeen, NewCatsSeen, undosRemaining);
-                    _currentChallengeRun = _puzzleManager.GetCurrentChallengeRun(_puzzleManager.CurrentArea);
-                    if (onUndoUsed != null) { onUndoUsed(undosRemaining); }
+                    _puzzleManager.UpdateCurrentChallengePuzzle(
+                        _puzzleArea,
+                        PuzzleBuilder.GetPuzzleJsonData(_puzzle),
+                        _puzzle.NumMovesMade,
+                        CatsSeen,
+                        NewCatsSeen,
+                        undosRemaining
+                    );
+                    _currentChallengeRun = _puzzleManager.GetCurrentChallengeRun(
+                        _puzzleManager.CurrentArea
+                    );
+                    if (onUndoUsed != null)
+                    {
+                        onUndoUsed(undosRemaining);
+                    }
                 }
             }
         }
@@ -114,38 +141,59 @@ namespace Tofuwu.StackCats
 
         public void StartChallengeRun()
         {
-            if (_state == ChallengeRunSceneState.None || _state == ChallengeRunSceneState.NotStarted)
+            if (
+                _state == ChallengeRunSceneState.None
+                || _state == ChallengeRunSceneState.NotStarted
+            )
             {
                 _currencyManager.ChangeCurrency(Currency.SilverPaw, -_yarnCost);
-                _currentChallengeRun = _puzzleManager.StartChallengeRun(_puzzleArea, _puzzleManager.DefaultChallengeRunDifficulty);
+                _currentChallengeRun = _puzzleManager.StartChallengeRun(
+                    _puzzleArea,
+                    _puzzleManager.DefaultChallengeRunDifficulty
+                );
                 ChangeState(ChallengeRunSceneState.ViewingProgress);
             }
         }
 
         public void LowerDifficulty()
         {
-            if (_puzzleManager.DefaultChallengeRunDifficulty == ChallengeRunDifficulty.VeryEasy) return;
+            if (_puzzleManager.DefaultChallengeRunDifficulty == ChallengeRunDifficulty.VeryEasy)
+                return;
 
             --_puzzleManager.DefaultChallengeRunDifficulty;
-            if (onDifficultyChanged != null) onDifficultyChanged(_puzzleManager.DefaultChallengeRunDifficulty);
+            if (onDifficultyChanged != null)
+                onDifficultyChanged(_puzzleManager.DefaultChallengeRunDifficulty);
         }
 
         public void RaiseDifficulty()
         {
-            if (_puzzleManager.DefaultChallengeRunDifficulty == ChallengeRunDifficulty.VeryHard) return;
+            if (_puzzleManager.DefaultChallengeRunDifficulty == ChallengeRunDifficulty.VeryHard)
+                return;
 
             ++_puzzleManager.DefaultChallengeRunDifficulty;
-            if (onDifficultyChanged != null) onDifficultyChanged(_puzzleManager.DefaultChallengeRunDifficulty);
+            if (onDifficultyChanged != null)
+                onDifficultyChanged(_puzzleManager.DefaultChallengeRunDifficulty);
         }
 
         public void UseLuckPotion()
         {
             if (CanUseLuckPotion)
             {
-                string puzzleJsonData = _currentChallengeRun.CurrentPuzzle.PuzzleCurrentStateJsonData;
-                Puzzle puzzle = PuzzleBuilder.BuildFromModel(puzzleJsonData, _puzzleArea, _catManager);
+                string puzzleJsonData = _currentChallengeRun
+                    .CurrentPuzzle
+                    .PuzzleCurrentStateJsonData;
+                Puzzle puzzle = PuzzleBuilder.BuildFromModel(
+                    puzzleJsonData,
+                    _puzzleArea,
+                    _catManager
+                );
                 puzzle.IsSpecial = true;
-                _puzzleManager.AddStuffToCatBlocks(puzzle, _puzzleArea, PuzzleMode.Challenge, false);
+                _puzzleManager.AddStuffToCatBlocks(
+                    puzzle,
+                    _puzzleArea,
+                    PuzzleMode.Challenge,
+                    false
+                );
                 string updatedPuzzleJsonData = PuzzleBuilder.GetPuzzleJsonData(puzzle);
                 Destroy(puzzle.gameObject);
 
@@ -153,7 +201,8 @@ namespace Tofuwu.StackCats
                 {
                     _currentChallengeRun = _puzzleManager.GetCurrentChallengeRun(_puzzleArea);
                     _stuffManager.RemoveItem(LuckPotionItem, 1);
-                    if(onLuckPotionUsed != null) onLuckPotionUsed();
+                    if (onLuckPotionUsed != null)
+                        onLuckPotionUsed();
                 }
             }
         }
@@ -183,7 +232,10 @@ namespace Tofuwu.StackCats
         {
             if (_state == ChallengeRunSceneState.ViewingProgress)
             {
-                _gameManager.ConfirmAction("Are you sure you want to end the current challenge run?", ConfirmEndChallengeRun);
+                _gameManager.ConfirmAction(
+                    "Are you sure you want to end the current challenge run?",
+                    ConfirmEndChallengeRun
+                );
             }
             else if (_state == ChallengeRunSceneState.RunCompleted)
             {
@@ -271,7 +323,10 @@ namespace Tofuwu.StackCats
             TopBoundarySprite.transform.localPosition = Vector2.up * 6.25f;
         }
 
-        protected override void OnPuzzleCompleted(Puzzle puzzle, PuzzleCompletionType completionType)
+        protected override void OnPuzzleCompleted(
+            Puzzle puzzle,
+            PuzzleCompletionType completionType
+        )
         {
             base.OnPuzzleCompleted(puzzle, completionType);
 
@@ -280,14 +335,16 @@ namespace Tofuwu.StackCats
 
         private void ChangeState(ChallengeRunSceneState state)
         {
-            if (_state == state) return;
+            if (_state == state)
+                return;
 
             switch (_state)
             {
                 case ChallengeRunSceneState.PlayingPuzzle:
                     _puzzleLoader.UnloadPuzzle();
                     HidePuzzleBackdrop();
-                    if (onChallengePuzzleUnloaded != null) onChallengePuzzleUnloaded();
+                    if (onChallengePuzzleUnloaded != null)
+                        onChallengePuzzleUnloaded();
                     break;
                 default:
                     break;
@@ -298,12 +355,21 @@ namespace Tofuwu.StackCats
             switch (_state)
             {
                 case ChallengeRunSceneState.PlayingPuzzle:
-                    _puzzleLoader.LoadPuzzle(_currentChallengeRun.CurrentPuzzle.PuzzleCurrentStateJsonData, _puzzleArea);
+                    _puzzleLoader.LoadPuzzle(
+                        _currentChallengeRun.CurrentPuzzle.PuzzleCurrentStateJsonData,
+                        _puzzleArea
+                    );
                     ShowPuzzleBackdrop(_puzzleLoader.Puzzle);
-                    _puzzleLoader.Puzzle.NumMovesMade = _currentChallengeRun.CurrentPuzzle.MovesMade;
+                    _puzzleLoader.Puzzle.NumMovesMade = _currentChallengeRun
+                        .CurrentPuzzle
+                        .MovesMade;
                     CatsSeen = _currentChallengeRun.CurrentPuzzle.CatsSeen;
                     NewCatsSeen = _currentChallengeRun.CurrentPuzzle.NewCatsSeen;
-                    if (onChallengePuzzleLoaded != null) onChallengePuzzleLoaded(_puzzleLoader.Puzzle, _currentChallengeRun.CurrentPuzzle);
+                    if (onChallengePuzzleLoaded != null)
+                        onChallengePuzzleLoaded(
+                            _puzzleLoader.Puzzle,
+                            _currentChallengeRun.CurrentPuzzle
+                        );
                     break;
                 case ChallengeRunSceneState.ViewingProgress:
                     _currentChallengeRun = _puzzleManager.GetCurrentChallengeRun(_puzzleArea);
@@ -312,12 +378,17 @@ namespace Tofuwu.StackCats
                     break;
             }
 
-            if (onStateChanged != null) onStateChanged(_state);
+            if (onStateChanged != null)
+                onStateChanged(_state);
         }
 
         private void CompletePuzzle(Puzzle puzzle, PuzzleCompletionType completionType)
         {
-            _puzzleManager.CompleteCurrentChallengePuzzle(_puzzleArea, completionType, puzzle.NumMovesMade);
+            _puzzleManager.CompleteCurrentChallengePuzzle(
+                _puzzleArea,
+                completionType,
+                puzzle.NumMovesMade
+            );
             _currentChallengeRun = _puzzleManager.GetCurrentChallengeRun(_puzzleArea);
 
             if (completionType == PuzzleCompletionType.PuzzleSolved)
@@ -337,13 +408,21 @@ namespace Tofuwu.StackCats
                 controller.enabled = false;
             }
 
-            if (onChallengePuzzleCompleted != null) onChallengePuzzleCompleted(puzzle, completionType);
+            if (onChallengePuzzleCompleted != null)
+                onChallengePuzzleCompleted(puzzle, completionType);
         }
 
         private void UpdateChallengePuzzleData(Puzzle puzzle)
         {
             int undosRemaining = _currentChallengeRun.CurrentPuzzle.UndosRemaining;
-            _puzzleManager.UpdateCurrentChallengePuzzle(_puzzleArea, PuzzleBuilder.GetPuzzleJsonData(puzzle), puzzle.NumMovesMade, CatsSeen, NewCatsSeen, undosRemaining);
+            _puzzleManager.UpdateCurrentChallengePuzzle(
+                _puzzleArea,
+                PuzzleBuilder.GetPuzzleJsonData(puzzle),
+                puzzle.NumMovesMade,
+                CatsSeen,
+                NewCatsSeen,
+                undosRemaining
+            );
             ChallengePuzzleModel challengePuzzle = _currentChallengeRun.CurrentPuzzle;
 
             int maxMoves = challengePuzzle.MaxMoves;
@@ -354,7 +433,8 @@ namespace Tofuwu.StackCats
                     puzzle.CompletePuzzle(PuzzleCompletionType.PuzzleFailed);
                 }
 
-                if (onMovesRemainingChanged != null) onMovesRemainingChanged(challengePuzzle.MaxMoves - puzzle.NumMovesMade);
+                if (onMovesRemainingChanged != null)
+                    onMovesRemainingChanged(challengePuzzle.MaxMoves - puzzle.NumMovesMade);
             }
         }
 
@@ -372,7 +452,12 @@ namespace Tofuwu.StackCats
             _puzzle = puzzle;
         }
 
-        private void OnBlockMoveResolved(Puzzle puzzle, Stack source, Block block, Stack destination)
+        private void OnBlockMoveResolved(
+            Puzzle puzzle,
+            Stack source,
+            Block block,
+            Stack destination
+        )
         {
             if (!puzzle.IsCompleted)
             {

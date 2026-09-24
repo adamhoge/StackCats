@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class CatAvatarStandardMannerisms : CatAvatarMannerisms
     {
@@ -29,33 +29,48 @@ namespace Tofuwu.StackCats
         {
             if (!_catAvatar.Animator.IsSleeping)
             {
-                if (Time.time >= _lastStretchTime + StretchMinInterval && Random.value > 1.0f - StretchOdds)
+                if (
+                    Time.time >= _lastStretchTime + StretchMinInterval
+                    && Random.value > 1.0f - StretchOdds
+                )
                 {
                     _catAvatar.Animator.Stretch();
                     _lastStretchTime = Time.time;
                 }
-                else if (Time.time >= _lastScratchTime + ScratchMinInterval && Random.value > 1.0f - ScratchOdds)
+                else if (
+                    Time.time >= _lastScratchTime + ScratchMinInterval
+                    && Random.value > 1.0f - ScratchOdds
+                )
                 {
                     _catAvatar.Animator.Scratch();
                     _lastScratchTime = Time.time;
                 }
-                else if (Time.time >= _lastBatheTime + BatheMinInterval && Random.value > 1.0f - BatheOdds)
+                else if (
+                    Time.time >= _lastBatheTime + BatheMinInterval
+                    && Random.value > 1.0f - BatheOdds
+                )
                 {
                     _catAvatar.Animator.Bathe();
                     _lastBatheTime = Time.time;
                 }
-                else if (Time.time >= _lastSurprisedTime + SurprisedMinInterval && Random.value > 1.0f - SurpriseOdds)
+                else if (
+                    Time.time >= _lastSurprisedTime + SurprisedMinInterval
+                    && Random.value > 1.0f - SurpriseOdds
+                )
                 {
                     _catAvatar.Animator.Surprised();
                     _lastSurprisedTime = Time.time;
                 }
-                else if (Time.time >= _lastSleepTime + SleepMinInterval && Random.value > 1.0f - SleepOdds)
+                else if (
+                    Time.time >= _lastSleepTime + SleepMinInterval
+                    && Random.value > 1.0f - SleepOdds
+                )
                 {
                     _catAvatar.Animator.Sleep();
                     _wakeTime = Time.time + Random.Range(SleepMinDuration, SleepMaxDuration);
                 }
             }
-            else if(Time.time >= _wakeTime)
+            else if (Time.time >= _wakeTime)
             {
                 _catAvatar.Animator.Stretch();
                 _lastStretchTime = Time.time;

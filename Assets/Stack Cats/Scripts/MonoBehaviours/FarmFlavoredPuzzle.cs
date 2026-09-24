@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
+using RockhopperGames.StackCats.Data;
 using UnityEngine;
-using Tofuwu.StackCats.Data;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class FarmFlavoredPuzzle : Puzzle
     {
@@ -16,21 +16,33 @@ namespace Tofuwu.StackCats
         /// <returns>A flag indicating whether or not the provided block is movable.</returns>
         public override bool IsMovable(Stack source, Block block)
         {
-            if (!source || !block || !source.Blocks.Contains(block)) return false;
+            if (!source || !block || !source.Blocks.Contains(block))
+                return false;
 
-            if (block.GetComponents<BlockComponent>().FirstOrDefault(bc => !bc.IsMovable)) return false;
+            if (block.GetComponents<BlockComponent>().FirstOrDefault(bc => !bc.IsMovable))
+                return false;
 
-            Type targetBlockType = block.GetComponent<PuzzleBlock>() ? typeof(PuzzleBlock) : block.GetComponent<BlockComponent>().GetType();
-            if (targetBlockType == typeof(CatBlock)) return false;
+            Type targetBlockType = block.GetComponent<PuzzleBlock>()
+                ? typeof(PuzzleBlock)
+                : block.GetComponent<BlockComponent>().GetType();
+            if (targetBlockType == typeof(CatBlock))
+                return false;
 
             for (int i = source.Blocks.Count - 1; i >= 0; i--)
             {
                 Block destinationBlock = source.Blocks[i];
-                Type destinationBlockType = destinationBlock.GetComponent<PuzzleBlock>() ? typeof(PuzzleBlock) : destinationBlock.GetComponent<BlockComponent>().GetType();
+                Type destinationBlockType = destinationBlock.GetComponent<PuzzleBlock>()
+                    ? typeof(PuzzleBlock)
+                    : destinationBlock.GetComponent<BlockComponent>().GetType();
 
-                if (destinationBlock == block) return true;
+                if (destinationBlock == block)
+                    return true;
 
-                if (destinationBlockType == typeof(CatBlock) || destinationBlockType != targetBlockType) return false;
+                if (
+                    destinationBlockType == typeof(CatBlock)
+                    || destinationBlockType != targetBlockType
+                )
+                    return false;
             }
 
             return true;
@@ -44,7 +56,8 @@ namespace Tofuwu.StackCats
         /// <returns>A flag indicating whether or not the provided block is placeable on the target block.</returns>
         public override bool IsPlaceable(Block from, Block to)
         {
-            return from.GetComponents<BlockComponent>().All(bc => !bc.enabled || bc.IsPlaceableOn(to));
+            return from.GetComponents<BlockComponent>()
+                .All(bc => !bc.enabled || bc.IsPlaceableOn(to));
         }
 
         /// <summary>
@@ -56,7 +69,7 @@ namespace Tofuwu.StackCats
         public override List<string> GetIsPlaceableRuleExceptions(Block from, Block to)
         {
             List<string> ruleExceptions = new List<string>();
-            foreach(BlockComponent blockComponent in from.GetComponents<BlockComponent>())
+            foreach (BlockComponent blockComponent in from.GetComponents<BlockComponent>())
             {
                 ruleExceptions.AddRange(blockComponent.GetIsPlaceableOnRuleExceptions(to));
             }
@@ -72,7 +85,8 @@ namespace Tofuwu.StackCats
         {
             if (!IsEditMode)
             {
-                if (IsComplete()) CompletePuzzle(PuzzleCompletionType.PuzzleSolved);
+                if (IsComplete())
+                    CompletePuzzle(PuzzleCompletionType.PuzzleSolved);
             }
         }
 

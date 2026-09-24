@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class CurrencyFadeInfo : PoolObject
     {
@@ -40,9 +40,16 @@ namespace Tofuwu.StackCats.UI
 
             LeanTween.scale(gameObject, Vector3.one * 1.25f, 0.5f).setEase(LeanTweenType.punch);
             float direction = Amount > 0 ? 1 : -1;
-            LeanTween.moveLocalY(gameObject, transform.localPosition.y + MoveDistance * direction, 1.25f);
+            LeanTween.moveLocalY(
+                gameObject,
+                transform.localPosition.y + MoveDistance * direction,
+                1.25f
+            );
             CurrencyCanvas.alpha = 1.0f;
-            LeanTween.alphaCanvas(CurrencyCanvas, 0.0f, 0.25f).setDelay(1.0f).setOnComplete(ReturnToPool);
+            LeanTween
+                .alphaCanvas(CurrencyCanvas, 0.0f, 0.25f)
+                .setDelay(1.0f)
+                .setOnComplete(ReturnToPool);
         }
 
         private void ReturnToPool()

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public delegate void ItemBought(ShopListing shopListing);
 
@@ -20,10 +20,11 @@ namespace Tofuwu.StackCats
 
         public bool BuyItem(ShopListing shopListing)
         {
-            if (!_currencyManager.HasAmount(shopListing.Price)) return false;
+            if (!_currencyManager.HasAmount(shopListing.Price))
+                return false;
 
             CurrencyAmountDictionary inverseListPrice = new CurrencyAmountDictionary();
-            foreach(KeyValuePair<Currency, int> currency in shopListing.Price)
+            foreach (KeyValuePair<Currency, int> currency in shopListing.Price)
             {
                 inverseListPrice.Add(currency.Key, -currency.Value);
             }
@@ -31,7 +32,8 @@ namespace Tofuwu.StackCats
 
             _stuffManager.AddItem(shopListing.Item);
 
-            if (onItemBought != null) onItemBought(shopListing);
+            if (onItemBought != null)
+                onItemBought(shopListing);
 
             return true;
         }

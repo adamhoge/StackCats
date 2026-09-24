@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     [CreateAssetMenu(fileName = "Currency Details", menuName = "Stack Cats/Currency Details")]
     public class CurrencyDetails : ScriptableObject

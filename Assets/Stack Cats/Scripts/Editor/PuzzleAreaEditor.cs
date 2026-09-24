@@ -1,4 +1,4 @@
-﻿using Tofuwu.StackCats;
+﻿using RockhopperGames.StackCats;
 using UnityEditor;
 
 [CustomEditor(typeof(PuzzleArea))]
@@ -6,7 +6,7 @@ public class PuzzleAreaEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-        PuzzleArea puzzleArea = (PuzzleArea) target;
+        PuzzleArea puzzleArea = (PuzzleArea)target;
 
         base.OnInspectorGUI();
         EditorGUILayout.Space();

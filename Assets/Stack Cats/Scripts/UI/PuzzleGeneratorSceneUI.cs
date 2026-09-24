@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class PuzzleGeneratorSceneUI : MonoBehaviour
     {
@@ -11,7 +11,8 @@ namespace Tofuwu.StackCats
 
         protected void Update()
         {
-            EstimatedDifficultyText.text = PuzzleGeneratorScene.CurrentPuzzleEstimatedDifficulty.ToString();
+            EstimatedDifficultyText.text =
+                PuzzleGeneratorScene.CurrentPuzzleEstimatedDifficulty.ToString();
             NumMovesMadeText.text = PuzzleGeneratorScene.CurrentPuzzleNumMovesMade.ToString();
         }
     }

@@ -1,7 +1,7 @@
-﻿using Tofuwu.StackCats.Models;
+﻿using RockhopperGames.StackCats.Models;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public static class FarmFlavoredPuzzleBuilder
     {

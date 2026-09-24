@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Tofuwu.StackCats.Procedural
+namespace RockhopperGames.StackCats.Procedural
 {
     public static class CatBlockContentsGenerator
     {
@@ -15,7 +15,9 @@ namespace Tofuwu.StackCats.Procedural
             public float LuckBonusForArea { get; set; }
         }
 
-        public static CatBlockContents GenerateCatBlockContents(PuzzleCatBlockContentsInfo puzzleCatBlockContentsInfo)
+        public static CatBlockContents GenerateCatBlockContents(
+            PuzzleCatBlockContentsInfo puzzleCatBlockContentsInfo
+        )
         {
             CatBlockContents catBlockContents = new CatBlockContents();
 
@@ -23,7 +25,10 @@ namespace Tofuwu.StackCats.Procedural
 
             if (!catBlockContents.Cat)
             {
-                catBlockContents.NumSilverPaws = GetSilverPawsForCatBlock(puzzleCatBlockContentsInfo.PuzzleMode, puzzleCatBlockContentsInfo.IsLuckyPuzzle);
+                catBlockContents.NumSilverPaws = GetSilverPawsForCatBlock(
+                    puzzleCatBlockContentsInfo.PuzzleMode,
+                    puzzleCatBlockContentsInfo.IsLuckyPuzzle
+                );
             }
 
             return catBlockContents;
@@ -31,7 +36,8 @@ namespace Tofuwu.StackCats.Procedural
 
         private static Cat GetCatForCatBlock(PuzzleCatBlockContentsInfo puzzleCatBlockContentsInfo)
         {
-            if (puzzleCatBlockContentsInfo.CatsAlreadyInBlocks.Count == 5) return null;
+            if (puzzleCatBlockContentsInfo.CatsAlreadyInBlocks.Count == 5)
+                return null;
 
             PuzzleArea puzzleArea = puzzleCatBlockContentsInfo.PuzzleArea;
             bool isLuckyPuzzle = puzzleCatBlockContentsInfo.IsLuckyPuzzle;
@@ -40,18 +46,29 @@ namespace Tofuwu.StackCats.Procedural
             switch (puzzleCatBlockContentsInfo.PuzzleMode)
             {
                 case PuzzleMode.Story:
-                    cats = puzzleArea.ProgressionPuzzleCats.Except(puzzleCatBlockContentsInfo.CatsAlreadyInBlocks).ToList();
+                    cats = puzzleArea
+                        .ProgressionPuzzleCats.Except(
+                            puzzleCatBlockContentsInfo.CatsAlreadyInBlocks
+                        )
+                        .ToList();
                     break;
                 case PuzzleMode.Challenge:
-                    cats = puzzleArea.GeneratedPuzzleCats.Except(puzzleCatBlockContentsInfo.CatsAlreadyInBlocks).ToList();
+                    cats = puzzleArea
+                        .GeneratedPuzzleCats.Except(puzzleCatBlockContentsInfo.CatsAlreadyInBlocks)
+                        .ToList();
                     break;
                 case PuzzleMode.Endless:
-                    cats = puzzleArea.ProgressionPuzzleCats.Except(puzzleCatBlockContentsInfo.CatsAlreadyInBlocks).ToList();
+                    cats = puzzleArea
+                        .ProgressionPuzzleCats.Except(
+                            puzzleCatBlockContentsInfo.CatsAlreadyInBlocks
+                        )
+                        .ToList();
                     break;
             }
 
             float rarityValue = UnityEngine.Random.value;
-            if (puzzleCatBlockContentsInfo.IsLuckyPuzzle) rarityValue *= 1.25f;
+            if (puzzleCatBlockContentsInfo.IsLuckyPuzzle)
+                rarityValue *= 1.25f;
 
             float rareRequirement = 0.996f;
             float uncommonRequirement = 0.96f;
@@ -90,16 +107,22 @@ namespace Tofuwu.StackCats.Procedural
         private static int GetSilverPawsForCatBlock(PuzzleMode puzzleMode, bool isLuckyPuzzle)
         {
             float randomValue = Random.value;
-            if (puzzleMode == PuzzleMode.Challenge) randomValue *= 1.25f;
-            if (isLuckyPuzzle) randomValue *= 1.25f;
+            if (puzzleMode == PuzzleMode.Challenge)
+                randomValue *= 1.25f;
+            if (isLuckyPuzzle)
+                randomValue *= 1.25f;
 
-            if (randomValue <= 0.2f) return 0;
+            if (randomValue <= 0.2f)
+                return 0;
 
-            if (randomValue <= 0.8f) return 1;
+            if (randomValue <= 0.8f)
+                return 1;
 
-            if (randomValue <= 1.1f) return 3;
+            if (randomValue <= 1.1f)
+                return 3;
 
-            if (randomValue <= 1.5) return 5;
+            if (randomValue <= 1.5)
+                return 5;
 
             return 100;
         }

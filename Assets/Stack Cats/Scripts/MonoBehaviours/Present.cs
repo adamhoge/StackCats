@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public delegate void PresentOpened(Present present);
 
@@ -10,7 +10,7 @@ namespace Tofuwu.StackCats
     {
         Unopened,
         Opening,
-        Opened
+        Opened,
     }
 
     public class Present : MonoBehaviour
@@ -23,16 +23,22 @@ namespace Tofuwu.StackCats
         public GameObject PresentLabel;
         public TextMeshPro PresentLabelNameText;
 
-        public PresentState State { get { return _state; } }
+        public PresentState State
+        {
+            get { return _state; }
+        }
 
         private PresentState _state;
 
         public void OpenPresent()
         {
-            if(_state == PresentState.Unopened)
+            if (_state == PresentState.Unopened)
             {
                 _state = PresentState.Opening;
-                LeanTween.scale(gameObject, Vector3.one * 0.9f, 0.75f).setEase(LeanTweenType.easeOutQuint).setOnComplete(OpeningComplete);
+                LeanTween
+                    .scale(gameObject, Vector3.one * 0.9f, 0.75f)
+                    .setEase(LeanTweenType.easeOutQuint)
+                    .setOnComplete(OpeningComplete);
             }
         }
 
@@ -42,7 +48,8 @@ namespace Tofuwu.StackCats
             LeanTween.scale(gameObject, Vector3.one * 1.25f, 0.5f).setEase(LeanTweenType.punch);
             PresentSpriteRenderer.sprite = OpenedPresentSprite;
             _state = PresentState.Opened;
-            if (onPresentOpened != null) onPresentOpened(this);
+            if (onPresentOpened != null)
+                onPresentOpened(this);
         }
 
         protected void Start()
@@ -50,7 +57,9 @@ namespace Tofuwu.StackCats
             Cat fromCat = PresentInfo.FromCat;
             if (fromCat)
             {
-                PresentLabelNameText.text = GameManager.Instance.Cats.IsBonded(fromCat) ? fromCat.Name : "???";
+                PresentLabelNameText.text = GameManager.Instance.Cats.IsBonded(fromCat)
+                    ? fromCat.Name
+                    : "???";
             }
             else
             {

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     [System.Serializable]
     public class OverlayScreenItem
@@ -46,7 +46,9 @@ namespace Tofuwu.StackCats.UI
         /// <param name="overlayScreen">The OverlayScreen to which to navigate.</param>
         public void GoToScreen(OverlayScreen overlayScreen)
         {
-            int overlayScreenIndex = OverlayScreens.FindIndex(os => os.OverlayScreen == overlayScreen);
+            int overlayScreenIndex = OverlayScreens.FindIndex(os =>
+                os.OverlayScreen == overlayScreen
+            );
             GoToScreen(overlayScreenIndex);
         }
 
@@ -69,7 +71,8 @@ namespace Tofuwu.StackCats.UI
             }
 
             OverlayScreenItem overlayScreenItem = OverlayScreens[screenIndex];
-            if (OverlayScreenTitleText) OverlayScreenTitleText.text = overlayScreenItem.OverlayScreenTitle;
+            if (OverlayScreenTitleText)
+                OverlayScreenTitleText.text = overlayScreenItem.OverlayScreenTitle;
             OverlayScreenManager.EnqueueScreen(overlayScreenItem.OverlayScreen, true);
             _currentScreenIndex = screenIndex;
         }
@@ -81,7 +84,8 @@ namespace Tofuwu.StackCats.UI
         {
             if (_currentScreenIndex > 0 || WrapNavigation)
             {
-                int screenIndex = (_currentScreenIndex - 1 + OverlayScreens.Count) % OverlayScreens.Count;
+                int screenIndex =
+                    (_currentScreenIndex - 1 + OverlayScreens.Count) % OverlayScreens.Count;
                 GoToScreen(screenIndex);
             }
         }
@@ -92,7 +96,7 @@ namespace Tofuwu.StackCats.UI
         public void GoToNextScreen()
         {
             int numScreens = OverlayScreens.Count;
-            if(_currentScreenIndex < numScreens || WrapNavigation)
+            if (_currentScreenIndex < numScreens || WrapNavigation)
             {
                 int screenIndex = (_currentScreenIndex + 1) % numScreens;
                 GoToScreen(screenIndex);

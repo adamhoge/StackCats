@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class PlaceableCatnipPlant : PlaceableObject
     {
@@ -9,7 +9,7 @@ namespace Tofuwu.StackCats
         {
             Sprout,
             Juvenile,
-            Mature
+            Mature,
         }
 
         public SpriteRenderer PlantSpriteRenderer;
@@ -33,7 +33,10 @@ namespace Tofuwu.StackCats
         {
             base.Start();
 
-            LeanTween.scaleY(PlantSpriteRenderer.gameObject, 1.05f, 1.0f).setEase(LeanTweenType.easeOutSine).setLoopPingPong();
+            LeanTween
+                .scaleY(PlantSpriteRenderer.gameObject, 1.05f, 1.0f)
+                .setEase(LeanTweenType.easeOutSine)
+                .setLoopPingPong();
 
             int ageInMinutes = GetLastActivationInSeconds();
             if (ageInMinutes >= MATURE_AT_SECONDS)
@@ -55,7 +58,7 @@ namespace Tofuwu.StackCats
             switch (_growthStage)
             {
                 case GrowthStage.Sprout:
-                    if(GetLastActivationInSeconds() >= JUVENILE_AT_SECONDS)
+                    if (GetLastActivationInSeconds() >= JUVENILE_AT_SECONDS)
                     {
                         SetGrowthStage(GrowthStage.Juvenile);
                     }

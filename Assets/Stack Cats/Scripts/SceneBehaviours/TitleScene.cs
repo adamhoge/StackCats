@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class TitleScene : SceneBehaviour
     {
@@ -15,6 +15,7 @@ namespace Tofuwu.StackCats
 
         private bool _isExiting;
         private DataManager _data;
+
         //private List<List<Block>> _scrollingStacks;
         //private float _scrollingStackOffset;
 

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public delegate void BeginHoldToSkip();
     public delegate void HoldingToSkip(float progress);
@@ -25,18 +25,23 @@ namespace Tofuwu.StackCats
             {
                 _beginHoldTime = Time.time;
 
-                if (onBeginHoldToStop != null) onBeginHoldToStop();
+                if (onBeginHoldToStop != null)
+                    onBeginHoldToStop();
             }
             else if (Input.GetMouseButtonUp(0))
             {
                 _beginHoldTime = null;
 
-                if (onCancelHoldToStop != null) onCancelHoldToStop();
+                if (onCancelHoldToStop != null)
+                    onCancelHoldToStop();
             }
 
             if (_beginHoldTime != null)
             {
-                if (onHoldingToStop != null) onHoldingToStop(Mathf.Clamp((Time.time - _beginHoldTime.Value) / HoldTimeToStop, 0.0f, 1.0f));
+                if (onHoldingToStop != null)
+                    onHoldingToStop(
+                        Mathf.Clamp((Time.time - _beginHoldTime.Value) / HoldTimeToStop, 0.0f, 1.0f)
+                    );
 
                 if (Time.time > _beginHoldTime.Value + HoldTimeToStop)
                 {
@@ -44,7 +49,8 @@ namespace Tofuwu.StackCats
 
                     _beginHoldTime = null;
 
-                    if (onCompleteHoldToStop != null) onCompleteHoldToStop();
+                    if (onCompleteHoldToStop != null)
+                        onCompleteHoldToStop();
                 }
             }
         }

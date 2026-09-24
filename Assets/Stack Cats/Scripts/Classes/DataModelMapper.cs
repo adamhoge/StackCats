@@ -1,12 +1,14 @@
-﻿using Tofuwu.StackCats.Data;
-using Tofuwu.StackCats.Models;
-using System.Linq;
+﻿using System.Linq;
+using RockhopperGames.StackCats.Data;
+using RockhopperGames.StackCats.Models;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public static class DataModelMapper
     {
-        public static ChallengePuzzleModel MapToChallengePuzzleModel(IChallengePuzzleData challengePuzzleData)
+        public static ChallengePuzzleModel MapToChallengePuzzleModel(
+            IChallengePuzzleData challengePuzzleData
+        )
         {
             if (challengePuzzleData == null)
             {
@@ -23,12 +25,14 @@ namespace Tofuwu.StackCats
                     MaxMoves = challengePuzzleData.MaxMoves,
                     MovesMade = challengePuzzleData.MovesMade,
                     UndosRemaining = challengePuzzleData.NumUndosRemaining,
-                    WasLuckPotionUsed = challengePuzzleData.WasLuckPotionUsed
+                    WasLuckPotionUsed = challengePuzzleData.WasLuckPotionUsed,
                 };
             }
         }
 
-        public static ChallengePuzzleCompletionModel MapToChallengePuzzleCompletionModel(IChallengePuzzleCompletionData challengePuzzleCompletionData)
+        public static ChallengePuzzleCompletionModel MapToChallengePuzzleCompletionModel(
+            IChallengePuzzleCompletionData challengePuzzleCompletionData
+        )
         {
             if (challengePuzzleCompletionData == null)
             {
@@ -41,12 +45,15 @@ namespace Tofuwu.StackCats
                     CompletionType = challengePuzzleCompletionData.CompletionType,
                     MinMoves = challengePuzzleCompletionData.MinMoves,
                     MaxMoves = challengePuzzleCompletionData.MaxMoves,
-                    MovesMade = challengePuzzleCompletionData.MovesMade
+                    MovesMade = challengePuzzleCompletionData.MovesMade,
                 };
             }
         }
 
-        public static EndlessPuzzleModel MapToEndlessPuzzleModel(IEndlessPuzzleData endlessPuzzleData, PuzzleManager puzzleManager)
+        public static EndlessPuzzleModel MapToEndlessPuzzleModel(
+            IEndlessPuzzleData endlessPuzzleData,
+            PuzzleManager puzzleManager
+        )
         {
             if (endlessPuzzleData == null)
             {
@@ -62,12 +69,15 @@ namespace Tofuwu.StackCats
                     MinMoves = endlessPuzzleData.MinMoves,
                     MaxMoves = endlessPuzzleData.MaxMoves,
                     MovesMade = endlessPuzzleData.MovesMade,
-                    UndosRemaining = endlessPuzzleData.NumUndosRemaining
+                    UndosRemaining = endlessPuzzleData.NumUndosRemaining,
                 };
             }
         }
 
-        public static EndlessPuzzleCompletionModel MapToEndlessPuzzleCompletionModel(IEndlessPuzzleCompletionData endlessPuzzleCompletionData, PuzzleManager puzzleManager)
+        public static EndlessPuzzleCompletionModel MapToEndlessPuzzleCompletionModel(
+            IEndlessPuzzleCompletionData endlessPuzzleCompletionData,
+            PuzzleManager puzzleManager
+        )
         {
             if (endlessPuzzleCompletionData == null)
             {
@@ -77,11 +87,13 @@ namespace Tofuwu.StackCats
             {
                 return new EndlessPuzzleCompletionModel
                 {
-                    PuzzleArea = puzzleManager.PuzzleAreaCollection.GetById(endlessPuzzleCompletionData.PuzzleAreaId),
+                    PuzzleArea = puzzleManager.PuzzleAreaCollection.GetById(
+                        endlessPuzzleCompletionData.PuzzleAreaId
+                    ),
                     CompletionType = endlessPuzzleCompletionData.CompletionType,
                     MinMoves = endlessPuzzleCompletionData.MinMoves,
                     MaxMoves = endlessPuzzleCompletionData.MaxMoves,
-                    MovesMade = endlessPuzzleCompletionData.MovesMade
+                    MovesMade = endlessPuzzleCompletionData.MovesMade,
                 };
             }
         }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tofuwu.StackCats.Data
+namespace RockhopperGames.StackCats.Data
 {
     public interface IMinigameData
     {

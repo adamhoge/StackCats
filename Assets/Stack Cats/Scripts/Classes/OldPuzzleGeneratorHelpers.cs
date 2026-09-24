@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Tofuwu.StackCats.Procedural
+namespace RockhopperGames.StackCats.Procedural
 {
     public static class OldPuzzleGeneratorHelpers
     {
@@ -11,9 +11,14 @@ namespace Tofuwu.StackCats.Procedural
             int lowestMovableIndex = -1;
             foreach (Stack stack in puzzle.Stacks)
             {
-                Block lowestBlock = stack.Blocks.FirstOrDefault(block => puzzle.IsMovable(stack, block) && !block.HasBlockBelow<CatBlock>());
+                Block lowestBlock = stack.Blocks.FirstOrDefault(block =>
+                    puzzle.IsMovable(stack, block) && !block.HasBlockBelow<CatBlock>()
+                );
                 int lowestBlockIndex = stack.Blocks.IndexOf(lowestBlock);
-                if (lowestBlock && (lowestMovableIndex == -1 || lowestBlockIndex < lowestMovableIndex))
+                if (
+                    lowestBlock
+                    && (lowestMovableIndex == -1 || lowestBlockIndex < lowestMovableIndex)
+                )
                 {
                     lowestMovableIndex = lowestBlockIndex;
                 }
@@ -22,18 +27,23 @@ namespace Tofuwu.StackCats.Procedural
             return lowestMovableIndex;
         }
 
-        public static int GetLowestMovableIndexOfBlockType<T>(this Puzzle puzzle) where T : BlockComponent
+        public static int GetLowestMovableIndexOfBlockType<T>(this Puzzle puzzle)
+            where T : BlockComponent
         {
             int lowestMovableIndex = -1;
             foreach (Stack stack in puzzle.Stacks)
             {
-                Block lowestBlock = stack.Blocks.FirstOrDefault(block => 
-                  puzzle.IsMovable(stack, block) && 
-                  block.GetComponent<T>() &&
-                  !block.HasBlockBelow<CatBlock>());
+                Block lowestBlock = stack.Blocks.FirstOrDefault(block =>
+                    puzzle.IsMovable(stack, block)
+                    && block.GetComponent<T>()
+                    && !block.HasBlockBelow<CatBlock>()
+                );
 
                 int lowestBlockIndex = stack.Blocks.IndexOf(lowestBlock);
-                if (lowestBlock && (lowestMovableIndex == -1 || lowestBlockIndex < lowestMovableIndex))
+                if (
+                    lowestBlock
+                    && (lowestMovableIndex == -1 || lowestBlockIndex < lowestMovableIndex)
+                )
                 {
                     lowestMovableIndex = lowestBlockIndex;
                 }

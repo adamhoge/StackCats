@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     [RequireComponent(typeof(CanvasGroup))]
     public class CanvasGroupOverlayScreenFader : MonoBehaviour
@@ -31,13 +31,17 @@ namespace Tofuwu.StackCats.UI
         {
             _canvasGroup.alpha = 0.0f;
             LeanTween.cancel(_canvasGroup.gameObject);
-            LeanTween.alphaCanvas(_canvasGroup, 1.0f, OverlayScreen.TransitionInDuration).setEase(OverlayScreen.TransitionInTween);
+            LeanTween
+                .alphaCanvas(_canvasGroup, 1.0f, OverlayScreen.TransitionInDuration)
+                .setEase(OverlayScreen.TransitionInTween);
         }
 
         private void OnTransitioningOut()
         {
             LeanTween.cancel(_canvasGroup.gameObject);
-            LeanTween.alphaCanvas(_canvasGroup, 0.0f, OverlayScreen.TransitionOutDuration).setEase(OverlayScreen.TransitionOutTween);
+            LeanTween
+                .alphaCanvas(_canvasGroup, 0.0f, OverlayScreen.TransitionOutDuration)
+                .setEase(OverlayScreen.TransitionOutTween);
         }
     }
 }

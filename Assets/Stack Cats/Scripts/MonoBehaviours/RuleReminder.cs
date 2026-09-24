@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class RuleReminder : MonoBehaviour
     {
@@ -22,7 +22,11 @@ namespace Tofuwu.StackCats
         {
             if (!PuzzleLoader)
             {
-                Debug.LogError("PuzzleLoader was not provided for " + gameObject.name + ". Destroying gameObject.");
+                Debug.LogError(
+                    "PuzzleLoader was not provided for "
+                        + gameObject.name
+                        + ". Destroying gameObject."
+                );
                 Destroy(gameObject);
                 return;
             }
@@ -38,7 +42,9 @@ namespace Tofuwu.StackCats
             if (_ruleDescriptionPending && Time.time > _ruleDescriptionTime + RuleReminderDelay)
             {
                 RuleReminderText.text = _ruleDescription;
-                LeanTween.alphaCanvas(RuleReminderCanvasGroup, 1.0f, 0.25f).setEase(LeanTweenType.easeOutSine);
+                LeanTween
+                    .alphaCanvas(RuleReminderCanvasGroup, 1.0f, 0.25f)
+                    .setEase(LeanTweenType.easeOutSine);
                 _ruleDescriptionPending = false;
             }
         }
@@ -67,7 +73,12 @@ namespace Tofuwu.StackCats
             }
         }
 
-        protected virtual void OnChecked(PuzzleMarker source, PuzzleMarker destination, int numBlocks, bool isValid)
+        protected virtual void OnChecked(
+            PuzzleMarker source,
+            PuzzleMarker destination,
+            int numBlocks,
+            bool isValid
+        )
         {
             if (isValid || source.Stack == destination.Stack)
             {
@@ -76,12 +87,16 @@ namespace Tofuwu.StackCats
             }
 
             List<string> ruleExceptions;
-            if (!_currentPuzzle.CanFit(source.Stack, source.Block, destination.Stack)){
+            if (!_currentPuzzle.CanFit(source.Stack, source.Block, destination.Stack))
+            {
                 ruleExceptions = new List<string> { "Not enough room to move the selected blocks" };
             }
             else
             {
-                ruleExceptions = _currentPuzzle.GetIsPlaceableRuleExceptions(source.Block, destination.Stack.TopBlock);
+                ruleExceptions = _currentPuzzle.GetIsPlaceableRuleExceptions(
+                    source.Block,
+                    destination.Stack.TopBlock
+                );
             }
             if (ruleExceptions.Count == 0)
             {
@@ -99,7 +114,9 @@ namespace Tofuwu.StackCats
         protected virtual void SetRuleReminder(string ruleDescription)
         {
             LeanTween.cancel(RuleReminderCanvasGroup.gameObject);
-            LeanTween.alphaCanvas(RuleReminderCanvasGroup, 0.0f, 0.25f).setEase(LeanTweenType.easeOutSine);
+            LeanTween
+                .alphaCanvas(RuleReminderCanvasGroup, 0.0f, 0.25f)
+                .setEase(LeanTweenType.easeOutSine);
             _ruleDescription = ruleDescription;
             _ruleDescriptionTime = Time.time;
             _ruleDescriptionPending = !string.IsNullOrEmpty(ruleDescription);

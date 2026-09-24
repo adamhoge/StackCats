@@ -1,4 +1,4 @@
-﻿namespace Tofuwu.StackCats.UI
+﻿namespace RockhopperGames.StackCats.UI
 {
     public class PuzzleMakerFarmFlavoredActionsUI : PuzzleMakerActionsUI { }
 }

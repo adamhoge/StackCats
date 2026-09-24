@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class SumBlock : BlockComponent
     {

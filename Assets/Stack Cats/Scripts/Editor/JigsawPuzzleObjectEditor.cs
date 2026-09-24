@@ -1,4 +1,4 @@
-﻿using Tofuwu.StackCats;
+﻿using RockhopperGames.StackCats;
 using UnityEditor;
 
 [CustomEditor(typeof(JigsawPuzzleObject))]
@@ -6,7 +6,7 @@ public class JigsawPuzzleObjectEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-        JigsawPuzzleObject jigsawPuzzleObject = (JigsawPuzzleObject) target;
+        JigsawPuzzleObject jigsawPuzzleObject = (JigsawPuzzleObject)target;
 
         base.OnInspectorGUI();
         EditorGUILayout.Space();

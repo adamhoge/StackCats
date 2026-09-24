@@ -1,9 +1,9 @@
-﻿using Tofuwu.StackCats.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using RockhopperGames.StackCats.Models;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public static class PuzzleBuilder
     {
@@ -14,17 +14,30 @@ namespace Tofuwu.StackCats
         /// <param name="stack">The puzzle stack.</param>
         /// <param name="min">The minimum puzzle block value.</param>
         /// <param name="min">The maximum puzzle block value.</param>
-        public static bool AddRandomPuzzleBlockToTop(Puzzle puzzle, Stack stack, int min = 1, int max = 9)
+        public static bool AddRandomPuzzleBlockToTop(
+            Puzzle puzzle,
+            Stack stack,
+            int min = 1,
+            int max = 9
+        )
         {
-            PuzzleBlock topPuzzleBlock = stack.TopBlock ? stack.TopBlock.GetComponent<PuzzleBlock>() : null;
+            PuzzleBlock topPuzzleBlock = stack.TopBlock
+                ? stack.TopBlock.GetComponent<PuzzleBlock>()
+                : null;
             PuzzleBlock puzzleBlock = CreateAdjacentPuzzleBlock(puzzle, topPuzzleBlock, min, max);
 
-            if (!puzzleBlock) return false;
+            if (!puzzleBlock)
+                return false;
 
             return puzzle.AddBlock(stack, puzzleBlock.Block);
         }
 
-        public static PuzzleBlock CreateAdjacentPuzzleBlock(Puzzle puzzle, PuzzleBlock puzzleBlock, int min = 1, int max = 9)
+        public static PuzzleBlock CreateAdjacentPuzzleBlock(
+            Puzzle puzzle,
+            PuzzleBlock puzzleBlock,
+            int min = 1,
+            int max = 9
+        )
         {
             int primaryNumber;
             int secondaryNumber;
@@ -39,7 +52,8 @@ namespace Tofuwu.StackCats
                 secondaryNumber = Random.Range(0, 2);
             }
 
-            if (primaryNumber < 1 || primaryNumber > 9) return null;
+            if (primaryNumber < 1 || primaryNumber > 9)
+                return null;
 
             return puzzle.CreatePuzzleBlock(primaryNumber, secondaryNumber);
         }
@@ -51,11 +65,19 @@ namespace Tofuwu.StackCats
         /// <param name="minCount"></param>
         /// <param name="maxCount"></param>
         /// <returns></returns>
-        public static Stack GetRandomStackByCountRange(IEnumerable<Stack> stacks, int minCount = 0, int maxCount = 10)
+        public static Stack GetRandomStackByCountRange(
+            IEnumerable<Stack> stacks,
+            int minCount = 0,
+            int maxCount = 10
+        )
         {
-            List<Stack> stacksInRange = stacks.Where(s => s.Blocks.Count >= minCount && s.Blocks.Count <= maxCount).ToList();
+            List<Stack> stacksInRange = stacks
+                .Where(s => s.Blocks.Count >= minCount && s.Blocks.Count <= maxCount)
+                .ToList();
 
-            return stacksInRange.Count > 0 ? stacksInRange[Random.Range(0, stacksInRange.Count)] : null;
+            return stacksInRange.Count > 0
+                ? stacksInRange[Random.Range(0, stacksInRange.Count)]
+                : null;
         }
 
         /// <summary>
@@ -66,16 +88,23 @@ namespace Tofuwu.StackCats
         /// <param name="maxCount"></param>
         /// <param name="excludedStacks"></param>
         /// <returns></returns>
-        public static List<Stack> GetStacksByMovableCountRange(Puzzle puzzle, int minCount = 1, int maxCount = 10, List<Stack> excludedStacks = null)
+        public static List<Stack> GetStacksByMovableCountRange(
+            Puzzle puzzle,
+            int minCount = 1,
+            int maxCount = 10,
+            List<Stack> excludedStacks = null
+        )
         {
-            if (excludedStacks == null) excludedStacks = new List<Stack>();
+            if (excludedStacks == null)
+                excludedStacks = new List<Stack>();
             List<Stack> stacksInRange = new List<Stack>();
             foreach (Stack stack in puzzle.Stacks)
             {
                 if (!excludedStacks.Contains(stack))
                 {
                     int numMovableBlocks = GetNumMovableBlocks(puzzle, stack);
-                    if (numMovableBlocks >= minCount && numMovableBlocks <= maxCount) stacksInRange.Add(stack);
+                    if (numMovableBlocks >= minCount && numMovableBlocks <= maxCount)
+                        stacksInRange.Add(stack);
                 }
             }
 
@@ -90,7 +119,12 @@ namespace Tofuwu.StackCats
         /// <param name="sourceBlock"></param>
         /// <param name="destinationStack"></param>
         /// <returns></returns>
-        public static bool AddMoveCatBlock(Puzzle puzzle, Stack sourceStack, Block sourceBlock, Stack destinationStack)
+        public static bool AddMoveCatBlock(
+            Puzzle puzzle,
+            Stack sourceStack,
+            Block sourceBlock,
+            Stack destinationStack
+        )
         {
             puzzle.AddNewCatBlock(destinationStack);
 
@@ -113,13 +147,21 @@ namespace Tofuwu.StackCats
         /// <param name="sourceBlock"></param>
         /// <param name="destinationStack"></param>
         /// <returns></returns>
-        public static bool AddMoveSumBlock(Puzzle puzzle, int sumBlockValue, Stack sourceStack, Block sourceBlock, Stack destinationStack)
+        public static bool AddMoveSumBlock(
+            Puzzle puzzle,
+            int sumBlockValue,
+            Stack sourceStack,
+            Block sourceBlock,
+            Stack destinationStack
+        )
         {
             puzzle.AddNewSumBlock(destinationStack, sumBlockValue);
 
             List<Stack> tryStacks = puzzle.Stacks.Where(s => s != destinationStack).ToList();
             Stack sumStack = tryStacks[Random.Range(0, tryStacks.Count)];
-            PuzzleBlock puzzleBlock = sumStack.TopBlock ? sumStack.TopBlock.GetComponent<PuzzleBlock>() : null;
+            PuzzleBlock puzzleBlock = sumStack.TopBlock
+                ? sumStack.TopBlock.GetComponent<PuzzleBlock>()
+                : null;
             while (puzzleBlock)
             {
                 puzzleBlock.PrimaryNumber -= sumBlockValue;
@@ -157,7 +199,8 @@ namespace Tofuwu.StackCats
             for (i = 0; i < stack.Blocks.Count; i++)
             {
                 Block block = stack.Blocks[i];
-                if (!blockBelowIsCatBlock && puzzle.IsMovable(stack, stack.Blocks[i])) break;
+                if (!blockBelowIsCatBlock && puzzle.IsMovable(stack, stack.Blocks[i]))
+                    break;
 
                 blockBelowIsCatBlock = block.GetComponent<CatBlock>();
             }
@@ -182,20 +225,34 @@ namespace Tofuwu.StackCats
             string jsonData = "";
 
             if (puzzle.GetType() == typeof(GalaxyFlavoredPuzzle))
-                jsonData = JsonUtility.ToJson(GalaxyFlavoredPuzzleBuilder.BuildToModel((GalaxyFlavoredPuzzle)puzzle));
+                jsonData = JsonUtility.ToJson(
+                    GalaxyFlavoredPuzzleBuilder.BuildToModel((GalaxyFlavoredPuzzle)puzzle)
+                );
             else if (puzzle.GetType() == typeof(NightFlavoredPuzzle))
-                jsonData = JsonUtility.ToJson(NightFlavoredPuzzleBuilder.BuildToModel((NightFlavoredPuzzle)puzzle));
+                jsonData = JsonUtility.ToJson(
+                    NightFlavoredPuzzleBuilder.BuildToModel((NightFlavoredPuzzle)puzzle)
+                );
             else if (puzzle.GetType() == typeof(JungleFlavoredPuzzle))
-                jsonData = JsonUtility.ToJson(JungleFlavoredPuzzleBuilder.BuildToModel((JungleFlavoredPuzzle)puzzle));
+                jsonData = JsonUtility.ToJson(
+                    JungleFlavoredPuzzleBuilder.BuildToModel((JungleFlavoredPuzzle)puzzle)
+                );
             else if (puzzle.GetType() == typeof(DesertFlavoredPuzzle))
-                jsonData = JsonUtility.ToJson(DesertFlavoredPuzzleBuilder.BuildToModel((DesertFlavoredPuzzle)puzzle));
+                jsonData = JsonUtility.ToJson(
+                    DesertFlavoredPuzzleBuilder.BuildToModel((DesertFlavoredPuzzle)puzzle)
+                );
             else if (puzzle.GetType() == typeof(FarmFlavoredPuzzle))
-                jsonData = JsonUtility.ToJson(FarmFlavoredPuzzleBuilder.BuildToModel((FarmFlavoredPuzzle)puzzle));
+                jsonData = JsonUtility.ToJson(
+                    FarmFlavoredPuzzleBuilder.BuildToModel((FarmFlavoredPuzzle)puzzle)
+                );
 
             return jsonData;
         }
 
-        public static Puzzle BuildFromModel(string puzzleJsonData, PuzzleArea puzzleArea, CatManager catManager)
+        public static Puzzle BuildFromModel(
+            string puzzleJsonData,
+            PuzzleArea puzzleArea,
+            CatManager catManager
+        )
         {
             Puzzle puzzlePrefab = puzzleArea.PuzzlePrefab;
 
@@ -204,23 +261,43 @@ namespace Tofuwu.StackCats
             {
                 if (puzzlePrefab.GetType() == typeof(GalaxyFlavoredPuzzle))
                 {
-                    puzzle = GalaxyFlavoredPuzzleBuilder.BuildFromModel(JsonUtility.FromJson<GalaxyFlavoredPuzzleModel>(puzzleJsonData), (GalaxyFlavoredPuzzle)puzzlePrefab, catManager);
+                    puzzle = GalaxyFlavoredPuzzleBuilder.BuildFromModel(
+                        JsonUtility.FromJson<GalaxyFlavoredPuzzleModel>(puzzleJsonData),
+                        (GalaxyFlavoredPuzzle)puzzlePrefab,
+                        catManager
+                    );
                 }
                 else if (puzzlePrefab.GetType() == typeof(NightFlavoredPuzzle))
                 {
-                    puzzle = NightFlavoredPuzzleBuilder.BuildFromModel(JsonUtility.FromJson<NightFlavoredPuzzleModel>(puzzleJsonData), (NightFlavoredPuzzle)puzzlePrefab, catManager);
+                    puzzle = NightFlavoredPuzzleBuilder.BuildFromModel(
+                        JsonUtility.FromJson<NightFlavoredPuzzleModel>(puzzleJsonData),
+                        (NightFlavoredPuzzle)puzzlePrefab,
+                        catManager
+                    );
                 }
                 else if (puzzlePrefab.GetType() == typeof(DesertFlavoredPuzzle))
                 {
-                    puzzle = DesertFlavoredPuzzleBuilder.BuildFromModel(JsonUtility.FromJson<DesertFlavoredPuzzleModel>(puzzleJsonData), (DesertFlavoredPuzzle)puzzlePrefab, catManager);
+                    puzzle = DesertFlavoredPuzzleBuilder.BuildFromModel(
+                        JsonUtility.FromJson<DesertFlavoredPuzzleModel>(puzzleJsonData),
+                        (DesertFlavoredPuzzle)puzzlePrefab,
+                        catManager
+                    );
                 }
                 else if (puzzlePrefab.GetType() == typeof(JungleFlavoredPuzzle))
                 {
-                    puzzle = JungleFlavoredPuzzleBuilder.BuildFromModel(JsonUtility.FromJson<JungleFlavoredPuzzleModel>(puzzleJsonData), (JungleFlavoredPuzzleArea)puzzleArea, catManager);
+                    puzzle = JungleFlavoredPuzzleBuilder.BuildFromModel(
+                        JsonUtility.FromJson<JungleFlavoredPuzzleModel>(puzzleJsonData),
+                        (JungleFlavoredPuzzleArea)puzzleArea,
+                        catManager
+                    );
                 }
                 else if (puzzlePrefab.GetType() == typeof(FarmFlavoredPuzzle))
                 {
-                    puzzle = FarmFlavoredPuzzleBuilder.BuildFromModel(JsonUtility.FromJson<PuzzleModel>(puzzleJsonData), (FarmFlavoredPuzzle)puzzlePrefab, catManager);
+                    puzzle = FarmFlavoredPuzzleBuilder.BuildFromModel(
+                        JsonUtility.FromJson<PuzzleModel>(puzzleJsonData),
+                        (FarmFlavoredPuzzle)puzzlePrefab,
+                        catManager
+                    );
                 }
             }
             catch

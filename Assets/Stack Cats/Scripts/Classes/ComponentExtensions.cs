@@ -2,15 +2,22 @@
 using System.Reflection;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public static class ComponentExtensions
     {
-        public static T GetCopyOf<T>(this Component comp, T other) where T : Component
+        public static T GetCopyOf<T>(this Component comp, T other)
+            where T : Component
         {
             Type type = comp.GetType();
-            if (type != other.GetType()) return null;
-            BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Default | BindingFlags.DeclaredOnly;
+            if (type != other.GetType())
+                return null;
+            BindingFlags flags =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.Default
+                | BindingFlags.DeclaredOnly;
             PropertyInfo[] pinfos = type.GetProperties(flags);
             foreach (var pinfo in pinfos)
             {
@@ -31,7 +38,8 @@ namespace Tofuwu.StackCats
             return comp as T;
         }
 
-        public static T AddComponent<T>(this GameObject go, T toAdd) where T : Component
+        public static T AddComponent<T>(this GameObject go, T toAdd)
+            where T : Component
         {
             return go.AddComponent<T>().GetCopyOf(toAdd) as T;
         }

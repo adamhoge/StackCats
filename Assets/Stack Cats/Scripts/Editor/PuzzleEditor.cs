@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
+using RockhopperGames.StackCats;
 using UnityEditor;
-using Tofuwu.StackCats;
+using UnityEngine;
 
 [CustomEditor(typeof(Puzzle), true)]
 public class PuzzleEditor : Editor
@@ -34,24 +34,51 @@ public class PuzzleEditor : Editor
 
             Handles.color = Color.white;
 
-            Vector3 addPuzzleBlockPosition = puzzle.transform.position + new Vector3(xPosition - 0.25f, -1.0f, 0.0f);
-            if (Handles.Button(addPuzzleBlockPosition, Quaternion.identity, size, size, Handles.RectangleHandleCap))
+            Vector3 addPuzzleBlockPosition =
+                puzzle.transform.position + new Vector3(xPosition - 0.25f, -1.0f, 0.0f);
+            if (
+                Handles.Button(
+                    addPuzzleBlockPosition,
+                    Quaternion.identity,
+                    size,
+                    size,
+                    Handles.RectangleHandleCap
+                )
+            )
             {
                 puzzle.AddNewPuzzleBlock(stack);
             }
 
             Handles.color = Color.yellow;
 
-            Vector3 addCatBlockPosition = puzzle.transform.position + new Vector3(xPosition + 0.25f, -1.0f, 0.0f);
-            if (Handles.Button(addCatBlockPosition, Quaternion.identity, size, size, Handles.RectangleHandleCap))
+            Vector3 addCatBlockPosition =
+                puzzle.transform.position + new Vector3(xPosition + 0.25f, -1.0f, 0.0f);
+            if (
+                Handles.Button(
+                    addCatBlockPosition,
+                    Quaternion.identity,
+                    size,
+                    size,
+                    Handles.RectangleHandleCap
+                )
+            )
             {
                 puzzle.AddNewCatBlock(stack);
             }
 
             Handles.color = Color.magenta;
 
-            Vector3 removePuzzleBlockPosition = puzzle.transform.position + new Vector3(xPosition - 0.25f, -1.5f, 0.0f);
-            if (Handles.Button(removePuzzleBlockPosition, Quaternion.identity, size, size, Handles.RectangleHandleCap))
+            Vector3 removePuzzleBlockPosition =
+                puzzle.transform.position + new Vector3(xPosition - 0.25f, -1.5f, 0.0f);
+            if (
+                Handles.Button(
+                    removePuzzleBlockPosition,
+                    Quaternion.identity,
+                    size,
+                    size,
+                    Handles.RectangleHandleCap
+                )
+            )
             {
                 Block removedBlock = stack.TopBlock;
                 if (stack.RemoveBlock(stack.TopBlock))
@@ -62,8 +89,17 @@ public class PuzzleEditor : Editor
 
             Handles.color = Color.red;
 
-            Vector3 removestackPosition = puzzle.transform.position + new Vector3(xPosition + 0.25f, -1.5f, 0.0f);
-            if (Handles.Button(removestackPosition, Quaternion.identity, size, size, Handles.RectangleHandleCap))
+            Vector3 removestackPosition =
+                puzzle.transform.position + new Vector3(xPosition + 0.25f, -1.5f, 0.0f);
+            if (
+                Handles.Button(
+                    removestackPosition,
+                    Quaternion.identity,
+                    size,
+                    size,
+                    Handles.RectangleHandleCap
+                )
+            )
             {
                 destroyStacks.Push(stack);
             }

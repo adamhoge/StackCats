@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     [CreateAssetMenu(fileName = "Block Tutorial", menuName = "Stack Cats/Tutorial/Block Tutorial")]
     public class BlockTutorial : Tutorial

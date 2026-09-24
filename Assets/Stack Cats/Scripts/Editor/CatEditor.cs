@@ -1,4 +1,4 @@
-﻿using Tofuwu.StackCats;
+﻿using RockhopperGames.StackCats;
 using UnityEditor;
 
 [CustomEditor(typeof(Cat))]
@@ -6,7 +6,7 @@ public class CatEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-        Cat cat = (Cat) target;
+        Cat cat = (Cat)target;
 
         base.OnInspectorGUI();
         EditorGUILayout.Space();

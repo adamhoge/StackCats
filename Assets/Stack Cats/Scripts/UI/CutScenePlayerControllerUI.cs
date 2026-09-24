@@ -1,9 +1,9 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class CutScenePlayerControllerUI : MonoBehaviour
     {

@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class GalaxyFlavoredScenaryConstellation : MonoBehaviour
     {
@@ -16,7 +16,7 @@ namespace Tofuwu.StackCats
         protected void OnEnable()
         {
             _animationStartTime = Time.time;
-            foreach(SpriteRenderer frame in AnimationFrames)
+            foreach (SpriteRenderer frame in AnimationFrames)
             {
                 frame.color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
             }
@@ -38,8 +38,11 @@ namespace Tofuwu.StackCats
 
         protected void Update()
         {
-            float animationCycleTimeElapsed = (Time.time - _animationStartTime) % _totalAnimationDuration;
-            int updatedAnimationFrameIndex = Mathf.FloorToInt(animationCycleTimeElapsed / AnimationFrameDuration);
+            float animationCycleTimeElapsed =
+                (Time.time - _animationStartTime) % _totalAnimationDuration;
+            int updatedAnimationFrameIndex = Mathf.FloorToInt(
+                animationCycleTimeElapsed / AnimationFrameDuration
+            );
 
             if (_currentAnimationFrameIndex != updatedAnimationFrameIndex)
             {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Tofuwu.StackCats.Models
+namespace RockhopperGames.StackCats.Models
 {
     public class EndlessRunModel
     {

@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
-    public delegate void StoryPuzzleSceneCompleted(StoryPuzzle storyPuzzle, PuzzleCompletionType completionType, int numMovesMade);
+    public delegate void StoryPuzzleSceneCompleted(
+        StoryPuzzle storyPuzzle,
+        PuzzleCompletionType completionType,
+        int numMovesMade
+    );
 
     [RequireComponent(typeof(PuzzleUndoer))]
     public class StoryPuzzleScene : PuzzleScene
@@ -31,7 +35,10 @@ namespace Tofuwu.StackCats
             }
             else
             {
-                _gameManager.ConfirmAction("Are you sure you want to quit the current puzzle?", _gameManager.GoToMap);
+                _gameManager.ConfirmAction(
+                    "Are you sure you want to quit the current puzzle?",
+                    _gameManager.GoToMap
+                );
             }
         }
 
@@ -66,6 +73,7 @@ namespace Tofuwu.StackCats
             LoadPuzzleTheme(_puzzleArea.PuzzleTheme);
 
             PuzzleLoader.LoadPuzzle(_puzzleManager.CurrentStoryPuzzle.JsonData, _puzzleArea);
+
             ShowPuzzleBackdrop(_puzzleLoader.Puzzle);
         }
 
@@ -85,7 +93,10 @@ namespace Tofuwu.StackCats
             TopBoundarySprite.transform.localPosition = Vector2.up * 6.25f;
         }
 
-        protected override void OnPuzzleCompleted(Puzzle puzzle, PuzzleCompletionType puzzleCompletionType)
+        protected override void OnPuzzleCompleted(
+            Puzzle puzzle,
+            PuzzleCompletionType puzzleCompletionType
+        )
         {
             base.OnPuzzleCompleted(puzzle, puzzleCompletionType);
 
@@ -97,11 +108,19 @@ namespace Tofuwu.StackCats
             }
         }
 
-        protected override void OnPuzzleSceneCompleted(Puzzle puzzle, PuzzleCompletionType puzzleCompletionType)
+        protected override void OnPuzzleSceneCompleted(
+            Puzzle puzzle,
+            PuzzleCompletionType puzzleCompletionType
+        )
         {
             base.OnPuzzleSceneCompleted(puzzle, puzzleCompletionType);
 
-            if (onStoryPuzzleSceneCompleted != null) onStoryPuzzleSceneCompleted(_puzzleManager.CurrentStoryPuzzle, puzzleCompletionType, puzzle.NumMovesMade);
+            if (onStoryPuzzleSceneCompleted != null)
+                onStoryPuzzleSceneCompleted(
+                    _puzzleManager.CurrentStoryPuzzle,
+                    puzzleCompletionType,
+                    puzzle.NumMovesMade
+                );
         }
 
         public void RestartPuzzle()
@@ -112,7 +131,10 @@ namespace Tofuwu.StackCats
             }
             else
             {
-                _gameManager.ConfirmAction("Restart the current puzzle?", _puzzleLoader.ReloadPuzzle);
+                _gameManager.ConfirmAction(
+                    "Restart the current puzzle?",
+                    _puzzleLoader.ReloadPuzzle
+                );
             }
         }
 
@@ -120,8 +142,14 @@ namespace Tofuwu.StackCats
         {
             if (completionType == PuzzleCompletionType.PuzzleSolved)
             {
-                _puzzleManager.CompleteStoryPuzzle(_puzzleManager.CurrentStoryPuzzle, puzzle.TimeElapsed, puzzle.NumMovesMade);
-                _puzzleManager.UnlockStoryPuzzle(_puzzleManager.GetNextStoryPuzzle(_puzzleManager.CurrentStoryPuzzle));
+                _puzzleManager.CompleteStoryPuzzle(
+                    _puzzleManager.CurrentStoryPuzzle,
+                    puzzle.TimeElapsed,
+                    puzzle.NumMovesMade
+                );
+                _puzzleManager.UnlockStoryPuzzle(
+                    _puzzleManager.GetNextStoryPuzzle(_puzzleManager.CurrentStoryPuzzle)
+                );
 
                 foreach (Cat cat in CatsSeen)
                 {
@@ -138,7 +166,12 @@ namespace Tofuwu.StackCats
         {
             if (!isUndo)
             {
-                _puzzleManager.AddStuffToCatBlocks(puzzle, _puzzleArea, PuzzleMode.Story, wasRestarted);
+                _puzzleManager.AddStuffToCatBlocks(
+                    puzzle,
+                    _puzzleArea,
+                    PuzzleMode.Story,
+                    wasRestarted
+                );
             }
         }
     }

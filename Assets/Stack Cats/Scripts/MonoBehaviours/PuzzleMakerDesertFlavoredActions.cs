@@ -1,4 +1,4 @@
-﻿namespace Tofuwu.StackCats
+﻿namespace RockhopperGames.StackCats
 {
     public class PuzzleMakerDesertFlavoredActions : PuzzleMakerActions
     {
@@ -8,7 +8,7 @@
         {
             _desertFlavoredPuzzle.StackHeightRequirements.Clear();
 
-            foreach(Stack stack in _desertFlavoredPuzzle.Stacks)
+            foreach (Stack stack in _desertFlavoredPuzzle.Stacks)
             {
                 _desertFlavoredPuzzle.StackHeightRequirements.Add(stack.Blocks.Count);
             }

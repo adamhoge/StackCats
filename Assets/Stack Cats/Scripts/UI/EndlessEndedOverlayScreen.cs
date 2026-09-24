@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using RockhopperGames.StackCats.Models;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Tofuwu.StackCats.Models;
-using TMPro;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class EndlessEndedOverlayScreen : OverlayScreen
     {

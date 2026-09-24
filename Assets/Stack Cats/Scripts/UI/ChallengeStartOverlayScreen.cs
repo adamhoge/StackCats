@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class ChallengeStartOverlayScreen : OverlayScreen
     {
@@ -45,7 +45,8 @@ namespace Tofuwu.StackCats.UI
 
         protected void Start()
         {
-            DifficultyText.text = ChallengeRunScene.SelectedDifficulty.ToChallengeRunDifficultyString();
+            DifficultyText.text =
+                ChallengeRunScene.SelectedDifficulty.ToChallengeRunDifficultyString();
             StartCostCurrencyAmount.CurrencyType = Currency.SilverPaw;
             StartCostCurrencyAmount.Amount = ChallengeRunScene.PuzzleArea.ChallengeRunCost;
 
@@ -55,8 +56,9 @@ namespace Tofuwu.StackCats.UI
         private void OnCurrencyChanged(Currency currency, int amount, int totalMonies)
         {
             StartButton.interactable = ChallengeRunScene.CanPlay;
-            if (currency == Currency.SilverPaw) HeldSilverPawsCurrency.Amount = totalMonies;
-        } 
+            if (currency == Currency.SilverPaw)
+                HeldSilverPawsCurrency.Amount = totalMonies;
+        }
 
         private void OnDifficultyChanged(ChallengeRunDifficulty difficulty)
         {
@@ -66,18 +68,22 @@ namespace Tofuwu.StackCats.UI
 
         private void UpdateRewardInformation()
         {
-            foreach(RectTransform rectTransform in RewardsRectTransform)
+            foreach (RectTransform rectTransform in RewardsRectTransform)
             {
                 Destroy(rectTransform.gameObject);
             }
 
-            List<ChallengePuzzleReward> rewards = ChallengeRunScene.PuzzleArea.ChallengeRunRewards.Where(r => r.AtDifficulty == ChallengeRunScene.SelectedDifficulty).ToList();
+            List<ChallengePuzzleReward> rewards = ChallengeRunScene
+                .PuzzleArea.ChallengeRunRewards.Where(r =>
+                    r.AtDifficulty == ChallengeRunScene.SelectedDifficulty
+                )
+                .ToList();
             CurrencyAmountDictionary currencyRewardTotals = new CurrencyAmountDictionary();
             int goldPaws = _puzzleManager.MaxChallengeRunPuzzles - rewards.Count;
             currencyRewardTotals.Add(Currency.GoldPaw, goldPaws);
             foreach (ChallengePuzzleReward reward in rewards)
             {
-                foreach(KeyValuePair<Currency, int> currencyReward in reward.CurrencyReward)
+                foreach (KeyValuePair<Currency, int> currencyReward in reward.CurrencyReward)
                 {
                     if (currencyRewardTotals.ContainsKey(currencyReward.Key))
                     {
@@ -90,9 +96,12 @@ namespace Tofuwu.StackCats.UI
                 }
             }
 
-            foreach(KeyValuePair<Currency, int> currencyRewardTotal in currencyRewardTotals)
+            foreach (KeyValuePair<Currency, int> currencyRewardTotal in currencyRewardTotals)
             {
-                CurrencyAmountUI rewardAmount = Instantiate(CurrencyAmountPrefab, RewardsRectTransform);
+                CurrencyAmountUI rewardAmount = Instantiate(
+                    CurrencyAmountPrefab,
+                    RewardsRectTransform
+                );
                 rewardAmount.CurrencyType = currencyRewardTotal.Key;
                 rewardAmount.Amount = currencyRewardTotal.Value;
             }

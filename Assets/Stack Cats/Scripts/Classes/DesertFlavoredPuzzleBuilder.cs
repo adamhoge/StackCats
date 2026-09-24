@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Tofuwu.StackCats.Models;
+using RockhopperGames.StackCats.Models;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public static class DesertFlavoredPuzzleBuilder
     {

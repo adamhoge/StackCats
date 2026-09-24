@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class LuckyPuzzleOverlayScreen : OverlayScreen
     {
@@ -17,12 +17,15 @@ namespace Tofuwu.StackCats.UI
         {
             base.OnTransitioningIn();
 
-            if (!_isInitialized) Initialize();
+            if (!_isInitialized)
+                Initialize();
 
             LeanTween.cancel(MainCanvasGroup.gameObject);
             MainCanvasGroup.transform.localScale = Vector3.one;
             MainCanvasGroup.alpha = 0.0f;
-            LeanTween.alphaCanvas(MainCanvasGroup, 1.0f, TransitionInDuration).setEase(TransitionInTween);
+            LeanTween
+                .alphaCanvas(MainCanvasGroup, 1.0f, TransitionInDuration)
+                .setEase(TransitionInTween);
 
             for (int i = 0; i < _luckyPuzzleLetterCanvasGroups.Count; i++)
             {
@@ -30,8 +33,14 @@ namespace Tofuwu.StackCats.UI
                 LeanTween.cancel(puzzleLetterCanvasGroup.gameObject);
                 puzzleLetterCanvasGroup.transform.Translate(Vector2.down * 1.0f);
                 puzzleLetterCanvasGroup.alpha = 0.0f;
-                LeanTween.moveLocalY(puzzleLetterCanvasGroup.gameObject, 0.0f, 2.0f).setEase(LeanTweenType.easeOutElastic).setDelay(0.5f + 0.04f * i);
-                LeanTween.alphaCanvas(puzzleLetterCanvasGroup, 1.0f, 0.25f).setEase(LeanTweenType.easeOutQuint).setDelay(0.5f + 0.04f * i);
+                LeanTween
+                    .moveLocalY(puzzleLetterCanvasGroup.gameObject, 0.0f, 2.0f)
+                    .setEase(LeanTweenType.easeOutElastic)
+                    .setDelay(0.5f + 0.04f * i);
+                LeanTween
+                    .alphaCanvas(puzzleLetterCanvasGroup, 1.0f, 0.25f)
+                    .setEase(LeanTweenType.easeOutQuint)
+                    .setDelay(0.5f + 0.04f * i);
             }
         }
 
@@ -40,8 +49,12 @@ namespace Tofuwu.StackCats.UI
             base.OnTransitioningOut();
 
             LeanTween.cancel(MainCanvasGroup.gameObject);
-            LeanTween.alphaCanvas(MainCanvasGroup, 0.0f, TransitionOutDuration).setEase(TransitionOutTween);
-            LeanTween.scale(MainCanvasGroup.gameObject, Vector3.one * 1.25f, TransitionOutDuration).setEase(TransitionOutTween);
+            LeanTween
+                .alphaCanvas(MainCanvasGroup, 0.0f, TransitionOutDuration)
+                .setEase(TransitionOutTween);
+            LeanTween
+                .scale(MainCanvasGroup.gameObject, Vector3.one * 1.25f, TransitionOutDuration)
+                .setEase(TransitionOutTween);
         }
 
         protected override void Update()
@@ -56,8 +69,14 @@ namespace Tofuwu.StackCats.UI
 
         private void Initialize()
         {
-            foreach (RectTransform transform in LuckyLettersLayoutGroup.transform) { _luckyPuzzleLetterCanvasGroups.Add(transform.GetComponent<CanvasGroup>()); }
-            foreach (RectTransform transform in PuzzleLettersLayoutGroup.transform) { _luckyPuzzleLetterCanvasGroups.Add(transform.GetComponent<CanvasGroup>()); }
+            foreach (RectTransform transform in LuckyLettersLayoutGroup.transform)
+            {
+                _luckyPuzzleLetterCanvasGroups.Add(transform.GetComponent<CanvasGroup>());
+            }
+            foreach (RectTransform transform in PuzzleLettersLayoutGroup.transform)
+            {
+                _luckyPuzzleLetterCanvasGroups.Add(transform.GetComponent<CanvasGroup>());
+            }
 
             LuckyLettersLayoutGroup.GetComponent<RectTransform>().WrapChildren();
             PuzzleLettersLayoutGroup.GetComponent<RectTransform>().WrapChildren();

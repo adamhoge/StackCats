@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public enum FillTransformDirection
     {
         Up,
         Right,
         Down,
-        Left
+        Left,
     }
 
     public delegate void FillTransformFull();
@@ -42,7 +42,10 @@ namespace Tofuwu.StackCats
         /// <summary>
         /// Flag indicating whether or not the transform is currently filling.
         /// </summary>
-        public bool IsFilling { get { return _lerpAmount != Amount; } }
+        public bool IsFilling
+        {
+            get { return _lerpAmount != Amount; }
+        }
 
         private RectTransform _rectTransform;
         private float _lerpAmount;
@@ -80,7 +83,8 @@ namespace Tofuwu.StackCats
 
                 if (_lerpAmount == Amount)
                 {
-                    if (onFull != null) onFull();
+                    if (onFull != null)
+                        onFull();
                 }
             }
         }

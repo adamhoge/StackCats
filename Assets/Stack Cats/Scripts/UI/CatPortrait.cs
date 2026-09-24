@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class CatPortrait : MonoBehaviour
     {
@@ -21,7 +21,9 @@ namespace Tofuwu.StackCats
             CatPortraitImage.sprite = Cat.Portrait;
             CatPortraitImage.color = IsBonded ? Color.white : NotBondedColor;
             OverlayColorCanvasGroup.alpha = 1.0f;
-            LeanTween.alphaCanvas(OverlayColorCanvasGroup, 0.0f, RevealFlashDuration).setEase(LeanTweenType.easeInSine);
+            LeanTween
+                .alphaCanvas(OverlayColorCanvasGroup, 0.0f, RevealFlashDuration)
+                .setEase(LeanTweenType.easeInSine);
         }
 
         public void SkipAnimation()

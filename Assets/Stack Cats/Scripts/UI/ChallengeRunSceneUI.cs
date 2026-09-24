@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using RockhopperGames.StackCats.Models;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using System;
-using Tofuwu.StackCats.Models;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class ChallengeRunSceneUI : MonoBehaviour
     {
@@ -72,8 +72,10 @@ namespace Tofuwu.StackCats.UI
         {
             PuzzleTheme puzzleTheme = ChallengeRunScene.PuzzleArea.PuzzleTheme;
             FooterBackgroundImage.color = puzzleTheme.UIColor;
-            foreach (Button button in UIButtons) button.image.color = puzzleTheme.UIColor;
-            foreach (Image image in UIImages) image.color = puzzleTheme.UIColor;
+            foreach (Button button in UIButtons)
+                button.image.color = puzzleTheme.UIColor;
+            foreach (Image image in UIImages)
+                image.color = puzzleTheme.UIColor;
         }
 
         protected void Update()
@@ -99,19 +101,25 @@ namespace Tofuwu.StackCats.UI
 
             LeanTween.cancel(NumUndoesRemainingText.gameObject);
             NumUndoesRemainingText.transform.localScale = Vector2.one;
-            LeanTween.scale(NumUndoesRemainingText.gameObject, Vector2.one * 1.25f, 0.5f).setEase(LeanTweenType.punch);
+            LeanTween
+                .scale(NumUndoesRemainingText.gameObject, Vector2.one * 1.25f, 0.5f)
+                .setEase(LeanTweenType.punch);
 
-            if (numUndosRemaining == 0) UndoButton.interactable = false;
+            if (numUndosRemaining == 0)
+                UndoButton.interactable = false;
         }
 
         private void UpdateMovesRemaining(int movesRemaining)
         {
             MovesRemainingText.text = movesRemaining.ToString();
-            MovesRemainingText.color = movesRemaining > 3 ? Color.white : MovesRemainingCriticalColor;
+            MovesRemainingText.color =
+                movesRemaining > 3 ? Color.white : MovesRemainingCriticalColor;
 
             LeanTween.cancel(MovesRemainingText.gameObject);
             MovesRemainingText.transform.localScale = Vector2.one;
-            LeanTween.scale(MovesRemainingText.gameObject, Vector2.one * 1.25f, 0.5f).setEase(LeanTweenType.punch);
+            LeanTween
+                .scale(MovesRemainingText.gameObject, Vector2.one * 1.25f, 0.5f)
+                .setEase(LeanTweenType.punch);
         }
 
         private void OnChallengeRunSceneStateChanged(ChallengeRunSceneState state)
@@ -124,35 +132,51 @@ namespace Tofuwu.StackCats.UI
                     ChallengeOverlayScreenManager.EnqueueScreen(ChallengeStartOverlayScreen);
                     break;
                 case ChallengeRunSceneState.PlayingPuzzle:
-                    LeanTween.alphaCanvas(ChallengeRunHeaderCanvasGroup, 0.0f, 0.5f).setEase(LeanTweenType.easeOutSine);
+                    LeanTween
+                        .alphaCanvas(ChallengeRunHeaderCanvasGroup, 0.0f, 0.5f)
+                        .setEase(LeanTweenType.easeOutSine);
                     break;
                 case ChallengeRunSceneState.ViewingProgress:
-                    LeanTween.alphaCanvas(ChallengeRunHeaderCanvasGroup, 1.0f, 0.5f).setEase(LeanTweenType.easeOutSine);
+                    LeanTween
+                        .alphaCanvas(ChallengeRunHeaderCanvasGroup, 1.0f, 0.5f)
+                        .setEase(LeanTweenType.easeOutSine);
                     ChallengeOverlayScreenManager.EnqueueScreen(ChallengeProgressOverlayScreen);
-                    UpdateNumUndosRemaining(ChallengeRunScene.CurrentChallengeRun.CurrentPuzzle.UndosRemaining);
+                    UpdateNumUndosRemaining(
+                        ChallengeRunScene.CurrentChallengeRun.CurrentPuzzle.UndosRemaining
+                    );
                     break;
                 case ChallengeRunSceneState.RunCompleted:
-                    LeanTween.alphaCanvas(ChallengeRunHeaderCanvasGroup, 1.0f, 0.5f).setEase(LeanTweenType.easeOutSine);
+                    LeanTween
+                        .alphaCanvas(ChallengeRunHeaderCanvasGroup, 1.0f, 0.5f)
+                        .setEase(LeanTweenType.easeOutSine);
                     ChallengeOverlayScreenManager.EnqueueScreen(ChallengeEndedOverlayScreen);
                     break;
             }
 
-            NumUndosRectTransform.gameObject.SetActive(state == ChallengeRunSceneState.PlayingPuzzle);
+            NumUndosRectTransform.gameObject.SetActive(
+                state == ChallengeRunSceneState.PlayingPuzzle
+            );
         }
 
         private void OnPuzzleBeginLoad(Puzzle puzzle, bool wasRestarted, bool isUndo)
         {
             BackButton.interactable = false;
             PuzzleCameraAdjuster.FitCameraAndUIToPuzzleAspect(puzzle);
-            if (!isUndo && puzzle.IsSpecial) MainOverlayScreenManager.EnqueueScreen(LuckyPuzzleOverlayScreen);
-            UpdateMovesRemaining(ChallengeRunScene.CurrentChallengeRun.CurrentPuzzle.MaxMoves - puzzle.NumMovesMade);
-            UpdateNumUndosRemaining(ChallengeRunScene.CurrentChallengeRun.CurrentPuzzle.UndosRemaining);
+            if (!isUndo && puzzle.IsSpecial)
+                MainOverlayScreenManager.EnqueueScreen(LuckyPuzzleOverlayScreen);
+            UpdateMovesRemaining(
+                ChallengeRunScene.CurrentChallengeRun.CurrentPuzzle.MaxMoves - puzzle.NumMovesMade
+            );
+            UpdateNumUndosRemaining(
+                ChallengeRunScene.CurrentChallengeRun.CurrentPuzzle.UndosRemaining
+            );
         }
 
         private void OnPuzzleLoaded(Puzzle puzzle)
         {
             BackButton.interactable = true;
-            UndoButton.interactable = ChallengeRunScene.CurrentChallengeRun.CurrentPuzzle.UndosRemaining > 0;
+            UndoButton.interactable =
+                ChallengeRunScene.CurrentChallengeRun.CurrentPuzzle.UndosRemaining > 0;
             puzzle.onCurrencyFound += OnCurrencyFound;
         }
 
@@ -185,7 +209,10 @@ namespace Tofuwu.StackCats.UI
             UndoButton.interactable = false;
         }
 
-        private void OnChallengePuzzleSceneCompleted(Puzzle puzzle, PuzzleCompletionType puzzleCompletionType)
+        private void OnChallengePuzzleSceneCompleted(
+            Puzzle puzzle,
+            PuzzleCompletionType puzzleCompletionType
+        )
         {
             MovesRemainingRectTransform.gameObject.SetActive(false);
 
@@ -196,12 +223,15 @@ namespace Tofuwu.StackCats.UI
 
                 foreach (Cat cat in newCatsSeen)
                 {
-                    NewCatOverlayScreen newCatOverlayScreen = Instantiate(NewCatOverlayScreenPrefab, MainOverlayScreenManager.transform);
+                    NewCatOverlayScreen newCatOverlayScreen = Instantiate(
+                        NewCatOverlayScreenPrefab,
+                        MainOverlayScreenManager.transform
+                    );
                     newCatOverlayScreen.Cat = cat;
                     MainOverlayScreenManager.EnqueueScreen(newCatOverlayScreen);
                 }
 
-                if(newCatsSeen.Count > 0)
+                if (newCatsSeen.Count > 0)
                 {
                     NewCatsInCollectionOverlayScreen.NewCats = newCatsSeen;
                     MainOverlayScreenManager.EnqueueScreen(NewCatsInCollectionOverlayScreen);
@@ -240,7 +270,8 @@ namespace Tofuwu.StackCats.UI
 
         private void OnCurrencyFound(CatBlock source, Currency currency, int amount)
         {
-            CurrencyFadeInfo currencyFadeInfo = (CurrencyFadeInfo)CurrencyFadeInfoObjectPooler.BorrowInstance();
+            CurrencyFadeInfo currencyFadeInfo = (CurrencyFadeInfo)
+                CurrencyFadeInfoObjectPooler.BorrowInstance();
             currencyFadeInfo.Currency = currency;
             currencyFadeInfo.Amount = amount;
             currencyFadeInfo.transform.position = source.transform.position + Vector3.up * 0.5f;

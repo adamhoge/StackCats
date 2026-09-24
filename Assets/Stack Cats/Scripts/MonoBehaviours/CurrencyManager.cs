@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
-using Tofuwu.StackCats.Data;
+using RockhopperGames.StackCats.Data;
 using RotaryHeart.Lib.SerializableDictionary;
+using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public delegate void CurrencyChanged(Currency currency, int amount, int total);
 
@@ -12,7 +12,8 @@ namespace Tofuwu.StackCats
     public class CurrencyAmountDictionary : SerializableDictionaryBase<Currency, int> { }
 
     [Serializable]
-    public class CurrencyDetailsDictionary : SerializableDictionaryBase<Currency, CurrencyDetails> { }
+    public class CurrencyDetailsDictionary
+        : SerializableDictionaryBase<Currency, CurrencyDetails> { }
 
     public class CurrencyManager : MonoBehaviour
     {
@@ -24,9 +25,10 @@ namespace Tofuwu.StackCats
 
         public bool HasAmount(CurrencyAmountDictionary currencyAmount)
         {
-            foreach(KeyValuePair<Currency, int> currency in currencyAmount)
+            foreach (KeyValuePair<Currency, int> currency in currencyAmount)
             {
-                if (GetCurrencyHeld(currency.Key) < currency.Value) return false;
+                if (GetCurrencyHeld(currency.Key) < currency.Value)
+                    return false;
             }
 
             return true;
@@ -41,16 +43,21 @@ namespace Tofuwu.StackCats
         {
             if (_data.ChangeCurrency(currency, amount, allowRemainder))
             {
-                if (onCurrencyChanged != null) onCurrencyChanged(currency, amount, _data.GetCurrencyHeld(currency));
+                if (onCurrencyChanged != null)
+                    onCurrencyChanged(currency, amount, _data.GetCurrencyHeld(currency));
                 return true;
             }
 
             return false;
         }
 
-        public bool ChangeCurrency(CurrencyAmountDictionary currencyAmount, bool allowRemainder = false)
+        public bool ChangeCurrency(
+            CurrencyAmountDictionary currencyAmount,
+            bool allowRemainder = false
+        )
         {
-            if (!allowRemainder && !HasAmount(currencyAmount)) return false;
+            if (!allowRemainder && !HasAmount(currencyAmount))
+                return false;
 
             foreach (KeyValuePair<Currency, int> currency in currencyAmount)
             {

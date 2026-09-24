@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace Tofuwu.StackCats.Data
+namespace RockhopperGames.StackCats.Data
 {
     [Serializable]
     public class LocalPreferencesData : IPreferencesData
@@ -11,32 +10,80 @@ namespace Tofuwu.StackCats.Data
         /// <summary>
         /// Flag indicating whether or not overall sound is currently enabled.
         /// </summary>
-        public bool IsMasterEnabled { get { return _isMasterEnabled; } set { _isMasterEnabled = value; Save(); } }
+        public bool IsMasterEnabled
+        {
+            get { return _isMasterEnabled; }
+            set
+            {
+                _isMasterEnabled = value;
+                Save();
+            }
+        }
 
         /// <summary>
         /// Flag indicating whether or not background music is currently enabled.
         /// </summary>
-        public bool IsBackgroundMusicEnabled { get { return _isBackgroundMusicEnabled; } set { _isBackgroundMusicEnabled = value; Save(); } }
+        public bool IsBackgroundMusicEnabled
+        {
+            get { return _isBackgroundMusicEnabled; }
+            set
+            {
+                _isBackgroundMusicEnabled = value;
+                Save();
+            }
+        }
 
         /// <summary>
         /// Flag indicating whether or not sound is currently enabled.
         /// </summary>
-        public bool IsSoundEffectsEnabled { get { return _isSoundEffectsEnabled; } set { _isSoundEffectsEnabled = value; Save(); } }
+        public bool IsSoundEffectsEnabled
+        {
+            get { return _isSoundEffectsEnabled; }
+            set
+            {
+                _isSoundEffectsEnabled = value;
+                Save();
+            }
+        }
 
         /// <summary>
         /// The current overall sound volume.
         /// </summary>
-        public float MasterVolume { get { return _masterVolume; } set { _masterVolume = value; Save(); } }
+        public float MasterVolume
+        {
+            get { return _masterVolume; }
+            set
+            {
+                _masterVolume = value;
+                Save();
+            }
+        }
 
         /// <summary>
         /// The current background music volume.
         /// </summary>
-        public float BackgroundMusicVolume { get { return _backgroundMusicVolume; } set { _backgroundMusicVolume = value; Save(); } }
+        public float BackgroundMusicVolume
+        {
+            get { return _backgroundMusicVolume; }
+            set
+            {
+                _backgroundMusicVolume = value;
+                Save();
+            }
+        }
 
         /// <summary>
         /// The current sound effects volume.
         /// </summary>
-        public float SoundEffectsVolume { get { return _soundEffectsVolume; } set { _soundEffectsVolume = value; Save(); } }
+        public float SoundEffectsVolume
+        {
+            get { return _soundEffectsVolume; }
+            set
+            {
+                _soundEffectsVolume = value;
+                Save();
+            }
+        }
 
         private readonly string _dataPath;
         private bool _isMasterEnabled = true;

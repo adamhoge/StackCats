@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public static class SpriteRendererHelper
     {
         public static SpriteRenderer CloneMaterials(this SpriteRenderer spriteRenderer)
         {
             var clonedMaterials = new List<Material>();
-            foreach(var material in spriteRenderer.materials)
+            foreach (var material in spriteRenderer.materials)
             {
                 var clonedMaterial = Object.Instantiate(material);
                 clonedMaterials.Add(clonedMaterial);
@@ -19,9 +19,13 @@ namespace Tofuwu.StackCats
             return spriteRenderer;
         }
 
-        public static void SetMaterialForItem(this SpriteRenderer spriteRenderer, ItemColorShift colorShift)
+        public static void SetMaterialForItem(
+            this SpriteRenderer spriteRenderer,
+            ItemColorShift colorShift
+        )
         {
-            if (colorShift == null) return;
+            if (colorShift == null)
+                return;
 
             spriteRenderer.CloneMaterials();
             spriteRenderer.material.SetFloat("_Hue", colorShift.Hue);

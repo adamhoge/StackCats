@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class ItemReceivedOverlayScreen : OverlayScreen
     {
@@ -17,15 +17,21 @@ namespace Tofuwu.StackCats.UI
             base.OnTransitioningIn();
 
             ItemIcon.sprite = Item.Icon;
-            ItemIcon.SetMaterialForItem(Item.ColorShift); ;
+            ItemIcon.SetMaterialForItem(Item.ColorShift);
+            ;
             ItemLabel.text = Item.Name;
-            if (Amount > 1) ItemLabel.text += " x" + Amount;
+            if (Amount > 1)
+                ItemLabel.text += " x" + Amount;
 
             PanelCanvasGroup.alpha = 0.0f;
             PanelCanvasGroup.transform.localScale = Vector2.one * 0.9f;
             LeanTween.cancel(PanelCanvasGroup.gameObject);
-            LeanTween.alphaCanvas(PanelCanvasGroup, 1.0f, TransitionInDuration).setEase(TransitionInTween);
-            LeanTween.scale(PanelCanvasGroup.gameObject, Vector2.one, TransitionInDuration).setEase(TransitionInTween);
+            LeanTween
+                .alphaCanvas(PanelCanvasGroup, 1.0f, TransitionInDuration)
+                .setEase(TransitionInTween);
+            LeanTween
+                .scale(PanelCanvasGroup.gameObject, Vector2.one, TransitionInDuration)
+                .setEase(TransitionInTween);
         }
 
         public override void OnTransitioningOut()
@@ -35,8 +41,12 @@ namespace Tofuwu.StackCats.UI
             PanelCanvasGroup.alpha = 1.0f;
             PanelCanvasGroup.transform.localScale = Vector2.one;
             LeanTween.cancel(PanelCanvasGroup.gameObject);
-            LeanTween.alphaCanvas(PanelCanvasGroup, 0.0f, TransitionOutDuration).setEase(TransitionInTween);
-            LeanTween.scale(PanelCanvasGroup.gameObject, Vector2.one * 0.9f, TransitionOutDuration).setEase(TransitionOutTween);
+            LeanTween
+                .alphaCanvas(PanelCanvasGroup, 0.0f, TransitionOutDuration)
+                .setEase(TransitionInTween);
+            LeanTween
+                .scale(PanelCanvasGroup.gameObject, Vector2.one * 0.9f, TransitionOutDuration)
+                .setEase(TransitionOutTween);
         }
     }
 }

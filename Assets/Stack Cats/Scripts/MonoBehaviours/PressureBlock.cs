@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using TMPro;
+﻿using TMPro;
+using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public delegate void PressureBlockBroke(PressureBlock pressureBlock, Stack stack, int atIndex);
 
@@ -12,7 +12,11 @@ namespace Tofuwu.StackCats
         /// <summary>
         /// The amount of blocks above the pressure block required to break it.
         /// </summary>
-        public int BreakingPoint { get { return _breakingPoint; } set { SetBreakingPoint(value); } }
+        public int BreakingPoint
+        {
+            get { return _breakingPoint; }
+            set { SetBreakingPoint(value); }
+        }
 
         public override bool IsMovable => false;
 
@@ -46,7 +50,8 @@ namespace Tofuwu.StackCats
                 Stack parentStack = Block.ParentStack;
                 int blockIndex = parentStack.Blocks.IndexOf(Block);
                 Block.ParentStack.RemoveBlock(Block, true);
-                if (onPressureBlockBroke != null) onPressureBlockBroke(this, parentStack, blockIndex);
+                if (onPressureBlockBroke != null)
+                    onPressureBlockBroke(this, parentStack, blockIndex);
             }
         }
 
@@ -62,16 +67,20 @@ namespace Tofuwu.StackCats
 
         protected void Start()
         {
-            if (BlocksAboveText) BlocksAboveText.text = Block.GetBlocksAbove().Count.ToString();
-            if (BreakingPointText) BreakingPointText.text = _breakingPoint.ToString();
+            if (BlocksAboveText)
+                BlocksAboveText.text = Block.GetBlocksAbove().Count.ToString();
+            if (BreakingPointText)
+                BreakingPointText.text = _breakingPoint.ToString();
         }
 
         private void SetBreakingPoint(int value)
         {
-            if (_breakingPoint == value) return;
+            if (_breakingPoint == value)
+                return;
 
             _breakingPoint = value;
-            if (BreakingPointText) BreakingPointText.text = _breakingPoint.ToString();
+            if (BreakingPointText)
+                BreakingPointText.text = _breakingPoint.ToString();
         }
     }
 }

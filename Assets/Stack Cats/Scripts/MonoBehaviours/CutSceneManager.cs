@@ -1,20 +1,31 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class CutSceneManager : MonoBehaviour
     {
         /// <summary>
         /// The scene to load upon cut scene completion.
         /// </summary>
-        public GameScene? ReturnScene { get { return _returnScene; } set { _returnScene = value; } }
+        public GameScene? ReturnScene
+        {
+            get { return _returnScene; }
+            set { _returnScene = value; }
+        }
 
-        public SceneTransitionSettings ReturnSceneTransitionSettings { get { return _returnSceneTransitionSettings; } set { _returnSceneTransitionSettings = value; } }
+        public SceneTransitionSettings ReturnSceneTransitionSettings
+        {
+            get { return _returnSceneTransitionSettings; }
+            set { _returnSceneTransitionSettings = value; }
+        }
 
         /// <summary>
         /// The current cut to be played when Cut Scene scene is loaded.
         /// </summary>
-        public CutScene PendingCutScene { get { return _pendingCutScene; } }
+        public CutScene PendingCutScene
+        {
+            get { return _pendingCutScene; }
+        }
 
         private GameManager _gameManager;
         private GameScene? _returnScene;

@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     [RequireComponent(typeof(Button))]
     public class CatPortraitButton : MonoBehaviour
@@ -22,7 +22,10 @@ namespace Tofuwu.StackCats.UI
         /// <summary>
         /// The button associated with the cat portrait.
         /// </summary>
-        public Button Button { get { return _button; } }
+        public Button Button
+        {
+            get { return _button; }
+        }
 
         private Button _button;
         private CatManager _cats;
@@ -65,9 +68,15 @@ namespace Tofuwu.StackCats.UI
                 Color borderColor = Color.clear;
                 switch (Cat.Rarity)
                 {
-                    case Rarity.Common: borderColor = CommonColor; break;
-                    case Rarity.Uncommon: borderColor = UncommonColor; break;
-                    case Rarity.Rare: borderColor = RareColor; break;
+                    case Rarity.Common:
+                        borderColor = CommonColor;
+                        break;
+                    case Rarity.Uncommon:
+                        borderColor = UncommonColor;
+                        break;
+                    case Rarity.Rare:
+                        borderColor = RareColor;
+                        break;
                 }
                 BorderImage.color = borderColor;
 

@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public delegate void CutSceneItemLoaded(CutSceneItem cutSceneItem);
     public delegate void CutSceneStarted(CutScene cutScene);
@@ -50,7 +50,8 @@ namespace Tofuwu.StackCats
             ++_currentCutSceneItemIndex;
             if (CutSceneItems.Count <= _currentCutSceneItemIndex)
             {
-                if (onCutSceneEnded != null) onCutSceneEnded(this);
+                if (onCutSceneEnded != null)
+                    onCutSceneEnded(this);
                 return;
             }
 
@@ -60,17 +61,20 @@ namespace Tofuwu.StackCats
             _cutSceneTimeElapsed = 0.0f;
 
             IsChatCatDoneTalking = cutSceneItem.Expressions.Count == 0;
-            foreach(ChatCatExpression expression in cutSceneItem.Expressions)
+            foreach (ChatCatExpression expression in cutSceneItem.Expressions)
             {
                 _chatCat.Say(expression.Message, expression.Emote, expression.LetterInterval);
             }
 
             if (cutSceneItem.StartBackgroundMusic || !cutSceneItem.InheritBackgroundMusic)
             {
-                GameManager.Instance.Audio.BackgroundMusic.PlayAudioLoop(cutSceneItem.StartBackgroundMusic);
+                GameManager.Instance.Audio.BackgroundMusic.PlayAudioLoop(
+                    cutSceneItem.StartBackgroundMusic
+                );
             }
 
-            if (onCutSceneItemLoaded != null) onCutSceneItemLoaded(cutSceneItem);
+            if (onCutSceneItemLoaded != null)
+                onCutSceneItemLoaded(cutSceneItem);
         }
 
         protected void Awake()
@@ -81,7 +85,8 @@ namespace Tofuwu.StackCats
         protected void Start()
         {
             GoToNextCutSceneItem();
-            if (onCutSceneStarted != null) onCutSceneStarted(this);
+            if (onCutSceneStarted != null)
+                onCutSceneStarted(this);
         }
 
         protected void Update()

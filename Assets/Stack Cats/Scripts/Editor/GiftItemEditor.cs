@@ -1,4 +1,4 @@
-﻿using Tofuwu.StackCats;
+﻿using RockhopperGames.StackCats;
 using UnityEditor;
 
 [CustomEditor(typeof(GiftItem))]
@@ -7,7 +7,7 @@ public class GiftItemEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-        GiftItem giftItem = (GiftItem) target;
+        GiftItem giftItem = (GiftItem)target;
 
         base.OnInspectorGUI();
         EditorGUILayout.Space();

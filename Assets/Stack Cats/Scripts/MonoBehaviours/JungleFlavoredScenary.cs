@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
-using Tofuwu.StackCats;
+﻿using System.Collections.Generic;
 using System.Linq;
+using RockhopperGames.StackCats;
+using UnityEngine;
 
 // TODO: Troubleshoot light beams staying active, probably due to the dictionary value
 public class JungleFlavoredScenary : MonoBehaviour
@@ -13,7 +13,8 @@ public class JungleFlavoredScenary : MonoBehaviour
     public float LightBeamDuration = 3.0f;
     public LeanTweenType LightBeamEasing = LeanTweenType.easeOutSine;
 
-    private Dictionary<SpriteRenderer, float> _activeLightBeams = new Dictionary<SpriteRenderer, float>();
+    private Dictionary<SpriteRenderer, float> _activeLightBeams =
+        new Dictionary<SpriteRenderer, float>();
     private float _nextLightBeamTime;
 
     protected void Start()
@@ -41,11 +42,15 @@ public class JungleFlavoredScenary : MonoBehaviour
 
         if (Time.time >= _nextLightBeamTime)
         {
-            List<SpriteRenderer> availableLightBeams = LightBeamSpriteRenderers.Where(lbr => !_activeLightBeams.ContainsKey(lbr)).ToList();
+            List<SpriteRenderer> availableLightBeams = LightBeamSpriteRenderers
+                .Where(lbr => !_activeLightBeams.ContainsKey(lbr))
+                .ToList();
             if (availableLightBeams.Count > 0)
             {
                 ActivateLightBeam(availableLightBeams.SelectRandom());
-                _nextLightBeamTime = Time.time + Random.Range(LightBeamMinActivationDelay, LightBeamMaxActivationDelay);
+                _nextLightBeamTime =
+                    Time.time
+                    + Random.Range(LightBeamMinActivationDelay, LightBeamMaxActivationDelay);
             }
         }
     }
@@ -59,7 +64,8 @@ public class JungleFlavoredScenary : MonoBehaviour
 
         LeanTween.cancel(lightBeam.gameObject);
         lightBeam.color = Constants.ClearWhite;
-        LeanTween.alpha(lightBeam.gameObject, 0.5f, LightBeamDuration / 2.0f)
+        LeanTween
+            .alpha(lightBeam.gameObject, 0.5f, LightBeamDuration / 2.0f)
             .setEase(LightBeamEasing)
             .setLoopPingPong(1);
         _activeLightBeams.Add(lightBeam, Time.time + LightBeamDuration);

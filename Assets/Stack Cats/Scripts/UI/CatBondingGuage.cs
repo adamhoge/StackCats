@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class CatBondingGuage : MonoBehaviour
     {
@@ -11,7 +11,8 @@ namespace Tofuwu.StackCats
         public void IncrementBondingLevel()
         {
             ++BondingLevel;
-            if (FillMask) FillMask.Amount = Mathf.Clamp(BondingLevel / (float)Cat.BondedAt, 0.0f, 1.0f);
+            if (FillMask)
+                FillMask.Amount = Mathf.Clamp(BondingLevel / (float)Cat.BondedAt, 0.0f, 1.0f);
         }
 
         protected void OnEnable()
@@ -19,13 +20,16 @@ namespace Tofuwu.StackCats
             if (FillMask)
             {
                 FillMask.onFull += OnFull;
-                FillMask.SetAmountImmediate(Mathf.Clamp(BondingLevel / (float)Cat.BondedAt, 0.0f, 1.0f));
+                FillMask.SetAmountImmediate(
+                    Mathf.Clamp(BondingLevel / (float)Cat.BondedAt, 0.0f, 1.0f)
+                );
             }
         }
 
         protected void OnDisable()
         {
-            if (FillMask) FillMask.onFull -= OnFull;
+            if (FillMask)
+                FillMask.onFull -= OnFull;
         }
 
         private void OnFull()

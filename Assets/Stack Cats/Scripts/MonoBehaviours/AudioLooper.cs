@@ -1,14 +1,29 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class AudioLooper : MonoBehaviour
     {
-        public float Volume { get { return _track1.volume; } set { _track1.volume = value; _track2.volume = value; } }
+        public float Volume
+        {
+            get { return _track1.volume; }
+            set
+            {
+                _track1.volume = value;
+                _track2.volume = value;
+            }
+        }
 
-        public AudioLoop CurrentAudioLoop { get { return _currentAudioLoop; } }
+        public AudioLoop CurrentAudioLoop
+        {
+            get { return _currentAudioLoop; }
+        }
 
-        public float Time { get { return _currentTrack.time; } set { _currentTrack.time = value; } }
+        public float Time
+        {
+            get { return _currentTrack.time; }
+            set { _currentTrack.time = value; }
+        }
 
         private AudioSource _track1;
         private AudioSource _track2;
@@ -33,7 +48,6 @@ namespace Tofuwu.StackCats
             _currentTrack = _track1;
             _currentTrack.time = 0.0f;
             _currentTrack.Play();
-
         }
 
         public void Stop()

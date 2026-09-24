@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using RockhopperGames.StackCats;
 using UnityEditor;
-using Tofuwu.StackCats;
+using UnityEngine;
 
 [CustomEditor(typeof(PuzzleBlock))]
 public class PuzzleBlockEditor : Editor
@@ -11,8 +11,14 @@ public class PuzzleBlockEditor : Editor
 
         PuzzleBlock puzzleBlock = (PuzzleBlock)target;
 
-        puzzleBlock.PrimaryNumber = EditorGUILayout.IntField("Primary Number:", puzzleBlock.PrimaryNumber);
+        puzzleBlock.PrimaryNumber = EditorGUILayout.IntField(
+            "Primary Number:",
+            puzzleBlock.PrimaryNumber
+        );
 
-        puzzleBlock.SecondaryNumber = EditorGUILayout.IntField("Secondary Number:", puzzleBlock.SecondaryNumber);
+        puzzleBlock.SecondaryNumber = EditorGUILayout.IntField(
+            "Secondary Number:",
+            puzzleBlock.SecondaryNumber
+        );
     }
 }

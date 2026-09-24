@@ -1,4 +1,4 @@
-﻿namespace Tofuwu.StackCats
+﻿namespace RockhopperGames.StackCats
 {
     public static class CatPersonalityHelper
     {
@@ -6,8 +6,10 @@
         {
             switch (catPersonality)
             {
-                case CatPersonality.MildMannered: return "Mild-Mannered";
-                default: return catPersonality.ToString(); 
+                case CatPersonality.MildMannered:
+                    return "Mild-Mannered";
+                default:
+                    return catPersonality.ToString();
             }
         }
     }

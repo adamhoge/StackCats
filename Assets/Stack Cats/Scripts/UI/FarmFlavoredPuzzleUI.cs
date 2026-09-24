@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using TMPro;
+﻿using TMPro;
+using UnityEngine;
 
-namespace Tofuwu.StackCats.UI
+namespace RockhopperGames.StackCats.UI
 {
     public class FarmFlavoredPuzzleUI : MonoBehaviour
     {
@@ -18,7 +18,8 @@ namespace Tofuwu.StackCats.UI
             PuzzleLoader.onPuzzleUnloaded += OnPuzzleUnloaded;
             PuzzleLoader.onPuzzleRestarted += OnPuzzleRestarted;
 
-            if (CatBlockRectTransform) CatBlockRectTransform.gameObject.SetActive(false);
+            if (CatBlockRectTransform)
+                CatBlockRectTransform.gameObject.SetActive(false);
         }
 
         private void OnPuzzleBeginLoad(Puzzle puzzle, bool wasRestarted, bool isUndo)
@@ -49,7 +50,8 @@ namespace Tofuwu.StackCats.UI
                 _puzzle.onBlockMoveResolved -= OnBlockMoveResolved;
                 _puzzle = null;
 
-                if (CatBlockRectTransform) CatBlockRectTransform.gameObject.SetActive(false);
+                if (CatBlockRectTransform)
+                    CatBlockRectTransform.gameObject.SetActive(false);
             }
         }
 
@@ -64,7 +66,9 @@ namespace Tofuwu.StackCats.UI
 
                 if (CatBlockRectTransform)
                 {
-                    LeanTween.scale(CatBlockRectTransform.gameObject, Vector3.one * 1.2f, 0.25f).setEase(LeanTweenType.punch);
+                    LeanTween
+                        .scale(CatBlockRectTransform.gameObject, Vector3.one * 1.2f, 0.25f)
+                        .setEase(LeanTweenType.punch);
                 }
             }
         }
@@ -74,7 +78,12 @@ namespace Tofuwu.StackCats.UI
             CatBlocksRemovedText.text = _puzzle.GetBlockComponentCount<CatBlock>().ToString();
         }
 
-        private void OnBlockMoveResolved(Puzzle puzzle, Stack source, Block block, Stack destination)
+        private void OnBlockMoveResolved(
+            Puzzle puzzle,
+            Stack source,
+            Block block,
+            Stack destination
+        )
         {
             UpdateCatBlocksRemovedText();
         }

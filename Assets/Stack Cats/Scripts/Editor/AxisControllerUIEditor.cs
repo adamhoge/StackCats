@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
+using RockhopperGames.StackCats;
+using RockhopperGames.StackCats.UI;
 using UnityEditor;
-using Tofuwu.StackCats;
-using Tofuwu.StackCats.UI;
+using UnityEngine;
 
 [CustomEditor(typeof(AxisControllerUI), true)]
 public class AxisControllerUIEditor : Editor
@@ -11,7 +11,7 @@ public class AxisControllerUIEditor : Editor
 
     protected void Awake()
     {
-        AxisControllerUI axisControllerUi = (AxisControllerUI) target;
+        AxisControllerUI axisControllerUi = (AxisControllerUI)target;
 
         _puzzleController = axisControllerUi.PuzzleController;
     }
@@ -23,7 +23,13 @@ public class AxisControllerUIEditor : Editor
         AxisControllerUI axisControllerUi = (AxisControllerUI)target;
 
         EditorGUI.BeginChangeCheck();
-        _puzzleController = (PuzzleController)EditorGUILayout.ObjectField("Puzzle Controller", _puzzleController, typeof(PuzzleController), true);
+        _puzzleController = (PuzzleController)
+            EditorGUILayout.ObjectField(
+                "Puzzle Controller",
+                _puzzleController,
+                typeof(PuzzleController),
+                true
+            );
         if (EditorGUI.EndChangeCheck())
         {
             axisControllerUi.PuzzleController = _puzzleController;

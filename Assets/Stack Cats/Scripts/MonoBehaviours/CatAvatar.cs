@@ -1,14 +1,14 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public enum CatAvatarBody
     {
         ShortHair,
         MediumHair,
-        SmooshFace
+        SmooshFace,
     }
 
     [Serializable]
@@ -116,17 +116,32 @@ namespace Tofuwu.StackCats
         /// <summary>
         /// The cat represented by the avatar.
         /// </summary>
-        public Cat Cat { get { return _cat; } set { SetCat(value); } }
+        public Cat Cat
+        {
+            get { return _cat; }
+            set { SetCat(value); }
+        }
 
         /// <summary>
         /// Flag indicating whether or not the avatar should be built as a shadow.
         /// </summary>
-        public bool IsShadow { get { return _isShadow; } set { SetIsShadow(value); } }
+        public bool IsShadow
+        {
+            get { return _isShadow; }
+            set { SetIsShadow(value); }
+        }
 
-        [SerializeField] private Cat _cat;
-        [SerializeField] private SkinnedMeshRenderer _activeBodyMesh;
-        [SerializeField] private SkinnedMeshRenderer _activeEyesMesh;
-        [SerializeField] private List<Material> _overlayMaterials = new List<Material>();
+        [SerializeField]
+        private Cat _cat;
+
+        [SerializeField]
+        private SkinnedMeshRenderer _activeBodyMesh;
+
+        [SerializeField]
+        private SkinnedMeshRenderer _activeEyesMesh;
+
+        [SerializeField]
+        private List<Material> _overlayMaterials = new List<Material>();
         private CatAvatarAnimator _animator;
         private bool _isShadow;
         private bool _isInitialized;
@@ -150,12 +165,22 @@ namespace Tofuwu.StackCats
         {
             foreach (Material overlayMaterial in _overlayMaterials)
             {
-                LeanTween.value(1.0f, 0.0f, duration).setEase(LeanTweenType.easeInQuad)
-                    .setOnUpdate((float alpha) =>
-                    {
-                        overlayMaterial.SetColor("_Color", new Color(color.r, color.g, color.b, alpha));
-                        overlayMaterial.SetColor("_OutlineColor", new Color(color.r, color.g, color.b, alpha));
-                    });
+                LeanTween
+                    .value(1.0f, 0.0f, duration)
+                    .setEase(LeanTweenType.easeInQuad)
+                    .setOnUpdate(
+                        (float alpha) =>
+                        {
+                            overlayMaterial.SetColor(
+                                "_Color",
+                                new Color(color.r, color.g, color.b, alpha)
+                            );
+                            overlayMaterial.SetColor(
+                                "_OutlineColor",
+                                new Color(color.r, color.g, color.b, alpha)
+                            );
+                        }
+                    );
             }
         }
 
@@ -196,10 +221,18 @@ namespace Tofuwu.StackCats
             CatAvatarSettings settings = _cat.AvatarSettings;
             switch (settings.Body)
             {
-                case CatAvatarBody.ShortHair: _activeBodyMesh = ShortHairedCatMesh; break;
-                case CatAvatarBody.MediumHair: _activeBodyMesh = MediumHairedCatMesh; break;
-                case CatAvatarBody.SmooshFace: _activeBodyMesh = SmooshFaceCatMesh; break;
-                default: _activeBodyMesh = null; break;
+                case CatAvatarBody.ShortHair:
+                    _activeBodyMesh = ShortHairedCatMesh;
+                    break;
+                case CatAvatarBody.MediumHair:
+                    _activeBodyMesh = MediumHairedCatMesh;
+                    break;
+                case CatAvatarBody.SmooshFace:
+                    _activeBodyMesh = SmooshFaceCatMesh;
+                    break;
+                default:
+                    _activeBodyMesh = null;
+                    break;
             }
             ShortHairedCatMesh.gameObject.SetActive(_activeBodyMesh == ShortHairedCatMesh);
             MediumHairedCatMesh.gameObject.SetActive(_activeBodyMesh == MediumHairedCatMesh);
@@ -212,7 +245,9 @@ namespace Tofuwu.StackCats
             }
             else
             {
-                bodyMaterials.Add(settings.BodyMaterial != null ? settings.BodyMaterial : DefaultBodyMaterial);
+                bodyMaterials.Add(
+                    settings.BodyMaterial != null ? settings.BodyMaterial : DefaultBodyMaterial
+                );
             }
             _activeBodyMesh.materials = bodyMaterials.ToArray();
         }
@@ -222,27 +257,53 @@ namespace Tofuwu.StackCats
             CatAvatarSettings settings = _cat.AvatarSettings;
             switch (settings.Body)
             {
-                case CatAvatarBody.ShortHair: _activeEyesMesh = ShortHairedCatEyesMesh; break;
-                case CatAvatarBody.MediumHair: _activeEyesMesh = MediumHairedCatEyesMesh; break;
-                case CatAvatarBody.SmooshFace: _activeEyesMesh = SmooshFaceCatEyesMesh; break;
-                default: _activeBodyMesh = null; break;
+                case CatAvatarBody.ShortHair:
+                    _activeEyesMesh = ShortHairedCatEyesMesh;
+                    break;
+                case CatAvatarBody.MediumHair:
+                    _activeEyesMesh = MediumHairedCatEyesMesh;
+                    break;
+                case CatAvatarBody.SmooshFace:
+                    _activeEyesMesh = SmooshFaceCatEyesMesh;
+                    break;
+                default:
+                    _activeBodyMesh = null;
+                    break;
             }
             ShortHairedCatEyesMesh.gameObject.SetActive(_activeEyesMesh == ShortHairedCatEyesMesh);
-            MediumHairedCatEyesMesh.gameObject.SetActive(_activeEyesMesh == MediumHairedCatEyesMesh);
+            MediumHairedCatEyesMesh.gameObject.SetActive(
+                _activeEyesMesh == MediumHairedCatEyesMesh
+            );
             SmooshFaceCatEyesMesh.gameObject.SetActive(_activeEyesMesh == SmooshFaceCatEyesMesh);
 
             List<Material> eyesMaterials = new List<Material>();
             if (_areEyesOpen)
             {
-                Material eyesOpenMaterial = settings.EyesOpenMaterial != null ? Instantiate(settings.EyesOpenMaterial) : Instantiate(DefaultEyesOpenMaterial);
-                eyesOpenMaterial.SetColor("_Color", IsShadow ? new Color(1.0f, 1.0f, 1.0f, eyesOpenMaterial.GetColor("_Color").a) : settings.EyeColorPrimary);
+                Material eyesOpenMaterial =
+                    settings.EyesOpenMaterial != null
+                        ? Instantiate(settings.EyesOpenMaterial)
+                        : Instantiate(DefaultEyesOpenMaterial);
+                eyesOpenMaterial.SetColor(
+                    "_Color",
+                    IsShadow
+                        ? new Color(1.0f, 1.0f, 1.0f, eyesOpenMaterial.GetColor("_Color").a)
+                        : settings.EyeColorPrimary
+                );
                 eyesMaterials.Add(eyesOpenMaterial);
             }
             else
             {
-                Material eyesClosedMaterial = settings.EyesClosedMaterial != null ? Instantiate(settings.EyesClosedMaterial) : Instantiate(DefaultEyesClosedMaterial);
+                Material eyesClosedMaterial =
+                    settings.EyesClosedMaterial != null
+                        ? Instantiate(settings.EyesClosedMaterial)
+                        : Instantiate(DefaultEyesClosedMaterial);
                 var eyesClosedAlpha = eyesClosedMaterial.GetColor("_Color").a;
-                eyesClosedMaterial.SetColor("_Color", IsShadow ? new Color(1.0f, 1.0f, 1.0f, eyesClosedAlpha) : new Color(0.25f, 0.25f, 0.25f, eyesClosedAlpha));
+                eyesClosedMaterial.SetColor(
+                    "_Color",
+                    IsShadow
+                        ? new Color(1.0f, 1.0f, 1.0f, eyesClosedAlpha)
+                        : new Color(0.25f, 0.25f, 0.25f, eyesClosedAlpha)
+                );
                 eyesMaterials.Add(eyesClosedMaterial);
             }
             _activeEyesMesh.materials = eyesMaterials.ToArray();
@@ -256,13 +317,19 @@ namespace Tofuwu.StackCats
             }
             if (_cat.HeadAccessory.Prefab != null)
             {
-                GameObject headAccessory = Instantiate(_cat.HeadAccessory.Prefab, HeadAccessoryTransform);
+                GameObject headAccessory = Instantiate(
+                    _cat.HeadAccessory.Prefab,
+                    HeadAccessoryTransform
+                );
                 headAccessory.transform.localPosition = _cat.HeadAccessory.Position;
-                headAccessory.transform.localRotation = Quaternion.Euler(_cat.HeadAccessory.Rotation);
+                headAccessory.transform.localRotation = Quaternion.Euler(
+                    _cat.HeadAccessory.Rotation
+                );
                 headAccessory.transform.localScale = _cat.HeadAccessory.Scale;
                 if (IsShadow)
                 {
-                    var headAcessoryMeshRenderers = headAccessory.GetComponentsInChildren<MeshRenderer>();
+                    var headAcessoryMeshRenderers =
+                        headAccessory.GetComponentsInChildren<MeshRenderer>();
                     foreach (var headAccessoryMeshRenderer in headAcessoryMeshRenderers)
                     {
                         headAccessoryMeshRenderer.materials = new[] { ShadowBodyMaterial };
@@ -301,7 +368,8 @@ namespace Tofuwu.StackCats
 
         private void SetCat(Cat value)
         {
-            if (_cat == value) return;
+            if (_cat == value)
+                return;
 
             _cat = value;
             Initialize();
@@ -309,7 +377,8 @@ namespace Tofuwu.StackCats
 
         private void SetIsShadow(bool isShadow)
         {
-            if (_isShadow == isShadow) return;
+            if (_isShadow == isShadow)
+                return;
 
             _isShadow = isShadow;
             RebuildAvatar();

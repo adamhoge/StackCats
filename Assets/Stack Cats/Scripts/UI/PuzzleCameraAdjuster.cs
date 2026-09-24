@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class PuzzleCameraAdjuster : MonoBehaviour
     {
@@ -59,9 +59,27 @@ namespace Tofuwu.StackCats
 
                 LeanTween.cancel(Camera.gameObject);
 
-                LeanTween.value(Camera.gameObject, Camera.orthographicSize, _currentAspectSettings.OrthographicSize, AspectTransitionDuration).setEase(AspectTransitionTweenType).setOnUpdate(
-                    (float newOrthoSize) => { Camera.orthographicSize = newOrthoSize; });
-                LeanTween.moveLocal(Camera.gameObject, _currentAspectSettings.CameraPosition, AspectTransitionDuration).setEase(AspectTransitionTweenType);
+                LeanTween
+                    .value(
+                        Camera.gameObject,
+                        Camera.orthographicSize,
+                        _currentAspectSettings.OrthographicSize,
+                        AspectTransitionDuration
+                    )
+                    .setEase(AspectTransitionTweenType)
+                    .setOnUpdate(
+                        (float newOrthoSize) =>
+                        {
+                            Camera.orthographicSize = newOrthoSize;
+                        }
+                    );
+                LeanTween
+                    .moveLocal(
+                        Camera.gameObject,
+                        _currentAspectSettings.CameraPosition,
+                        AspectTransitionDuration
+                    )
+                    .setEase(AspectTransitionTweenType);
             }
         }
 
@@ -80,34 +98,48 @@ namespace Tofuwu.StackCats
 
         public void FitCameraAndUIToPuzzleAspect(Puzzle puzzle = null)
         {
-            bool screenSizeChanged = Screen.width != _screenSize.x || Screen.height != _screenSize.y;
+            bool screenSizeChanged =
+                Screen.width != _screenSize.x || Screen.height != _screenSize.y;
             _screenSize = new Vector2(Screen.width, Screen.height);
 
-            float puzzleWidth = puzzle ? puzzle.Stacks.Count * (1.0f + puzzle.StackSpacing) + puzzle.StackSpacing : DefaultPuzzleWidth;
+            float puzzleWidth = puzzle
+                ? puzzle.Stacks.Count * (1.0f + puzzle.StackSpacing) + puzzle.StackSpacing
+                : DefaultPuzzleWidth;
             puzzleWidth += 0.5f;
             float puzzleHeight = puzzle ? puzzle.MaxStackHeight + 0.5f : DefaultPuzzleHeight;
             puzzleHeight += 0.5f;
 
-            if (!screenSizeChanged && _currentAspectSettings != null && _currentAspectSettings.PuzzleWidth == puzzleWidth && _currentAspectSettings.PuzzleHeight == puzzleHeight) return;
+            if (
+                !screenSizeChanged
+                && _currentAspectSettings != null
+                && _currentAspectSettings.PuzzleWidth == puzzleWidth
+                && _currentAspectSettings.PuzzleHeight == puzzleHeight
+            )
+                return;
 
             float minHeaderYPercent = 1.0f - HeaderRectTransform.anchorMin.y;
             float minFooterYPercent = FooterRectTransform.anchorMax.y;
             float cameraAspect = Camera.aspect;
             float puzzleAspect = puzzleWidth / puzzleHeight;
-            float maxUsableCameraAspect = _screenSize.x / (_screenSize.y * (1.0f - minHeaderYPercent - minFooterYPercent));
+            float maxUsableCameraAspect =
+                _screenSize.x / (_screenSize.y * (1.0f - minHeaderYPercent - minFooterYPercent));
             float orthographicSize;
             float topBoundaryMin;
             float bottomBoundaryMax;
             if (puzzleAspect <= maxUsableCameraAspect)
             {
-                orthographicSize = puzzleWidth / 2 / puzzleAspect / cameraAspect * maxUsableCameraAspect;
+                orthographicSize =
+                    puzzleWidth / 2 / puzzleAspect / cameraAspect * maxUsableCameraAspect;
                 topBoundaryMin = minHeaderYPercent;
                 bottomBoundaryMax = minFooterYPercent;
             }
             else
             {
-                float addedPercent = (_screenSize.x / maxUsableCameraAspect - _screenSize.x / puzzleAspect) / _screenSize.y;
-                if (addedPercent < 0) addedPercent = 0;
+                float addedPercent =
+                    (_screenSize.x / maxUsableCameraAspect - _screenSize.x / puzzleAspect)
+                    / _screenSize.y;
+                if (addedPercent < 0)
+                    addedPercent = 0;
                 topBoundaryMin = minHeaderYPercent + addedPercent / 2;
                 bottomBoundaryMax = minFooterYPercent + addedPercent / 2;
                 orthographicSize = puzzleWidth / 2 / cameraAspect;

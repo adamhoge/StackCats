@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using TMPro;
+﻿using TMPro;
+using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class PressureBlockDestructionEffect : MonoBehaviour
     {
@@ -13,7 +13,9 @@ namespace Tofuwu.StackCats
         protected void Start()
         {
             LeanTween.moveLocalY(PressureBlock, 0.5f, 0.25f).setEase(LeanTweenType.easeOutSine);
-            LeanTween.scale(PressureBlock, Vector3.zero, BlockShrinkDuration).setEase(LeanTweenType.easeOutSine);
+            LeanTween
+                .scale(PressureBlock, Vector3.zero, BlockShrinkDuration)
+                .setEase(LeanTweenType.easeOutSine);
             LeanTween.alpha(PressureBlock, 0.0f, 0.25f).setEase(LeanTweenType.easeOutQuint);
         }
     }

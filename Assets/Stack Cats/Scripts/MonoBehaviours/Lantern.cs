@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tofuwu.StackCats
+namespace RockhopperGames.StackCats
 {
     public class Lantern : MonoBehaviour
     {
@@ -26,10 +26,16 @@ namespace Tofuwu.StackCats
             float r = LightColor.r;
             float g = LightColor.g;
             float b = LightColor.b;
-            float a = LightAlphaMin + (LightAlphaMax - LightAlphaMin) * Mathf.PerlinNoise((_flickerOffset + Time.time) * FlickerMultiplier, 0.0f);
+            float a =
+                LightAlphaMin
+                + (LightAlphaMax - LightAlphaMin)
+                    * Mathf.PerlinNoise((_flickerOffset + Time.time) * FlickerMultiplier, 0.0f);
             LightSprite.color = new Color(r, g, b, a);
 
-            float swayRotation = -SwayRangeInDegrees / 2.0f + SwayRangeInDegrees * Mathf.PerlinNoise((_swayOffset + Time.time) * SwayMultiplier, 0.0f);
+            float swayRotation =
+                -SwayRangeInDegrees / 2.0f
+                + SwayRangeInDegrees
+                    * Mathf.PerlinNoise((_swayOffset + Time.time) * SwayMultiplier, 0.0f);
             transform.rotation = Quaternion.Euler(0.0f, 0.0f, swayRotation);
         }
     }
