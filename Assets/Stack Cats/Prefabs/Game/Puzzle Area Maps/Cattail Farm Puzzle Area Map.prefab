@@ -158,43 +158,43 @@ MonoBehaviour:
     NormalPuzzle: {fileID: 11400000, guid: 51e72011c058a5f46808ebeea4167151, type: 2}
     HardPuzzle: {fileID: 0}
   - Coordinates: {x: 0.13994311, y: -0.11249194}
-    NormalPuzzle: {fileID: 11400000, guid: d3706e9cc9d08724f8eabeda7228115a, type: 2}
+    NormalPuzzle: {fileID: 11400000, guid: 997ff22b5a6eb954aa19b7874f0f58ca, type: 2}
     HardPuzzle: {fileID: 0}
   - Coordinates: {x: 0.16559565, y: -0.017363202}
-    NormalPuzzle: {fileID: 11400000, guid: 95927f02cc15b3d45b115751b13072f9, type: 2}
-    HardPuzzle: {fileID: 0}
-  - Coordinates: {x: 0.136208, y: 0.07721488}
     NormalPuzzle: {fileID: 11400000, guid: bb92167a857af574bab6b371951fcb38, type: 2}
     HardPuzzle: {fileID: 0}
+  - Coordinates: {x: 0.136208, y: 0.07721488}
+    NormalPuzzle: {fileID: 11400000, guid: 95927f02cc15b3d45b115751b13072f9, type: 2}
+    HardPuzzle: {fileID: 0}
   - Coordinates: {x: 0.1731124, y: 0.1675295}
-    NormalPuzzle: {fileID: 11400000, guid: 63e68cabc3998ab47a2b46358db01421, type: 2}
+    NormalPuzzle: {fileID: 11400000, guid: d3706e9cc9d08724f8eabeda7228115a, type: 2}
     HardPuzzle: {fileID: 0}
   - Coordinates: {x: 0.18519436, y: 0.26463202}
-    NormalPuzzle: {fileID: 11400000, guid: dd5cea72896af614ba5f07e510a1e684, type: 2}
+    NormalPuzzle: {fileID: 11400000, guid: 63e68cabc3998ab47a2b46358db01421, type: 2}
     HardPuzzle: {fileID: 0}
   - Coordinates: {x: 0.11224769, y: 0.33170173}
-    NormalPuzzle: {fileID: 11400000, guid: c73676eb82ee2d348904e9cf64d52e8c, type: 2}
+    NormalPuzzle: {fileID: 11400000, guid: dd5cea72896af614ba5f07e510a1e684, type: 2}
     HardPuzzle: {fileID: 0}
   - Coordinates: {x: 0.018447949, y: 0.35141596}
-    NormalPuzzle: {fileID: 11400000, guid: 91c4c7d66a6b54e41a29b8ebf824ed37, type: 2}
+    NormalPuzzle: {fileID: 11400000, guid: c73676eb82ee2d348904e9cf64d52e8c, type: 2}
     HardPuzzle: {fileID: 0}
   - Coordinates: {x: -0.0764419, y: 0.33634058}
-    NormalPuzzle: {fileID: 11400000, guid: 27b65ff97d14a054c9f97e824f399875, type: 2}
+    NormalPuzzle: {fileID: 11400000, guid: 91c4c7d66a6b54e41a29b8ebf824ed37, type: 2}
     HardPuzzle: {fileID: 0}
   - Coordinates: {x: -0.1794437, y: 0.24483952}
-    NormalPuzzle: {fileID: 11400000, guid: 34e09feaf07b7094abdeb0217020a4e5, type: 2}
+    NormalPuzzle: {fileID: 11400000, guid: 27b65ff97d14a054c9f97e824f399875, type: 2}
     HardPuzzle: {fileID: 0}
   - Coordinates: {x: -0.18511842, y: 0.14489613}
-    NormalPuzzle: {fileID: 11400000, guid: fd7da4a0475460241ab8fb7fde908a54, type: 2}
+    NormalPuzzle: {fileID: 11400000, guid: 34e09feaf07b7094abdeb0217020a4e5, type: 2}
     HardPuzzle: {fileID: 0}
   - Coordinates: {x: -0.14437643, y: 0.053661406}
-    NormalPuzzle: {fileID: 11400000, guid: aef9c6c27b48d164a96c5542004d3092, type: 2}
+    NormalPuzzle: {fileID: 11400000, guid: fd7da4a0475460241ab8fb7fde908a54, type: 2}
     HardPuzzle: {fileID: 0}
   - Coordinates: {x: -0.059528634, y: 0.008293396}
-    NormalPuzzle: {fileID: 11400000, guid: c10ba504ec4265f459225c3515efd306, type: 2}
+    NormalPuzzle: {fileID: 11400000, guid: aef9c6c27b48d164a96c5542004d3092, type: 2}
     HardPuzzle: {fileID: 0}
   - Coordinates: {x: -0.00019228458, y: -0.06987564}
-    NormalPuzzle: {fileID: 0}
+    NormalPuzzle: {fileID: 11400000, guid: c10ba504ec4265f459225c3515efd306, type: 2}
     HardPuzzle: {fileID: 0}
   - Coordinates: {x: -0.0032358263, y: -0.16648182}
     NormalPuzzle: {fileID: 0}
