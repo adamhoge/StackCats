@@ -7555,7 +7555,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6547364652844589252, guid: c55cf64c20e1fe44f827acf6285875d2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Tofuwu.StackCats.UI.OverlayScreenManager, Assembly-CSharp
+      value: RockhopperGames.StackCats.UI.OverlayScreenManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6547364652844589252, guid: c55cf64c20e1fe44f827acf6285875d2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
@@ -7563,7 +7563,7 @@ PrefabInstance:
       objectReference: {fileID: 51922856}
     - target: {fileID: 6547364652844589252, guid: c55cf64c20e1fe44f827acf6285875d2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: Tofuwu.StackCats.UI.OverlayScreen, Assembly-CSharp
+      value: RockhopperGames.StackCats.UI.OverlayScreen, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6547364652844589253, guid: c55cf64c20e1fe44f827acf6285875d2, type: 3}
       propertyPath: m_Pivot.x

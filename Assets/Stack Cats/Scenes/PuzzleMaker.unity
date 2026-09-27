@@ -1269,7 +1269,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6376531413378915286, guid: 82153da76a18d5644844e3346ee95ece, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -8
+      value: -7.999878
       objectReference: {fileID: 0}
     - target: {fileID: 6376531413378915286, guid: 82153da76a18d5644844e3346ee95ece, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1676,18 +1676,6 @@ PrefabInstance:
       value: 266.80002
       objectReference: {fileID: 0}
     - target: {fileID: 5582485717260466883, guid: 537241901c2f9ad4f8340d290c0ff1a6, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.0000103
-      objectReference: {fileID: 0}
-    - target: {fileID: 5582485717260466883, guid: 537241901c2f9ad4f8340d290c0ff1a6, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.0000103
-      objectReference: {fileID: 0}
-    - target: {fileID: 5582485717260466883, guid: 537241901c2f9ad4f8340d290c0ff1a6, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.0000103
-      objectReference: {fileID: 0}
-    - target: {fileID: 5582485717260466883, guid: 537241901c2f9ad4f8340d290c0ff1a6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -1901,7 +1889,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2828212349381535707, guid: 537241901c2f9ad4f8340d290c0ff1a6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Tofuwu.StackCats.UI.OverlayScreenManager, Assembly-CSharp
+      value: RockhopperGames.StackCats.UI.OverlayScreenManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2828212349381535707, guid: 537241901c2f9ad4f8340d290c0ff1a6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
@@ -1909,7 +1897,7 @@ PrefabInstance:
       objectReference: {fileID: 396530929}
     - target: {fileID: 2828212349381535707, guid: 537241901c2f9ad4f8340d290c0ff1a6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: Tofuwu.StackCats.UI.OverlayScreen, Assembly-CSharp
+      value: RockhopperGames.StackCats.UI.OverlayScreen, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2828212349381535707, guid: 537241901c2f9ad4f8340d290c0ff1a6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1950,18 +1938,6 @@ PrefabInstance:
     - target: {fileID: 5582485717260466883, guid: 537241901c2f9ad4f8340d290c0ff1a6, type: 3}
       propertyPath: m_SizeDelta.y
       value: 266.80002
-      objectReference: {fileID: 0}
-    - target: {fileID: 5582485717260466883, guid: 537241901c2f9ad4f8340d290c0ff1a6, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.0000129
-      objectReference: {fileID: 0}
-    - target: {fileID: 5582485717260466883, guid: 537241901c2f9ad4f8340d290c0ff1a6, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.0000129
-      objectReference: {fileID: 0}
-    - target: {fileID: 5582485717260466883, guid: 537241901c2f9ad4f8340d290c0ff1a6, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.0000129
       objectReference: {fileID: 0}
     - target: {fileID: 5582485717260466883, guid: 537241901c2f9ad4f8340d290c0ff1a6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2194,7 +2170,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3355239545737444673, guid: a21e0fb5429ca4848850c3dd7418ebdd, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.00010681152
+      value: -0.00008392334
       objectReference: {fileID: 0}
     - target: {fileID: 3862638249982068468, guid: a21e0fb5429ca4848850c3dd7418ebdd, type: 3}
       propertyPath: m_AnchorMax.x

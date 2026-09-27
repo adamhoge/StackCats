@@ -24,13 +24,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2329165227316291840}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1066594701884296921}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3658235287880450029
 MonoBehaviour:
@@ -52,58 +53,58 @@ MonoBehaviour:
   - Coordinates: {x: 0.038999073, y: -0.30195338}
     NormalPuzzle: {fileID: 11400000, guid: 662d5966ec8f03f449d8c2582c80b3cc, type: 2}
     HardPuzzle: {fileID: 0}
-  - Coordinates: {x: -0.055700995, y: -0.30244726}
+  - Coordinates: {x: -0.05447507, y: -0.30428615}
     NormalPuzzle: {fileID: 11400000, guid: 6dea8b9362634de40859112ddd25f09a, type: 2}
     HardPuzzle: {fileID: 0}
-  - Coordinates: {x: -0.14873435, y: -0.279992}
+  - Coordinates: {x: -0.14494415, y: -0.27770868}
     NormalPuzzle: {fileID: 11400000, guid: 42d389cafea9e064a9b8d9cd4a069325, type: 2}
     HardPuzzle: {fileID: 0}
-  - Coordinates: {x: -0.16914302, y: -0.18722926}
+  - Coordinates: {x: -0.16290091, y: -0.18511455}
     NormalPuzzle: {fileID: 11400000, guid: 414f064bf97e06f4984c0ce1f44e4bc4, type: 2}
     HardPuzzle: {fileID: 0}
-  - Coordinates: {x: -0.12499882, y: -0.1078688}
+  - Coordinates: {x: -0.10076595, y: -0.119566225}
     NormalPuzzle: {fileID: 11400000, guid: 381987ece9f25d94ea6c9c06c1f8c993, type: 2}
     HardPuzzle: {fileID: 0}
-  - Coordinates: {x: -0.03204397, y: -0.10138439}
+  - Coordinates: {x: -0.009593786, y: -0.1144152}
     NormalPuzzle: {fileID: 11400000, guid: 76ca0ec0476dfc84bafafb0c9152b825, type: 2}
     HardPuzzle: {fileID: 0}
-  - Coordinates: {x: 0.04300616, y: -0.16008553}
+  - Coordinates: {x: 0.078915074, y: -0.14087217}
     NormalPuzzle: {fileID: 11400000, guid: 8aaa4d014d03319459ce7ec7194104e0, type: 2}
     HardPuzzle: {fileID: 0}
-  - Coordinates: {x: 0.13236687, y: -0.14131938}
+  - Coordinates: {x: 0.168247, y: -0.11064409}
     NormalPuzzle: {fileID: 11400000, guid: be58c5cf519d0f7468b04cd04cf90b19, type: 2}
     HardPuzzle: {fileID: 0}
-  - Coordinates: {x: 0.1794096, y: -0.05735538}
+  - Coordinates: {x: 0.19505545, y: -0.019589}
     NormalPuzzle: {fileID: 11400000, guid: a327ca44da4371144ae42450798b08b0, type: 2}
     HardPuzzle: {fileID: 0}
-  - Coordinates: {x: 0.16221496, y: 0.038550533}
+  - Coordinates: {x: 0.14636794, y: 0.060984887}
     NormalPuzzle: {fileID: 11400000, guid: fd085886b5c78214392e9db08b27dafd, type: 2}
     HardPuzzle: {fileID: 0}
-  - Coordinates: {x: 0.068636216, y: 0.06250672}
+  - Coordinates: {x: 0.05414192, y: 0.059225887}
     NormalPuzzle: {fileID: 11400000, guid: de366f78ed2328a45bafed91c30c1294, type: 2}
     HardPuzzle: {fileID: 0}
-  - Coordinates: {x: -0.023671355, y: 0.036358774}
+  - Coordinates: {x: -0.04007882, y: 0.04621741}
     NormalPuzzle: {fileID: 11400000, guid: bd2edc0c2103c084086edb042b353df7, type: 2}
     HardPuzzle: {fileID: 0}
-  - Coordinates: {x: -0.11695061, y: 0.041683353}
+  - Coordinates: {x: -0.13182743, y: 0.072603524}
     NormalPuzzle: {fileID: 11400000, guid: eef7e7c8a9c182b448519cee21279bd6, type: 2}
     HardPuzzle: {fileID: 0}
-  - Coordinates: {x: -0.17152086, y: 0.11686598}
+  - Coordinates: {x: -0.16969271, y: 0.15587282}
     NormalPuzzle: {fileID: 11400000, guid: 4e656b936378b86488f0a003e7f5c719, type: 2}
     HardPuzzle: {fileID: 0}
-  - Coordinates: {x: -0.1722886, y: 0.20930028}
+  - Coordinates: {x: -0.16399862, y: 0.24932998}
     NormalPuzzle: {fileID: 11400000, guid: 03a16775dd5f70842bf02fa62c882a54, type: 2}
     HardPuzzle: {fileID: 0}
-  - Coordinates: {x: -0.14028524, y: 0.29678938}
+  - Coordinates: {x: -0.10693473, y: 0.3267157}
     NormalPuzzle: {fileID: 11400000, guid: 7478e4eb64b618340bfbc21b882c3bfd, type: 2}
     HardPuzzle: {fileID: 0}
-  - Coordinates: {x: -0.058559053, y: 0.34391245}
+  - Coordinates: {x: -0.017401088, y: 0.34888902}
     NormalPuzzle: {fileID: 11400000, guid: a1de75b392a9e31428c42c5d53099205, type: 2}
     HardPuzzle: {fileID: 0}
-  - Coordinates: {x: 0.03638403, y: 0.34804985}
+  - Coordinates: {x: 0.080650985, y: 0.33169824}
     NormalPuzzle: {fileID: 11400000, guid: e52ab3c3b7fb01a4bb6a90b36ffbb639, type: 2}
     HardPuzzle: {fileID: 0}
-  - Coordinates: {x: 0.122308105, y: 0.30563086}
+  - Coordinates: {x: 0.17065205, y: 0.37530306}
     NormalPuzzle: {fileID: 11400000, guid: a8feda45bce5f3c4cb6bbcb508a55c38, type: 2}
     HardPuzzle: {fileID: 0}
   NextAreaCoordinates: {x: 0, y: 0}
@@ -134,15 +135,17 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4714998658994707669}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8565884074445214687}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5522758237819883054
 SpriteRenderer:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -158,6 +161,11 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -179,9 +187,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: cda42a37f7a1a10438bcb0c3db7d2aaa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -191,5 +201,5 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
