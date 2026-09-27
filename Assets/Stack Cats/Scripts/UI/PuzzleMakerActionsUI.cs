@@ -114,11 +114,15 @@ namespace RockhopperGames.StackCats.UI
                 InvertActionToggle.isOn = !InvertActionToggle.isOn;
             }
 
-            for (int i = 0; i < PuzzleMakerActionsOptions.Count; i++)
+            // Only handle number input for actions if Shift is NOT held (Shift is for story puzzle selection)
+            if (!Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.RightShift))
             {
-                if (Input.GetKeyDown((i + 1).ToString()) && !GetIsActionInputFocused())
+                for (int i = 0; i < PuzzleMakerActionsOptions.Count; i++)
                 {
-                    PuzzleMakerActionsDropdown.value = i;
+                    if (Input.GetKeyDown((i + 1).ToString()) && !GetIsActionInputFocused())
+                    {
+                        PuzzleMakerActionsDropdown.value = i;
+                    }
                 }
             }
 

@@ -23,6 +23,10 @@ namespace RockhopperGames.StackCats.UI
         public Button PlaytestButton;
 
         private PuzzleMakerActionsUI _currentPuzzleMakerActionsUI;
+        private PuzzleManager _puzzleManager;
+        private string _currentNumberInput = "";
+        private float _numberInputStartTime = -1f;
+        private const float NUMBER_INPUT_TIMEOUT = 0.5f;
 
         protected virtual void OnEnable()
         {
@@ -32,6 +36,7 @@ namespace RockhopperGames.StackCats.UI
             PuzzleMakerScene.onActionsEditorStopped += OnActionEditorStopped;
             PuzzleMakerScene.onPuzzleMakerPuzzleLoaded += OnPuzzleLoaded;
             PuzzleMakerScene.onPuzzleMakerPuzzleUnloaded += OnPuzzleUnloaded;
+            _puzzleManager = GameManager.Instance.Puzzles;
         }
 
         protected virtual void OnDisable()
@@ -61,6 +66,42 @@ namespace RockhopperGames.StackCats.UI
         {
             AreaEditorSelectDropdown.interactable = !PuzzleMakerScene.IsTesting;
             DataButton.interactable = !PuzzleMakerScene.IsTesting;
+
+            // Handle number input for quick story puzzle loading (when Shift is held)
+            if (
+                !PuzzleMakerScene.IsTesting
+                && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+            )
+            {
+                for (int i = 0; i <= 9; i++)
+                {
+                    KeyCode keyCode = KeyCode.Alpha0 + i;
+                    if (Input.GetKeyDown(keyCode))
+                    {
+                        HandleNumberInput(i);
+                        break;
+                    }
+                }
+
+                // Check if timeout has elapsed and we should attempt to load
+                if (!string.IsNullOrEmpty(_currentNumberInput) && _numberInputStartTime >= 0f)
+                {
+                    if (Time.time - _numberInputStartTime >= NUMBER_INPUT_TIMEOUT)
+                    {
+                        TryLoadStoryPuzzle();
+                    }
+                }
+            }
+            else
+            {
+                // Shift is not held, re-enable controller if it was disabled
+                if (!string.IsNullOrEmpty(_currentNumberInput))
+                {
+                    _currentNumberInput = "";
+                    _numberInputStartTime = -1f;
+                    PuzzleMakerScene.SetControllerEnabled(true);
+                }
+            }
         }
 
         private void OnPuzzleAreaEditorSelected(int selection)
@@ -136,6 +177,60 @@ namespace RockhopperGames.StackCats.UI
         private void OnPuzzleUnloaded()
         {
             PuzzleCameraAdjuster.FitCameraAndUIToMenu();
+        }
+
+        private void HandleNumberInput(int digit)
+        {
+            if (_currentNumberInput.Length == 0)
+            {
+                // First digit pressed - disable puzzle actions to prevent them from receiving this input
+                _currentNumberInput = digit.ToString();
+                _numberInputStartTime = Time.time;
+                PuzzleMakerScene.SetControllerEnabled(false);
+            }
+            else if (_currentNumberInput.Length == 1)
+            {
+                // Second digit pressed, immediately attempt to load
+                _currentNumberInput += digit.ToString();
+                TryLoadStoryPuzzle();
+            }
+        }
+
+        private void TryLoadStoryPuzzle()
+        {
+            if (string.IsNullOrEmpty(_currentNumberInput))
+            {
+                PuzzleMakerScene.SetControllerEnabled(true);
+                return;
+            }
+
+            if (!int.TryParse(_currentNumberInput, out int puzzleIndex))
+            {
+                _currentNumberInput = "";
+                _numberInputStartTime = -1f;
+                PuzzleMakerScene.SetControllerEnabled(true);
+                return;
+            }
+
+            // Adjust for 1-based indexing (user types 1-based, but list is 0-based)
+            puzzleIndex--;
+
+            List<StoryPuzzle> storyPuzzles = _puzzleManager.GetStoryPuzzles(
+                PuzzleMakerScene.CurrentAreaEditor.PuzzleArea
+            );
+
+            if (puzzleIndex >= 0 && puzzleIndex < storyPuzzles.Count)
+            {
+                StoryPuzzle selectedPuzzle = storyPuzzles[puzzleIndex];
+                if (selectedPuzzle != null)
+                {
+                    PuzzleMakerScene.LoadPuzzle(selectedPuzzle.JsonData);
+                }
+            }
+
+            _currentNumberInput = "";
+            _numberInputStartTime = -1f;
+            PuzzleMakerScene.SetControllerEnabled(true);
         }
     }
 }
