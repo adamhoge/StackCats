@@ -94,6 +94,12 @@ namespace RockhopperGames.StackCats
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
 
+            if (Input.GetKey(KeyCode.M))
+            {
+                _currency.ChangeCurrency(Currency.SilverPaw, 1000);
+                _currency.ChangeCurrency(Currency.GoldPaw, 1000);
+            }
+
             if (Input.GetKey(KeyCode.P))
             {
                 ++_keypresses;

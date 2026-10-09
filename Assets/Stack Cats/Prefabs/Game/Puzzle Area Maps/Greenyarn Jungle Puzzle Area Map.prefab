@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8565884074445214687}
   - component: {fileID: 3658235287880450029}
   m_Layer: 0
-  m_Name: Jungle Flavored Puzzle Area Map
+  m_Name: Greenyarn Jungle Puzzle Area Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,19 +60,19 @@ MonoBehaviour:
     NormalPuzzle: {fileID: 11400000, guid: 42d389cafea9e064a9b8d9cd4a069325, type: 2}
     HardPuzzle: {fileID: 0}
   - Coordinates: {x: -0.16290091, y: -0.18511455}
-    NormalPuzzle: {fileID: 11400000, guid: 414f064bf97e06f4984c0ce1f44e4bc4, type: 2}
-    HardPuzzle: {fileID: 0}
-  - Coordinates: {x: -0.10076595, y: -0.119566225}
-    NormalPuzzle: {fileID: 11400000, guid: 381987ece9f25d94ea6c9c06c1f8c993, type: 2}
-    HardPuzzle: {fileID: 0}
-  - Coordinates: {x: -0.009593786, y: -0.1144152}
     NormalPuzzle: {fileID: 11400000, guid: 76ca0ec0476dfc84bafafb0c9152b825, type: 2}
     HardPuzzle: {fileID: 0}
-  - Coordinates: {x: 0.078915074, y: -0.14087217}
+  - Coordinates: {x: -0.10076595, y: -0.119566225}
     NormalPuzzle: {fileID: 11400000, guid: 8aaa4d014d03319459ce7ec7194104e0, type: 2}
     HardPuzzle: {fileID: 0}
-  - Coordinates: {x: 0.168247, y: -0.11064409}
+  - Coordinates: {x: -0.009593786, y: -0.1144152}
+    NormalPuzzle: {fileID: 11400000, guid: 414f064bf97e06f4984c0ce1f44e4bc4, type: 2}
+    HardPuzzle: {fileID: 0}
+  - Coordinates: {x: 0.078915074, y: -0.14087217}
     NormalPuzzle: {fileID: 11400000, guid: be58c5cf519d0f7468b04cd04cf90b19, type: 2}
+    HardPuzzle: {fileID: 0}
+  - Coordinates: {x: 0.168247, y: -0.11064409}
+    NormalPuzzle: {fileID: 11400000, guid: 381987ece9f25d94ea6c9c06c1f8c993, type: 2}
     HardPuzzle: {fileID: 0}
   - Coordinates: {x: 0.19505545, y: -0.019589}
     NormalPuzzle: {fileID: 11400000, guid: a327ca44da4371144ae42450798b08b0, type: 2}

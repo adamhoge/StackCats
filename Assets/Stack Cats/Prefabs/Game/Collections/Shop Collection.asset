@@ -27,6 +27,7 @@ MonoBehaviour:
           m_Text: Keys
           m_Image: {fileID: 0}
           m_Tooltip: 
+          m_TextWithWhitespace: 
         headerHeight: 18
         footerHeight: 13
         slideEasing: 0.15
@@ -38,9 +39,9 @@ MonoBehaviour:
         elementIcon: {fileID: 0}
       reqReferences: {fileID: 0}
       isExpanded: 1
-      _keyValues: 01000000
-      _keys: 01000000
-      _values: 05000000
+      _keyValues: 01000000i
+      _keys: 01000000i
+      _values: 05000000i
   - Item: {fileID: 11400000, guid: fea3bb2fd65c2744aa4230c3c90cf2bc, type: 2}
     RequiredPuzzleArea: {fileID: 0}
     Price:
@@ -55,6 +56,7 @@ MonoBehaviour:
           m_Text: Keys
           m_Image: {fileID: 0}
           m_Tooltip: 
+          m_TextWithWhitespace: 
         headerHeight: 18
         footerHeight: 13
         slideEasing: 0.15
@@ -66,9 +68,9 @@ MonoBehaviour:
         elementIcon: {fileID: 0}
       reqReferences: {fileID: 0}
       isExpanded: 1
-      _keyValues: 00000000
-      _keys: 00000000
-      _values: 19000000
+      _keyValues: 00000000i
+      _keys: 00000000i
+      _values: 19000000i
   - Item: {fileID: 11400000, guid: 1f08d5a4d3fc78e4587ca16e48d20e2b, type: 2}
     RequiredPuzzleArea: {fileID: 0}
     Price:
@@ -83,6 +85,7 @@ MonoBehaviour:
           m_Text: Keys
           m_Image: {fileID: 0}
           m_Tooltip: 
+          m_TextWithWhitespace: 
         headerHeight: 18
         footerHeight: 13
         slideEasing: 0.15
@@ -94,9 +97,9 @@ MonoBehaviour:
         elementIcon: {fileID: 0}
       reqReferences: {fileID: 0}
       isExpanded: 1
-      _keyValues: 00000000
-      _keys: 00000000
-      _values: 19000000
+      _keyValues: 00000000i
+      _keys: 00000000i
+      _values: 19000000i
   - Item: {fileID: 11400000, guid: e1bc0177b6a82c4498ceb851a2ea32bd, type: 2}
     RequiredPuzzleArea: {fileID: 0}
     Price:
@@ -111,6 +114,7 @@ MonoBehaviour:
           m_Text: Keys
           m_Image: {fileID: 0}
           m_Tooltip: 
+          m_TextWithWhitespace: 
         headerHeight: 18
         footerHeight: 13
         slideEasing: 0.15
@@ -122,12 +126,11 @@ MonoBehaviour:
         elementIcon: {fileID: 0}
       reqReferences: {fileID: 0}
       isExpanded: 1
-      _keyValues: 00000000
-      _keys: 00000000
-      _values: 19000000
+      _keyValues: 00000000i
+      _keys: 00000000i
+      _values: 19000000i
   - Item: {fileID: 11400000, guid: 921afab25a761a54d87713a0860ff68a, type: 2}
-    RequiredPuzzleArea: {fileID: 11400000, guid: 8f566cdb8c9892b499d4757288eaab63,
-      type: 2}
+    RequiredPuzzleArea: {fileID: 11400000, guid: 8f566cdb8c9892b499d4757288eaab63, type: 2}
     Price:
       reorderableList:
         canAdd: 1
@@ -140,6 +143,7 @@ MonoBehaviour:
           m_Text: Keys
           m_Image: {fileID: 0}
           m_Tooltip: 
+          m_TextWithWhitespace: 
         headerHeight: 18
         footerHeight: 13
         slideEasing: 0.15
@@ -151,12 +155,11 @@ MonoBehaviour:
         elementIcon: {fileID: 0}
       reqReferences: {fileID: 0}
       isExpanded: 1
-      _keyValues: 0100000003000000
-      _keys: 0100000003000000
-      _values: 0f00000003000000
+      _keyValues: 0100000003000000i
+      _keys: 0100000003000000i
+      _values: 0f00000003000000i
   - Item: {fileID: 11400000, guid: f9b05e9f65055494cb5c7d1fe463e93d, type: 2}
-    RequiredPuzzleArea: {fileID: 11400000, guid: 8f566cdb8c9892b499d4757288eaab63,
-      type: 2}
+    RequiredPuzzleArea: {fileID: 11400000, guid: 8f566cdb8c9892b499d4757288eaab63, type: 2}
     Price:
       reorderableList:
         canAdd: 1
@@ -169,6 +172,7 @@ MonoBehaviour:
           m_Text: Keys
           m_Image: {fileID: 0}
           m_Tooltip: 
+          m_TextWithWhitespace: 
         headerHeight: 18
         footerHeight: 13
         slideEasing: 0.15
@@ -180,12 +184,11 @@ MonoBehaviour:
         elementIcon: {fileID: 0}
       reqReferences: {fileID: 0}
       isExpanded: 1
-      _keyValues: 0100000003000000
-      _keys: 0100000003000000
-      _values: 0f00000003000000
+      _keyValues: 0100000003000000i
+      _keys: 0100000003000000i
+      _values: 0f00000003000000i
   - Item: {fileID: 11400000, guid: 280e62ad7f66de2429b16ecf59beb3a4, type: 2}
-    RequiredPuzzleArea: {fileID: 11400000, guid: 8f566cdb8c9892b499d4757288eaab63,
-      type: 2}
+    RequiredPuzzleArea: {fileID: 11400000, guid: 8f566cdb8c9892b499d4757288eaab63, type: 2}
     Price:
       reorderableList:
         canAdd: 1
@@ -198,6 +201,7 @@ MonoBehaviour:
           m_Text: Keys
           m_Image: {fileID: 0}
           m_Tooltip: 
+          m_TextWithWhitespace: 
         headerHeight: 18
         footerHeight: 13
         slideEasing: 0.15
@@ -209,9 +213,9 @@ MonoBehaviour:
         elementIcon: {fileID: 0}
       reqReferences: {fileID: 0}
       isExpanded: 1
-      _keyValues: 0100000003000000
-      _keys: 0100000003000000
-      _values: 0f00000003000000
+      _keyValues: 0100000003000000i
+      _keys: 0100000003000000i
+      _values: 0f00000003000000i
   - Item: {fileID: 11400000, guid: e792484d43e3fcd4486ef2fb5756c965, type: 2}
     RequiredPuzzleArea: {fileID: 0}
     Price:
@@ -226,6 +230,7 @@ MonoBehaviour:
           m_Text: Keys
           m_Image: {fileID: 0}
           m_Tooltip: 
+          m_TextWithWhitespace: 
         headerHeight: 18
         footerHeight: 13
         slideEasing: 0.15
@@ -237,9 +242,9 @@ MonoBehaviour:
         elementIcon: {fileID: 0}
       reqReferences: {fileID: 0}
       isExpanded: 1
-      _keyValues: 01000000
-      _keys: 01000000
-      _values: 0a000000
+      _keyValues: 01000000i
+      _keys: 01000000i
+      _values: 0a000000i
   - Item: {fileID: 11400000, guid: 1310410b629031448b0084ccdd1962ad, type: 2}
     RequiredPuzzleArea: {fileID: 0}
     Price:
@@ -254,6 +259,7 @@ MonoBehaviour:
           m_Text: Keys
           m_Image: {fileID: 0}
           m_Tooltip: 
+          m_TextWithWhitespace: 
         headerHeight: 18
         footerHeight: 13
         slideEasing: 0.15
@@ -265,9 +271,9 @@ MonoBehaviour:
         elementIcon: {fileID: 0}
       reqReferences: {fileID: 0}
       isExpanded: 1
-      _keyValues: 00000000
-      _keys: 00000000
-      _values: c8000000
+      _keyValues: 00000000i
+      _keys: 00000000i
+      _values: c8000000i
   - Item: {fileID: 11400000, guid: 25c4fa250bae34a49b2ff8c80a0730e1, type: 2}
     RequiredPuzzleArea: {fileID: 0}
     Price:
@@ -282,6 +288,7 @@ MonoBehaviour:
           m_Text: Keys
           m_Image: {fileID: 0}
           m_Tooltip: 
+          m_TextWithWhitespace: 
         headerHeight: 18
         footerHeight: 13
         slideEasing: 0.15
@@ -293,9 +300,9 @@ MonoBehaviour:
         elementIcon: {fileID: 0}
       reqReferences: {fileID: 0}
       isExpanded: 1
-      _keyValues: 00000000
-      _keys: 00000000
-      _values: c8000000
+      _keyValues: 00000000i
+      _keys: 00000000i
+      _values: c8000000i
   - Item: {fileID: 11400000, guid: 5ebca644213e15740aee4bbf5fee6256, type: 2}
     RequiredPuzzleArea: {fileID: 0}
     Price:
@@ -310,6 +317,7 @@ MonoBehaviour:
           m_Text: Keys
           m_Image: {fileID: 0}
           m_Tooltip: 
+          m_TextWithWhitespace: 
         headerHeight: 18
         footerHeight: 13
         slideEasing: 0.15
@@ -321,9 +329,9 @@ MonoBehaviour:
         elementIcon: {fileID: 0}
       reqReferences: {fileID: 0}
       isExpanded: 1
-      _keyValues: 00000000
-      _keys: 00000000
-      _values: c8000000
+      _keyValues: 00000000i
+      _keys: 00000000i
+      _values: c8000000i
   - Item: {fileID: 11400000, guid: d4f7f601f8d4ea549b77f9a03b3cc4ed, type: 2}
     RequiredPuzzleArea: {fileID: 0}
     Price:
@@ -338,6 +346,7 @@ MonoBehaviour:
           m_Text: Keys
           m_Image: {fileID: 0}
           m_Tooltip: 
+          m_TextWithWhitespace: 
         headerHeight: 18
         footerHeight: 13
         slideEasing: 0.15
@@ -349,9 +358,9 @@ MonoBehaviour:
         elementIcon: {fileID: 0}
       reqReferences: {fileID: 0}
       isExpanded: 1
-      _keyValues: 00000000
-      _keys: 00000000
-      _values: c8000000
+      _keyValues: 00000000i
+      _keys: 00000000i
+      _values: c8000000i
   - Item: {fileID: 11400000, guid: da9802bb18489334fb24c336c17ed2eb, type: 2}
     RequiredPuzzleArea: {fileID: 0}
     Price:
@@ -366,6 +375,7 @@ MonoBehaviour:
           m_Text: Keys
           m_Image: {fileID: 0}
           m_Tooltip: 
+          m_TextWithWhitespace: 
         headerHeight: 18
         footerHeight: 13
         slideEasing: 0.15
@@ -377,9 +387,9 @@ MonoBehaviour:
         elementIcon: {fileID: 0}
       reqReferences: {fileID: 0}
       isExpanded: 1
-      _keyValues: 00000000
-      _keys: 00000000
-      _values: c8000000
+      _keyValues: 00000000i
+      _keys: 00000000i
+      _values: c8000000i
   - Item: {fileID: 11400000, guid: a556afded30635a40a348fe5fc15cd4f, type: 2}
     RequiredPuzzleArea: {fileID: 0}
     Price:
@@ -394,6 +404,7 @@ MonoBehaviour:
           m_Text: Keys
           m_Image: {fileID: 0}
           m_Tooltip: 
+          m_TextWithWhitespace: 
         headerHeight: 18
         footerHeight: 13
         slideEasing: 0.15
@@ -405,9 +416,9 @@ MonoBehaviour:
         elementIcon: {fileID: 0}
       reqReferences: {fileID: 0}
       isExpanded: 1
-      _keyValues: 00000000
-      _keys: 00000000
-      _values: c8000000
+      _keyValues: 00000000i
+      _keys: 00000000i
+      _values: c8000000i
   - Item: {fileID: 11400000, guid: 3d5a6b2a5edc18e47977bb1a3a9ecb53, type: 2}
     RequiredPuzzleArea: {fileID: 0}
     Price:
@@ -422,6 +433,7 @@ MonoBehaviour:
           m_Text: Keys
           m_Image: {fileID: 0}
           m_Tooltip: 
+          m_TextWithWhitespace: 
         headerHeight: 18
         footerHeight: 13
         slideEasing: 0.15
@@ -433,9 +445,9 @@ MonoBehaviour:
         elementIcon: {fileID: 0}
       reqReferences: {fileID: 0}
       isExpanded: 1
-      _keyValues: 00000000
-      _keys: 00000000
-      _values: c8000000
+      _keyValues: 00000000i
+      _keys: 00000000i
+      _values: c8000000i
   - Item: {fileID: 11400000, guid: 6b1c8822a4d8ea04bbec70dff737292d, type: 2}
     RequiredPuzzleArea: {fileID: 0}
     Price:
@@ -450,6 +462,7 @@ MonoBehaviour:
           m_Text: Keys
           m_Image: {fileID: 0}
           m_Tooltip: 
+          m_TextWithWhitespace: 
         headerHeight: 18
         footerHeight: 13
         slideEasing: 0.15
@@ -461,9 +474,9 @@ MonoBehaviour:
         elementIcon: {fileID: 0}
       reqReferences: {fileID: 0}
       isExpanded: 1
-      _keyValues: 00000000
-      _keys: 00000000
-      _values: c8000000
+      _keyValues: 00000000i
+      _keys: 00000000i
+      _values: c8000000i
   - Item: {fileID: 11400000, guid: 9564e897ce12b704aaa49f741b701e05, type: 2}
     RequiredPuzzleArea: {fileID: 0}
     Price:
@@ -478,6 +491,7 @@ MonoBehaviour:
           m_Text: Keys
           m_Image: {fileID: 0}
           m_Tooltip: 
+          m_TextWithWhitespace: 
         headerHeight: 18
         footerHeight: 13
         slideEasing: 0.15
@@ -489,9 +503,9 @@ MonoBehaviour:
         elementIcon: {fileID: 0}
       reqReferences: {fileID: 0}
       isExpanded: 1
-      _keyValues: 00000000
-      _keys: 00000000
-      _values: c8000000
+      _keyValues: 00000000i
+      _keys: 00000000i
+      _values: c8000000i
   - Item: {fileID: 11400000, guid: 02b4507809bcb144fbf0bb4e8f98a48d, type: 2}
     RequiredPuzzleArea: {fileID: 0}
     Price:
@@ -506,6 +520,7 @@ MonoBehaviour:
           m_Text: Keys
           m_Image: {fileID: 0}
           m_Tooltip: 
+          m_TextWithWhitespace: 
         headerHeight: 18
         footerHeight: 13
         slideEasing: 0.15
@@ -517,6 +532,64 @@ MonoBehaviour:
         elementIcon: {fileID: 0}
       reqReferences: {fileID: 0}
       isExpanded: 1
-      _keyValues: 00000000
-      _keys: 00000000
-      _values: c8000000
+      _keyValues: 00000000i
+      _keys: 00000000i
+      _values: c8000000i
+  - Item: {fileID: 11400000, guid: e4ce59e2758a7dd469b729376f509939, type: 2}
+    RequiredPuzzleArea: {fileID: 0}
+    Price:
+      reorderableList:
+        canAdd: 1
+        canRemove: 1
+        draggable: 1
+        expandable: 1
+        multipleSelection: 1
+        isExpanded: 1
+        label:
+          m_Text: Keys
+          m_Image: {fileID: 0}
+          m_Tooltip: 
+          m_TextWithWhitespace: "Keys\u200B"
+        headerHeight: 18
+        footerHeight: 13
+        slideEasing: 0.15
+        verticalSpacing: 2
+        showDefaultBackground: 1
+        elementDisplayType: 0
+        elementNameProperty: 
+        elementNameOverride: 
+        elementIcon: {fileID: 0}
+      reqReferences: {fileID: 0}
+      isExpanded: 1
+      _keyValues: 01000000i
+      _keys: 01000000i
+      _values: 14000000i
+  - Item: {fileID: 11400000, guid: f4547b6574bacdb40bd399a084995ab1, type: 2}
+    RequiredPuzzleArea: {fileID: 0}
+    Price:
+      reorderableList:
+        canAdd: 1
+        canRemove: 1
+        draggable: 1
+        expandable: 1
+        multipleSelection: 1
+        isExpanded: 1
+        label:
+          m_Text: Keys
+          m_Image: {fileID: 0}
+          m_Tooltip: 
+          m_TextWithWhitespace: "Keys\u200B"
+        headerHeight: 18
+        footerHeight: 13
+        slideEasing: 0.15
+        verticalSpacing: 2
+        showDefaultBackground: 1
+        elementDisplayType: 0
+        elementNameProperty: 
+        elementNameOverride: 
+        elementIcon: {fileID: 0}
+      reqReferences: {fileID: 0}
+      isExpanded: 1
+      _keyValues: 01000000i
+      _keys: 01000000i
+      _values: 14000000i

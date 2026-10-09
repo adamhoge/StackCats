@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b897339df87f09749bb9e4e742feade8, type: 3}
+  m_Name: Spooky Curtains
+  m_EditorClassIdentifier: Assembly-CSharp::RockhopperGames.StackCats.WindowItem
+  Name: Spooky Curtains
+  Icon: {fileID: 21300000, guid: 348d83941274e6f438a296aeef4d621b, type: 3}
+  ColorShift:
+    Hue: 0
+    Brightness: 0
+    Contrast: 1
+    Saturation: 1
+  IsUnique: 1
+  Rarity: 1
+  _id: e710513d-e63f-4961-87ab-a276e387ce26
+  WindowSprite: {fileID: 21300000, guid: 348d83941274e6f438a296aeef4d621b, type: 3}

@@ -16,6 +16,6 @@ MonoBehaviour:
   - AudioClip: {fileID: 8300000, guid: 9b2efe47863a6b6499407dc8364c1c29, type: 3}
     Probability: 1
   Pitch: 1
-  Volume: 0.638
+  Volume: 0.524
   PitchVariance: 0
   VolumeVariance: 0
