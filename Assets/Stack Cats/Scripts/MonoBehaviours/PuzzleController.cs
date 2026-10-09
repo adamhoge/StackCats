@@ -9,6 +9,7 @@ namespace RockhopperGames.StackCats
         PuzzleMarker source,
         PuzzleMarker destination,
         int numBlocks,
+        int numTransformedBlocks,
         bool isValid
     );
     public delegate void BlocksSelected(PuzzleMarker selection);
@@ -121,9 +122,14 @@ namespace RockhopperGames.StackCats
                     int numBlocks =
                         _selection.Stack.Blocks.Count
                         - _selection.Stack.Blocks.IndexOf(_selection.Block);
-                    OnChecked(_focus, numBlocks, isValid);
+                    int numTransformedBlocks = _puzzle.GetTransformedBlocksCount(
+                        _selection.Stack,
+                        _selection.Block,
+                        _focus.Stack
+                    );
+                    OnChecked(_focus, numBlocks, numTransformedBlocks, isValid);
                     if (onChecked != null)
-                        onChecked(_selection, _focus, numBlocks, isValid);
+                        onChecked(_selection, _focus, numBlocks, numTransformedBlocks, isValid);
                 }
             }
         }
@@ -198,7 +204,12 @@ namespace RockhopperGames.StackCats
 
         protected virtual void OnFocused(PuzzleMarker marker, bool isMovable) { }
 
-        protected virtual void OnChecked(PuzzleMarker marker, int numBlocks, bool isValid) { }
+        protected virtual void OnChecked(
+            PuzzleMarker marker,
+            int numBlocks,
+            int numTransformedBlocks,
+            bool isValid
+        ) { }
 
         protected virtual void OnBlocksSelected(PuzzleMarker marker) { }
 

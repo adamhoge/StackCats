@@ -77,6 +77,7 @@ namespace RockhopperGames.StackCats
             PuzzleMarker source,
             PuzzleMarker destination,
             int numBlocks,
+            int numTransformedBlocks,
             bool isValid
         )
         {

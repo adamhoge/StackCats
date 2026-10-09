@@ -622,6 +622,34 @@ namespace RockhopperGames.StackCats
         }
 
         /// <summary>
+        /// Get the number of blocks that will be transformed when moving a block from one stack to another.
+        /// </summary>
+        /// <param name="source">The stack from which the block should be moved.</param>
+        /// <param name="block">The block that should be moved.</param>
+        /// <param name="destination">The stack to which the block should be moved.</param>
+        /// <returns>The number of blocks that will be transformed.</returns>
+        public virtual int GetTransformedBlocksCount(Stack source, Block block, Stack destination)
+        {
+            if (!block || !block.GetComponent<SumBlock>() || !destination)
+                return 0;
+
+            int numTransformedBlocks = 0;
+            for (int i = destination.Blocks.Count - 1; i >= 0; i--)
+            {
+                Block destinationBlock = destination.Blocks[i];
+                if (
+                    !destinationBlock.GetComponent<PuzzleBlock>()
+                    || destinationBlock.GetComponent<WildBlock>()
+                )
+                    break;
+
+                numTransformedBlocks++;
+            }
+
+            return numTransformedBlocks;
+        }
+
+        /// <summary>
         /// Check whether or not a block (an any blocks above) can fit in a stack.
         /// </summary>
         /// <param name="source">The stack from which the block should be moved.</param>

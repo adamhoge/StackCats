@@ -90,6 +90,11 @@ namespace RockhopperGames.StackCats
                 ruleExceptions.Add("Puzzle Blocks cannot be placed on Sum Blocks");
             }
 
+            if (otherBlock.GetComponent<RestrictedBlock>())
+            {
+                ruleExceptions.Add("Puzzle Blocks cannot be placed on Restricted Blocks");
+            }
+
             if (otherBlock.GetComponent<WildBlock>())
             {
                 int numWildBlocks = 1;

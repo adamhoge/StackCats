@@ -94,7 +94,13 @@ namespace RockhopperGames.StackCats.UI
             }
         }
 
-        private void OnCheck(PuzzleMarker source, PuzzleMarker marker, int numBlocks, bool isValid)
+        private void OnCheck(
+            PuzzleMarker source,
+            PuzzleMarker marker,
+            int numBlocks,
+            int numTransformedBlocks,
+            bool isValid
+        )
         {
             if (_placementPreview)
                 Destroy(_placementPreview.gameObject);
