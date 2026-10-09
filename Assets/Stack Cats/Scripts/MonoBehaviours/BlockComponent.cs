@@ -26,12 +26,18 @@ namespace RockhopperGames.StackCats
 
         public virtual bool IsPlaceableOn(Block block)
         {
-            return true;
+            return !block || !block.GetComponent<RestrictedBlock>();
         }
 
         public virtual List<string> GetIsPlaceableOnRuleExceptions(Block block)
         {
-            return new List<string>();
+            List<string> ruleExceptions = new List<string>();
+            if (block && block.GetComponent<RestrictedBlock>())
+            {
+                ruleExceptions.Add("Blocks cannot be placed on Restricted Blocks");
+            }
+
+            return ruleExceptions;
         }
 
         public virtual void OnMove() { }

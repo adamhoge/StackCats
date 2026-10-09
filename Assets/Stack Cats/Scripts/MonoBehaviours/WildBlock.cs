@@ -23,6 +23,9 @@ namespace RockhopperGames.StackCats
 
         public override bool IsPlaceableOn(Block otherBlock)
         {
+            if (!base.IsPlaceableOn(otherBlock))
+                return false;
+
             if (!otherBlock)
                 return true;
 
@@ -50,6 +53,9 @@ namespace RockhopperGames.StackCats
 
         public override List<string> GetIsPlaceableOnRuleExceptions(Block otherBlock)
         {
+            if (otherBlock && otherBlock.GetComponent<RestrictedBlock>())
+                return base.GetIsPlaceableOnRuleExceptions(otherBlock);
+
             List<string> ruleExceptions = new List<string>();
 
             SumBlock sumBlock = otherBlock.GetComponent<SumBlock>();

@@ -41,6 +41,9 @@ namespace RockhopperGames.StackCats
 
         public override bool IsPlaceableOn(Block otherBlock)
         {
+            if (!base.IsPlaceableOn(otherBlock))
+                return false;
+
             if (!otherBlock || otherBlock.GetComponent<CatBlock>())
                 return true;
 
@@ -85,14 +88,15 @@ namespace RockhopperGames.StackCats
             if (!otherBlock || GetComponent<WildBlock>())
                 return ruleExceptions;
 
+            if (otherBlock.GetComponent<RestrictedBlock>())
+            {
+                ruleExceptions.AddRange(base.GetIsPlaceableOnRuleExceptions(otherBlock));
+                return ruleExceptions;
+            }
+
             if (otherBlock.GetComponent<SumBlock>())
             {
                 ruleExceptions.Add("Puzzle Blocks cannot be placed on Sum Blocks");
-            }
-
-            if (otherBlock.GetComponent<RestrictedBlock>())
-            {
-                ruleExceptions.Add("Puzzle Blocks cannot be placed on Restricted Blocks");
             }
 
             if (otherBlock.GetComponent<WildBlock>())

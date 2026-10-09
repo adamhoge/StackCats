@@ -31,6 +31,9 @@ namespace RockhopperGames.StackCats
 
         public override bool IsPlaceableOn(Block block)
         {
+            if (!base.IsPlaceableOn(block))
+                return false;
+
             if (!block)
                 return true;
 
@@ -78,6 +81,9 @@ namespace RockhopperGames.StackCats
 
         public override List<string> GetIsPlaceableOnRuleExceptions(Block block)
         {
+            if (block && block.GetComponent<RestrictedBlock>())
+                return base.GetIsPlaceableOnRuleExceptions(block);
+
             List<string> ruleExceptions = new List<string>();
 
             WildBlock wildBlock = block.GetComponent<WildBlock>();

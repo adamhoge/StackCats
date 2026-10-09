@@ -11,13 +11,7 @@ namespace RockhopperGames.StackCats
 
         public override bool IsPlaceableOn(Block otherBlock)
         {
-            if (!otherBlock)
-                return true;
-
-            if (otherBlock.GetComponent<RestrictedBlock>())
-                return false;
-
-            return true;
+            return base.IsPlaceableOn(otherBlock);
         }
 
         public override void OnMove()

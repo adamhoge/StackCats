@@ -12,6 +12,7 @@ namespace RockhopperGames.StackCats.UI
         public TextMeshProUGUI MoveRequirementText;
         public Image StarImage;
         public Image StarBaseImage;
+        public Image StarOutlineImage;
         public CanvasGroup StarFlashCanvasGroup;
         public Sprite PreviouslyEarnedSprite;
         public Sprite NotPreviouslyEarned;
@@ -93,6 +94,19 @@ namespace RockhopperGames.StackCats.UI
             LeanTween
                 .scale(StarFlashCanvasGroup.gameObject, Vector2.one * 1.5f, 0.5f)
                 .setEase(LeanTweenType.punch);
+
+            ShowStarOutline();
+        }
+
+        private void ShowStarOutline()
+        {
+            StarOutlineImage.gameObject.SetActive(true);
+            LeanTween
+                .alpha(StarOutlineImage.rectTransform, 0.0f, 0.65f)
+                .setEase(LeanTweenType.easeOutQuint);
+            LeanTween
+                .scale(StarOutlineImage.rectTransform, Vector2.one * 5.0f, 0.65f)
+                .setEase(LeanTweenType.easeOutQuint);
         }
     }
 }
